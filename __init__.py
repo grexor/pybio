@@ -14,6 +14,7 @@ import utils
 import expression
 import genomes
 import math
+import config
 import sequence
 import os
 

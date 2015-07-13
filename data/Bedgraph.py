@@ -21,7 +21,7 @@ class Bedgraph():
         if type(val) not in [float, int]:
             return False
         return val == int(val)
-    
+
     def __init__(self, filename=None, genome="ensembl", fast=False):
         self.clear()
         if filename!=None:
@@ -98,14 +98,14 @@ class Bedgraph():
             r = f.readline()
         f.close()
         self.genome = "ensembl" # we converted to ensembl
-        
+
         if not_converted>0:
-            print "%s positions were skipped because we couldn't convert the chromosome name to ensembl format" % not_converted
-        
+            print "%s positions were skipped; unable to convert chromosome name to ensembl format" % not_converted
+
         if fast:
             self.raw = temp_raw
             return
-        
+
         # scaling (cpm) and consider thresholds (min_cpm, min_raw)
         for chr, strand_data in temp_raw.items():
             for strand, pos_data in strand_data.items():
@@ -173,7 +173,7 @@ class Bedgraph():
             print "%s not converted during save" % not_converted
             f_out.write("#not converted from ensembl chr names = %s" % not_converted)
         f_out.close()
-        
+
     def set_value(self, chr, strand, pos, val, db="raw"):
         if val==0:
             return
@@ -226,7 +226,7 @@ class Bedgraph():
         for i in range(start, stop+1):
             region_sum += data.get(chr, {}).get(strand, {}).get(i, 0)
         return region_sum
-    
+
     def get_vector(self, chr, strand, start, stop, db="raw"):
         # only for raw and cpm
         data = getattr(self, db)
@@ -283,7 +283,7 @@ class Bedgraph():
                     temp_cpm[main_pos] = new_cpm
                     temp_support[main_pos] = new_support
                     temp_meta[main_pos] = new_meta
-                    
+
                 self.raw[chr][strand] = temp_raw
                 self.cpm[chr][strand] = temp_cpm
                 self.support[chr][strand] = temp_support
@@ -295,7 +295,7 @@ class Bedgraph():
         # only keep positions that are min_distance apart (don't sum anything)
         for chr, strand_data in self.raw.items():
             for strand, pos_data in strand_data.items():
-                print "filtering : %s %s (min distance = %s)" % (chr, strand, min_distance)
+                print "filtering: %s%s (MD = %snt)" % (strand, chr, min_distance)
                 # if same value, take downstream position first
                 mp = 1 if strand=="+" else -1
                 positions = [(raw, mp*pos, pos) for pos, raw in pos_data.items()]

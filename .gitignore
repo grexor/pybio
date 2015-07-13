@@ -1,1 +1,12 @@
 *.pyc
+*.bt2
+*.fasta
+*.fastq
+*.string
+*.ensembl
+genomes/*.txt
+genomes/*.star
+genomes/*.assembly
+genomes/*.bowtie2
+genomes/*.ensembl*
+genomes/*.bowtie
