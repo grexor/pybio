@@ -1,0 +1,75 @@
+#!/usr/bin/python
+
+import apa
+import os
+import sys
+import pybio
+import numpy as np
+import itertools
+import pylab as pl
+import matplotlib
+import matplotlib.pyplot as plt
+from matplotlib import cm as CM
+import matplotlib.patches as mpatches
+import matplotlib.ticker as mticker
+import shutil
+from sklearn import tree
+import pickle
+import math
+from collections import Counter
+import random
+
+matplotlib.rcParams['axes.labelsize'] = 10
+matplotlib.rcParams['axes.titlesize'] = 10
+matplotlib.rcParams['xtick.labelsize'] = 10
+matplotlib.rcParams['ytick.labelsize'] = 10
+matplotlib.rcParams['legend.fontsize'] = 10
+matplotlib.rcParams['legend.frameon'] = 'False'
+
+input = sys.argv[1]
+output = input+".svg"
+
+ymax = 0
+
+f = None
+if input.find("fastq")!=-1:
+    f = pybio.data.Fastq(input)
+if input.find("fasta")!=-1:
+    f = pybio.data.Fasta(input)
+if f==None:
+    print "unknown file format\n%s" % input
+    sys.exit(1)
+
+temp = {"A": {}, "C": {}, "T": {}, "G": {}, "N":{}}
+len_seq = 0
+id = 0
+while f.read():
+    if id%100000==0:
+        print "processed = %sK reads" % (id/1000)
+    id += 1
+    len_seq = max(len_seq, len(f.sequence))
+    for index in range(0, len(f.sequence)):
+        nt = f.sequence[index]
+        temp[nt][index] = temp[nt].get(index, 0) + 1
+
+pd = {}
+for nt in ["A", "C", "T", "G"]:
+    y = [(float(temp[nt][index])/(temp["A"][index] + temp["C"][index] + temp["T"][index] + temp["G"][index])) for index in range(0, len_seq)]
+    y = [x*100.0 for x in y]
+    pd[nt] = y
+
+pl.clf()
+a = pl.axes([0.1, 0.1, 0.85, 0.8])
+a.yaxis.grid(True, linestyle='-', which='major', color='lightgrey', alpha=0.5)
+a.spines["top"].set_alpha(0.1)
+a.spines["bottom"].set_alpha(0.1)
+a.spines["left"].set_alpha(0.1)
+a.spines["right"].set_alpha(0.1)
+for nt in ["A", "C", "T", "G"]:
+    pl.plot(range(0, len_seq), pd[nt], label=nt)
+pl.ylim([0, 100])
+pl.xlabel('[nt]')
+pl.ylabel('percentage')
+pl.title('nucleotide distribution (reads=%s)' % id)
+pl.legend(loc="upper right")
+pl.savefig(output, dpi=300)

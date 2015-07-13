@@ -1,0 +1,11 @@
+#!/usr/bin/python
+
+import sys
+import pybio
+filename = sys.argv[1]
+f = pybio.data.Fasta(filename)
+while f.read():
+    print f.id.split(" ")[0]
+    fout = open("%s.string" % f.id.split(" ")[0], "wt")
+    fout.write(f.sequence)
+    fout.close()

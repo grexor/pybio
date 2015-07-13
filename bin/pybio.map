@@ -1,0 +1,11 @@
+#!/usr/bin/python
+
+import pybio
+import sys
+import os
+
+genome = sys.argv[1]
+file = sys.argv[2]
+output = sys.argv[3]
+
+pybio.map.star(genome, file, output, output)

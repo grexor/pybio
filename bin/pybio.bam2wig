@@ -1,0 +1,15 @@
+#!/usr/bin/python
+
+import pybio
+import glob
+
+input_filename = sys.argv[1]
+output_prefix = sys.argv[2]
+
+print bam_filename
+bw_filename = prefix + ".bw"
+bwn_filename = prefix + ".bwn"
+mapped_reads = pybio.expression.bam_statistics(bam_filename)["mapped"]
+scale = 1/float(mapped_reads) * 1e6 # multiply by million
+pybio.expression.bam2wig(bam_filename, bw_filename)
+pybio.expression.bam2wig(bam_filename, bwn_filename, scale=scale)

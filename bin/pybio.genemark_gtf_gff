@@ -1,0 +1,31 @@
+#!/usr/bin/python
+
+import pybio
+import types
+import sys
+
+if len(sys.argv)!=3:
+    print "usage: genemark_gtf_2_gff3.py input.gtf output.gff3"
+    sys.exit(1)
+
+g = pybio.data.Gtf(sys.argv[1])
+
+def write_gff3_genemark(self, filename):
+    f = open(filename, "wt")
+    for gene_id, gene in self.genes.iteritems():
+        row = [gene.chr, "biox", "gene", gene.start, gene.stop, "", gene.strand, ".", "ID=%s" % gene_id] # gene
+        f.write("\t".join(str(x) for x in row) + "\n")
+        row = [gene.chr, "biox", "mRNA", gene.start, gene.stop, "", gene.strand, ".", "ID=%s.t1;Parent=%s" % (gene_id, gene_id)] # mRNA
+        f.write("\t".join(str(x) for x in row) + "\n")
+        for exon_index, feature in enumerate(gene.features):
+            if feature.type not in ["CDS"]:
+                continue
+            row = [gene.chr, "biox", "CDS", feature.start, feature.stop, "", gene.strand, ".", "ID=%s.t1.cds;Parent=%s.t1" % (gene_id, gene_id)] # mRNA
+            f.write("\t".join(str(x) for x in row) + "\n")
+            row = [gene.chr, "biox", "exon", feature.start, feature.stop, "", gene.strand, ".", "ID=%s.t1.exon%s;Parent=%s.t1" % (gene_id, exon_index+1, gene_id)] # mRNA
+            f.write("\t".join(str(x) for x in row) + "\n")
+        f.write("\n")
+    f.close()
+
+g.write_gff3_genemark = types.MethodType(write_gff3_genemark, g, pybio.data.Gtf)
+g.write_gff3_genemark(sys.argv[2])

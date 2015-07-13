@@ -1,0 +1,4 @@
+# convert sam to bam and sort bam file by position
+samtools view -bS $1 > ${1:0:-4}.bam
+samtools sort ${1:0:-4}.bam ${1:0:-4}
+samtools index ${1:0:-4}.bam

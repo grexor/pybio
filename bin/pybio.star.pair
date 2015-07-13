@@ -1,0 +1,12 @@
+mkdir $1
+cd $1
+STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 $4 --outReadsUnmapped Fastx --readFilesCommand zcat --runThreadN $6
+mv Aligned.out.sam $5.sam
+mv Log.final.out $5.stats.txt
+mv Log.out $5.log.txt
+mv Unmapped.out.mate1 $5.unmapped.fastq
+mv Log.progress.out $5.progress.txt
+pybio.sam2bam $5.sam
+rm $5.sam
+gzip $5.unmapped.fastq
+mv SJ.out.tab $5.splice.tab.out

@@ -1,0 +1,168 @@
+#!/usr/bin/python
+
+"""
+Contributed by Vid Jelen (vid.jelen1@gmail.com)
+Integrated into ap by Gregor Rot (gregor.rot@gmail.com)
+"""
+
+import sys
+import os
+import ap
+import gzip
+import matplotlib
+matplotlib.use('Agg')
+import pylab
+from numpy import median
+from time import time
+from optparse import OptionParser
+
+usage = "usage: fastq_qc.py <input_file> [options]"
+option_parser = OptionParser(usage=usage)
+option_parser.add_option("-m", "--measure", dest="measure", default="avg",
+                  help="the measure of quality: either 'avg' or 'med', average or median respectively. The default setting is average", metavar="MEASURE")
+option_parser.add_option("-q", "--quality",
+                  action="store", dest="quality",
+                  help="compute the average length of a read with higher quality score than the one specified in this parameter. The default setting is 20", metavar="PHRED")
+option_parser.add_option("-t", "--trim",
+                  action="store", dest="trim", default="", metavar ="FILE",
+                  help="trim the input reads to the length of the -q parameter into FILE")
+
+(options, args) = option_parser.parse_args()
+
+if options.measure != "avg" and options.measure != "med":
+    print("Only 'avg' and 'med' are available as measures. Make sure you typed the measure out correctly!")
+    exit()
+
+if len(args) == 0:
+    option_parser.print_help()
+    print("")
+    print("Example of a minimal FastQ Quality Control usage ----> python fastq_qc.py <input_file>")
+    print("<input_file> can either be a .fastq or a .fastq.gz compressed file\n")
+    exit()
+
+filename = args[0]
+if not os.path.exists(filename):
+    print("%s: File cannot be opened, or file does not exist!\n" % file_name)
+    sys.exit(0)
+
+start = time()
+
+try:
+    cutoff_average = int(options.quality) # Cutoff value for the position where reads have average quality lower than this value
+except:
+    cutoff_average = 20
+
+f = ap.data.Fastq(filename)
+total_sum = 0
+quantity = 0
+reads = 0
+cutoff_index = 0
+total_median = []
+current_median = []
+averages = []
+medians = []
+
+while f.read():
+    reads += 1
+    quantity += len(f.sequence)
+    if reads%10000==0:
+        print "%s: reads processed:" % filename, reads
+#    if reads>10000:
+#        break
+    for index, q in enumerate(f.quality):
+        if len(averages)<index+1:
+            averages.append(0)
+        averages[index] += ord(q) - 64
+        if len(medians)<index+1:
+            medians.append([])
+        medians[index].append(ord(q)-64)
+        total_sum += ord(q) - 64
+        current_median.append(ord(q)-64)
+    total_median.append(median(current_median))
+    current_median = []
+
+out_file = open("%s.stats" % filename, "wt")
+out_file.write("reads: %d\n" % reads)
+out_file.write("average: %.3f\n" % (float(total_sum)/quantity))
+out_file.write("median: %.3f\n\n" % (median(total_median)))
+out_file.write("position\taverage\tmedian\n")
+
+for i in range(len(averages)):
+    averages[i] = averages[i]/(reads*1.0)
+    medians[i] = median(medians[i])
+    out_file.write("%s\t%.3f\t%.3f\n" % (i+1, averages[i], medians[i]))
+
+if options.measure == "avg":
+    for i in reversed(range(len(averages))):
+        cutoff_index = None
+        if averages[i] > cutoff_average:
+            cutoff_index = i+1
+            break
+    if cutoff_index == len(averages):
+        cutoff_index = None
+    print("Cutoff index with average PHRED score %s = %s" % (cutoff_average, cutoff_index))
+else:
+    for i in reversed(range(len(medians))):
+        cutoff_index = None
+        if medians[i] > cutoff_average:
+            cutoff_index = i+1
+            break
+    if cutoff_index == len(medians):
+        cutoff_index = None
+    print("Cutoff index with median PHRED score %s = %s" % (cutoff_average, cutoff_index))
+
+out_file.close()
+
+trim_text = ""
+if options.trim != "" and cutoff_index!=None:
+    trim_text = "Reads were trimmed to %s and saved to <a href='%s'>%s</a>" % (cutoff_index, options.trim, options.trim)
+    f = ap.data.Fastq(filename)
+    out_trim = open(options.trim, "wt")
+    index = 0
+    while f.read():
+        index += 1
+        out_trim.write(f.id + "\n")
+        out_trim.write(f.sequence[:cutoff_index] + "\n")
+        out_trim.write(f.plus + "\n")
+        out_trim.write(f.quality[:cutoff_index] + "\n")
+    out_trim.close()
+
+pylab.clf()
+pylab.plot(range(1, len(averages)+1), averages)
+pylab.plot(range(1, len(medians)+1), medians)
+pylab.legend(("Average", "Median"), loc=0)
+pylab.xlabel("Read length")
+pylab.xlim(1,len(averages))
+pylab.ylim(0,40)
+pylab.ylabel("Quality score")
+pylab.title("%s" % filename)
+filename_picture = filename + ".png"
+pylab.savefig(filename + ".png")
+
+html_file = open(filename + ".html", "wt")
+html_file.write(
+"""
+<!DOCTYPE html>
+<html>
+<style>
+    a {
+        color: #33b;
+        text-decoration:none;
+    }
+
+    a:hover {
+        text-decoration:underline;
+    }
+</style>
+<body>
+Reads=%s<br>
+<a href="%s"><img border="0" style="width: 400px;" src="%s"></a><br>
+%s<br>
+<a href="%s">View statistics</a>
+</body>
+</html>
+"""
+% (reads, "%s.png" % filename, "%s.png" % filename, trim_text, "%s.stats" % filename))
+html_file.close()
+
+print("Time: %.2f minutes" % ((time() - start)/60))
