@@ -82,7 +82,6 @@ class Bedgraph():
                     not_converted += 1
                     r = f.readline()
                     continue
-            pos = int(r[1])
             raw = float(r[3])
             # if reading integer numbers, make them integer
             if self.is_int(raw):
@@ -91,9 +90,10 @@ class Bedgraph():
             if force_strand!=None:
                 assert(force_strand in ["+", "-"])
                 strand = force_strand
-            temp_raw.setdefault(chr, {}).setdefault(strand, {}).setdefault(pos, 0)
-            temp_raw[chr][strand][pos] += abs(raw)
-            raw_sum += abs(raw)
+            for pos in range(int(r[1]), int(r[2])):
+                temp_raw.setdefault(chr, {}).setdefault(strand, {}).setdefault(pos, 0)
+                temp_raw[chr][strand][pos] += abs(raw)
+                raw_sum += abs(raw)
             self.total_raw += abs(raw)
             r = f.readline()
         f.close()
