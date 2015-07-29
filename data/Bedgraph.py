@@ -75,6 +75,9 @@ class Bedgraph():
                 r = f.readline()
                 continue
             r = r.rstrip("\r").rstrip("\n").split("\t")
+            if r==[""]:
+                r = f.readline()
+                continue
             chr = r[0]
             if genome!="ensembl":
                 chr = pybio.genomes.chr_uscs_ensembl.get(genome, {}).get(chr, None) # always convert ucsc to ensembl
