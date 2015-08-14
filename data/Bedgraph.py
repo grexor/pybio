@@ -3,6 +3,7 @@ import bisect
 import pybio
 import os
 import json
+import shelve
 
 def mix_sort(x):
     if x.isdigit():
@@ -33,6 +34,8 @@ class Bedgraph():
         self.support = {} # set of ids: if cpm >= self.min_cpm set value to id of file
         self.meta = {} # metadata: weighted by cpm data, fraction of various features (tissue, experiment, etc)
         self.total_raw = 0
+        self.filename = ""
+        self.shelve = False
 
     def overlay(self, template_filename, source_filename, region_up=100, region_down=25, db_template="raw", db_source="raw", fast=False, genome_template="ensembl", genome_source="ensembl"):
         self.clear()
@@ -50,17 +53,35 @@ class Bedgraph():
                         raw += bg_source.get_value(chr, strand, i, db = db_source)
                     self.set_value(chr, strand, pos, raw)
 
+    def save_shelve(self):
+        fname = self.filename+".shelve"
+        d = shelve.open(fname)
+        for chr, strand_data in self.raw.items():
+            for strand, pos_data in strand_data.items():
+                for pos, val in pos_data.items():
+                    key = "%s:%s:%s" % (chr, strand, pos)
+                    d[key] = val
+        d.close()
+
     def load(self, filename, track_id=None, meta=None, min_cpm=0, min_raw=0, compute_cpm=True, genome="ensembl", fast=False, force_strand=None):
         # if genome != "ensembl", data is loaded from UCSC genome (hg19, mm10) and converted to ensembl
         # load can be called multiple times on different bed files
         # track_id : unique identifier for this file
         # genome: ensembl/ucsc
+        print "loading : %s" % filename
+
+        self.filename = filename
+
+        if os.path.exists(filename+".shelve"):
+            self.d = shelve.open(filename+".shelve")
+            self.shelve = True
+            return
+
         if track_id==None:
             track_id = filename
 
         temp_raw = {}
         raw_sum = 0
-        print "loading : %s" % filename
         if filename.endswith(".gz"):
             f = gzip.open(filename, "rb")
         else:
@@ -207,7 +228,11 @@ class Bedgraph():
             data[chr][strand][pos][mt] = data[chr][strand][pos].get(mt, 0) + val
 
     def get_value(self, chr, strand, pos, db="raw"):
-        data = getattr(self, db)
+        if self.shelve:
+            key = "%s:%s:%s" % (chr, strand, pos)
+            return self.d.get(key, 0)
+        else:
+            data = getattr(self, db)
         if db in ["raw", "cpm"]:
             return data.get(chr, {}).get(strand, {}).get(pos, 0)
         if db in ["support"]:
