@@ -6,8 +6,10 @@
 FASTQ files (``fastq``)
 **********************************
 
+Quick use:
+
+.. literalinclude:: code/fastq.py
+
 .. autoclass:: pybio.data.Fastq
    :members:
    :show-inheritance:
-   
-.. literalinclude:: code/fastq.py

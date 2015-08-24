@@ -14,7 +14,7 @@ def mix_sort(x):
 class Bedgraph():
     """
     Class for reading bedgraph files.
-    Scaling is done by / total_raw * 1e6
+    Scaling is done by / total_raw * 1e6.
     Each position can carry metadata, weighted by cpm value.
     """
 
@@ -54,6 +54,10 @@ class Bedgraph():
                     self.set_value(chr, strand, pos, raw)
 
     def save_shelve(self):
+        """
+        The data is saved into a shelve dictionary stored with the same filename with ".shelve" extension. Suitable for larger bedgraph files (> 2MB gzipped).
+        If a ".shelve" file exists, the data is loaded automatically with "load".
+        """
         fname = self.filename+".shelve"
         d = shelve.open(fname)
         for chr, strand_data in self.raw.items():
@@ -64,6 +68,9 @@ class Bedgraph():
         d.close()
 
     def load(self, filename, track_id=None, meta=None, min_cpm=0, min_raw=0, compute_cpm=True, genome="ensembl", fast=False, force_strand=None):
+        """
+        Load Bedgraph file (can also be gzipped). A Bedgraph object load method can be called multiple times on various files, the content is added up.
+        """
         # if genome != "ensembl", data is loaded from UCSC genome (hg19, mm10) and converted to ensembl
         # load can be called multiple times on different bed files
         # track_id : unique identifier for this file
@@ -148,6 +155,9 @@ class Bedgraph():
         # Get positions from db_source, check min_raw agains db_source
         # Save raw value from db_save
         # Usually db_source and db_save are the same
+        """
+        Save bedgraph data to file.
+        """
         print "save : %s, format : %s" % (filename, filetype)
         if track_id!=None:
             self.track_id = track_id
@@ -228,6 +238,9 @@ class Bedgraph():
             data[chr][strand][pos][mt] = data[chr][strand][pos].get(mt, 0) + val
 
     def get_value(self, chr, strand, pos, db="raw"):
+        """
+        Get value at chromosome (chr), strand, position.
+        """
         if self.shelve:
             key = "%s:%s:%s" % (chr, strand, pos)
             return self.d.get(key, 0)
@@ -266,6 +279,9 @@ class Bedgraph():
     def cluster(self, region_up=150, region_down=150):
         # go down position list: highly expressed -> lowly expressed
         # sum [region_up, region_down] and assign to main position
+        """
+        Cluster positions in bedgraph. For each chromosome & strand, sort positions by value (descending), and assign sum(region_up, region_down) around each position.
+        """
         for chr, strand_data in self.raw.items():
             for strand, pos_data in strand_data.items():
                 print "clustering : %s %s" % (chr, strand)
@@ -321,6 +337,9 @@ class Bedgraph():
         # filter on raw data
         # sort positions and go down the list
         # only keep positions that are min_distance apart (don't sum anything)
+        """
+        Sort chromosome + strand positions by value (descending). Go down the list and only keep positions that are min_distance apart.
+        """
         for chr, strand_data in self.raw.items():
             for strand, pos_data in strand_data.items():
                 print "filtering: %s%s (MD = %snt)" % (strand, chr, min_distance)

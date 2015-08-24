@@ -6,9 +6,10 @@
 TAB separated files (``TabReader``)
 **********************************
 
-.. autoclass:: pybio.data.TabReader
-   :members:
-   :show-inheritance:
+Quick use:
+
+.. literalinclude:: code/tabreader.py
+    :linenos:
 
 TAB file example:
 
@@ -19,7 +20,6 @@ gene1      g1     200
 gene2      g2     1000
 =========  =====  ==========
 
-Reading the TAB file:
-
-.. literalinclude:: code/tabreader.py
-    :linenos:
+.. autoclass:: pybio.data.TabReader
+   :members:
+   :show-inheritance:

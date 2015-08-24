@@ -8,3 +8,4 @@
    pybio.data.Fasta
    pybio.data.Fastq
    pybio.data.TabReader
+   pybio.data.Bedgraph

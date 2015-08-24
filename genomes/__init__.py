@@ -46,11 +46,11 @@ def load_chr_ucsc_ensembl(species):
 def load(species, version="ensembl74"):
     """
     Loads the genome annotation into memory
-    
+
     :param species: the genome id
     :param version: the Ensembl version of the annotation, if applicable
     """
-    
+
     if genes.get(species, None)!=None: # already loaded?
         return
     genes_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "genes.json")
@@ -114,7 +114,7 @@ def prepare(species="hg19", version="ensembl74"):
     chrs_names = [name for (name, size) in chrs_list]
     temp_genes = {}
     temp_intervals = {}
-    
+
     f_log.write("reading annotation\n")
     # A: read all data; merge transcript records and assign to genes
     # make all coordinates 0-based (Ensembl is 1-based)
@@ -166,10 +166,10 @@ def prepare(species="hg19", version="ensembl74"):
         exons.append((exon_start, exon_stop))
         geneD["exons"] = exons
         temp_genes[gene_id] = geneD
-       
+
     max_intervals = 0
     all_genes = len(temp_genes.keys())
-    
+
     current_gene = 0
     for gene_id, geneD in temp_genes.items():
         current_gene += 1
@@ -195,7 +195,7 @@ def prepare(species="hg19", version="ensembl74"):
                     if coverage.get(i, None)!=None:
                         continue
                     coverage[i] = 'o'
-                    
+
         ints = pybio.utils.coverage_to_intervals(coverage)
         # add intronic intervals
         all_intervals = [ints[0]]
@@ -212,7 +212,7 @@ def prepare(species="hg19", version="ensembl74"):
             del geneD["utr5"]
         if geneD.get("utr3", None)!=None:
             del geneD["utr3"]
-    
+
     # B: all genes are read, now we need to resolve overlapping clusters of genes
     genes_by_chrstrand = {}
     for gene_id, geneD in temp_genes.items():
@@ -220,14 +220,14 @@ def prepare(species="hg19", version="ensembl74"):
         L = genes_by_chrstrand.get(chrstrand, [])
         L.append((geneD["gene_start"], geneD["gene_id"]))
         genes_by_chrstrand[chrstrand] = L
-    
+
     for chrstrand, gene_list in genes_by_chrstrand.items():
         f_log.write("making clusters %s\n" % chrstrand)
         gene_list.sort()
         clusters = {}
         for gene_start, gid in gene_list:
             add_cluster(gid, temp_genes, clusters)
-    
+
         f_log.write("overlaying genes in clusters %s\n" % chrstrand)
         # superimpose genes in clusters (shorter genes have preference)
         for (start, stop), cluster_genes in clusters.items():
@@ -253,7 +253,7 @@ def prepare(species="hg19", version="ensembl74"):
                 # check coverage intervals
                 for (i1_start, i1_stop, gid1), (i2_start, i2_stop, gid2) in zip(coverage, coverage[1:]):
                     assert(i1_stop+1==i2_start)
-                
+
                 # it may happen that one gene completelly (exactly) overlaps another
                 # get new gene list from coverage
                 new_gene_list = [gid for (i_start, i_stop, gid) in coverage]
@@ -267,7 +267,7 @@ def prepare(species="hg19", version="ensembl74"):
                 for gid in new_gene_list:
                     limit_intervals = [(start, stop) for (start, stop, interval_gid) in coverage if interval_gid==gid]
                     adjust_gene(gid, limit_intervals, temp_genes)
-                
+
         f_log.write("making genome intervals from resolved clusters %s\n" % chrstrand)
         gi_list = temp_intervals.get(chrstrand, [])
         for gid, geneD in temp_genes.items():
@@ -286,10 +286,10 @@ def prepare(species="hg19", version="ensembl74"):
                 gi_list.append((geneD["gene_start"], geneD["gene_stop"], gid))
         gi_list.sort()
         temp_intervals[chrstrand] = gi_list
-    
+
     f_log.write("saving genome intervals\n")
     f_log.close()
-    
+
     f = open(os.path.join(annotation_folder, "intervals.json"), "wt")
     f.write(json.dumps(temp_intervals))
     f.close()
@@ -299,7 +299,8 @@ def prepare(species="hg19", version="ensembl74"):
 
 def annotate_position(species, chr, strand, pos):
     """
-    Annotages given genomic position
+    | Annotages given genomic position.
+    | Returns triple (upstream_gene, position_gene, downstream_gene).
     """
     chrstrand = "%s:%s" % (chr, strand)
     gi = intervals[species].get(chrstrand, None)
@@ -414,7 +415,7 @@ def make_motifs(motif_size):
     z = itertools.product("ATCG", repeat=motif_size)
     for el in z:
         motifs.append("".join(el))
-    temp = []    
+    temp = []
     z = itertools.product("ATCG", repeat=motif_size-2)
     for el in z:
         temp.append("".join(el))
