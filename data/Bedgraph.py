@@ -76,9 +76,7 @@ class Bedgraph():
         # track_id : unique identifier for this file
         # genome: ensembl/ucsc
         print "loading : %s" % filename
-
         self.filename = filename
-
         if os.path.exists(filename+".shelve"):
             self.d = shelve.open(filename+".shelve")
             self.shelve = True
@@ -158,6 +156,7 @@ class Bedgraph():
         """
         Save bedgraph data to file.
         """
+        self.filename = filename # set the new filename
         print "save : %s, format : %s" % (filename, filetype)
         if track_id!=None:
             self.track_id = track_id
