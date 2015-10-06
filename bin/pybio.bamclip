@@ -40,7 +40,7 @@ args = parser.parse_args()
 
 seq_len = 0
 seqs = []
-all_files = glob.glob(args.bam)
+all_files = glob.glob(os.path.expanduser(args.bam))
 
 for bam_filename in all_files:
     bam_file = pysam.Samfile(bam_filename)
@@ -141,10 +141,10 @@ import matplotlib.colors as mcolors
 heatmap = ax2.pcolor(numpy.array([map_read]), cmap="BuGn")
 ax2.set_yticks([]) # remove y scale ticks for heatmap
 
-plt.savefig(args.image+".png", dpi=150)
+plt.savefig(os.path.expanduser(args.image)+".png", dpi=150)
 plt.close()
 
-f = open(args.image+".tab", "wt")
+f = open(os.path.expanduser(args.image)+".tab", "wt")
 f.write("count=%s\n" % count)
 f.write("map_5=%s\n" % map_5)
 f.write("map_read=%s\n" % map_read)

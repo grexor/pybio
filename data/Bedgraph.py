@@ -252,6 +252,13 @@ class Bedgraph():
         if db in ["meta"]:
             return data.get(chr, {}).get(strand, {}).get(pos, {})
 
+    def fetch(self, db="raw"):
+        data = getattr(self, db)
+        for chr, chr_data in data.items():
+            for strand, pos_data in chr_data.items():
+                for pos, cDNA in pos_data.items():
+                    iter (chr, strand, pos, cDNA)
+
     def set_region(self, chr, strand, start, stop, val, db="raw"):
         # only for raw and cpm
         data = getattr(self, db)
