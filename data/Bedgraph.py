@@ -37,21 +37,16 @@ class Bedgraph():
         self.filename = ""
         self.shelve = False
 
-    def overlay(self, template_filename, source_filename, region_up=100, region_down=25, db_template="raw", db_source="raw", fast=False, genome_template="ensembl", genome_source="ensembl"):
+    def overlay(self, template_filename, source_filename, start=-100, stop=25, db_template="raw", db_source="raw", fast=False, genome_template="ensembl", genome_source="ensembl"):
         self.clear()
         bg_template = pybio.data.Bedgraph(template_filename, fast=fast, genome=genome_template)
         bg_source = pybio.data.Bedgraph(source_filename, fast=fast, genome=genome_source)
         data_template = getattr(bg_template, db_template)
         for chr, strand_data in data_template.items():
             for strand, pos_data in strand_data.items():
-                offset_up, offset_down = region_up, region_down
-                if strand=="-":
-                    offset_up, offset_down = offset_down, offset_up
-                for pos, val in pos_data.items():
-                    raw = 0
-                    for i in range(pos-offset_up, pos+offset_down+1):
-                        raw += bg_source.get_value(chr, strand, i, db = db_source)
-                    self.set_value(chr, strand, pos, raw)
+                for pos in pos_data.keys():
+                    cDNA = bg_source.get_region(chr, strand, pos, start=start, stop=stop, db = db_source)
+                    self.set_value(chr, strand, pos, cDNA)
 
     def save_shelve(self):
         """
@@ -212,7 +207,7 @@ class Bedgraph():
             return
         data = getattr(self, db)
         if db in ["raw", "cpm", "meta"]:
-            data.setdefault(chr, {}).setdefault(strand, {}).setdefault(pos, val)
+            data.setdefault(chr, {}).setdefault(strand, {}).setdefault(pos, abs(val))
         if db in ["support"]:
             data.setdefault(chr, {}).setdefault(strand, {}).setdefault(pos, set(val))
 
@@ -257,7 +252,7 @@ class Bedgraph():
         for chr, chr_data in data.items():
             for strand, pos_data in chr_data.items():
                 for pos, cDNA in pos_data.items():
-                    iter (chr, strand, pos, cDNA)
+                    yield (chr, strand, pos, cDNA)
 
     def set_region(self, chr, strand, start, stop, val, db="raw"):
         # only for raw and cpm
@@ -266,19 +261,25 @@ class Bedgraph():
             data.setdefault(chr, {}).setdefault(strand, {})
             data[chr][strand][i] = val
 
-    def get_region(self, chr, strand, start, stop, db="raw"):
+    def get_region(self, chr, strand, pos, start, stop, db="raw"):
         # only for raw and cpm
         data = getattr(self, db)
+        if strand=="-":
+            start, stop = -start, -stop
+        start, stop = min(start, stop), max(start, stop)
         region_sum = 0
-        for i in range(start, stop+1):
+        for i in range(pos+start, pos+stop+1):
             region_sum += data.get(chr, {}).get(strand, {}).get(i, 0)
         return region_sum
 
-    def get_vector(self, chr, strand, start, stop, db="raw"):
+    def get_vector(self, chr, strand, pos, start, stop, db="raw"):
+        vector = []
         # only for raw and cpm
         data = getattr(self, db)
-        vector = []
-        for i in range(start, stop+1):
+        if strand=="-":
+            start, stop = -start, -stop
+        start, stop = min(start, stop), max(start, stop)
+        for i in range(pos+start, pos+stop+1):
             vector.append(data.get(chr, {}).get(strand, {}).get(i, 0))
         return vector
 
