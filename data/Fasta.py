@@ -11,7 +11,7 @@ class Fasta:
     def __init__(self, fname):
         self.fname = fname
         self.open_file()
-                
+
     def open_file(self):
         self.id = None
         self.next_id = None
@@ -19,7 +19,7 @@ class Fasta:
             self.f = gzip.open(self.fname, "rt")
         else:
             self.f = open(self.fname, "rt")
-        
+
     def read(self):
         """
         Reads next ID and SEQUENCE from FASTA file
@@ -48,7 +48,7 @@ class Fasta:
             r = self.f.readline()
         self.sequence = "".join(self.sequence)
         return True
-    
+
     def split(self):
         """
         Splits FASTA file
@@ -57,4 +57,4 @@ class Fasta:
             seq_id = self.id.split(" ")[0] # take everything until first space
             fout = open("%s.string" % seq_id, "wt")
             fout.write(self.sequence)
-            fout.close()    
+            fout.close()

@@ -11,6 +11,7 @@
 		<Attribute name = "transcript_start" />
 		<Attribute name = "transcript_end" />
 		<Attribute name = "strand" />
+		<Attribute name = "external_gene_id" />
 		<Attribute name = "5_utr_start" />
 		<Attribute name = "5_utr_end" />
 		<Attribute name = "3_utr_start" />
@@ -21,6 +22,5 @@
 		<Attribute name = "is_constitutive" />
 		<Attribute name = "rank" />
 		<Attribute name = "ensembl_exon_id" />
-		<Attribute name = "external_gene_name" />
 	</Dataset>
 </Query>

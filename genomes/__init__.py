@@ -53,6 +53,10 @@ def load(species, version="ensembl74"):
 
     if genes.get(species, None)!=None: # already loaded?
         return
+
+    if species=="mm10":
+        version="ensembl82"
+        
     genes_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "genes.json")
     genes[species] = json.loads(open(genes_filename).read())
     intervals_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "intervals.json")
@@ -106,6 +110,8 @@ def add_cluster(gid, dbgenes, dbclusters):
 def prepare(species="hg19", version="ensembl74"):
     if species=="mm9":
         version = "ensembl67" # latest ensembl annotation for mm9
+    if species=="mm10":
+        version = "ensembl82" # latest ensembl annotation for mm9
     print "preparing annotation for %s" % species
     annotation_folder = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version))
     f_log = open(os.path.join(annotation_folder, "log.txt"), "wt")
@@ -139,7 +145,9 @@ def prepare(species="hg19", version="ensembl74"):
             utr3_start = int(f.data["3' UTR Start"])-1
         if f.data["3' UTR End"]!="":
             utr3_stop = int(f.data["3' UTR End"])-1
-        biotype = f.data["Gene Biotype"]
+        biotype = f.data.get("Gene Biotype", None)
+        if biotype==None:
+            biotype = f.data.get("Gene type", "")
         exon_start = int(f.data["Exon Chr Start (bp)"])-1
         exon_stop = int(f.data["Exon Chr End (bp)"])-1
         constitutive = f.data["Constitutive Exon"]
@@ -152,7 +160,7 @@ def prepare(species="hg19", version="ensembl74"):
         geneD["gene_start"] = gene_start
         geneD["gene_stop"] = gene_stop
         geneD["gene_name"] = f.data.get("Associated Gene Name", "")
-        geneD["gene_biotype"] = f.data["Gene Biotype"]
+        geneD["gene_biotype"] = biotype
         geneD["gene_length"] = gene_stop - gene_start + 1
         if utr3_start!="" and utr3_stop!="":
             utr3 = geneD.get("utr3", [])
