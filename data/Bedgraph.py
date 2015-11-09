@@ -158,7 +158,10 @@ class Bedgraph():
         else:
             self.track_id = os.path.basename(filename)
         not_converted = 0
-        f_out = open(filename, "wt")
+        if filename.endswith(".gz"):
+            f_out = gzip.open(filename, "wb")
+        else:
+            f_out = open(filename, "wt")
         if filetype=="complete":
             header = ["chr", "strand", "pos", "raw", "cpm", "support", "meta"]
             f_out.write("\t".join(header)+"\n")
@@ -171,7 +174,8 @@ class Bedgraph():
             for strand, strand_data in chr_data.items():
                 positions = [(pos, raw) for pos, raw in strand_data.items()]
                 positions.sort()
-                for (pos, val) in positions:
+                cluster_start = None
+                for (pos, val), (pos2, val2) in zip(positions, positions[1:]+[(None, None)]):
                     strand_str = "" if strand=="+" else "-"
                     if db_save=="support":
                         val = len(val)
@@ -187,7 +191,15 @@ class Bedgraph():
                                 not_converted += 1
                                 continue
                         if filetype=="bed":
-                            row = [chr_str, str(pos), str(pos+1)]
+                            if pos2==pos+1 and val==val2:
+                                if cluster_start==None:
+                                    cluster_start = pos
+                                continue
+                            if cluster_start!=None:
+                                row = [chr_str, str(cluster_start), str(pos+1)]
+                                cluster_start = None
+                            else:
+                                row = [chr_str, str(pos), str(pos+1)]
                             if type(val)==float:
                                 row.append("%s%.2f" % (strand_str, val))
                             else:

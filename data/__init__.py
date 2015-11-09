@@ -15,7 +15,6 @@ from Wig import *
 from Sissrs import *
 from Sequence import *
 
-    
 def bedgraph_bigwig(filename_bed, filename_bw, genome):
     """
     BigWig can't display + and - strands together, always filter bedGraph before
@@ -37,9 +36,9 @@ def fastq_qminmax(filename):
     f = pybio.data.Fastq(filename)
     while f.read():
         qmin = min(qmin, ord(f.quality[-1]))
-        qmax = max(qmax, ord(f.quality[0]))        
+        qmax = max(qmax, ord(f.quality[0]))
     return qmin, qmax
-    
+
 def fasta_check(filename, allowed_chars=["A", "C", "T", "G", "N"]):
     """
     Checks if FASTA file format is valid.
@@ -68,7 +67,7 @@ def prepare_fasta_gbrowse(filename):
         row = [f.id, "ap", "chromosome", 1, len(f.sequence), ".", ".", ".", "ID=%s;Name=%s" % (f.id, f.id)]
         f_gff3.write("\t".join(str(x) for x in row) + "\n")
     f_gff3.close()
-    
+
 def prepare_fasta_mapability(input, output, seq_len):
     f_output = open(output, "wt")
     id_seq = 1
