@@ -389,38 +389,42 @@ def chr_list(genome):
     return R
 
 # get genomic sequence
-def seq(genome, chr, strand, pos, up=0, down=0, flank="N"):
+def seq(genome, chr, strand, pos, start=0, stop=0, flank="N"):
     """
     :param genome: mm9, hg19, ...
     :param chr: chr1, chrX, ...
     :param pos: 0-based
-    :param up: 0-based, right closed, positive integer; specifies how many nucleotides upstream (relative to strand) should be fetched
-    :param down: 0-based, right closed, positive integer; specifies how many nucleotides downstream (relative to strand) should be fetched
+    :param start: 0-based, right closed, positive integer; specifies position relative to pos (adjusted for strand)
+    :param stop: 0-based, right closed, positive integer; specifies position relative to pos (adjusted for strand)
+
+    Note: start must be < stop; examples: -60, 100: takes 60 nucleotides upstream of pos and 100 nt downstream of pos (strand wise)
 
     Returns chromosome sequence from (pos-up..pos+down), correctly considering strand (if -, also returns reverse complement of sequence)
     Coordinates are 0-based, inclusive
     """
 
+    assert(start<=stop)
+
     # determine start and stop positions on the genome
     if strand=="+":
-        start = pos-up
-        stop = pos+down
+        gstart = pos+start
+        gstop = pos+stop
     else:
-        start = pos-down
-        stop = pos+up
+        gstart = pos-stop
+        gstop = pos-start
 
     chrs = chr_list(genome)
     seq = ""
-    if start<0:
-        seq = flank * abs(start)
-    start = max(0, start) # start can only be non-negative
+    if gstart<0:
+        seq = flank * abs(gstart)
+    gstart = max(0, gstart) # start can only be non-negative
     fname = os.path.join(pybio.path.root_folder, "genomes", "%s.assembly" % genome, "%s.string" % chr)
     if not os.path.exists(fname):
         return ""
     f = open(fname, "rt")
-    f.seek(start, 0)
-    seq += f.read(stop-start+1)
-    diff = (stop-start+1) - len(seq)
+    f.seek(gstart, 0)
+    seq += f.read(gstop-gstart+1)
+    diff = (gstop-gstart+1) - len(seq)
     seq += flank * diff
     if strand=="-":
         return pybio.sequence.reverse_complement(seq)
