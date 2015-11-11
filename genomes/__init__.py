@@ -56,7 +56,7 @@ def load(species, version="ensembl74"):
 
     if species=="mm10":
         version="ensembl82"
-        
+
     genes_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "genes.json")
     genes[species] = json.loads(open(genes_filename).read())
     intervals_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "intervals.json")
@@ -389,18 +389,26 @@ def chr_list(genome):
     return R
 
 # get genomic sequence
-def seq(genome, chr, strand, start, stop, flank="N"):
+def seq(genome, chr, strand, pos, up=0, down=0, flank="N"):
     """
     :param genome: mm9, hg19, ...
     :param chr: chr1, chrX, ...
-    :param start: 0-based
-    :param stop: 0-based, right closed
+    :param pos: 0-based
+    :param up: 0-based, right closed, positive integer; specifies how many nucleotides upstream (relative to strand) should be fetched
+    :param down: 0-based, right closed, positive integer; specifies how many nucleotides downstream (relative to strand) should be fetched
 
-    Returns chromosome sequence from start_pos to end_pos. If strand is negative, return reverse complement
+    Returns chromosome sequence from (pos-up..pos+down), correctly considering strand (if -, also returns reverse complement of sequence)
     Coordinates are 0-based, inclusive
     """
-    if start>stop: # always positive orientation
-        start, stop = stop, start
+
+    # determine start and stop positions on the genome
+    if strand=="+":
+        start = pos-up
+        stop = pos+down
+    else:
+        start = pos-down
+        stop = pos+up
+
     chrs = chr_list(genome)
     seq = ""
     if start<0:
@@ -416,7 +424,8 @@ def seq(genome, chr, strand, start, stop, flank="N"):
     seq += flank * diff
     if strand=="-":
         return pybio.sequence.reverse_complement(seq)
-    return seq
+    else:
+        return seq
 
 def make_motifs(motif_size):
     motifs = []

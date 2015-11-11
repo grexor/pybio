@@ -143,7 +143,7 @@ class Bedgraph():
                             self.add_value(chr, strand, pos, track_id, db="support")
         del temp_raw
 
-    def save(self, filename, db_save="raw", min_raw=0, min_support=0, min_cpm=0, filetype="bed", genome="ensembl", track_id=None):
+    def save(self, filename, db_save="raw", min_raw=0, min_support=0, min_cpm=0, filetype="bed", genome="ensembl", track_id=None, without_track=False):
         # IF genome != "ensembl", convert chromosome names to UCSC
         # Get positions from db_source, check min_raw agains db_source
         # Save raw value from db_save
@@ -166,7 +166,8 @@ class Bedgraph():
             header = ["chr", "strand", "pos", "raw", "cpm", "support", "meta"]
             f_out.write("\t".join(header)+"\n")
         else:
-            f_out.write('track type=bedGraph name="%s" description="%s" altColor="200,120,59" color="120,101,172" maxHeightPixels="100:50:0" visibility="full" priority="20"\n' % (self.track_id, self.track_id))
+            if not without_track:
+                f_out.write('track type=bedGraph name="%s" description="%s" altColor="200,120,59" color="120,101,172" maxHeightPixels="100:50:0" visibility="full" priority="20"\n' % (self.track_id, self.track_id))
         data_save = getattr(self, db_save)
         chr_names = sorted(data_save.keys(), key=mix_sort)
         for chr in chr_names:
