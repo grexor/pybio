@@ -149,6 +149,7 @@ class Bedgraph():
         # Save raw value from db_save
         # Usually db_source and db_save are the same
         """
+        :param without_track: do not include track names
         Save bedgraph data to file.
         """
         self.filename = filename # set the new filename

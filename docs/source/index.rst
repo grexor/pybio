@@ -6,4 +6,5 @@
    pybio.data
    pybio.map
    pybio.genomes
+   pybio.sequence
    pybio.utils

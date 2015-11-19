@@ -13,3 +13,6 @@ Quick use:
 
 .. autofunction:: pybio.genomes.load
 .. autofunction:: pybio.genomes.annotate_position
+.. autofunction:: pybio.genomes.seq
+.. literalinclude:: code/genomes2.py
+.. autofunction:: pybio.genomes.seq_direct
