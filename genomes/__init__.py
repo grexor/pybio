@@ -438,7 +438,7 @@ def seq(genome, chr, strand, pos, start=0, stop=0, flank="N"):
     else:
         gstart = pos-stop
         gstop = pos-start
-    return seq_direct(chr, stand, gstart, gstop)
+    return seq_direct(genome, chr, strand, gstart, gstop)
 
 def make_motifs(motif_size):
     motifs = []
