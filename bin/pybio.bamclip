@@ -15,34 +15,31 @@ matplotlib.use("Agg", warn=False)
 import matplotlib.pyplot as plt
 import math
 from matplotlib import cm as CM
-import matplotlib.patches as mpatches
-import matplotlib.ticker as mticker
-from matplotlib.colors import LinearSegmentedColormap
-import matplotlib.colors as mcolors
-c = mcolors.ColorConverter().to_rgb
 
 # styling
-matplotlib.rcParams['axes.labelsize'] = 10
-matplotlib.rcParams['axes.titlesize'] = 10
-matplotlib.rcParams['xtick.labelsize'] = 10
-matplotlib.rcParams['ytick.labelsize'] = 10
-matplotlib.rcParams['legend.fontsize'] = 10
+matplotlib.rcParams['axes.labelsize'] = 14
+matplotlib.rcParams['axes.titlesize'] = 14
+matplotlib.rcParams['xtick.labelsize'] = 14
+matplotlib.rcParams['ytick.labelsize'] = 14
+matplotlib.rcParams['legend.fontsize'] = 14
 matplotlib.rc('axes',edgecolor='gray')
-matplotlib.rcParams['axes.linewidth'] = 0.3
+matplotlib.rcParams['axes.linewidth'] = 0.4
 matplotlib.rcParams['legend.frameon'] = 'False'
-from matplotlib import gridspec
 
 # parse arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('-bam', action="store", dest="bam", default=None)
-parser.add_argument('-image', action="store", dest="image", default=None)
+parser.add_argument('-image', action="store", dest="image", default="bamclip")
 args = parser.parse_args()
 
 seq_len = 0
 seqs = []
 all_files = glob.glob(os.path.expanduser(args.bam))
 
+map_5 = map_3 = map_read = None
+
 for bam_filename in all_files:
+    print "reading: %s" % os.path.basename(bam_filename)
     bam_file = pysam.Samfile(bam_filename)
     count = 0
     for a in bam_file.fetch():
@@ -67,7 +64,6 @@ for bam_filename in all_files:
         else:
             read_sequence = a.seq
             mapped_sequence = a.query
-
         flank_5 = ""
         flank_3 = ""
         if removed_5>0:
@@ -82,66 +78,55 @@ for bam_filename in all_files:
         else:
             assert(read_sequence[removed_5:-removed_3]==mapped_sequence)
 
-        row = [flank_5, mapped_sequence,flank_3]
-        seqs.append(row)
+        row = [flank_5, mapped_sequence, flank_3]
+
+        if map_read==None:
+            map_5 = [0]*seq_len
+            map_3 = [0]*seq_len
+            map_read = [0]*seq_len
+
+        if seq_len>len(map_read):
+            ext = seq_len - len(map_read)
+            map_5 = map_5 + [0]*ext
+            map_3 = map_3 + [0]*ext
+            map_read = map_read + [0]*ext
+        for i in range(0, len(flank_5)):
+            map_5[i] = map_5[i]+1
+        for i in range(len(flank_5), len(flank_5)+len(mapped_sequence)):
+            map_read[i] = map_read[i]+1
+        for i in range(len(flank_5)+len(mapped_sequence), len(flank_5)+len(mapped_sequence)+len(flank_3)):
+            map_3[i] = map_3[i]+1
+
         count += 1
-        if count%10000==0:
-            print "reading %s, %sM sequences read [read_len=%s]" % (bam_filename, count/1e6, seq_len)
-        #if count>10000:
-        #    break
-
-print len(seqs), count
-
-map_5 = [0]*seq_len
-map_3 = [0]*seq_len
-map_read = [0]*seq_len
-
-count = 0
-for r in seqs:
-    count += 1
-    read_5 = r[0]
-    read_mapped = r[1]
-    read_3 = r[2]
-    for i in range(0, len(read_5)):
-        map_5[i] = map_5[i]+1
-    for i in range(len(read_5), len(read_5)+len(read_mapped)):
-        map_read[i] = map_read[i]+1
-    for i in range(len(read_5)+len(read_mapped), len(read_5)+len(read_mapped)+len(read_3)):
-        map_3[i] = map_3[i]+1
-    if count%10000==0:
-        print "%.3fM reads processed" % (count/1e6)
+        if count%1000==0:
+            sys.stdout.write("\r    %.3fM alignments processed [read_len=%s]" % (count/1e6, seq_len))
+            sys.stdout.flush()
+    print
 
 map_5 = [x/float(count) for x in map_5]
 map_read = [x/float(count) for x in map_read]
 map_3 = [x/float(count) for x in map_3]
 
-fig = plt.figure(figsize=(20, 4))
-gs = gridspec.GridSpec(2, 1, height_ratios=[10, 1])
-ax1 = fig.add_subplot(gs[0])
-ax2 = fig.add_subplot(gs[1], sharex=ax1)
-#fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(20, 4))
+plt.figure(figsize=(16, 4))
+#ax1 = plt.axes([0.1, 0.2, 0.85, 0.7])
+ax1 = plt.gca()
 ax1.set_xlim(0, seq_len)
-ax1.set_ylim(0, 1)
-
-ax1.set_title("Soft clipping distribution [%.3fM sites]" % (count/1e6))
-ax1.set_ylabel("fraction")
-plt.xlabel("position in read")
-
+ax1.set_ylim(-0.025, 1)
+plt.yticks([0, 0.25, 0.5, 0.75, 1], [0, 0.25, 0.5, 0.75, 1])
+ax1.set_title("Clipping analysis [%.3fM alignments]" % (count/1e6))
+ax1.set_ylabel("fraction of alignments")
+plt.xlabel("position in read [nt]")
 legend = []
-for name, data in [("clipped_5", map_5), ("mapped to genome", map_read), ("clipped_3", map_3)]:
+for name, data in [("clipped 5'", map_5), ("aligned", map_read), ("clipped 3'", map_3)]:
     legend.append(name)
-    ax1.plot(range(0, seq_len), data, alpha=0.6, linewidth=2)
+    plt.plot(range(0, seq_len), data, alpha=0.5, linewidth=5, linestyle="-")
 
-ax1.legend(legend, loc='upper left')
+ax1.legend(legend, loc='upper right')
+ax1.grid(alpha=0.5)
 
-# heatmaps
-import matplotlib.cm as cm
-import matplotlib.colors as mcolors
-
-heatmap = ax2.pcolor(numpy.array([map_read]), cmap="BuGn")
-ax2.set_yticks([]) # remove y scale ticks for heatmap
-
+plt.tight_layout()
 plt.savefig(os.path.expanduser(args.image)+".png", dpi=150)
+plt.savefig(os.path.expanduser(args.image)+".pdf")
 plt.close()
 
 f = open(os.path.expanduser(args.image)+".tab", "wt")
