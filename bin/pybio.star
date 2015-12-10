@@ -1,5 +1,6 @@
 mkdir $1
 cd $1
+echo $4
 STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --readFilesCommand zcat
 # https://groups.google.com/forum/#!topic/rna-star/7RwKkvNLmI4
 # STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --readFilesCommand zcat --outFilterMatchNminOverLread 0.2 --outFilterScoreMinOverLread 0.2 --runThreadN $5
