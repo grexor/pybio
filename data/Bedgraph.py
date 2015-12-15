@@ -275,7 +275,7 @@ class Bedgraph():
             data.setdefault(chr, {}).setdefault(strand, {})
             data[chr][strand][i] = val
 
-    def get_region(self, chr, strand, pos, start, stop, db="raw"):
+    def get_region(self, chr, strand, pos, start=0, stop=0, db="raw"):
         # only for raw and cpm
         data = getattr(self, db)
         if strand=="-":

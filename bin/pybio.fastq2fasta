@@ -7,5 +7,5 @@ import sys
 fin = pybio.data.Fastq(sys.argv[1])
 fout = open(sys.argv[2], "wt")
 while fin.read():
-    fout.write(">%s\n%s\n" % (fin.id, fin.sequence))
+    fout.write(">%s\n%s\n" % (fin.id[1:], fin.sequence))
 fout.close()

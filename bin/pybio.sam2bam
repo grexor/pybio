@@ -1,4 +1,7 @@
 # convert sam to bam and sort bam file by position
-samtools view -bS $1 > ${1:0:-4}.bam
-samtools sort ${1:0:-4}.bam ${1:0:-4}
-samtools index ${1:0:-4}.bam
+for fname in $@
+do
+  samtools view -F 4 -bS ${fname} > ${fname:0:-4}.bam # -F 4 means only mapped reads
+  samtools sort ${fname:0:-4}.bam ${fname:0:-4}
+  samtools index ${fname:0:-4}.bam
+done
