@@ -54,26 +54,3 @@ def fasta_check(filename, allowed_chars=["A", "C", "T", "G", "N"]):
         if seq_len!=len(f.sequence):
             return False, "Sequence with characters other than %s" % str(allowed_chars)
     return True, "File in FASTA format"
-
-def prepare_fasta_gbrowse(filename):
-    f = pybio.data.Fasta(filename)
-    f_gff3 = open("chromosomes.gff3", "wt")
-    while f.read():
-        fout = open("%s.fa" % f.id, "wt")
-        fout.write(">%s\n" % f.id)
-        sequences = [f.sequence[i:i+50] for i in range(0, len(f.sequence), 50)]
-        fout.write("\n".join(sequences) + "\n")
-        fout.close()
-        row = [f.id, "ap", "chromosome", 1, len(f.sequence), ".", ".", ".", "ID=%s;Name=%s" % (f.id, f.id)]
-        f_gff3.write("\t".join(str(x) for x in row) + "\n")
-    f_gff3.close()
-
-def prepare_fasta_mapability(input, output, seq_len):
-    f_output = open(output, "wt")
-    id_seq = 1
-    f_input = pybio.data.Fasta(input)
-    while f_input.read():
-      for i in xrange(0, len(f_input.sequence)-seq_len):
-        f_output.write(">%s\n%s\n" % (id_seq, f_input.sequence[i:i+seq_len]))
-        id_seq += 1
-    f_output.close()
