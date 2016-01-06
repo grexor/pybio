@@ -363,7 +363,7 @@ class Bedgraph():
         """
         for chr, strand_data in self.raw.items():
             for strand, pos_data in strand_data.items():
-                print "filtering: %s%s (MD = %snt)" % (strand, chr, min_distance)
+                print "filtering: %s%s (min distance = %snt)" % (strand, chr, min_distance)
                 # if same value, take downstream position first
                 mp = 1 if strand=="+" else -1
                 positions = [(raw, mp*pos, pos) for pos, raw in pos_data.items()]
