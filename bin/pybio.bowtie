@@ -1,0 +1,32 @@
+output_folder=$1
+genome_index=$2
+fastq_file=$3
+name=$4
+cpu=$5
+seq_len=$6
+
+mkdir $output_folder
+cd $output_folder
+
+rm *.sam
+rm *.bam
+rm *.bam.bai
+rm *.fasta
+
+# make fasta fasta file from fastq file
+fasta_file="reads0.fasta"
+pybio.fastq2fasta $fastq_file $fasta_file
+
+let seq_len="$seq_len-10" # we don't clip the last 10 nt
+
+for ((i=0; i<=seq_len; i++))
+do
+     ni=$((i+1))
+     bowtie ${genome_index} -f reads${i}.fasta -m 1 -a -v 2 --strata --best -S > mapped${i}.sam -p ${cpu} --un reads${ni}.fasta -3 $i
+     rm reads${i}.fasta
+done
+rm *.fasta
+pybio.sam2bam *.sam
+samtools merge ${name}.bam mapped*.bam
+rm mapped*
+pybio.bam_index ${name}.bam
