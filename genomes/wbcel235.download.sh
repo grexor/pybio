@@ -3,7 +3,7 @@ mkdir wbcel235.assembly
 cd wbcel235.assembly
 wget ftp://ftp.ensembl.org/pub/release-77/fasta/caenorhabditis_elegans/dna/Caenorhabditis_elegans.WBcel235.dna_rm.toplevel.fa.gz -O wbcel235.fasta.gz
 gunzip -f wbcel235.fasta.gz
-printf 'import pybio\npybio.data.fastasplit("wbcel235.fasta")' | python
+printf 'import pybio\npybio.data.Fasta("wbcel235.fasta").split()' | python
 cd ..
 
 rm -r wbcel235.assembly.star

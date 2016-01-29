@@ -3,7 +3,7 @@ mkdir mm9.assembly
 cd mm9.assembly
 wget ftp://ftp.ensembl.org/pub/release-67/fasta/mus_musculus/dna/Mus_musculus.NCBIM37.67.dna.toplevel.fa.gz -O mm9.fasta.gz
 gunzip -f mm9.fasta.gz
-printf 'import pybio\npybio.data.fastasplit("mm9.fasta")' | python
+printf 'import pybio\npybio.data.Fasta("mm9.fasta").split()' | python
 cd ..
 
 rm -r mm9.assembly.star

@@ -38,10 +38,10 @@ all_files = glob.glob(os.path.expanduser(args.bam))
 
 map_5 = map_3 = map_read = None
 
+count = 0
 for bam_filename in all_files:
     print "reading: %s" % os.path.basename(bam_filename)
     bam_file = pysam.Samfile(bam_filename)
-    count = 0
     for a in bam_file.fetch():
         seq_len = max(seq_len, len(a.seq))
         sc_3 = 0
@@ -103,35 +103,40 @@ for bam_filename in all_files:
             sys.stdout.flush()
     print
 
-map_5 = [x/float(count) for x in map_5]
-map_read = [x/float(count) for x in map_read]
-map_3 = [x/float(count) for x in map_3]
+map_5 = [x/float(count)*100.0 for x in map_5]
+map_read = [x/float(count)*100.0 for x in map_read]
+map_3 = [x/float(count)*100.0 for x in map_3]
+clipped_overall = [e1+e2 for e1, e2 in zip(map_5, map_3)]
 
-plt.figure(figsize=(16, 4))
+plt.figure(figsize=(12, 3))
 #ax1 = plt.axes([0.1, 0.2, 0.85, 0.7])
 ax1 = plt.gca()
 ax1.set_xlim(0, seq_len)
-ax1.set_ylim(-0.025, 1)
-plt.yticks([0, 0.25, 0.5, 0.75, 1], [0, 0.25, 0.5, 0.75, 1])
-ax1.set_title("Clipping analysis [%.3fM alignments]" % (count/1e6))
-ax1.set_ylabel("fraction of alignments")
+ax1.set_ylim(-0.5, max(clipped_overall))
+#plt.yticks([0, 0.25, 0.5, 0.75, 1], [0, 0.25, 0.5, 0.75, 1])
+ax1.set_title("percentage of clipped alignments [%.3fM alignments]" % (count/1e6))
+ax1.set_ylabel("% alignments")
 plt.xlabel("position in read [nt]")
 legend = []
-for name, data in [("clipped 5'", map_5), ("aligned", map_read), ("clipped 3'", map_3)]:
-    legend.append(name)
-    plt.plot(range(0, seq_len), data, alpha=0.5, linewidth=5, linestyle="-")
+
+
+#for name, data in [("clipped 5'", map_5), ("aligned", map_read), ("clipped 3'", map_3)]:
+#for name, data in [("clipped 5'", map_5), ("clipped 3'", map_3)]:
+for name, data in [("clipped", clipped_overall)]:
+    #legend.append(name)
+    plt.plot(range(0, seq_len), data, linewidth=4, linestyle="-", color='#707070')
 
 ax1.legend(legend, loc='upper right')
 ax1.grid(alpha=0.5)
 
 plt.tight_layout()
-plt.savefig(os.path.expanduser(args.image)+".png", dpi=150)
+#plt.savefig(os.path.expanduser(args.image)+".png", dpi=150)
 plt.savefig(os.path.expanduser(args.image)+".pdf")
 plt.close()
 
 f = open(os.path.expanduser(args.image)+".tab", "wt")
-f.write("count=%s\n" % count)
-f.write("map_5=%s\n" % map_5)
-f.write("map_read=%s\n" % map_read)
-f.write("map_3=%s\n" % map_3)
+f.write("count\t%s\n" % count)
+f.write("map_5\t" + "\t".join(str(e) for e in map_5) + "\n")
+f.write("mapped\t" + "\t".join(str(e) for e in map_read) + "\n")
+f.write("map_3\t" + "\t".join(str(e) for e in map_3) + "\n")
 f.close()

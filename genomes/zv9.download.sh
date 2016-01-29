@@ -3,7 +3,7 @@ mkdir zv9.assembly
 cd zv9.assembly
 wget ftp://ftp.ensembl.org/pub/release-74/fasta/danio_rerio/dna/Danio_rerio.Zv9.74.dna_rm.toplevel.fa.gz -O zv9.fasta.gz
 gunzip -f zv9.fasta.gz
-printf 'import pybio\npybio.data.fastasplit("zv9.fasta")' | python
+printf 'import pybio\npybio.data.Fasta("zv9.fasta").split()' | python
 cd ..
 
 rm -r zv9.assembly.star

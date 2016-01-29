@@ -3,7 +3,7 @@ mkdir hg19.assembly
 cd hg19.assembly
 wget ftp://ftp.ensembl.org/pub/release-79/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz -O hg19.fasta.gz
 gunzip -f hg19.fasta.gz
-printf 'import pybio\npybio.data.fastasplit("hg19.fasta")' | python
+printf 'import pybio\npybio.data.Fasta("hg19.fasta").split()' | python
 mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -N -e "select * from ucscToEnsembl;" hg19 > hg19.chr.ucsc.ensembl
 cd ..
 

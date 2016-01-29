@@ -3,7 +3,7 @@ mkdir anoCar2.assembly
 cd anoCar2.assembly
 wget ftp://ftp.ensembl.org/pub/release-76/fasta/anolis_carolinensis/dna/Anolis_carolinensis.AnoCar2.0.dna_rm.toplevel.fa.gz -O anoCar2.fasta.gz
 gunzip -f anoCar2.fasta.gz
-printf 'import pybio\npybio.data.fastasplit("anoCar2.fasta")' | python
+printf 'import pybio\npybio.data.Fasta("anoCar2.fasta").split()' | python
 mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -N -e "select * from ucscToEnsembl;" anoCar2 > anoCar2.chr.ucsc.ensembl
 cd ..
 

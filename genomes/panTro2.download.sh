@@ -3,7 +3,7 @@ mkdir panTro2.assembly
 cd panTro2.assembly
 wget ftp://ftp.ensembl.org/pub/release-64/fasta/pan_troglodytes/dna/Pan_troglodytes.CHIMP2.1.64.dna_rm.toplevel.fa.gz -O panTro2.fasta.gz
 gunzip -f panTro2.fasta.gz
-printf 'import pybio\npybio.data.fastasplit("panTro2.fasta")' | python
+printf 'import pybio\npybio.data.Fasta("panTro2.fasta").split()' | python
 mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -N -e "select * from ucscToEnsembl;" panTro2 > panTro2.chr.ucsc.ensembl
 cd ..
 

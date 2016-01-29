@@ -3,7 +3,7 @@ mkdir rn5.assembly
 cd rn5.assembly
 wget ftp://ftp.ensembl.org/pub/release-74/fasta/rattus_norvegicus/dna/Rattus_norvegicus.Rnor_5.0.74.dna_rm.toplevel.fa.gz -O rn5.fasta.gz
 gunzip -f rn5.fasta.gz
-printf 'import pybio\npybio.data.fastasplit("rn5.fasta")' | python
+printf 'import pybio\npybio.data.Fasta("rn5.fasta").split()' | python
 cd ..
 
 rm -r rn5.assembly.star

@@ -3,7 +3,7 @@ mkdir xenTro2.assembly
 cd xenTro2.assembly
 wget ftp://ftp.ensembl.org/pub/release-59/fasta/xenopus_tropicalis/dna/Xenopus_tropicalis.JGI4.1.59.dna_rm.toplevel.fa.gz -O xenTro2.fasta.gz
 gunzip -f xenTro2.fasta.gz
-printf 'import pybio\npybio.data.fastasplit("xenTro2.fasta")' | python
+printf 'import pybio\npybio.data.Fasta("xenTro2.fasta").split()' | python
 mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -N -e "select * from ucscToEnsembl;" xenTro2 > xenTro2.chr.ucsc.ensembl
 cd ..
 
