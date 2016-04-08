@@ -23,10 +23,10 @@ class Bedgraph():
             return False
         return val == int(val)
 
-    def __init__(self, filename=None, genome="ensembl", fast=False):
+    def __init__(self, filename=None, genome="ensembl", fixed_cDNA=False, fast=False):
         self.clear()
         if filename!=None:
-            self.load(filename, genome=genome, fast=fast)
+            self.load(filename, genome=genome, fast=fast, fixed_cDNA=fixed_cDNA)
 
     def clear(self):
         self.raw = {} # raw counts
@@ -62,7 +62,7 @@ class Bedgraph():
                     d[key] = val
         d.close()
 
-    def load(self, filename, track_id=None, meta=None, min_cpm=0, min_raw=0, compute_cpm=True, genome="ensembl", fast=False, force_strand=None):
+    def load(self, filename, track_id=None, meta=None, min_cpm=0, min_raw=0, fixed_cDNA=False, compute_cpm=True, genome="ensembl", fast=False, force_strand=None):
         """
         Load Bedgraph file (can also be gzipped). A Bedgraph object load method can be called multiple times on various files, the content is added up.
         """
@@ -111,6 +111,8 @@ class Bedgraph():
             if self.is_int(raw):
                 raw = int(raw)
             strand = "+" if raw>=0 else "-"
+            if fixed_cDNA!=False:
+                raw = fixed_cDNA
             if force_strand!=None:
                 assert(force_strand in ["+", "-"])
                 strand = force_strand
@@ -231,7 +233,7 @@ class Bedgraph():
         data = getattr(self, db)
         if db in ["raw", "cpm"]:
             data.setdefault(chr, {}).setdefault(strand, {}).setdefault(pos, 0)
-            data[chr][strand][pos] += val
+            data[chr][strand][pos] += abs(val)
         if db in ["support"]:
             data.setdefault(chr, {}).setdefault(strand, {}).setdefault(pos, set())
             data[chr][strand][pos].add(val)

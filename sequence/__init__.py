@@ -41,7 +41,7 @@ def all_indices(string, sub,offset=0):
         listindex.append(i)
         i = string.find(sub, i + 1)
     return listindex
-    
+
 def overlap(item1, item2):
     start1 = item1[0]
     start2 = item2[0]
@@ -97,3 +97,72 @@ def convolve(vector, hw):
 def extend(vector, window_size):
     new_vector = [sum(vector[max(0, i-window_size/2):i+window_size/2+1]) for i in range(0, len(vector))]
     return new_vector
+
+def draw(sequences, fname):
+    
+    import matplotlib
+    matplotlib.use("Agg", warn=False)
+    import matplotlib.pyplot as plt
+    import math
+    import gzip
+    from matplotlib import cm as CM
+    import matplotlib.patches as mpatches
+    import matplotlib.ticker as mticker
+    from matplotlib.colors import LinearSegmentedColormap
+    import matplotlib.colors as mcolors
+    import pybio
+    c = mcolors.ColorConverter().to_rgb
+
+    # styling
+    matplotlib.rcParams['axes.labelsize'] = 10
+    matplotlib.rcParams['axes.titlesize'] = 10
+    matplotlib.rcParams['xtick.labelsize'] = 10
+    matplotlib.rcParams['ytick.labelsize'] = 10
+    matplotlib.rcParams['legend.fontsize'] = 10
+    matplotlib.rc('axes',edgecolor='gray')
+    matplotlib.rcParams['axes.linewidth'] = 0.3
+    matplotlib.rcParams['legend.frameon'] = 'False'
+
+    def compute_f(sequences, max_l):
+        dist = {}
+        for i in range(0, max_l):
+            dist[i] = {"A":0, "C":0, "U":0, "G":0, "N":0}
+        for seq in sequences:
+            for i in range(0, len(seq)):
+                c = {"A":"A", "C":"C", "T":"U", "G":"G", "N":"N"}[seq[i]]
+                dist[i][c] = dist[i].get(c, 0) + 1
+        v_a = []
+        v_u = []
+        v_c = []
+        v_g = []
+        for i in range(max_l):
+            v_sum = dist[i]["A"]+dist[i]["U"]+dist[i]["C"]+dist[i]["G"]
+            v_a.append(float(dist[i]["A"])/v_sum*100)
+            v_u.append(float(dist[i]["U"])/v_sum*100)
+            v_c.append(float(dist[i]["C"])/v_sum*100)
+            v_g.append(float(dist[i]["G"])/v_sum*100)
+        return v_a, v_u, v_c, v_g, len(sequences)
+
+    max_l = 0
+    for s in sequences:
+        max_l = max(max_l, len(s))
+    fig, ax = plt.subplots(1, 1, figsize=(12, 3))
+    ax.set_ylim(0, 100)
+    ax.set_xlim(0, max_l)
+
+    legend = []
+    v_a, v_u, v_c, v_g, count = compute_f(sequences, max_l)
+    ax.set_title("nucleotide composition [%s sites]" % format(count, ','))
+    ax.set_ylabel("nucleotide percentage")
+    plt.xlabel("nucleotide position")
+    for name, data, color in [("A", v_a, "red"), ("U", v_u, "blue"), ("C", v_c, "green"), ("G", v_g, "orange")]:
+        legend.append(name)
+        #data = pybio.utils.smooth(data, 5)
+        ax.plot(range(0, max_l), data, alpha=0.7, linewidth=3, color=color)
+    ax.set_xticks(range(0, max_l, 10))
+    ax.set_xticklabels(range(0, max_l, 10))
+    ax.legend(legend, loc='upper left')
+    ax.grid(alpha=0.2)
+    plt.tight_layout()
+    plt.savefig(fname)
+    plt.close()
