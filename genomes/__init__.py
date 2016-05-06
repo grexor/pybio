@@ -400,6 +400,8 @@ def seq_direct(genome, chr, strand, start, stop, flank="N"):
 
     Note: negative strand returns reverse complement; coordinates are 0-based, left and right closed; start must be < stop;
     """
+    if start>stop:
+        start, stop = stop, start
     assert(start<=stop)
     seq = ""
     if start<0:

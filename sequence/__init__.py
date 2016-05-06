@@ -61,7 +61,7 @@ def expand(motif):
     start_n = motif[0]
     end_n = motif[-1]
     if expand_code.get(start_n, None)==None or expand_code.get(end_n, None)==None:
-        return motif
+        return [motif]
     motifs = set()
     for x in expand_code[start_n]:
         for y in expand_code[end_n]:
@@ -76,6 +76,7 @@ def search(input_string, motif_list, strict=False):
         expanded = expand(m)
         pool = []
         for em in expanded:
+            print em
             z = all_indices(input_string, em)
             if len(z)==0 and strict:
                 return [], [0] * len(input_string)
@@ -99,7 +100,7 @@ def extend(vector, window_size):
     return new_vector
 
 def draw(sequences, fname):
-    
+
     import matplotlib
     matplotlib.use("Agg", warn=False)
     import matplotlib.pyplot as plt

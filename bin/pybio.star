@@ -11,6 +11,7 @@ STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmappe
 
 # https://groups.google.com/forum/#!topic/rna-star/7RwKkvNLmI4
 # STAR --outFilterMultimapNmax 1 --genomeDir ${genome_dir} --readFilesIn ${fastq} --outReadsUnmapped Fastx --readFilesCommand zcat --outFilterMatchNminOverLread 0.2 --outFilterScoreMinOverLread 0.2 --runThreadN ${cpu}
+
 mv Aligned.out.sam ${name}.sam
 mv Log.final.out ${name}.stats.txt
 mv Log.out ${name}.log.txt
