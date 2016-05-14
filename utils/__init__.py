@@ -233,3 +233,77 @@ def split_string(seq, length):
     Splitting strings (used by FASTA module).
     """
     return [seq[i:i+length] for i in range(0, len(seq), length)]
+
+def is_sorted(l):
+    return all(l[i] <= l[i+1] for i in xrange(len(l)-1))
+
+# from Orange bioinformatics stats library
+# http://orange.biolab.si
+def FDR(p_values, dependent=False, m=None, ordered=False):
+
+    if not ordered:
+        ordered = is_sorted(p_values)
+
+    if not ordered:
+        joined = [ (v,i) for i,v in enumerate(p_values) ]
+        joined.sort()
+        p_values = [ p[0] for p in joined ]
+        indices = [ p[1] for p in joined ]
+
+    if not m:
+        m = len(p_values)
+    if m <= 0 or not p_values:
+        return []
+
+    if dependent: # correct q for dependent tests
+        k = c[m-1] if m <= len(c) else math.log(m) + 0.57721566490153286060651209008240243104215933593992
+        m = m * k
+
+    tmp_fdrs = [p*m/(i+1.0) for (i, p) in enumerate(p_values)]
+    fdrs = []
+    cmin = tmp_fdrs[-1]
+    for f in reversed(tmp_fdrs):
+        cmin = min(f, cmin)
+        fdrs.append( cmin)
+    fdrs.reverse()
+
+    if not ordered:
+        new = [ None ] * len(fdrs)
+        for v,i in zip(fdrs, indices):
+            new[i] = v
+        fdrs = new
+
+    return fdrs
+
+# replaces column cname in file fname with corrected FDR p-values
+def FDR_tab(fname, cname):
+    L = []
+    f = open(fname)
+    header = f.readline().replace("\n", "").replace("\r", "").split("\t")
+    r = f.readline()
+    while r:
+        r = r.replace("\n", "").replace("\r", "").split("\t")
+        data = dict(zip(header, r))
+        L.append(float(data[cname]))
+        r = f.readline()
+    f.close()
+
+    os.rename(fname, fname+"fdr_temp")
+
+    L2 = pybio.utils.FDR(L)
+    f1 = open(fname+"fdr_temp")
+    f2 = open(fname, "wt")
+    header = f1.readline().replace("\n", "").replace("\r", "").split("\t")
+    f2.write("\t".join(header)+"\n")
+    r1 = f1.readline()
+    while r1:
+        r1 = r1.replace("\n", "").replace("\r", "").split("\t")
+        data = dict(zip(header, r))
+        r1[header.index(cname)] = L2.pop(0)
+        f2.write("\t".join(str(x) for x in r1) + "\n")
+        r1 = f1.readline()
+    f1.close()
+    f2.close()
+    assert(len(L2)==0) # we used all corrected value
+
+    #os.remove(fname+"fdr_temp")

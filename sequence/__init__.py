@@ -76,7 +76,6 @@ def search(input_string, motif_list, strict=False):
         expanded = expand(m)
         pool = []
         for em in expanded:
-            print em
             z = all_indices(input_string, em)
             if len(z)==0 and strict:
                 return [], [0] * len(input_string)
