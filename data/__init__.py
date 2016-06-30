@@ -6,6 +6,7 @@ from TabReader import *
 from Fastq import *
 from Fasta import *
 from Bedgraph import *
+from Bedgraph2 import *
 from Gff3 import *
 from Gtf import *
 from Gene import *

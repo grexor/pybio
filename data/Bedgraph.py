@@ -3,7 +3,6 @@ import bisect
 import pybio
 import os
 import json
-import shelve
 
 def mix_sort(x):
     if x.isdigit():
@@ -35,7 +34,6 @@ class Bedgraph():
         self.meta = {} # metadata: weighted by cpm data, fraction of various features (tissue, experiment, etc)
         self.total_raw = 0
         self.filename = ""
-        self.shelve = False
 
     def overlay(self, template_filename, source_filename, start=-100, stop=25, db_template="raw", db_source="raw", fast=False, genome_template="ensembl", genome_source="ensembl"):
         self.clear()
@@ -48,20 +46,6 @@ class Bedgraph():
                     cDNA = bg_source.get_region(chr, strand, pos, start=start, stop=stop, db = db_source)
                     self.set_value(chr, strand, pos, cDNA)
 
-    def save_shelve(self):
-        """
-        The data is saved into a shelve dictionary stored with the same filename with ".shelve" extension. Suitable for larger bedgraph files (> 2MB gzipped).
-        If a ".shelve" file exists, the data is loaded automatically with "load".
-        """
-        fname = self.filename+".shelve"
-        d = shelve.open(fname)
-        for chr, strand_data in self.raw.items():
-            for strand, pos_data in strand_data.items():
-                for pos, val in pos_data.items():
-                    key = "%s:%s:%s" % (chr, strand, pos)
-                    d[key] = val
-        d.close()
-
     def load(self, filename, track_id=None, meta=None, min_cpm=0, min_raw=0, fixed_cDNA=False, compute_cpm=True, genome="ensembl", fast=False, force_strand=None):
         """
         Load Bedgraph file (can also be gzipped). A Bedgraph object load method can be called multiple times on various files, the content is added up.
@@ -72,10 +56,6 @@ class Bedgraph():
         # genome: ensembl/ucsc
         print "loading : %s" % filename
         self.filename = filename
-        if os.path.exists(filename+".shelve"):
-            self.d = shelve.open(filename+".shelve")
-            self.shelve = True
-            return
 
         if track_id==None:
             track_id = filename
@@ -251,11 +231,7 @@ class Bedgraph():
         """
         Get value at chromosome (chr), strand, position.
         """
-        if self.shelve:
-            key = "%s:%s:%s" % (chr, strand, pos)
-            return self.d.get(key, 0)
-        else:
-            data = getattr(self, db)
+        data = getattr(self, db)
         if db in ["raw", "cpm"]:
             return data.get(chr, {}).get(strand, {}).get(pos, 0)
         if db in ["support"]:
@@ -273,8 +249,8 @@ class Bedgraph():
     def set_region(self, chr, strand, start, stop, val, db="raw"):
         # only for raw and cpm
         data = getattr(self, db)
+        data.setdefault(chr, {}).setdefault(strand, {})
         for i in range(start, stop+1):
-            data.setdefault(chr, {}).setdefault(strand, {})
             data[chr][strand][i] = val
 
     def get_region(self, chr, strand, pos, start=0, stop=0, db="raw"):
@@ -289,6 +265,10 @@ class Bedgraph():
         return region_sum
 
     def get_vector(self, chr, strand, pos, start, stop, db="raw"):
+        # returns vector of values around pos
+        # considers strand but does not reverse the vector
+        # example: strand=-, start=-10, stop=20, would return a vector of pos-20 .. pos+10
+        # example: strand=+, start=-10, stop=20, would return a vector of pos-10 .. pos+20
         vector = []
         # only for raw and cpm
         data = getattr(self, db)
