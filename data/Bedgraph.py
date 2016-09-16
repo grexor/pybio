@@ -45,8 +45,9 @@ class Bedgraph():
                 for pos in pos_data.keys():
                     cDNA = bg_source.get_region(chr, strand, pos, start=start, stop=stop, db = db_source)
                     self.set_value(chr, strand, pos, cDNA)
+                    self.total_raw += cDNA
 
-    def load(self, filename, track_id=None, meta=None, min_cpm=0, min_raw=0, fixed_cDNA=False, compute_cpm=True, genome="ensembl", fast=False, force_strand=None):
+    def load(self, filename, track_id=None, meta=None, fixed_cDNA=False, compute_cpm=True, genome="ensembl", fast=False, force_strand=None):
         """
         Load Bedgraph file (can also be gzipped). A Bedgraph object load method can be called multiple times on various files, the content is added up.
         """
@@ -61,7 +62,6 @@ class Bedgraph():
             track_id = filename
 
         temp_raw = {}
-        raw_sum = 0
         if filename.endswith(".gz"):
             f = gzip.open(filename, "rb")
         else:
@@ -99,7 +99,7 @@ class Bedgraph():
             for pos in range(int(r[1]), int(r[2])):
                 temp_raw.setdefault(chr, {}).setdefault(strand, {}).setdefault(pos, 0)
                 temp_raw[chr][strand][pos] += abs(raw)
-                raw_sum += abs(raw)
+                self.total_raw += abs(raw)
             self.total_raw += abs(raw)
             r = f.readline()
         f.close()
@@ -108,22 +108,24 @@ class Bedgraph():
         if not_converted>0:
             print "%s positions were skipped; unable to convert chromosome name to ensembl format" % not_converted
 
-        if fast:
-            self.raw = temp_raw
-            return
-
-        # scaling (cpm) and consider thresholds (min_cpm, min_raw)
         for chr, strand_data in temp_raw.items():
             for strand, pos_data in strand_data.items():
                 for pos, raw in pos_data.items():
-                    cpm = raw / float(raw_sum) * 1e6
-                    if raw>=min_raw and cpm>=min_cpm:
-                        self.add_value(chr, strand, pos, raw, db="raw")
-                        if compute_cpm: # add cpm, support, meta?
-                            self.add_value(chr, strand, pos, cpm, db="cpm")
-                            self.add_meta(chr, strand, pos, meta, cpm)
-                            self.add_value(chr, strand, pos, track_id, db="support")
+                    self.add_value(chr, strand, pos, raw, db="raw")
+                    if meta!=None:
+                        self.add_meta(chr, strand, pos, meta, raw)
+
         del temp_raw
+        #self.add_value(chr, strand, pos, track_id, db="support")
+        return
+
+    # normalize (cpm) and consider thresholds (min_cpm, min_raw)
+    def norm(self):
+        for chr, strand_data in self.raw.items():
+            for strand, pos_data in strand_data.items():
+                for pos, raw in pos_data.items():
+                    cpm = raw / float(self.total_raw) * 1e6
+                    self.add_value(chr, strand, pos, cpm, db="cpm")
 
     def save(self, filename, db_save="raw", min_raw=0, min_support=0, min_cpm=0, filetype="bed", genome="ensembl", track_id=None, without_track=False):
         # IF genome != "ensembl", convert chromosome names to UCSC
@@ -225,7 +227,7 @@ class Bedgraph():
         data = getattr(self, "meta")
         data.setdefault(chr, {}).setdefault(strand, {}).setdefault(pos, {})
         for mt in meta:
-            data[chr][strand][pos][mt] = data[chr][strand][pos].get(mt, 0) + val
+            data[chr][strand][pos] = meta
 
     def get_value(self, chr, strand, pos, db="raw"):
         """
@@ -237,7 +239,7 @@ class Bedgraph():
         if db in ["support"]:
             return data.get(chr, {}).get(strand, {}).get(pos, set())
         if db in ["meta"]:
-            return data.get(chr, {}).get(strand, {}).get(pos, {})
+            return data.get(chr, {}).get(strand, {}).get(pos, "")
 
     def fetch(self, db="raw"):
         data = getattr(self, db)

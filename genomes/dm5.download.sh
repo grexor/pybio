@@ -1,7 +1,7 @@
 rm -r dm5.assembly
 mkdir dm5.assembly
 cd dm5.assembly
-wget ftp://ftp.ensembl.org/pub/release-74/fasta/drosophila_melanogaster/dna/Drosophila_melanogaster.BDGP5.74.dna_rm.toplevel.fa.gz -O dm5.fasta.gz
+wget ftp://ftp.ensembl.org/pub/release-85/fasta/drosophila_melanogaster/dna/Drosophila_melanogaster.BDGP6.dna_rm.toplevel.fa.gz -O dm5.fasta.gz
 gunzip -f dm5.fasta.gz
 printf 'import pybio\npybio.data.Fasta("dm5.fasta").split()' | python
 mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -N -e "select * from ucscToEnsembl;" dm5 > dm5.chr.ucsc.ensembl
