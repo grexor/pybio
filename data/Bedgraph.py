@@ -22,10 +22,10 @@ class Bedgraph():
             return False
         return val == int(val)
 
-    def __init__(self, filename=None, genome="ensembl", fixed_cDNA=False, fast=False):
+    def __init__(self, filename=None, genome="ensembl", fixed_cDNA=False, fast=False, min_cDNA=0):
         self.clear()
         if filename!=None:
-            self.load(filename, genome=genome, fast=fast, fixed_cDNA=fixed_cDNA)
+            self.load(filename, genome=genome, fast=fast, fixed_cDNA=fixed_cDNA, min_cDNA=min_cDNA)
 
     def clear(self):
         self.raw = {} # raw counts
@@ -33,6 +33,7 @@ class Bedgraph():
         self.support = {} # set of ids: if cpm >= self.min_cpm set value to id of file
         self.meta = {} # metadata: weighted by cpm data, fraction of various features (tissue, experiment, etc)
         self.total_raw = 0
+        self.total_pos = 0
         self.filename = ""
 
     def overlay(self, template_filename, source_filename, start=-100, stop=25, db_template="raw", db_source="raw", fast=False, genome_template="ensembl", genome_source="ensembl"):
@@ -47,7 +48,7 @@ class Bedgraph():
                     self.set_value(chr, strand, pos, cDNA)
                     self.total_raw += cDNA
 
-    def load(self, filename, track_id=None, meta=None, fixed_cDNA=False, compute_cpm=True, genome="ensembl", fast=False, force_strand=None):
+    def load(self, filename, track_id=None, meta=None, fixed_cDNA=False, compute_cpm=True, genome="ensembl", fast=False, force_strand=None, min_cDNA=0):
         """
         Load Bedgraph file (can also be gzipped). A Bedgraph object load method can be called multiple times on various files, the content is added up.
         """
@@ -97,10 +98,11 @@ class Bedgraph():
                 assert(force_strand in ["+", "-"])
                 strand = force_strand
             for pos in range(int(r[1]), int(r[2])):
-                temp_raw.setdefault(chr, {}).setdefault(strand, {}).setdefault(pos, 0)
-                temp_raw[chr][strand][pos] += abs(raw)
-                self.total_raw += abs(raw)
-            self.total_raw += abs(raw)
+                if abs(raw)>=min_cDNA:
+                    temp_raw.setdefault(chr, {}).setdefault(strand, {}).setdefault(pos, 0)
+                    temp_raw[chr][strand][pos] += abs(raw)
+                    self.total_raw += abs(raw)
+                    self.total_pos += 1
             r = f.readline()
         f.close()
         self.genome = "ensembl" # we converted to ensembl
@@ -371,9 +373,9 @@ class Bedgraph():
                             del self.cpm[chr][strand][i]
                         if self.get_value(chr, strand, i, db="support")!=set():
                             del self.support[chr][strand][i]
-                        if self.get_value(chr, strand, i, db="meta")!={}:
+                        if self.get_value(chr, strand, i, db="meta")!="":
                             del self.meta[chr][strand][i]
                 self.raw[chr][strand] = temp_raw
-                self.cpm[chr][strand] = temp_cpm
-                self.support[chr][strand] = temp_support
-                self.meta[chr][strand] = temp_meta
+                #self.cpm[chr][strand] = temp_cpm
+                #self.support[chr][strand] = temp_support
+                #self.meta[chr][strand] = temp_meta

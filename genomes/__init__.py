@@ -57,6 +57,9 @@ def load(species, version="ensembl74"):
     if species=="mm10":
         version="ensembl82"
 
+    if species=="dm5":
+        version="ensembl85"
+
     genes_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "genes.json")
     genes[species] = json.loads(open(genes_filename).read())
     intervals_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "intervals.json")
