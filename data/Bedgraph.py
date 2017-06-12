@@ -3,6 +3,8 @@ import bisect
 import pybio
 import os
 import json
+import pysam
+import numpy as np
 
 def mix_sort(x):
     if x.isdigit():
@@ -44,9 +46,83 @@ class Bedgraph():
         for chr, strand_data in data_template.items():
             for strand, pos_data in strand_data.items():
                 for pos in pos_data.keys():
+                    if (start<0) and (stop>0): # all this to consider nearby sites and only add /2 distance if closer than start, stop
+                        check_start = 2*start
+                        check_stop = 2*stop
+                        min_start = start
+                        min_stop = stop
+                        vector = bg_template.get_vector(chr, strand, pos, start=check_start, stop=-1)
+                        vector.reverse()
+                        for i in range(len(vector)):
+                            if vector[i]>0:
+                                min_start = max(min_start, -i/2)
+                        vector = bg_template.get_vector(chr, strand, pos, start=1, stop=check_stop)
+                        for i in range(len(vector)):
+                            if vector[i]>0:
+                                min_stop = min(min_stop, i/2)
+                        cDNA = bg_source.get_region(chr, strand, pos, start=min_start, stop=min_stop, db = db_source)
+                    else:
+                        cDNA = bg_source.get_region(chr, strand, pos, start=start, stop=stop, db = db_source)
+                    self.set_value(chr, strand, pos, cDNA)
+                    #print chr, strand, pos, cDNA
+                    self.total_raw += cDNA
+
+    def overlay_old(self, template_filename, source_filename, start=-100, stop=25, db_template="raw", db_source="raw", fast=False, genome_template="ensembl", genome_source="ensembl"):
+        self.clear()
+        bg_template = pybio.data.Bedgraph(template_filename, fast=fast, genome=genome_template)
+        bg_source = pybio.data.Bedgraph(source_filename, fast=fast, genome=genome_source)
+        data_template = getattr(bg_template, db_template)
+        for chr, strand_data in data_template.items():
+            for strand, pos_data in strand_data.items():
+                for pos in pos_data.keys():
                     cDNA = bg_source.get_region(chr, strand, pos, start=start, stop=stop, db = db_source)
                     self.set_value(chr, strand, pos, cDNA)
                     self.total_raw += cDNA
+
+    def overlay2(self, template_filename, source_filename, start=-100, stop=25, db_template="raw", db_source="raw", fast=False, genome_template="ensembl", genome_source="ensembl", reverse_strand=False):
+        self.clear()
+        bg_template = pybio.data.Bedgraph(template_filename, fast=fast, genome=genome_template)
+        data_template = getattr(bg_template, db_template)
+        bam = pysam.AlignmentFile(source_filename, "rb")
+
+        proc = 0
+        for chr, strand_data in data_template.items():
+            try:
+                bam.pileup(chr, 0, 10, truncate=True)
+            except:
+                print "skipping", chr
+                continue
+            for strand, pos_data in strand_data.items():
+                if strand=="-":
+                    start, stop = -start, -stop
+                start, stop = min(start, stop), max(start, stop)
+                match_strand = strand
+                if reverse_strand:
+                    match_strand = {"+":"-", "-":"+"}[match_strand]
+                for pos in pos_data.keys():
+                    max_coverage = 0
+                    if proc%1000==0:
+                        print template_filename, source_filename, "%sK processed" % (proc/1000)
+                    proc += 1
+                    for pup in bam.pileup(chr, pos+start, pos+stop+1, truncate=True):
+                        present = set()
+                        for read in pup.pileups:
+                            cigar = read.alignment.cigar
+                            cigar_types = [t for (t, v) in cigar]
+                            if 3 in cigar_types:
+                                continue
+                            if (match_strand=="+" and not read.alignment.is_reverse) or (match_strand=="-" and read.alignment.is_reverse):
+                                present.add(read.alignment.qname)
+                        max_coverage = max(len(present), max_coverage)
+                    #if max_coverage>0:
+                    #    print chr, strand, pos, max_coverage
+                    self.set_value(chr, strand, pos, max_coverage)
+                    self.total_raw += max_coverage
+
+    def get_bam_coverage(self, bam_filename, chr, strand, pos, start, stop, already_processed=set()):
+        max_coverage = 0
+        bam.close()
+        return max_coverage
 
     def load(self, filename, track_id=None, meta=None, fixed_cDNA=False, compute_cpm=True, genome="ensembl", fast=False, force_strand=None, min_cDNA=0):
         """
@@ -82,7 +158,7 @@ class Bedgraph():
                 continue
             chr = r[0]
             if genome!="ensembl":
-                chr = pybio.genomes.chr_uscs_ensembl.get(genome, {}).get(chr, None) # always convert ucsc to ensembl
+                chr = pybio.genomes.chr_uscs_ensembl.get(chr, None) # convert ucsc to ensembl
                 if chr==None: # the mapping of chromosome from ucsc to ensembl didnt success
                     not_converted += 1
                     r = f.readline()
@@ -173,8 +249,8 @@ class Bedgraph():
                     meta = self.get_value(chr, strand, pos, db="meta")
                     if raw>=min_raw and cpm>=min_cpm and support>=min_support:
                         chr_str = chr
-                        if genome!="ensembl":
-                            chr_str = pybio.genomes.chr_ensembl_ucsc.get(genome, {}).get(chr_str, None) # always convert ucsc to ensembl
+                        if genome=="ucsc":
+                            chr_str = pybio.genomes.chr_ensembl_ucsc.get(chr_str, None) # convert ensembl to ucsc
                             if chr_str==None:
                                 not_converted += 1
                                 continue
@@ -201,6 +277,9 @@ class Bedgraph():
             print "%s not converted during save" % not_converted
             f_out.write("#not converted from ensembl chr names = %s" % not_converted)
         f_out.close()
+        if genome!="ucsc":
+            if filename.endswith(".bed"):
+                self.save(filename.replace(".bed", "_ucsc.bed"), db_save=db_save, min_raw=min_raw, min_support=min_support, min_cpm=min_cpm, filetype=filetype, genome="ucsc")
 
     def set_value(self, chr, strand, pos, val, db="raw"):
         if val==0:
@@ -295,50 +374,22 @@ class Bedgraph():
                 offset_up, offset_down = region_up, region_down
                 if strand=="-":
                     offset_up, offset_down = offset_down, offset_up
-                mp = 1 if strand=="+" else -1
+                mp = 1 if strand=="+" else -1 # if same value, take downstream position first
                 positions = [(raw, mp*pos, pos) for pos, raw in pos_data.items()]
                 positions = sorted(positions, reverse=True)
-                self.cpm.setdefault(chr, {}).setdefault(strand, {})
-                self.support.setdefault(chr, {}).setdefault(strand, {})
-                self.meta.setdefault(chr, {}).setdefault(strand, {})
                 temp_raw = {}
-                temp_cpm = {}
-                temp_support = {}
-                temp_meta = {}
                 for _, _, main_pos in positions:
                     if self.get_value(chr, strand, main_pos, db="raw")==0: # has this position been deleted (added or ignored)? move on
                         continue
                     new_raw = 0
-                    new_cpm = 0
-                    new_support = set()
-                    new_meta = {}
                     for i in range(main_pos-offset_up, main_pos+offset_down+1):
                         raw = self.get_value(chr, strand, i, db="raw")
                         if raw!=0:
                             new_raw += raw
                             del self.raw[chr][strand][i]
-                        cpm = self.get_value(chr, strand, i, db="cpm")
-                        if cpm!=0:
-                            new_cpm += cpm
-                            del self.cpm[chr][strand][i]
-                        support = self.get_value(chr, strand, i, db="support")
-                        if support!=set():
-                            new_support = new_support.union(support)
-                            del self.support[chr][strand][i]
-                        meta = self.get_value(chr, strand, i, db="meta")
-                        if meta!={}:
-                            for mt, mv in meta.items():
-                                new_meta[mt] = new_meta.get(mt, 0) + mv
-                            del self.meta[chr][strand][i]
                     temp_raw[main_pos] = new_raw
-                    temp_cpm[main_pos] = new_cpm
-                    temp_support[main_pos] = new_support
-                    temp_meta[main_pos] = new_meta
 
                 self.raw[chr][strand] = temp_raw
-                self.cpm[chr][strand] = temp_cpm
-                self.support[chr][strand] = temp_support
-                self.meta[chr][strand] = temp_meta
 
     def filter(self, min_distance=125):
         # filter on raw data
@@ -350,32 +401,15 @@ class Bedgraph():
         for chr, strand_data in self.raw.items():
             for strand, pos_data in strand_data.items():
                 print "filtering: %s%s (min distance = %snt)" % (strand, chr, min_distance)
-                # if same value, take downstream position first
-                mp = 1 if strand=="+" else -1
+                mp = 1 if strand=="+" else -1 # if same value, take downstream position first
                 positions = [(raw, mp*pos, pos) for pos, raw in pos_data.items()]
                 positions = sorted(positions, reverse=True)
                 temp_raw = {}
-                temp_cpm = {}
-                temp_support = {}
-                temp_meta = {}
                 for _, _, main_pos in positions:
-                    if self.get_value(chr, strand, main_pos, db="raw")==0: # has this position been deleted (added or ignored)? move on
+                    if self.get_value(chr, strand, main_pos)==0: # has this position been deleted (added or ignored)? move on
                         continue
-                    temp_raw[main_pos] = self.get_value(chr, strand, main_pos, db="raw")
-                    temp_cpm[main_pos] = self.get_value(chr, strand, main_pos, db="cpm")
-                    temp_support[main_pos] = self.get_value(chr, strand, main_pos, db="support")
-                    temp_meta[main_pos] = self.get_value(chr, strand, main_pos, db="meta")
-                    # delete main_pos and surroundings [-min_distance, min_distance]
-                    for i in range(main_pos-min_distance, main_pos+min_distance+1):
-                        if self.get_value(chr, strand, i, db="raw")!=0:
+                    temp_raw[main_pos] = self.get_value(chr, strand, main_pos)
+                    for i in range(main_pos-min_distance, main_pos+min_distance+1): # delete main_pos and surroundings [-min_distance, min_distance]
+                        if self.get_value(chr, strand, i)!=0:
                             del self.raw[chr][strand][i]
-                        if self.get_value(chr, strand, i, db="cpm")!=0:
-                            del self.cpm[chr][strand][i]
-                        if self.get_value(chr, strand, i, db="support")!=set():
-                            del self.support[chr][strand][i]
-                        if self.get_value(chr, strand, i, db="meta")!="":
-                            del self.meta[chr][strand][i]
                 self.raw[chr][strand] = temp_raw
-                #self.cpm[chr][strand] = temp_cpm
-                #self.support[chr][strand] = temp_support
-                #self.meta[chr][strand] = temp_meta

@@ -18,17 +18,14 @@ genes = {}
 intervals = {}
 
 def init():
-    load_chr_ucsc_ensembl("hg19")
-    load_chr_ucsc_ensembl("mm10")
+    load_chr_ucsc_ensembl()
 
 def genomes_list():
     genomes = glob.glob(os.path.join(pybio.path.genomes_folder, "*.assembly"))
     return [os.path.basename(x.rstrip(".assembly")) for x in genomes]
 
-def load_chr_ucsc_ensembl(species):
-    if chr_uscs_ensembl.get(species, None)==None:
-        chr_uscs_ensembl[species] = {}
-        chr_ensembl_ucsc[species] = {}
+def load_chr_ucsc_ensembl():
+    for species in ["hg19", "mm10"]:
         map_filename = os.path.join(pybio.path.genomes_folder, "%s.assembly" % species, "%s.chr.ucsc.ensembl" % species)
         if os.path.exists(map_filename):
             f = open(map_filename, "rt")
@@ -39,8 +36,12 @@ def load_chr_ucsc_ensembl(species):
                 ensembl = r[1]
                 if species=="hg19" and ensembl.find("GL")!=-1:
                     ensembl = ensembl+".1"
-                chr_uscs_ensembl[species][ucsc] = ensembl
-                chr_ensembl_ucsc[species][ensembl] = ucsc
+                if chr_uscs_ensembl.get(ucsc, None)!=None:
+                    assert(chr_uscs_ensembl[ucsc]==ensembl)
+                chr_uscs_ensembl[ucsc] = ensembl
+                if chr_ensembl_ucsc.get(ensembl, None)!=None:
+                    assert(chr_ensembl_ucsc[ensembl]==ucsc)
+                chr_ensembl_ucsc[ensembl] = ucsc
                 r = f.readline()
 
 def load(species, version="ensembl74"):
@@ -59,6 +60,9 @@ def load(species, version="ensembl74"):
 
     if species=="dm5":
         version="ensembl85"
+
+    if species=="dm6":
+        version="ensembl88"
 
     genes_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "genes.json")
     genes[species] = json.loads(open(genes_filename).read())
@@ -115,6 +119,8 @@ def prepare(species="hg19", version="ensembl74"):
         version = "ensembl67" # latest ensembl annotation for mm9
     if species=="mm10":
         version = "ensembl82" # latest ensembl annotation for mm9
+    if species=="dm6":
+        version = "ensembl88" # latest ensembl annotation for mm9
     print "preparing annotation for %s" % species
     annotation_folder = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version))
     f_log = open(os.path.join(annotation_folder, "log.txt"), "wt")
@@ -131,28 +137,45 @@ def prepare(species="hg19", version="ensembl74"):
     # convert strand: 1 = +, -1 = "-"
     f = pybio.data.TabReader(os.path.join(annotation_folder, "%s.annotation.%s.tab" % (species, version)))
     while f.readline():
+        for k, item in f.data.items():
+            f.data[k.lower()] = item
         utr5_start = utr5_stop = utr3_start = utr3_stop = ""
-        gene_id = f.data["Ensembl Gene ID"]
+        if f.data.get("Ensembl Gene ID", None)!=None:
+            gene_id = f.data["Ensembl Gene ID"]
+        elif f.data.get("Gene stable ID", None)!=None:
+            gene_id = f.data["Gene stable ID"]
         gene_start = int(f.data["Gene Start (bp)"])-1
         gene_stop = int(f.data["Gene End (bp)"])-1
-        gene_chr = f.data["Chromosome Name"]
+        if f.data.get("Chromosome Name")!=None:
+            gene_chr = f.data["Chromosome Name"]
+        elif f.data.get("Chromosome/scaffold name")!=None:
+            gene_chr = f.data["Chromosome/scaffold name"]
         gene_strand = int(f.data["Strand"])
         gene_strand = "+" if gene_strand==1 else "-"
         if gene_chr not in chrs_names:
             continue
-        if f.data["5' UTR Start"]!="":
-            utr5_start = int(f.data["5' UTR Start"])-1
-        if f.data["5' UTR End"]!="":
-            utr5_stop = int(f.data["5' UTR End"])-1
-        if f.data["3' UTR Start"]!="":
-            utr3_start = int(f.data["3' UTR Start"])-1
-        if f.data["3' UTR End"]!="":
-            utr3_stop = int(f.data["3' UTR End"])-1
+        if f.data["5' utr start"]!="":
+            utr5_start = int(f.data["5' utr start"])-1
+        if f.data["5' utr end"]!="":
+            utr5_stop = int(f.data["5' utr end"])-1
+        if f.data["3' utr start"]!="":
+            utr3_start = int(f.data["3' utr start"])-1
+        if f.data["3' utr end"]!="":
+            utr3_stop = int(f.data["3' utr end"])-1
         biotype = f.data.get("Gene Biotype", None)
         if biotype==None:
             biotype = f.data.get("Gene type", "")
-        exon_start = int(f.data["Exon Chr Start (bp)"])-1
-        exon_stop = int(f.data["Exon Chr End (bp)"])-1
+
+        if f.data.get("Exon Chr Start (bp)", None)!=None:
+            exon_start = int(f.data["Exon Chr Start (bp)"])-1
+        elif f.data.get("Exon region start (bp)", None)!=None:
+            exon_start = int(f.data["Exon region start (bp)"])-1
+
+        if f.data.get("Exon Chr End (bp)", None)!=None:
+            exon_stop = int(f.data["Exon Chr End (bp)"])-1
+        elif f.data.get("Exon region end (bp)", None)!=None:
+            exon_stop = int(f.data["Exon region end (bp)"])-1
+
         constitutive = f.data["Constitutive Exon"]
         # define gene record dictionary
         geneD = temp_genes.get(gene_id, {})
@@ -162,7 +185,10 @@ def prepare(species="hg19", version="ensembl74"):
         geneD["gene_strand"] = gene_strand
         geneD["gene_start"] = gene_start
         geneD["gene_stop"] = gene_stop
-        geneD["gene_name"] = f.data.get("Associated Gene Name", "")
+        if f.data.get("Associated Gene Name", None)!=None:
+            geneD["gene_name"] = f.data["Associated Gene Name"]
+        elif f.data.get("Gene name", None)!=None:
+            geneD["gene_name"] = f.data["Gene name"]
         geneD["gene_biotype"] = biotype
         geneD["gene_length"] = gene_stop - gene_start + 1
         if utr3_start!="" and utr3_stop!="":

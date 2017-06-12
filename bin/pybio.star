@@ -8,7 +8,7 @@ minlen=$6
 mkdir $output_folder
 cd $output_folder
 
-STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --readFilesCommand zcat --runThreadN ${cpu} --outFilterMatchNminOverLread ${minlen}
+STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --readFilesCommand zcat --runThreadN ${cpu} --outFilterMatchNminOverLread ${minlen} --outFilterScoreMinOverLread ${minlen}
 
 # https://groups.google.com/forum/#!topic/rna-star/7RwKkvNLmI4
 # STAR --outFilterMultimapNmax 1 --genomeDir ${genome_dir} --readFilesIn ${fastq} --outReadsUnmapped Fastx --readFilesCommand zcat --outFilterMatchNminOverLread 0.2 --outFilterScoreMinOverLread 0.2 --runThreadN ${cpu}
@@ -20,5 +20,5 @@ mv Unmapped.out.mate1 ${name}.unmapped.fastq
 mv Log.progress.out ${name}.progress.txt
 pybio.sam2bam ${name}.sam
 rm ${name}.sam
-gzip ${name}.unmapped.fastq
+gzip -f ${name}.unmapped.fastq
 mv SJ.out.tab ${name}.splice.tab.out
