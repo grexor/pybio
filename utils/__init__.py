@@ -171,7 +171,7 @@ class Cmd():
     def __init__(self, command):
         self.command = command
         self.returncode = None
-        self.process = subprocess.Popen(['/bin/bash', '-cl', command], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        self.process = subprocess.Popen(['/bin/sh', '-cl', command], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         self.pid = self.process.pid
 
     def run(self):

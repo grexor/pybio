@@ -62,7 +62,10 @@ def load(species, version="ensembl74"):
         version="ensembl85"
 
     if species=="dm6":
-        version="ensembl88"
+        version="ensembl90"
+
+    if species=="dm61":
+        version="flybase"
 
     genes_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "genes.json")
     genes[species] = json.loads(open(genes_filename).read())
@@ -120,7 +123,9 @@ def prepare(species="hg19", version="ensembl74"):
     if species=="mm10":
         version = "ensembl82" # latest ensembl annotation for mm9
     if species=="dm6":
-        version = "ensembl88" # latest ensembl annotation for mm9
+        version = "ensembl90" # latest ensembl annotation for mm9
+    if species=="dm61":
+        version = "flybase" # latest ensembl annotation for mm9
     print "preparing annotation for %s" % species
     annotation_folder = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version))
     f_log = open(os.path.join(annotation_folder, "log.txt"), "wt")
@@ -153,6 +158,7 @@ def prepare(species="hg19", version="ensembl74"):
         gene_strand = int(f.data["Strand"])
         gene_strand = "+" if gene_strand==1 else "-"
         if gene_chr not in chrs_names:
+            print gene_chr
             continue
         if f.data["5' utr start"]!="":
             utr5_start = int(f.data["5' utr start"])-1
@@ -415,6 +421,13 @@ def chr_list(genome):
         chr_name = f.rstrip(".string").split("/")[-1]
         chr_size = os.path.getsize(f)
         R.append((chr_name, chr_size))
+
+    files = glob.glob(pybio.path.root_folder+"/genomes/%s.assembly/*.raw" % (genome))
+    for f in files:
+        chr_name = f.rstrip(".raw").split("/")[-1]
+        chr_size = os.path.getsize(f)
+        R.append((chr_name, chr_size))
+
     return R
 
 # get genomic sequence
