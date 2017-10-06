@@ -2,6 +2,6 @@
 for fname in $@
 do
   samtools view -@ 4 -F 4 -bS ${fname} -o ${fname:0:-4}.bam # -F 4 means only mapped reads
-  samtools sort -@ 4 -o ${fname:0:-4}.bam ${fname:0:-4}.bam
-  samtools index -b ${fname:0:-4}.bam
+  samtools sort -@ 4 ${fname:0:-4}.bam ${fname:0:-4}
+  samtools index ${fname:0:-4}.bam
 done
