@@ -21,5 +21,6 @@
 		<Attribute name = "is_constitutive" />
 		<Attribute name = "rank" />
 		<Attribute name = "ensembl_exon_id" />
+		<Attribute name = "external_gene_id" />
 	</Dataset>
 </Query>

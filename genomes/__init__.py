@@ -149,8 +149,14 @@ def prepare(species="hg19", version="ensembl74"):
             gene_id = f.data["Ensembl Gene ID"]
         elif f.data.get("Gene stable ID", None)!=None:
             gene_id = f.data["Gene stable ID"]
-        gene_start = int(f.data["Gene Start (bp)"])-1
-        gene_stop = int(f.data["Gene End (bp)"])-1
+        if "Gene start (bp)" in f.data.keys():
+            gene_start = int(f.data["Gene start (bp)"])-1
+        if "Gene Start (bp)" in f.data.keys():
+            gene_start = int(f.data["Gene Start (bp)"])-1
+        if "Gene End (bp)" in f.data.keys():
+            gene_stop = int(f.data["Gene End (bp)"])-1
+        if "Gene end (bp)" in f.data.keys():
+            gene_stop = int(f.data["Gene end (bp)"])-1
         if f.data.get("Chromosome Name")!=None:
             gene_chr = f.data["Chromosome Name"]
         elif f.data.get("Chromosome/scaffold name")!=None:
@@ -158,7 +164,6 @@ def prepare(species="hg19", version="ensembl74"):
         gene_strand = int(f.data["Strand"])
         gene_strand = "+" if gene_strand==1 else "-"
         if gene_chr not in chrs_names:
-            print gene_chr
             continue
         if f.data["5' utr start"]!="":
             utr5_start = int(f.data["5' utr start"])-1
@@ -182,7 +187,10 @@ def prepare(species="hg19", version="ensembl74"):
         elif f.data.get("Exon region end (bp)", None)!=None:
             exon_stop = int(f.data["Exon region end (bp)"])-1
 
-        constitutive = f.data["Constitutive Exon"]
+        if "Constitutive exon" in f.data.keys():
+            constitutive = f.data["Constitutive exon"]
+        if "Constitutive Exon" in f.data.keys():
+            constitutive = f.data["Constitutive Exon"]
         # define gene record dictionary
         geneD = temp_genes.get(gene_id, {})
         geneD["record"] = "gene"
@@ -421,13 +429,11 @@ def chr_list(genome):
         chr_name = f.rstrip(".string").split("/")[-1]
         chr_size = os.path.getsize(f)
         R.append((chr_name, chr_size))
-
     files = glob.glob(pybio.path.root_folder+"/genomes/%s.assembly/*.raw" % (genome))
     for f in files:
         chr_name = f.rstrip(".raw").split("/")[-1]
         chr_size = os.path.getsize(f)
         R.append((chr_name, chr_size))
-
     return R
 
 # get genomic sequence
