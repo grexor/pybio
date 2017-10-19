@@ -17,7 +17,8 @@ def star(genome, fastq_file, output_folder, name, cpu=1, verbose=True, minlen=0.
     :param minlen: outFilterMatchNminOverLread, if -1, use default
     """
 
-    genome_folder = os.path.join(pybio.path.genomes_folder, "%s.assembly.star" % genome)
+    version = pybio.genomes.get_latest_version(genome)
+    genome_folder = os.path.join(pybio.path.genomes_folder, "%s.assembly.%s.star" % (genome, version))
     command = "pybio.star %s %s %s %s %s %s" % (output_folder, genome_folder, os.path.abspath(fastq_file), name, cpu, minlen)
     if verbose:
         print command
@@ -37,7 +38,8 @@ def star_pair(genome, file1, file2, output_folder, name, cpu=1, verbose=True):
     :param verbose: print executed STAR commands
     """
 
-    genome_folder = os.path.join(pybio.path.genomes_folder, "%s.assembly.star" % genome)
+    version = pybio.genomes.get_latest_version(genome)
+    genome_folder = os.path.join(pybio.path.genomes_folder, "%s.assembly.%s.star" % (genome, version))
     command = "pybio.star.pair %s %s %s %s %s %s" % (output_folder, genome_folder, os.path.abspath(file1), os.path.abspath(file2), name, cpu)
     if verbose:
         print command

@@ -2,7 +2,7 @@
 <!DOCTYPE Query>
 <Query  virtualSchemaName = "default" formatter = "TSV" header = "1" uniqueRows = "1" count = "" datasetConfigVersion = "0.6" >
 			
-	<Dataset name = "mmusculus_gene_ensembl" interface = "default" >
+	<Dataset name = "dmelanogaster_gene_ensembl" interface = "default" >
 		<Attribute name = "ensembl_gene_id" />
 		<Attribute name = "ensembl_transcript_id" />
 		<Attribute name = "chromosome_name" />
@@ -11,7 +11,6 @@
 		<Attribute name = "transcript_start" />
 		<Attribute name = "transcript_end" />
 		<Attribute name = "strand" />
-		<Attribute name = "external_gene_id" />
 		<Attribute name = "5_utr_start" />
 		<Attribute name = "5_utr_end" />
 		<Attribute name = "3_utr_start" />

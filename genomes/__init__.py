@@ -22,13 +22,29 @@ linear = {}
 def init():
     load_chr_ucsc_ensembl()
 
-def genomes_list():
-    genomes = glob.glob(os.path.join(pybio.path.genomes_folder, "*.assembly"))
-    return [os.path.basename(x.rstrip(".assembly")) for x in genomes]
+def get_latest_version(species):
+    if species=="dm6":
+        return "ensembl90"
+    if species=="at":
+        return "ensembl90"
+    if species=="mm9":
+        return "ensembl75"
+    if species=="mm10":
+        return "ensembl90"
+    if species=="hg19":
+        return "ensembl75"
+    if species=="hg38":
+        return "ensembl90"
+    return "ensembl90" # for all other species
+
+def genomes_list(version="ensembl90"):
+    genomes = glob.glob(os.path.join(pybio.path.genomes_folder, "*.assembly.%s" % version))
+    return [os.path.basename(x.rstrip(".assembly.%s" % version)) for x in genomes]
 
 def load_chr_ucsc_ensembl():
-    for species in ["hg19", "mm10"]:
-        map_filename = os.path.join(pybio.path.genomes_folder, "%s.assembly" % species, "%s.chr.ucsc.ensembl" % species)
+    for species in ["hg19", "mm10", "mm9", "hg38"]:
+        version = get_latest_version(species)
+        map_filename = os.path.join(pybio.path.genomes_folder, "%s.assembly.%s" % (species, version), "%s.chr.ucsc.ensembl" % species)
         if os.path.exists(map_filename):
             f = open(map_filename, "rt")
             r = f.readline()
@@ -46,7 +62,7 @@ def load_chr_ucsc_ensembl():
                 chr_ensembl_ucsc[ensembl] = ucsc
                 r = f.readline()
 
-def load(species, version="ensembl74", force=False):
+def load(species, version=None, force=False):
     """
     Loads the genome annotation into memory
 
@@ -59,17 +75,8 @@ def load(species, version="ensembl74", force=False):
 
     print "loading genome for ", species
 
-    if species=="mm10":
-        version="ensembl82"
-
-    if species=="dm5":
-        version="ensembl85"
-
-    if species=="dm6":
-        version="ensembl90"
-
-    if species=="dm61":
-        version="flybase"
+    if version==None:
+        version = get_latest_version(species)
 
     genes_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "genes.json")
     genes[species] = json.loads(open(genes_filename).read())
@@ -129,15 +136,11 @@ def add_cluster(gid, dbgenes, dbclusters):
         cluster_start, cluster_stop = dbgenes[gid]["gene_start"], dbgenes[gid]["gene_stop"]
         dbclusters[(cluster_start, cluster_stop)] = cluster_genes # newly created cluster
 
-def prepare(species="hg19", version="ensembl74"):
-    if species=="mm9":
-        version = "ensembl67" # latest ensembl annotation for mm9
-    if species=="mm10":
-        version = "ensembl82" # latest ensembl annotation for mm9
-    if species=="dm6":
-        version = "ensembl90" # latest ensembl annotation for mm9
-    if species=="dm61":
-        version = "flybase" # latest ensembl annotation for mm9
+def prepare(species="hg19", version=None):
+
+    if version==None:
+        version = get_latest_version(species)
+
     print "preparing annotation for %s" % species
     annotation_folder = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version))
     f_log = open(os.path.join(annotation_folder, "log.txt"), "wt")
@@ -449,19 +452,23 @@ def find_right_linear(genome_linear, index):
     return right_index, right_gene_id
 
 # get chromosome list
-def chr_list(genome):
+def chr_list(genome, version=None):
     """
     :param genome: mm9, hg19, ...
 
     Returns chromosome list (names) of the given genome.
     """
-    files = glob.glob(pybio.path.root_folder+"/genomes/%s.assembly/*.string" % (genome))
+
+    if version==None:
+        version = get_latest_version(genome)
+
+    files = glob.glob(pybio.path.root_folder+"/genomes/%s.assembly.%s/*.string" % (genome, version))
     R = []
     for f in files:
         chr_name = f.rstrip(".string").split("/")[-1]
         chr_size = os.path.getsize(f)
         R.append((chr_name, chr_size))
-    files = glob.glob(pybio.path.root_folder+"/genomes/%s.assembly/*.raw" % (genome))
+    files = glob.glob(pybio.path.root_folder+"/genomes/%s.assembly.%s/*.raw" % (genome, version))
     for f in files:
         chr_name = f.rstrip(".raw").split("/")[-1]
         chr_size = os.path.getsize(f)
@@ -469,7 +476,7 @@ def chr_list(genome):
     return R
 
 # get genomic sequence
-def seq_direct(genome, chr, strand, start, stop, flank="N"):
+def seq_direct(genome, chr, strand, start, stop, flank="N", version=None):
     """
     :param genome: mm9, hg19, ...
     :param chr: chr1, chrX, ...
@@ -480,6 +487,10 @@ def seq_direct(genome, chr, strand, start, stop, flank="N"):
 
     Note: negative strand returns reverse complement; coordinates are 0-based, left and right closed; start must be < stop;
     """
+
+    if version==None:
+        version = get_latest_version(genome)
+
     if start>stop:
         start, stop = stop, start
     assert(start<=stop)
@@ -487,7 +498,7 @@ def seq_direct(genome, chr, strand, start, stop, flank="N"):
     if start<0:
         seq = flank * abs(start)
     start = max(0, start) # start can only be non-negative
-    fname = os.path.join(pybio.path.root_folder, "genomes", "%s.assembly" % genome, "%s.string" % chr)
+    fname = os.path.join(pybio.path.root_folder, "genomes", "%s.assembly.%s" % (genome, version), "%s.string" % chr)
     if not os.path.exists(fname):
         return ""
     f = open(fname, "rt")
