@@ -6,6 +6,7 @@ import glob
 import json
 import struct
 import itertools
+import copy
 
 code = {"R": ["A", "G"], "Y": ["C", "T"], "S": ["G", "C"], "W": ["A", "T"]}
 revCode = {'A': 'T', 'T': 'A', 'U': 'A', 'G': 'C', 'C': 'G', 'R': 'Y', 'Y': 'R', 'K': 'M', 'M': 'K', 'S': 'S', 'W': 'W', 'B': 'V', 'D': 'H', 'H': 'D', 'V': 'B', 'N': 'N'}
@@ -16,6 +17,7 @@ chr_ensembl_ucsc = {}
 # load existing annotations
 genes = {}
 intervals = {}
+linear = {}
 
 def init():
     load_chr_ucsc_ensembl()
@@ -44,7 +46,7 @@ def load_chr_ucsc_ensembl():
                 chr_ensembl_ucsc[ensembl] = ucsc
                 r = f.readline()
 
-def load(species, version="ensembl74"):
+def load(species, version="ensembl74", force=False):
     """
     Loads the genome annotation into memory
 
@@ -52,8 +54,10 @@ def load(species, version="ensembl74"):
     :param version: the Ensembl version of the annotation, if applicable
     """
 
-    if genes.get(species, None)!=None: # already loaded?
+    if genes.get(species, None)!=None and not force: # already loaded?
         return
+
+    print "loading genome for ", species
 
     if species=="mm10":
         version="ensembl82"
@@ -71,12 +75,20 @@ def load(species, version="ensembl74"):
     genes[species] = json.loads(open(genes_filename).read())
     intervals_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "intervals.json")
     intervals[species] = json.loads(open(intervals_filename).read())
+    linear_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "linear.json")
+    linear[species] = json.loads(open(linear_filename).read())
     # json stores [] instead of (), bisect doesnt work with []
     for chrstrand, gi in intervals[species].items():
         new_gi = []
         for e in gi:
             new_gi.append(tuple(e))
         intervals[species][chrstrand] = new_gi
+
+    for chrstrand, gi in linear[species].items():
+        new_gi = []
+        for e in gi:
+            new_gi.append(tuple(e))
+        linear[species][chrstrand] = new_gi
 
 def adjust_gene(gid, limit_intervals, dbgenes):
     # limit_intervals must be defined inside gene
@@ -348,73 +360,93 @@ def prepare(species="hg19", version="ensembl74"):
     f.write(json.dumps(temp_genes))
     f.close()
 
-def annotate_position(species, chr, strand, pos):
+    linear = {}
+    f = open(os.path.join(annotation_folder, "linear.json"), "wt")
+    for gene_id, gene in temp_genes.items():
+        key = "%s:%s" % (gene["gene_chr"], gene["gene_strand"])
+        chrstrand = linear.get(key, [])
+        for (i_start, i_stop, i_type) in gene["gene_intervals"]:
+            chrstrand.append((i_start, i_stop, i_type, gene_id))
+        linear[key] = chrstrand
+    for key, chrstrand in linear.items():
+        chrstrand.sort()
+        linear[key] = chrstrand
+    f.write(json.dumps(linear))
+
+def annotate(species, chr, strand, pos, extension = 0):
     """
-    | Annotages given genomic position.
+    | Annotates given genomic position.
     | Returns triple (upstream_gene, position_gene, downstream_gene).
     """
-    chrstrand = "%s:%s" % (chr, strand)
-    gi = intervals[species].get(chrstrand, None)
-    if gi==None: # no genes on this chrstrand
-        return (None, None, None)
-    i, gid = find_gene(gi, pos)
-    # bisect returns the point of insertion, we still need to check if pos is inside gene
-    # if intergenic, bisect returns the upstream gene
-    pos_in_gene = False
-    if type(genes[species][gid]["gene_start"])==list:
-        for (start, stop) in zip(genes[species][gid]["gene_start"], genes[species][gid]["gene_stop"]):
-            if start<=pos<=stop:
-                pos_in_gene = True
-    if genes[species][gid]["gene_start"]<=pos<=genes[species][gid]["gene_stop"]:
-        pos_in_gene = True
-    if pos_in_gene:
-        if i>0:
-            gid_up = gi[i-1][2]
-        else:
-            gid_up = None
-        if i<len(gi)-1:
-            gid_down = gi[i+1][2]
-        else:
-            gid_down = None
-        if strand=="+":
-            return (gid_up, gid, gid_down)
-        else:
-            return (gid_down, gid, gid_up)
-    else: # position not in gene
-        gid = None
-        if i>=0:
-            gid_up = gi[i][2] # bisect point of insertion
-        else:
-            gid_up = None
-        if i<len(gi)-1:
-            gid_down = gi[i+1][2]
-        else:
-            gid_down = None
-        if strand=="+":
-            return (gid_up, gid, gid_down)
-        else:
-            return (gid_down, gid, gid_up)
-
-def find_gene(gi, pos):
-    # print gi[:12]
-    i = bisect.bisect_left(gi, (pos, "", ""))
-    return i-1, gi[i-1][2]
-
-def find_feature(species, gid, pos):
-    intervals = genes[species][gid]["gene_intervals"]
-    for (start, stop, t) in intervals:
-        if start<=pos<=stop:
-            return (start, stop, t)
-    return None
-
-def annotate(species, chr, strand, pos):
     load(species)
-    pos = int(pos)
-    up_gene, gid, down_gene = annotate_position(species, chr, strand, pos)
-    interval = None
-    if gid:
-        interval = find_feature(species, gid, pos)
-    return (up_gene, gid, down_gene, interval)
+    chrstrand = "%s:%s" % (chr, strand)
+    genome_linear = linear[species].get(chrstrand, None)
+    if genome_linear==None: # no genes on this chrstrand
+        return (None, None, None, None)
+    closest_index, gene_id = find_linear(genome_linear, pos) # if gene_id==None, pos is intergenic, closest_index is upstream linear
+    if gene_id!=None:
+        _, gid_up = find_left_linear(genome_linear, closest_index)
+        _, gid_down = find_right_linear(genome_linear, closest_index)
+        interval = (genome_linear[closest_index][0], genome_linear[closest_index][1], genome_linear[closest_index][2]) # convert linear (start, stop, i/o, gene_id) to (start, stop, i/o)
+        if strand=="+":
+            return (gid_up, gene_id, gid_down, interval)
+        else:
+            return (gid_down, gene_id, gid_up, interval)
+    else: # position is intergenic
+        gene_up = genome_linear[closest_index]
+        index_down, _ = find_right_linear(genome_linear, closest_index)
+        gene_down = genome_linear[index_down]
+
+        if strand=="+":
+            distance_to_up = abs(pos-gene_up[1])
+            distance_to_down = abs(pos-gene_down[0])
+        if strand=="-":
+            distance_to_up = abs(pos-gene_down[0])
+            distance_to_down = abs(pos-gene_up[1])
+
+        # assign intergenic position to upstream gene or return current gene as none and return upstream and downstream genes
+        if distance_to_up<=extension and distance_to_up<=distance_to_down:
+            _, gid_up = find_left_linear(genome_linear, closest_index)
+            gene_id = genome_linear[closest_index][3]
+            gene_linear = genome_linear[closest_index]
+            interval = (gene_linear[0], gene_linear[1], gene_linear[2]) # convert linear (start, stop, i/o, gene_id) to (start, stop, i/o)
+            _, gid_down = find_right_linear(genome_linear, closest_index)
+        else:
+            gid_up = genome_linear[closest_index][3]
+            gene_linear = None
+            interval = (None, None, None)
+            _, gid_down = find_right_linear(genome_linear, closest_index)
+
+        if strand=="+":
+            return (gid_up, gene_id, gid_down, interval)
+        else:
+            return (gid_down, gene_id, gid_up, interval)
+
+def find_linear(genome_linear, pos):
+    index = bisect.bisect_left(genome_linear, (pos, "", ""))
+    in_gene = False
+    gene_id = None
+    if (genome_linear[index-1][0]<=pos<=genome_linear[index-1][1]):
+        gene_id = genome_linear[index-1][3]
+    return index-1, gene_id
+
+def find_left_linear(genome_linear, index):
+    gene_id = genome_linear[index][3]
+    left_gene_id = gene_id
+    left_index = index
+    while gene_id==left_gene_id and left_index>0:
+        left_index = left_index - 1
+        left_gene_id = genome_linear[left_index][3]
+    return left_index, left_gene_id
+
+def find_right_linear(genome_linear, index):
+    gene_id = genome_linear[index][3]
+    right_gene_id = gene_id
+    right_index = index
+    while gene_id==right_gene_id and right_index<(len(genome_linear)-1):
+        right_index = right_index + 1
+        right_gene_id = genome_linear[right_index][3]
+    return right_index, right_gene_id
 
 # get chromosome list
 def chr_list(genome):
