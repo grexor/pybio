@@ -1,3 +1,5 @@
+#!/bin/bash
+
 output_folder=$1
 genome_dir=$2
 file1=$3

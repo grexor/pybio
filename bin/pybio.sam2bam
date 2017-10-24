@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # convert sam to bam and sort bam file by position
 for fname in $@
 do

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 output_folder=$1
 genome_index=$2
 fastq_file=$3

@@ -42,7 +42,7 @@ def genomes_list(version="ensembl90"):
     return [os.path.basename(x.rstrip(".assembly.%s" % version)) for x in genomes]
 
 def load_chr_ucsc_ensembl():
-    for species in ["hg19", "mm10", "mm9", "hg38"]:
+    for species in ["hg19", "mm10"]:
         version = get_latest_version(species)
         map_filename = os.path.join(pybio.path.genomes_folder, "%s.assembly.%s" % (species, version), "%s.chr.ucsc.ensembl" % species)
         if os.path.exists(map_filename):

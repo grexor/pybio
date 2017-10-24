@@ -8,10 +8,9 @@ minlen=$6
 mkdir $output_folder
 cd $output_folder
 
-STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --readFilesCommand zcat --runThreadN ${cpu} --outFilterMatchNminOverLread ${minlen} --outFilterScoreMinOverLread ${minlen}
-
 # https://groups.google.com/forum/#!topic/rna-star/7RwKkvNLmI4
-# STAR --outFilterMultimapNmax 1 --genomeDir ${genome_dir} --readFilesIn ${fastq} --outReadsUnmapped Fastx --readFilesCommand zcat --outFilterMatchNminOverLread 0.2 --outFilterScoreMinOverLread 0.2 --runThreadN ${cpu}
+# --genomeLoad LoadAndRemove
+STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --readFilesCommand zcat --runThreadN ${cpu} --outFilterMatchNminOverLread ${minlen} --outFilterScoreMinOverLread ${minlen}
 
 mv Aligned.out.sam ${name}.sam
 mv Log.final.out ${name}.stats.txt
