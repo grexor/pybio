@@ -287,8 +287,10 @@ class Bedgraph():
         data = getattr(self, db)
         if db in ["raw", "cpm", "meta"]:
             data.setdefault(chr, {}).setdefault(strand, {}).setdefault(pos, abs(val))
+            data[chr][strand][pos] = abs(val)
         if db in ["support"]:
             data.setdefault(chr, {}).setdefault(strand, {}).setdefault(pos, set(val))
+            data[chr][strand][pos] = set(val)
 
     def add_value(self, chr, strand, pos, val, db="raw"):
         if val==0:
