@@ -28,7 +28,7 @@ def get_latest_version(species):
     if species=="at":
         return "ensembl90"
     if species=="mm9":
-        return "ensembl75"
+        return "ensembl67"
     if species=="mm10":
         return "ensembl90"
     if species=="hg19":
@@ -84,6 +84,7 @@ def load(species, version=None, force=False):
     intervals[species] = json.loads(open(intervals_filename).read())
     linear_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "linear.json")
     linear[species] = json.loads(open(linear_filename).read())
+
     # json stores [] instead of (), bisect doesnt work with []
     for chrstrand, gi in intervals[species].items():
         new_gi = []
@@ -141,10 +142,10 @@ def prepare(species="hg19", version=None):
     if version==None:
         version = get_latest_version(species)
 
-    print "preparing annotation for %s" % species
+    print "%s: processing annotation" % species
     annotation_folder = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version))
     f_log = open(os.path.join(annotation_folder, "log.txt"), "wt")
-    chrs_list = pybio.genomes.chr_list(species)
+    chrs_list = pybio.genomes.chr_list(species, version)
     assert(len(chrs_list)>0)
     chrs_names = [name for (name, size) in chrs_list]
     temp_genes = {}
@@ -156,7 +157,11 @@ def prepare(species="hg19", version=None):
     # -1 on all coordinates
     # convert strand: 1 = +, -1 = "-"
     f = pybio.data.TabReader(os.path.join(annotation_folder, "%s.annotation.%s.tab" % (species, version)))
+    cline = 0
     while f.readline():
+        cline += 1
+        if cline%100000==0:
+            print "%s: processed %sM annotation rows" % (species, cline/100000)
         for k, item in f.data.items():
             f.data[k.lower()] = item
         utr5_start = utr5_stop = utr3_start = utr3_stop = ""
@@ -180,14 +185,32 @@ def prepare(species="hg19", version=None):
         gene_strand = "+" if gene_strand==1 else "-"
         if gene_chr not in chrs_names:
             continue
-        if f.data["5' utr start"]!="":
-            utr5_start = int(f.data["5' utr start"])-1
-        if f.data["5' utr end"]!="":
-            utr5_stop = int(f.data["5' utr end"])-1
-        if f.data["3' utr start"]!="":
-            utr3_start = int(f.data["3' utr start"])-1
-        if f.data["3' utr end"]!="":
-            utr3_stop = int(f.data["3' utr end"])-1
+        if "5' UTR start" in f.data:
+            if f.data["5' UTR start"]!="":
+                utr5_start = int(f.data["5' UTR start"])-1
+        if "5' UTR end" in f.data:
+            if f.data["5' UTR end"]!="":
+                utr5_stop = int(f.data["5' UTR end"])-1
+        if "3' UTR start" in f.data:
+            if f.data["3' UTR start"]!="":
+                utr3_start = int(f.data["3' UTR start"])-1
+        if "3' UTR end" in f.data:
+            if f.data["3' UTR end"]!="":
+                utr3_stop = int(f.data["3' UTR end"])-1
+
+        if "5' UTR Start" in f.data:
+            if f.data["5' UTR Start"]!="":
+                utr5_start = int(f.data["5' UTR Start"])-1
+        if "5' UTR End" in f.data:
+            if f.data["5' UTR End"]!="":
+                utr5_stop = int(f.data["5' UTR End"])-1
+        if "3' UTR Start" in f.data:
+            if f.data["3' UTR Start"]!="":
+                utr3_start = int(f.data["3' UTR Start"])-1
+        if "3' UTR End" in f.data:
+            if f.data["3' UTR End"]!="":
+                utr3_stop = int(f.data["3' UTR End"])-1
+
         biotype = f.data.get("Gene Biotype", None)
         if biotype==None:
             biotype = f.data.get("Gene type", "")
@@ -214,6 +237,9 @@ def prepare(species="hg19", version=None):
         geneD["gene_strand"] = gene_strand
         geneD["gene_start"] = gene_start
         geneD["gene_stop"] = gene_stop
+        geneD.setdefault("utr5", [])
+        geneD.setdefault("utr3", [])
+        geneD.setdefault("exons", [])
         if f.data.get("Associated Gene Name", None)!=None:
             geneD["gene_name"] = f.data["Associated Gene Name"]
         elif f.data.get("Gene name", None)!=None:
@@ -221,14 +247,14 @@ def prepare(species="hg19", version=None):
         geneD["gene_biotype"] = biotype
         geneD["gene_length"] = gene_stop - gene_start + 1
         if utr3_start!="" and utr3_stop!="":
-            utr3 = geneD.get("utr3", [])
+            utr3 = geneD.get("utr3")
             utr3.append((utr3_start, utr3_stop))
             geneD["utr3"] = utr3
         if utr5_start!="" and utr5_stop!="":
-            utr5 = geneD.get("utr5", [])
+            utr5 = geneD.get("utr5")
             utr5.append((utr5_start, utr5_stop))
             geneD["utr5"] = utr5
-        exons = geneD.get("exons", [])
+        exons = geneD.get("exons")
         exons.append((exon_start, exon_stop))
         geneD["exons"] = exons
         temp_genes[gene_id] = geneD
@@ -240,29 +266,31 @@ def prepare(species="hg19", version=None):
     for gene_id, geneD in temp_genes.items():
         current_gene += 1
         if current_gene%100==0:
-            f_log.write("creating intervals: %.2f done\n" % (current_gene / float(all_genes)))
+            f_log.write("%s: creating intervals: %.2f done\n" % (species, current_gene / float(all_genes)))
         coverage = {}
+        coverage_utrs = {} # only 5' and 3'
         geneD["exons"] = pybio.utils.merge_intervals(geneD["exons"])
-        if geneD.get("utr3", None)!=None:
-            for (utr3_start, utr3_stop) in geneD["utr3"]:
-                for i in xrange(utr3_start, utr3_stop+1):
-                    #coverage[i] = '3'
+        geneD["utr5"] = pybio.utils.merge_intervals(geneD["utr5"])
+        geneD["utr3"] = pybio.utils.merge_intervals(geneD["utr3"])
+
+        # precedence: 3utr -> 5utr -> exon
+        if geneD.get("exons", None)!=None:
+            for (exon_start, exon_stop) in geneD["exons"]:
+                for i in xrange(exon_start, exon_stop+1):
                     coverage[i] = 'o'
         if geneD.get("utr5", None)!=None:
             for (utr5_start, utr5_stop) in geneD["utr5"]:
                 for i in xrange(utr5_start, utr5_stop+1):
-                    if coverage.get(i, None)!=None:
-                        continue
-                    #coverage[i] = '5'
+                    coverage_utrs[i] = '5'
                     coverage[i] = 'o'
-        if geneD.get("exons", None)!=None:
-            for (exon_start, exon_stop) in geneD["exons"]:
-                for i in xrange(exon_start, exon_stop+1):
-                    if coverage.get(i, None)!=None:
-                        continue
+        if geneD.get("utr3", None)!=None:
+            for (utr3_start, utr3_stop) in geneD["utr3"]:
+                for i in xrange(utr3_start, utr3_stop+1):
+                    coverage_utrs[i] = '3'
                     coverage[i] = 'o'
 
         ints = pybio.utils.coverage_to_intervals(coverage)
+        utr_intervals = pybio.utils.coverage_to_intervals(coverage_utrs)
         # add intronic intervals
         all_intervals = [ints[0]]
         for (i1_start, i1_stop, i1_value), (i2_start, i2_stop, i2_value) in zip(ints, ints[1:]):
@@ -272,12 +300,12 @@ def prepare(species="hg19", version=None):
         assert(all_intervals[0][0]==geneD["gene_start"])
         assert(all_intervals[-1][1]==geneD["gene_stop"])
         geneD["gene_intervals"] = all_intervals
-        # delete old intervals
-        del geneD["exons"]
-        if geneD.get("utr5", None)!=None:
-            del geneD["utr5"]
-        if geneD.get("utr3", None)!=None:
-            del geneD["utr3"]
+        geneD["gene_utrs"] = utr_intervals
+
+        # delete original annotation intervals
+        for feature in ["exons", "utr5", "utr3"]:
+            if feature in geneD:
+                del geneD[feature]
 
     # B: all genes are read, now we need to resolve overlapping clusters of genes
     genes_by_chrstrand = {}
@@ -359,6 +387,7 @@ def prepare(species="hg19", version=None):
     f = open(os.path.join(annotation_folder, "intervals.json"), "wt")
     f.write(json.dumps(temp_intervals))
     f.close()
+
     f = open(os.path.join(annotation_folder, "genes.json"), "wt")
     f.write(json.dumps(temp_genes))
     f.close()
@@ -385,16 +414,16 @@ def annotate(species, chr, strand, pos, extension = 0):
     chrstrand = "%s:%s" % (chr, strand)
     genome_linear = linear[species].get(chrstrand, None)
     if genome_linear==None: # no genes on this chrstrand
-        return (None, None, None, None)
+        return (None, None, None, None, None)
     closest_index, gene_id = find_linear(genome_linear, pos) # if gene_id==None, pos is intergenic, closest_index is upstream linear
     if gene_id!=None:
         _, gid_up = find_left_linear(genome_linear, closest_index)
         _, gid_down = find_right_linear(genome_linear, closest_index)
         interval = (genome_linear[closest_index][0], genome_linear[closest_index][1], genome_linear[closest_index][2]) # convert linear (start, stop, i/o, gene_id) to (start, stop, i/o)
         if strand=="+":
-            return (gid_up, gene_id, gid_down, interval)
+            return (gid_up, gene_id, gid_down, interval, find_feature_type(species, gene_id, interval[2], pos))
         else:
-            return (gid_down, gene_id, gid_up, interval)
+            return (gid_down, gene_id, gid_up, interval, find_feature_type(species, gene_id, interval[2], pos))
     else: # position is intergenic
         gene_up = genome_linear[closest_index]
         index_down, _ = find_right_linear(genome_linear, closest_index)
@@ -421,9 +450,20 @@ def annotate(species, chr, strand, pos, extension = 0):
             _, gid_down = find_right_linear(genome_linear, closest_index)
 
         if strand=="+":
-            return (gid_up, gene_id, gid_down, interval)
+            return (gid_up, gene_id, gid_down, interval, find_feature_type(species, gene_id, interval[2], pos))
         else:
-            return (gid_down, gene_id, gid_up, interval)
+            return (gid_down, gene_id, gid_up, interval, find_feature_type(species, gene_id, interval[2], pos))
+
+def find_feature_type(species, gene_id, interval, pos):
+    if interval==None:
+        return None
+    feature_type = {"o":"exon", "i":"intron"}[interval]
+    if interval=="o":
+        # detect if it's 3'utr or 5'utr
+        for (start, stop, ftype) in genes[species][gene_id]["gene_utrs"]:
+            if start<=pos<=stop:
+                feature_type = ftype
+    return {"exon":"exon", "3":"utr3", "5":"utr5", "intron":"intron"}[feature_type]
 
 def find_linear(genome_linear, pos):
     index = bisect.bisect_left(genome_linear, (pos, "", ""))

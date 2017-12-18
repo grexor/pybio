@@ -14,7 +14,7 @@ def mix_sort(x):
 
 class Bedgraph():
     """
-    Class for reading bedgraph files.
+    Class for reading bedGraph files.
     Scaling is done by / total_raw * 1e6.
     Each position can carry metadata, weighted by cpm value.
     """
@@ -46,7 +46,13 @@ class Bedgraph():
         for chr, strand_data in data_template.items():
             for strand, pos_data in strand_data.items():
                 for pos in pos_data.keys():
-                    if (start<0) and (stop>0): # all this to consider nearby sites and only add /2 distance if closer than start, stop
+                    # adjust (start, stop) intervals to half distance to any upstream / downstream template position
+                    # e.g, if the template has 3 positions: 100, 150, 200
+                    # and parameters are: start = -100, stop = 25
+                    # the considered intervals would be:
+                    # 0..125, 125..175, 175..225 : the intervals are readjusted to consider only 1/2 distance to the surrounding positions
+                    # in this way positions do not "share" data from the source
+                    if (start<0) and (stop>0):
                         check_start = 2*start
                         check_stop = 2*stop
                         min_start = start
@@ -61,68 +67,10 @@ class Bedgraph():
                             if vector[i]>0:
                                 min_stop = min(min_stop, i/2)
                         cDNA = bg_source.get_region(chr, strand, pos, start=min_start, stop=min_stop, db = db_source)
-                    else:
+                    else: # else do not readjust intervals
                         cDNA = bg_source.get_region(chr, strand, pos, start=start, stop=stop, db = db_source)
-                    self.set_value(chr, strand, pos, cDNA)
-                    #print chr, strand, pos, cDNA
+                    self.add_value(chr, strand, pos, cDNA)
                     self.total_raw += cDNA
-
-    def overlay_old(self, template_filename, source_filename, start=-100, stop=25, db_template="raw", db_source="raw", fast=False, genome_template="ensembl", genome_source="ensembl"):
-        self.clear()
-        bg_template = pybio.data.Bedgraph(template_filename, fast=fast, genome=genome_template)
-        bg_source = pybio.data.Bedgraph(source_filename, fast=fast, genome=genome_source)
-        data_template = getattr(bg_template, db_template)
-        for chr, strand_data in data_template.items():
-            for strand, pos_data in strand_data.items():
-                for pos in pos_data.keys():
-                    cDNA = bg_source.get_region(chr, strand, pos, start=start, stop=stop, db = db_source)
-                    self.set_value(chr, strand, pos, cDNA)
-                    self.total_raw += cDNA
-
-    def overlay2(self, template_filename, source_filename, start=-100, stop=25, db_template="raw", db_source="raw", fast=False, genome_template="ensembl", genome_source="ensembl", reverse_strand=False):
-        self.clear()
-        bg_template = pybio.data.Bedgraph(template_filename, fast=fast, genome=genome_template)
-        data_template = getattr(bg_template, db_template)
-        bam = pysam.AlignmentFile(source_filename, "rb")
-
-        proc = 0
-        for chr, strand_data in data_template.items():
-            try:
-                bam.pileup(chr, 0, 10, truncate=True)
-            except:
-                print "skipping", chr
-                continue
-            for strand, pos_data in strand_data.items():
-                if strand=="-":
-                    start, stop = -start, -stop
-                start, stop = min(start, stop), max(start, stop)
-                match_strand = strand
-                if reverse_strand:
-                    match_strand = {"+":"-", "-":"+"}[match_strand]
-                for pos in pos_data.keys():
-                    max_coverage = 0
-                    if proc%1000==0:
-                        print template_filename, source_filename, "%sK processed" % (proc/1000)
-                    proc += 1
-                    for pup in bam.pileup(chr, pos+start, pos+stop+1, truncate=True):
-                        present = set()
-                        for read in pup.pileups:
-                            cigar = read.alignment.cigar
-                            cigar_types = [t for (t, v) in cigar]
-                            if 3 in cigar_types:
-                                continue
-                            if (match_strand=="+" and not read.alignment.is_reverse) or (match_strand=="-" and read.alignment.is_reverse):
-                                present.add(read.alignment.qname)
-                        max_coverage = max(len(present), max_coverage)
-                    #if max_coverage>0:
-                    #    print chr, strand, pos, max_coverage
-                    self.set_value(chr, strand, pos, max_coverage)
-                    self.total_raw += max_coverage
-
-    def get_bam_coverage(self, bam_filename, chr, strand, pos, start, stop, already_processed=set()):
-        max_coverage = 0
-        bam.close()
-        return max_coverage
 
     def load(self, filename, track_id=None, meta=None, fixed_cDNA=False, compute_cpm=True, genome="ensembl", fast=False, force_strand=None, min_cDNA=0):
         """
@@ -132,7 +80,7 @@ class Bedgraph():
         # load can be called multiple times on different bed files
         # track_id : unique identifier for this file
         # genome: ensembl/ucsc
-        print "loading : %s" % filename
+        print "loading: %s" % filename
         self.filename = filename
 
         if track_id==None:
@@ -164,7 +112,6 @@ class Bedgraph():
                     r = f.readline()
                     continue
             raw = float(r[3])
-            # if reading integer numbers, make them integer
             if self.is_int(raw):
                 raw = int(raw)
             strand = "+" if raw>=0 else "-"
@@ -184,7 +131,7 @@ class Bedgraph():
         self.genome = "ensembl" # we converted to ensembl
 
         if not_converted>0:
-            print "%s positions were skipped; unable to convert chromosome name to ensembl format" % not_converted
+            print "loading: %s: %s positions skipped -> unable to convert chromosome to ensembl convention" % (filename, not_converted)
 
         for chr, strand_data in temp_raw.items():
             for strand, pos_data in strand_data.items():
@@ -210,10 +157,6 @@ class Bedgraph():
         # Get positions from db_source, check min_raw agains db_source
         # Save raw value from db_save
         # Usually db_source and db_save are the same
-        """
-        :param without_track: do not include track names
-        Save bedgraph data to file.
-        """
         self.filename = filename # set the new filename
         print "save : %s, format : %s" % (filename, filetype)
         if track_id!=None:

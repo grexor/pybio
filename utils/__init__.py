@@ -133,7 +133,10 @@ def coverage_to_intervals(coverage):
     | output: [(10, 10, '5'), (12, 12, '5'), (13, 14, 'o'), (25, 26, '3'), (27, 27, '5')]
     | intervals are inclusive left and right
     """
+    if len(coverage)==0:
+        return [] # no coverage? no intervals
     L = []
+    i = None
     val_index = min(coverage.keys())
     val = coverage[val_index]
     for i in xrange(min(coverage.keys())+1, max(coverage.keys())+1):
@@ -149,7 +152,8 @@ def coverage_to_intervals(coverage):
         if val==None and new_val!=None:
             val = new_val
             val_index = i
-    L.append((val_index, i, val))
+    if i!=None:
+        L.append((val_index, i, val))
     return L
 
 def interval_overlap(start1, stop1, start2, stop2):
