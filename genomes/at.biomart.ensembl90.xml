@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Query>
-<Query  virtualSchemaName = "default" formatter = "TSV" header = "1" uniqueRows = "0" count = "" datasetConfigVersion = "0.6" >
-			
-	<Dataset name = "dmelanogaster_gene_ensembl" interface = "default" >
+<Query  virtualSchemaName = "plants_mart" formatter = "TSV" header = "1" uniqueRows = "0" count = "" datasetConfigVersion = "0.6" >
+
+	<Dataset name = "athaliana_eg_gene" interface = "default" >
 		<Attribute name = "ensembl_gene_id" />
 		<Attribute name = "ensembl_transcript_id" />
 		<Attribute name = "chromosome_name" />
@@ -21,5 +21,6 @@
 		<Attribute name = "is_constitutive" />
 		<Attribute name = "rank" />
 		<Attribute name = "ensembl_exon_id" />
+		<Attribute name = "external_gene_name" />
 	</Dataset>
 </Query>

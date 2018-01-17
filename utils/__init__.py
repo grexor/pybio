@@ -5,6 +5,7 @@ import gzip
 import pybio
 import math
 import numpy as np
+import pickle
 
 endings = [".gzip", ".gz", ".bz2"]
 
@@ -311,3 +312,9 @@ def FDR_tab(fname, cname):
     assert(len(L2)==0) # we used all corrected value
 
     #os.remove(fname+"fdr_temp")
+
+def save_pickle(obj, fname):
+    pickle.dump(obj, open(fname, "wb"), -1)
+
+def load_pickle(fname):
+    return pickle.load(open(fname, "rb"))

@@ -72,9 +72,7 @@ def load(species, version=None, force=False):
 
     if genes.get(species, None)!=None and not force: # already loaded?
         return
-
-    print "loading genome for ", species
-
+    print "%s: loading genome" % species
     if version==None:
         version = get_latest_version(species)
 
@@ -241,9 +239,9 @@ def prepare(species="hg19", version=None):
         geneD.setdefault("utr3", [])
         geneD.setdefault("exons", [])
         if f.data.get("Associated Gene Name", None)!=None:
-            geneD["gene_name"] = f.data["Associated Gene Name"]
+            geneD["gene_name"] = f.data["Associated Gene Name"].replace(" ", "")
         elif f.data.get("Gene name", None)!=None:
-            geneD["gene_name"] = f.data["Gene name"]
+            geneD["gene_name"] = f.data["Gene name"].replace(" ", "")
         geneD["gene_biotype"] = biotype
         geneD["gene_length"] = gene_stop - gene_start + 1
         if utr3_start!="" and utr3_stop!="":
