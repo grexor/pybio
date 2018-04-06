@@ -76,10 +76,6 @@ class Bedgraph():
         """
         Load Bedgraph file (can also be gzipped). A Bedgraph object load method can be called multiple times on various files, the content is added up.
         """
-        # if genome != "ensembl", data is loaded from UCSC genome (hg19, mm10) and converted to ensembl
-        # load can be called multiple times on different bed files
-        # track_id : unique identifier for this file
-        # genome: ensembl/ucsc
         print "loading: %s" % filename
         self.filename = filename
 
@@ -105,12 +101,6 @@ class Bedgraph():
                 r = f.readline()
                 continue
             chr = r[0]
-            if genome!="ensembl":
-                chr = pybio.genomes.chr_uscs_ensembl.get(chr, None) # convert ucsc to ensembl
-                if chr==None: # the mapping of chromosome from ucsc to ensembl didnt success
-                    not_converted += 1
-                    r = f.readline()
-                    continue
             raw = float(r[3])
             if self.is_int(raw):
                 raw = int(raw)
@@ -192,11 +182,6 @@ class Bedgraph():
                     meta = self.get_value(chr, strand, pos, db="meta")
                     if raw>=min_raw and cpm>=min_cpm and support>=min_support:
                         chr_str = chr
-                        if genome=="ucsc":
-                            chr_str = pybio.genomes.chr_ensembl_ucsc.get(chr_str, None) # convert ensembl to ucsc
-                            if chr_str==None:
-                                not_converted += 1
-                                continue
                         if filetype=="bed":
                             if pos2==pos+1 and val==val2:
                                 if cluster_start==None:
@@ -220,9 +205,6 @@ class Bedgraph():
             print "%s not converted during save" % not_converted
             f_out.write("#not converted from ensembl chr names = %s" % not_converted)
         f_out.close()
-        if genome!="ucsc":
-            if filename.endswith(".bed"):
-                self.save(filename.replace(".bed", "_ucsc.bed"), db_save=db_save, min_raw=min_raw, min_support=min_support, min_cpm=min_cpm, filetype=filetype, genome="ucsc")
 
     def set_value(self, chr, strand, pos, val, db="raw"):
         if val==0:

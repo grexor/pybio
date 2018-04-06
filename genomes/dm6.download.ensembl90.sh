@@ -23,6 +23,8 @@ cd ..
 
 rm -r dm6.assembly.ensembl90.star
 mkdir dm6.assembly.ensembl90.star
-STAR --runMode genomeGenerate --genomeDir dm6.assembly.ensembl90.star --genomeFastaFiles dm6.assembly.ensembl90/dm6.fasta --runThreadN 8 --sjdbGTFfile dm6.annotation.ensembl90/Drosophila_melanogaster.BDGP6.90.chr.gtf
+# https://groups.google.com/forum/#!topic/rna-star/6csLuVjxiR0
+# dm6 = 140M bases, log2(140M)/2-1 = 12.5, we set --genomeSAindexNbases to 10
+STAR --runMode genomeGenerate --genomeSAindexNbases 10 --genomeDir dm6.assembly.ensembl90.star --genomeFastaFiles dm6.assembly.ensembl90/dm6.fasta --runThreadN 8 --sjdbGTFfile dm6.annotation.ensembl90/Drosophila_melanogaster.BDGP6.90.chr.gtf
 
 gzip dm6.annotation.ensembl90/Drosophila_melanogaster.BDGP6.90.chr.gtf

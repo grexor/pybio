@@ -21,6 +21,6 @@ mv Log.out ${name}.log.txt
 mv Unmapped.out.mate1 ${name}.unmapped.fastq
 mv Log.progress.out ${name}.progress.txt
 pybio.sam2bam ${name}.sam
-#rm ${name}.sam
+rm ${name}.sam
 gzip -f ${name}.unmapped.fastq
 mv SJ.out.tab ${name}.splice.tab.out

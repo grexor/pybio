@@ -26,3 +26,11 @@ def bowtie(genome, fastq_file, output_folder, name, cpu=1, verbose=True):
         print command
     output, error = pybio.utils.Cmd(command).run()
     return output
+
+def bowtie2(genome, fastq_file, output_folder, name, cpu=1, verbose=True):
+    genome_index = os.path.join(pybio.path.genomes_folder, "%s.assembly.ensembl90/%s" % (genome, genome))
+    command = "pybio.bowtie2 %s %s %s %s %s %s" % (output_folder, genome_index, os.path.abspath(fastq_file), name, cpu)
+    if verbose:
+        print command
+    output, error = pybio.utils.Cmd(command).run()
+    return output
