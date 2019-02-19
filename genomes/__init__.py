@@ -26,7 +26,7 @@ def get_latest_version(species):
     if species=="dm6":
         return "ensembl90"
     if species=="at":
-        return "ensembl90"
+        return "ensembl39"
     if species=="mm9":
         return "ensembl67"
     if species=="mm10":
@@ -37,6 +37,10 @@ def get_latest_version(species):
         return "ensembl90"
     if species=="rn6":
         return "ensembl91"
+    if species=="PR8":
+        return ""
+    if species=="SC35M":
+        return ""
     return "ensembl90" # for all other species
 
 def genomes_list(version="ensembl90"):

@@ -12,8 +12,8 @@ cd $output_folder
 
 # https://groups.google.com/forum/#!topic/rna-star/7RwKkvNLmI4
 # --genomeLoad LoadAndRemove
-echo "STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --readFilesCommand zcat --runThreadN ${cpu} --outFilterMatchNminOverLread ${minlen} --outFilterScoreMinOverLread ${minlen}"
-STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --readFilesCommand zcat --runThreadN ${cpu} --outFilterMatchNminOverLread ${minlen} --outFilterScoreMinOverLread ${minlen}
+echo "STAR --readFilesCommand bzip2 -c --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --runThreadN ${cpu} --outFilterMatchNminOverLread ${minlen} --outFilterScoreMinOverLread ${minlen}"
+STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --runThreadN ${cpu} --outFilterMatchNminOverLread ${minlen} --outFilterScoreMinOverLread ${minlen} --readFilesCommand bunzip2 -c
 
 mv Aligned.out.sam ${name}.sam
 mv Log.final.out ${name}.stats.txt
