@@ -1,0 +1,15 @@
+#!/bin/sh
+
+output_folder=$1
+genome_dir=$2
+fastq=$3
+name=$4
+cpu=$5
+minlen=$6
+
+mkdir $output_folder
+cd $output_folder
+
+bowtie2 -x ${genome_dir} -U ${fastq} -S ${name}.sam -p 3 --no-unal
+
+pybio.sam2bam ${name}.sam

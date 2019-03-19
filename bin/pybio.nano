@@ -1,0 +1,17 @@
+#!/bin/sh
+
+output_folder=$1
+genome_fasta_file=$2
+fastq=$3
+name=$4
+cpu=$5
+minlen=$6
+
+mkdir $output_folder
+cd $output_folder
+
+echo "bzcat $3 | minimap2 -N 0 -ax splice -t $5 -k14 -uf $2 - > $4.sam"
+bzcat $3 | minimap2 -N 0 -ax splice -k14 -uf $2 - > $4.sam
+
+pybio.sam2bam ${name}.sam
+rm ${name}.sam
