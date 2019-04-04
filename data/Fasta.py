@@ -1,5 +1,6 @@
 import pybio
 import gzip
+import bz2
 import os
 
 class Fasta:
@@ -17,6 +18,8 @@ class Fasta:
         self.next_id = None
         if self.fname.endswith(".gz"):
             self.f = gzip.open(self.fname, "rt")
+        elif self.fname.endswith(".bz2"):
+            self.f = bz2.BZ2File(file_name, "r")
         else:
             self.f = open(self.fname, "rt")
 

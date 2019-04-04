@@ -9,6 +9,7 @@ while f.read():
 """
 
 import gzip
+import bz2
 
 class Fastq:
 
@@ -33,6 +34,8 @@ class Fastq:
         self.cut_bad = cut_bad
         if file_name.endswith(".gz"):
             self.f = gzip.open(file_name)
+        elif file_name.endswith(".bz2"):
+            self.f = bz2.BZ2File(file_name, "r")
         else:
             self.f = open(file_name, "rt")
         self.id = ""
