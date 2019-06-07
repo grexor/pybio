@@ -604,3 +604,6 @@ def make_motifs_nr(motif_size):
     for el in z:
         motifs.append("".join(el))
     return motifs
+
+def ensembl_species():
+    #https://rest.ensembl.org/info/species?content-type=application/json
