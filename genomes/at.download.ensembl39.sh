@@ -17,5 +17,5 @@ printf 'import pybio\npybio.genomes.prepare("at")' | python
 cd ..
 rm -r at.assembly.ensembl39.star
 mkdir at.assembly.ensembl39.star
-STAR --runMode genomeGenerate --genomeDir at.assembly.ensembl39.star --genomeFastaFiles at.assembly.ensembl39/at.fasta --runThreadN 4 --sjdbGTFfile at.annotation.ensembl39/Arabidopsis_thaliana.TAIR10.39.gtf --alignIntronMin 60 --alignIntronMax 6000
+STAR --runMode genomeGenerate --genomeDir at.assembly.ensembl39.star --genomeFastaFiles at.assembly.ensembl39/at.fasta --genomeSAindexNbases 12 --runThreadN 4 --sjdbGTFfile at.annotation.ensembl39/Arabidopsis_thaliana.TAIR10.39.gtf
 gzip at.annotation.ensembl39/Arabidopsis_thaliana.TAIR10.39.gtf

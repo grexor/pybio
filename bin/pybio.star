@@ -6,14 +6,15 @@ fastq=$3
 name=$4
 cpu=$5
 minlen=$6
+intron_min=$7
+intron_max=$8
 
 mkdir $output_folder
 cd $output_folder
 
 # https://groups.google.com/forum/#!topic/rna-star/7RwKkvNLmI4
 # --genomeLoad LoadAndRemove
-echo "STAR --readFilesCommand bzip2 -c --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --runThreadN ${cpu} --outFilterMatchNminOverLread ${minlen} --outFilterScoreMinOverLread ${minlen}"
-STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --runThreadN ${cpu} --outFilterMatchNminOverLread ${minlen} --outFilterScoreMinOverLread ${minlen} --readFilesCommand bunzip2 -c
+STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --runThreadN ${cpu} --outFilterMatchNminOverLread ${minlen} --outFilterScoreMinOverLread ${minlen} --readFilesCommand bunzip2 -c --alignIntronMin ${intron_min} --alignIntronMax ${intron_max}
 
 mv Aligned.out.sam ${name}.sam
 mv Log.final.out ${name}.stats.txt

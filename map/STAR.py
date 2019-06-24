@@ -4,7 +4,7 @@ import os
 import sys
 import locale
 
-def star(genome, fastq_file, output_folder, name, cpu=1, verbose=True, minlen=0.66):
+def star(genome, fastq_file, output_folder, name, cpu=1, verbose=True, minlen=0.66, intron_min=20, intron_max=1000000):
     """
     Use the `STAR aligner <https://code.google.com/p/rna-star>`_ to map single-end reads to the reference genome.
 
@@ -19,7 +19,10 @@ def star(genome, fastq_file, output_folder, name, cpu=1, verbose=True, minlen=0.
 
     version = pybio.genomes.get_latest_version(genome)
     genome_folder = os.path.join(pybio.path.genomes_folder, "%s.assembly.%s.star" % (genome, version))
-    command = "pybio.star %s %s %s %s %s %s" % (output_folder, genome_folder, os.path.abspath(fastq_file), name, cpu, minlen)
+    if genome_folder.find("at.assembly")!=-1: # AT intron sizes
+        intron_min = 60
+        intron_max = 6000
+    command = "pybio.star %s %s %s %s %s %s %s %s" % (output_folder, genome_folder, os.path.abspath(fastq_file), name, cpu, minlen, intron_min, intron_max)
     if verbose:
         print command
     output, error = pybio.utils.Cmd(command).run()
