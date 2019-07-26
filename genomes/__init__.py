@@ -34,7 +34,7 @@ def get_latest_version(species):
     if species=="hg19":
         return "ensembl75"
     if species=="hg38":
-        return "ensembl90"
+        return "ensembl97"
     if species=="rn6":
         return "ensembl91"
     if species=="PR8":
