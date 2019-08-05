@@ -4,7 +4,8 @@ import os
 import sys
 import locale
 
-def star(genome, fastq_file, output_folder, name, cpu=1, verbose=True, minlen=0.66, intron_min=20, intron_max=1000000):
+# 20190727: minlen=0.2
+def star(genome, fastq_file, output_folder, name, cpu=1, verbose=True, minlen=0.2, intron_min=20, intron_max=1000000):
     """
     Use the `STAR aligner <https://code.google.com/p/rna-star>`_ to map single-end reads to the reference genome.
 
