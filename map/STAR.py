@@ -29,7 +29,7 @@ def star(genome, fastq_file, output_folder, name, cpu=1, verbose=True, minlen=0.
     output, error = pybio.utils.Cmd(command).run()
     return output
 
-def star_pair(genome, file1, file2, output_folder, name, cpu=1, verbose=True):
+def star_pair(genome, file1, file2, output_folder, name, cpu=1, minlen=0.2, verbose=True):
     """
     Use the `STAR aligner <https://code.google.com/p/rna-star>`_ to map paired-end reads to the reference genome.
 

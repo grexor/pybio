@@ -23,6 +23,9 @@ def init():
     load_chr_ucsc_ensembl()
 
 def get_latest_version(species):
+    if species=="dd":
+        return "ensembl44"
+
     if species=="dm6":
         return "ensembl90"
     if species=="at":
@@ -42,6 +45,8 @@ def get_latest_version(species):
     if species=="SC35M":
         return ""
     if species=="dmag":
+        return "ensembl44"
+    if species=="mar3":
         return "ensembl44"
     return "ensembl90" # for all other species
 
