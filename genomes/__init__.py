@@ -23,6 +23,9 @@ def init():
     load_chr_ucsc_ensembl()
 
 def get_latest_version(species):
+    if species=="tt":
+        return "custom"
+
     if species=="dd":
         return "ensembl44"
 
