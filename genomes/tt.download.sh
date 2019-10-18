@@ -14,6 +14,7 @@ cd ..
 python tt_gff_gtf.py
 
 gzip -f tt.annotation.custom/tt.gff
+gzip -f tt.annotation.custom/tt.gtf
 
 printf 'import pybio\npybio.genomes.prepare("tt")' | python
 
