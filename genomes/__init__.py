@@ -23,35 +23,24 @@ def init():
     load_chr_ucsc_ensembl()
 
 def get_latest_version(species):
-    if species=="tt":
-        return "custom"
-
-    if species=="dd":
-        return "ensembl44"
-
-    if species=="dm6":
+    sd = {}
+    sd["tt"] = "custom"
+    sd["dd"] = "ensembl44"
+    sd["dm6"] = "ensembl90"
+    sd["at"] = "ensembl39"
+    sd["mm9"] = "ensembl67"
+    sd["mm10"] = "ensembl90"
+    sd["hg19"] = "ensembl75"
+    sd["hg38"] = "ensembl98"
+    sd["rn6"] = "ensembl91"
+    sd["PR8"] = ""
+    sd["SC35M"] = ""
+    sd["dmag"] = "ensembl44"
+    sd["mar3"] = "ensembl44"
+    if sd.get(species, None)!=None:
+        return sd[species]
+    else:
         return "ensembl90"
-    if species=="at":
-        return "ensembl39"
-    if species=="mm9":
-        return "ensembl67"
-    if species=="mm10":
-        return "ensembl90"
-    if species=="hg19":
-        return "ensembl75"
-    if species=="hg38":
-        return "ensembl97"
-    if species=="rn6":
-        return "ensembl91"
-    if species=="PR8":
-        return ""
-    if species=="SC35M":
-        return ""
-    if species=="dmag":
-        return "ensembl44"
-    if species=="mar3":
-        return "ensembl44"
-    return "ensembl90" # for all other species
 
 def genomes_list(version="ensembl90"):
     genomes = glob.glob(os.path.join(pybio.path.genomes_folder, "*.assembly.%s" % version))
