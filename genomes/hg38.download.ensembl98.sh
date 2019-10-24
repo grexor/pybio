@@ -25,3 +25,10 @@ mkdir hg38.assembly.ensembl${eversion}.star
 STAR --runMode genomeGenerate --genomeDir hg38.assembly.ensembl${eversion}.star --genomeFastaFiles hg38.assembly.ensembl${eversion}/hg38.fasta --runThreadN 4 --sjdbGTFfile hg38.annotation.ensembl${eversion}/Homo_sapiens.GRCh38.${eversion}.chr.gtf
 
 gzip hg38.annotation.ensembl${eversion}/Homo_sapiens.GRCh38.${eversion}.chr.gtf # to save space
+
+rm -r hg38.transcripts.ensembl${eversion}
+mkdir hg38.transcripts.ensembl${eversion}
+cd hg38.transcripts.ensembl${eversion}
+wget ftp://ftp.ensembl.org/pub/release-98/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz
+cd ..
+salmon index -t hg38.transcripts.ensembl${eversion}/Homo_sapiens.GRCh38.cdna.all.fa.gz -i hg38.transcripts.ensembl${eversion}.salmon
