@@ -21,9 +21,9 @@ gunzip Mus_musculus.GRCm38.${eversion}.chr.gtf.gz # file must be unzipped for ST
 cd ..
 rm -r mm10.assembly.ensembl${eversion}.star
 mkdir mm10.assembly.ensembl${eversion}.star
-STAR --runMode genomeGenerate --genomeDir mm10.assembly.ensembl${eversion}.star --genomeFastaFiles mm10.assembly.ensembl${eversion}/mm10.fasta --runThreadN 4 --sjdbGTFfile mm10.annotation.ensembl${eversion}/Mus_musculus.GRCh38.${eversion}.chr.gtf
+STAR --runMode genomeGenerate --genomeDir mm10.assembly.ensembl${eversion}.star --genomeFastaFiles mm10.assembly.ensembl${eversion}/mm10.fasta --runThreadN 4 --sjdbGTFfile mm10.annotation.ensembl${eversion}/Mus_musculus.GRCm38.${eversion}.chr.gtf
 
-gzip mm10.annotation.ensembl${eversion}/Mus_musculus.GRCh38.${eversion}.chr.gtf # to save space
+gzip mm10.annotation.ensembl${eversion}/Mus_musculus.GRCm38.${eversion}.chr.gtf # to save space
 
 rm -r mm10.transcripts.ensembl${eversion}
 mkdir mm10.transcripts.ensembl${eversion}
