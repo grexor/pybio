@@ -12,7 +12,6 @@ mkdir hg38.annotation.ensembl${eversion}
 cd hg38.annotation.ensembl${eversion}
 export BM=`sed ':a;N;$!ba;s/\n/ /g' ../hg38.biomart.ensembl${eversion}.xml`
 wget -O hg38.annotation.ensembl${eversion}.tab "http://www.ensembl.org/biomart/martservice?query=$BM"
-# check this
 printf 'import pybio\npybio.genomes.prepare("hg38", version="ensembl'${eversion}'")' | python
 
 # https://www.biostars.org/p/279235/#279238
@@ -29,6 +28,6 @@ gzip hg38.annotation.ensembl${eversion}/Homo_sapiens.GRCh38.${eversion}.chr.gtf 
 rm -r hg38.transcripts.ensembl${eversion}
 mkdir hg38.transcripts.ensembl${eversion}
 cd hg38.transcripts.ensembl${eversion}
-wget ftp://ftp.ensembl.org/pub/release-98/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz
+wget ftp://ftp.ensembl.org/pub/release-${eversion}/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz
 cd ..
 salmon index -t hg38.transcripts.ensembl${eversion}/Homo_sapiens.GRCh38.cdna.all.fa.gz -i hg38.transcripts.ensembl${eversion}.salmon
