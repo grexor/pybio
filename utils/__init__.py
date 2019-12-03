@@ -2,7 +2,7 @@ import os
 import sys
 import subprocess
 import gzip
-import pybio3
+import pybio
 import math
 import numpy as np
 import pickle

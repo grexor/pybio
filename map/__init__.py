@@ -1,5 +1,5 @@
-import pybio3
-from pybio3.map.STAR import *
-from pybio3.map.sege import *
-from pybio3.map.bowtie import *
-from pybio3.map.nano import *
+import pybio
+from pybio.map.STAR import *
+from pybio.map.sege import *
+from pybio.map.bowtie import *
+from pybio.map.nano import *

@@ -1,3 +1,3 @@
-import pybio3
+import pybio
 
-version = 1.0
+version = 1.3

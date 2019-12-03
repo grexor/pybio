@@ -1,32 +1,32 @@
-import pybio3
+import pybio
 from os.path import join as pjoin
 
 # modules
-from pybio3.data.TabReader import *
-from pybio3.data.Fastq import *
-from pybio3.data.Fasta import *
-from pybio3.data.Bedgraph import *
-from pybio3.data.Bedgraph2 import *
-from pybio3.data.Gff3 import *
-from pybio3.data.Gtf import *
-from pybio3.data.Gene import *
-from pybio3.data.GeneFeature import *
-from pybio3.data.Bam import *
-from pybio3.data.Wig import *
-from pybio3.data.Sissrs import *
-from pybio3.data.Sequence import *
+from pybio.data.TabReader import *
+from pybio.data.Fastq import *
+from pybio.data.Fasta import *
+from pybio.data.Bedgraph import *
+from pybio.data.Bedgraph2 import *
+from pybio.data.Gff3 import *
+from pybio.data.Gtf import *
+from pybio.data.Gene import *
+from pybio.data.GeneFeature import *
+from pybio.data.Bam import *
+from pybio.data.Wig import *
+from pybio.data.Sissrs import *
+from pybio.data.Sequence import *
 
 def bedgraph_bigwig(filename_bed, filename_bw, genome):
     """
     BigWig can't display + and - strands together, always filter bedGraph before
     """
-    filename_genome_chrs = pjoin(pybio3.path.folder_genomes, genome, "sequence", "%s.chrs" % genome)
+    filename_genome_chrs = pjoin(pybio.path.folder_genomes, genome, "sequence", "%s.chrs" % genome)
     command = "sort -k1,1 -k2,2n {filename_bed} > {filename_bed}.temp".format(filename_bed=filename_bed) # sort bedGraph
-    output, error = pybio3.utils.cmd(command)
+    output, error = pybio.utils.cmd(command)
     command = "bedGraphToBigWig {filename_bed}.temp {filename_genome_chrs} {filename_bw}".format(filename_bed=filename_bed, filename_genome_chrs=filename_genome_chrs, filename_bw=filename_bw)
-    output, error = pybio3.utils.cmd(command)
+    output, error = pybio.utils.cmd(command)
     command = "rm {filename_bed}.temp".format(filename_bed=filename_bed) # delete sorted temo bedGraph file
-    output, error = pybio3.utils.cmd(command)
+    output, error = pybio.utils.cmd(command)
 
 def fastq_qminmax(filename):
     """
@@ -34,7 +34,7 @@ def fastq_qminmax(filename):
     """
     qmin = ()
     qmax = 0
-    f = pybio3.data.Fastq(filename)
+    f = pybio.data.Fastq(filename)
     while f.read():
         qmin = min(qmin, ord(f.quality[-1]))
         qmax = max(qmax, ord(f.quality[0]))
@@ -44,7 +44,7 @@ def fasta_check(filename, allowed_chars=["A", "C", "T", "G", "N"]):
     """
     Checks if FASTA file format is valid.
     """
-    f = pybio3.data.Fasta(filename)
+    f = pybio.data.Fasta(filename)
     valid_fasta = True
     while f.read():
         seq_len = 0

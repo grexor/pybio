@@ -1,4 +1,4 @@
-import pybio3
+import pybio
 import os
 import sys
 

@@ -1,5 +1,5 @@
 import gzip
-import pybio3
+import pybio
 
 class Sissrs():
     def __init__(self, filename):

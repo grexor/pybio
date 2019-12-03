@@ -1,4 +1,4 @@
-import pybio3
+import pybio
 from os.path import join as pjoin
 import os
 import sys

@@ -1,6 +1,6 @@
 import gzip
 import bisect
-import pybio3
+import pybio
 import os
 import json
 import pysam

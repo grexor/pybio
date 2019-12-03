@@ -1,5 +1,5 @@
 import gzip
-import pybio3
+import pybio
 
 class Wig():
     def __init__(self, filename=None, min_value=None, only_positions=None):

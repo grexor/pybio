@@ -1,4 +1,4 @@
-import pybio3
+import pybio
 import pysam
 from os.path import join as pjoin
 
