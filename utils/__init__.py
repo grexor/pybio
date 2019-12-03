@@ -46,7 +46,7 @@ def merge_intervals(ints):
         del ints[0]
         return to_return
 
-    def add_new(ints, (start, stop)):
+    def add_new(ints, start, stop):
         if len(ints)==0:
             ints.append((start, stop))
             return
@@ -61,7 +61,7 @@ def merge_intervals(ints):
     ints_merged = []
     while len(ints)>0:
         (start, stop) = take_next(ints)
-        add_new(ints_merged, (start, stop))
+        add_new(ints_merged, start, stop)
     ints_merged.sort()
     return ints_merged
 

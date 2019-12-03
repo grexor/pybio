@@ -34,7 +34,7 @@ class Bedgraph2():
         """
         Load Bedgraph file (can also be gzipped). A Bedgraph object load method can be called multiple times on various files, the content is added up.
         """
-        print "loading : %s" % filename
+        print("loading : {filename}".format(filename=filename))
         self.filename = filename
 
         if track_id==None:
@@ -86,7 +86,7 @@ class Bedgraph2():
         self.genome = "ensembl" # we converted to ensembl
 
         if not_converted>0:
-            print "%s positions were skipped; unable to convert chromosome name to ensembl format" % not_converted
+            print("{not_converted} positions were skipped; unable to convert chromosome name to ensembl format".format(not_converted=not_converted))
 
         self.raw = temp_raw
         self.rawx = temp_rawx
@@ -107,7 +107,7 @@ class Bedgraph2():
         # returns vector of values around pos
         # considers strand but does not reverse the vector
         # example: strand=-, start=-10, stop=20, would return a vector of pos-20 .. pos+10
-        # example: strand=+, start=-10, stop=20, would return a vector of pos-10 .. pos+20    
+        # example: strand=+, start=-10, stop=20, would return a vector of pos-10 .. pos+20
         if strand=="-":
             start, stop = -start, -stop
         start, stop = min(start, stop), max(start, stop)

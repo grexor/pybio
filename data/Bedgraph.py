@@ -76,7 +76,7 @@ class Bedgraph():
         """
         Load Bedgraph file (can also be gzipped). A Bedgraph object load method can be called multiple times on various files, the content is added up.
         """
-        print "loading: %s" % filename
+        print("loading: %s" % filename)
         self.filename = filename
 
         if track_id==None:
@@ -121,7 +121,7 @@ class Bedgraph():
         self.genome = "ensembl" # we converted to ensembl
 
         if not_converted>0:
-            print "loading: %s: %s positions skipped -> unable to convert chromosome to ensembl convention" % (filename, not_converted)
+            print("loading: {filename}: {not_converted} positions skipped -> unable to convert chromosome to ensembl convention".format(filename=filename, not_converted=not_converted))
 
         for chr, strand_data in temp_raw.items():
             for strand, pos_data in strand_data.items():
@@ -148,7 +148,7 @@ class Bedgraph():
         # Save raw value from db_save
         # Usually db_source and db_save are the same
         self.filename = filename # set the new filename
-        print "save : %s, format : %s" % (filename, filetype)
+        print("save : {filename}, format : {format}".format(filename=filename, filetype=filetype))
         if track_id!=None:
             self.track_id = track_id
         else:
@@ -202,7 +202,7 @@ class Bedgraph():
                             row = [chr_str, strand, str(pos), str(raw), "%.2f" % cpm, str(support), json.dumps(meta)]
                         f_out.write("\t".join(row)+"\n")
         if not_converted>0:
-            print "%s not converted during save" % not_converted
+            print("{not_converted} not converted during save".format(not_converted=not_converted))
             f_out.write("#not converted from ensembl chr names = %s" % not_converted)
         f_out.close()
 
@@ -297,7 +297,7 @@ class Bedgraph():
         """
         for chr, strand_data in self.raw.items():
             for strand, pos_data in strand_data.items():
-                print "clustering : %s %s" % (chr, strand)
+                print("clustering : {chr} {strand}".format(chr=chr, strand=strand))
                 offset_up, offset_down = region_up, region_down
                 if strand=="-":
                     offset_up, offset_down = offset_down, offset_up
@@ -327,7 +327,7 @@ class Bedgraph():
         """
         for chr, strand_data in self.raw.items():
             for strand, pos_data in strand_data.items():
-                print "filtering: %s%s (min distance = %snt)" % (strand, chr, min_distance)
+                print("filtering: {strand}{chr} (min distance = {min_distance} nt)".format(strand=strand, chr=chr, min_distance=min_distance))
                 mp = 1 if strand=="+" else -1 # if same value, take downstream position first
                 positions = [(raw, mp*pos, pos) for pos, raw in pos_data.items()]
                 positions = sorted(positions, reverse=True)

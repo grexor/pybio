@@ -77,7 +77,7 @@ def load(species, version=None, force=False):
 
     if genes.get(species, None)!=None and not force: # already loaded?
         return
-    print "%s: loading genome" % species
+    print("{species}: loading genome".format(species=species))
     if version==None:
         version = get_latest_version(species)
 
@@ -145,7 +145,7 @@ def prepare(species="hg19", version=None):
     if version==None:
         version = get_latest_version(species)
 
-    print "%s: processing annotation" % species
+    print("{species}: processing annotation".format(species=species))
     annotation_folder = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version))
     f_log = open(os.path.join(annotation_folder, "log.txt"), "wt")
     chrs_list = pybio.genomes.chr_list(species, version)
@@ -164,7 +164,7 @@ def prepare(species="hg19", version=None):
     while f.readline():
         cline += 1
         if cline%100000==0:
-            print "%s: processed %sM annotation rows" % (species, cline/100000)
+            print("{species}: processed {processed}M annotation rows".format(species=species, processed=cline/100000))
         for k, item in f.data.items():
             f.data[k.lower()] = item
         utr5_start = utr5_stop = utr3_start = utr3_stop = ""

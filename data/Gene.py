@@ -17,13 +17,13 @@ class Gene():
         self.features = []
         self.start = ()
         self.stop = 0
-    
+
     def add_feature(self, feature_new, merge = True):
         """
         Add feature to Gene
-        
+
         :param merge_overlapping: if the feature (exon, CDS) overlaps with an existing feature of the same type, simply adjust the start,stop positions
-        """        
+        """
         added = False
         # if feature_new is overlapping with an existing feature of the same type, adjust start,stop positions
         if merge:
@@ -37,9 +37,9 @@ class Gene():
                     break
         if not added:
             self.features.append(feature_new)
-            
+
         # keep features sorted by start position
         self.features = sorted(self.features, key=attrgetter("start"))
-        
+
         self.start = min(self.start, feature_new.start)
         self.stop = max(self.stop, feature_new.stop)

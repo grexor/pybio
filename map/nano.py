@@ -9,6 +9,6 @@ def nano(genome, fastq_file, output_folder, name, cpu=1, verbose=True, minlen=0.
     genome_fasta_file = os.path.join(pybio.path.genomes_folder, "%s.assembly.%s/%s.fasta" % (genome, version, genome))
     command = "pybio.nano %s %s %s %s %s %s" % (output_folder, genome_fasta_file, os.path.abspath(fastq_file), name, cpu, minlen)
     if verbose:
-        print command
+        print(command)
     output, error = pybio.utils.Cmd(command).run()
     return output

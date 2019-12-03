@@ -7,7 +7,7 @@ class Wig():
         self.data = {}
         if not filename==None:
             self.load(filename, min_value=min_value, only_positions = only_positions)
-            
+
     def load(self, filename, min_value=0, only_positions=None):
         if filename.endswith(".gz"):
             f = gzip.open(filename, "rb")
@@ -38,17 +38,17 @@ class Wig():
         for chr in self.data.keys():
             self.data[chr]["+"].sort()
             self.data[chr]["-"].sort()
-        
+
     def chromosomes(self):
         return self.data.keys()
-        
+
     def value(self, chr, strand, pos):
         L = self.data.get(chr, {}).get(strand, [])
         for (span, start, value) in L:
             if start<=pos<=start+span-1:
                 return value
         return 0
-        
+
     def region(self, chr, strand, pos_from, pos_to):
         L = self.data.get(chr, {}).get(strand, [])
         count = 0

@@ -2,7 +2,7 @@ try:
     import stats
 except:
     pass
-    
+
 def chisquare(matrix):
     sum_all = float(sum([sum(x) for x in matrix]))
     def sum_col(i):
@@ -19,7 +19,7 @@ def chisquare(matrix):
             element = sum_col(i)*sum_row(j)/sum_all
             col.append(element)
         matrix_expected.append(col)
-        
+
     matrix_chi = []
     for i in range(0, dim_x):
         col = []

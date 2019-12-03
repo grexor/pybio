@@ -2,19 +2,19 @@ import pybio
 from os.path import join as pjoin
 
 # modules
-from TabReader import *
-from Fastq import *
-from Fasta import *
-from Bedgraph import *
-from Bedgraph2 import *
-from Gff3 import *
-from Gtf import *
-from Gene import *
-from GeneFeature import *
-from Bam import *
-from Wig import *
-from Sissrs import *
-from Sequence import *
+from pybio.data.TabReader import *
+from pybio.data.Fastq import *
+from pybio.data.Fasta import *
+from pybio.data.Bedgraph import *
+from pybio.data.Bedgraph2 import *
+from pybio.data.Gff3 import *
+from pybio.data.Gtf import *
+from pybio.data.Gene import *
+from pybio.data.GeneFeature import *
+from pybio.data.Bam import *
+from pybio.data.Wig import *
+from pybio.data.Sissrs import *
+from pybio.data.Sequence import *
 
 def bedgraph_bigwig(filename_bed, filename_bw, genome):
     """

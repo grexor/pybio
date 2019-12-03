@@ -1,6 +1,6 @@
-import pybio
 import os
 import glob
+import pybio
 
 def init():
     pybio.path.root_folder = os.path.abspath(os.path.join(os.path.abspath(__file__), "..", ".."))

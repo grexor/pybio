@@ -18,7 +18,7 @@ class Sissrs():
             self.data.append(r)
             r = f.readline()
         f.close()
-        
+
     def bedgraph(self, filename, p_value = None):
         f = open(filename, "wt")
         for r in self.data:

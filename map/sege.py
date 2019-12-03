@@ -20,6 +20,6 @@ def sege(genome, fastq_file, output_folder, name, cpu=1, verbose=True):
     genome_fasta = os.path.join(pybio.path.genomes_folder, "%s.assembly/%s.fasta" % (genome, genome))
     command = "pybio.sege %s %s %s %s %s %s" % (output_folder, genome_index, genome_fasta, os.path.abspath(fastq_file), name, cpu)
     if verbose:
-        print command
+        print(command)
     output, error = pybio.utils.Cmd(command).run()
     return output
