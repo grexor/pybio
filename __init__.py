@@ -1,5 +1,5 @@
 """
-pybio3
+pybio
 ====
 
 A compact python module developed to handle common bioinformatics file formats, especially
