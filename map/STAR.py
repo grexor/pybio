@@ -1,4 +1,4 @@
-import pybio
+import pybio3
 from os.path import join as pjoin
 import os
 import sys
@@ -25,7 +25,7 @@ def star(genome, fastq_file, output_folder, name, cpu=1, verbose=True, minlen=0.
         intron_max = 6000
     command = "pybio.star %s %s %s %s %s %s %s %s" % (output_folder, genome_folder, os.path.abspath(fastq_file), name, cpu, minlen, intron_min, intron_max)
     if verbose:
-        print command
+        print(command)
     output, error = pybio.utils.Cmd(command).run()
     return output
 
@@ -46,6 +46,6 @@ def star_pair(genome, file1, file2, output_folder, name, cpu=1, minlen=0.2, verb
     genome_folder = os.path.join(pybio.path.genomes_folder, "%s.assembly.%s.star" % (genome, version))
     command = "pybio.star.pair %s %s %s %s %s %s" % (output_folder, genome_folder, os.path.abspath(file1), os.path.abspath(file2), name, cpu)
     if verbose:
-        print command
+        print(command)
     output, error = pybio.utils.Cmd(command).run()
     return output

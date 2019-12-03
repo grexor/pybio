@@ -1,7 +1,7 @@
-import pybio
+import pybio3
 import os
 import sys
-import cPickle
+import pickle
 
 cache_data = {}
 def cache_string(string):
@@ -36,7 +36,7 @@ class Gtf():
             feature = pybio.data.GeneFeature(start, stop, gene_type, gene)
             gene.add_feature(feature)
             self.genes[gene.id] = gene
-    
+
     def get_genes(self, chr, pos):
         bin = pos/self.bin_size
         candidate_genes = self.pindex.get(chr, {}).get(bin, [])
@@ -48,7 +48,7 @@ class Gtf():
                 if feature.start<=pos<=feature.stop:
                     position_genes.add(gene_id)
         return position_genes
-    
+
     def write_gff3(self, filename):
         f = open(filename, "wt")
         for gene_id, gene in self.genes.iteritems():

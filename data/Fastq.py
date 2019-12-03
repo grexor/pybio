@@ -25,7 +25,7 @@ class Fastq:
                 return False
         if self.cut_bad:
             qual = self.quality.rstrip("B")
-            if len(qual) <> len(self.quality):
+            if len(qual) != len(self.quality):
                 self.sequence = self.sequence[:len(qual)]
                 self.quality = qual
         return True

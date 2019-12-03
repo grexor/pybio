@@ -1,4 +1,4 @@
-import pybio
+import pybio3
 import os
 import sys
 
@@ -61,10 +61,10 @@ class Gff3():
             if type=="CDS":
                 gene_id = self.mRNA_genes[attributes["Parent"]]
                 mRNA_id = attributes["Parent"]
-                self.genes[gene_id]["data"][mRNA_id]["exons"].append((start, stop))  
+                self.genes[gene_id]["data"][mRNA_id]["exons"].append((start, stop))
             r = f.readline()
             l+=1
-    
+
     def write_gtf(self, filename):
         f = open(filename, "wt")
         gene_names = self.genes.keys()

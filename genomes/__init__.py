@@ -1,6 +1,6 @@
 import os
 import bisect
-import pybio
+import pybio3
 from os.path import join as pjoin
 import glob
 import json
@@ -43,13 +43,13 @@ def get_latest_version(species):
         return "ensembl90"
 
 def genomes_list(version="ensembl90"):
-    genomes = glob.glob(os.path.join(pybio.path.genomes_folder, "*.assembly.%s" % version))
+    genomes = glob.glob(os.path.join(pybio3.path.genomes_folder, "*.assembly.%s" % version))
     return [os.path.basename(x.rstrip(".assembly.%s" % version)) for x in genomes]
 
 def load_chr_ucsc_ensembl():
     for species in ["hg19", "mm10"]:
         version = get_latest_version(species)
-        map_filename = os.path.join(pybio.path.genomes_folder, "%s.assembly.%s" % (species, version), "%s.chr.ucsc.ensembl" % species)
+        map_filename = os.path.join(pybio3.path.genomes_folder, "%s.assembly.%s" % (species, version), "%s.chr.ucsc.ensembl" % species)
         if os.path.exists(map_filename):
             f = open(map_filename, "rt")
             r = f.readline()
@@ -77,15 +77,15 @@ def load(species, version=None, force=False):
 
     if genes.get(species, None)!=None and not force: # already loaded?
         return
-    print "%s: loading genome" % species
+    print("{species}: loading genome".format(species=species))
     if version==None:
         version = get_latest_version(species)
 
-    genes_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "genes.json")
+    genes_filename = os.path.join(pybio3.path.genomes_folder, "%s.annotation.%s" % (species, version), "genes.json")
     genes[species] = json.loads(open(genes_filename).read())
-    intervals_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "intervals.json")
+    intervals_filename = os.path.join(pybio3.path.genomes_folder, "%s.annotation.%s" % (species, version), "intervals.json")
     intervals[species] = json.loads(open(intervals_filename).read())
-    linear_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "linear.json")
+    linear_filename = os.path.join(pybio3.path.genomes_folder, "%s.annotation.%s" % (species, version), "linear.json")
     linear[species] = json.loads(open(linear_filename).read())
 
     # json stores [] instead of (), bisect doesnt work with []
@@ -112,7 +112,7 @@ def adjust_gene(gid, limit_intervals, dbgenes):
     new_gene_intervals = []
     for (limit_start, limit_stop) in limit_intervals:
         for (start, stop, t) in dbgenes[gid]["gene_intervals"]:
-            overlap = pybio.utils.interval_overlap(start, stop, limit_start, limit_stop)
+            overlap = pybio3.utils.interval_overlap(start, stop, limit_start, limit_stop)
             if overlap>0:
                 new_gene_intervals.append([max(start, limit_start), min(stop, limit_stop), t])
     new_gene_intervals.sort()
@@ -121,7 +121,7 @@ def adjust_gene(gid, limit_intervals, dbgenes):
 def add_cluster(gid, dbgenes, dbclusters):
     overlaps = []
     for (start, stop), _ in dbclusters.items():
-        val = pybio.utils.interval_overlap(start, stop, dbgenes[gid]["gene_start"], dbgenes[gid]["gene_stop"])
+        val = pybio3.utils.interval_overlap(start, stop, dbgenes[gid]["gene_start"], dbgenes[gid]["gene_stop"])
         if val>0:
             overlaps.append((start, stop))
     if len(overlaps)>0:
@@ -145,10 +145,10 @@ def prepare(species="hg19", version=None):
     if version==None:
         version = get_latest_version(species)
 
-    print "%s: processing annotation" % species
-    annotation_folder = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version))
+    print("{species}: processing annotation".format(species=species))
+    annotation_folder = os.path.join(pybio3.path.genomes_folder, "%s.annotation.%s" % (species, version))
     f_log = open(os.path.join(annotation_folder, "log.txt"), "wt")
-    chrs_list = pybio.genomes.chr_list(species, version)
+    chrs_list = pybio3.genomes.chr_list(species, version)
     assert(len(chrs_list)>0)
     chrs_names = [name for (name, size) in chrs_list]
     temp_genes = {}
@@ -159,12 +159,12 @@ def prepare(species="hg19", version=None):
     # make all coordinates 0-based (Ensembl is 1-based)
     # -1 on all coordinates
     # convert strand: 1 = +, -1 = "-"
-    f = pybio.data.TabReader(os.path.join(annotation_folder, "%s.annotation.%s.tab" % (species, version)))
+    f = pybio3.data.TabReader(os.path.join(annotation_folder, "%s.annotation.%s.tab" % (species, version)))
     cline = 0
     while f.readline():
         cline += 1
         if cline%100000==0:
-            print "%s: processed %sM annotation rows" % (species, cline/100000)
+            print("{species}: processed {processed}M annotation rows".format(species=species, processed=cline/100000))
         for k, item in f.data.items():
             f.data[k.lower()] = item
         utr5_start = utr5_stop = utr3_start = utr3_stop = ""
@@ -272,9 +272,9 @@ def prepare(species="hg19", version=None):
             f_log.write("%s: creating intervals: %.2f done\n" % (species, current_gene / float(all_genes)))
         coverage = {}
         coverage_utrs = {} # only 5' and 3'
-        geneD["exons"] = pybio.utils.merge_intervals(geneD["exons"])
-        geneD["utr5"] = pybio.utils.merge_intervals(geneD["utr5"])
-        geneD["utr3"] = pybio.utils.merge_intervals(geneD["utr3"])
+        geneD["exons"] = pybio3.utils.merge_intervals(geneD["exons"])
+        geneD["utr5"] = pybio3.utils.merge_intervals(geneD["utr5"])
+        geneD["utr3"] = pybio3.utils.merge_intervals(geneD["utr3"])
 
         # precedence: 3utr -> 5utr -> exon
         if geneD.get("exons", None)!=None:
@@ -292,8 +292,8 @@ def prepare(species="hg19", version=None):
                     coverage_utrs[i] = '3'
                     coverage[i] = 'o'
 
-        ints = pybio.utils.coverage_to_intervals(coverage)
-        utr_intervals = pybio.utils.coverage_to_intervals(coverage_utrs)
+        ints = pybio3.utils.coverage_to_intervals(coverage)
+        utr_intervals = pybio3.utils.coverage_to_intervals(coverage_utrs)
         # add intronic intervals
         all_intervals = [ints[0]]
         for (i1_start, i1_stop, i1_value), (i2_start, i2_stop, i2_value) in zip(ints, ints[1:]):
@@ -346,7 +346,7 @@ def prepare(species="hg19", version=None):
                         for i in xrange(temp_genes[gid]["gene_start"], temp_genes[gid]["gene_stop"]+1):
                             coverage[i] = gid
                 f_log.write("\n")
-                coverage = pybio.utils.coverage_to_intervals(coverage)
+                coverage = pybio3.utils.coverage_to_intervals(coverage)
                 # check coverage intervals
                 for (i1_start, i1_stop, gid1), (i2_start, i2_stop, gid2) in zip(coverage, coverage[1:]):
                     assert(i1_stop+1==i2_start)
@@ -505,13 +505,13 @@ def chr_list(genome, version=None):
     if version==None:
         version = get_latest_version(genome)
 
-    files = glob.glob(pybio.path.root_folder+"/genomes/%s.assembly.%s/*.string" % (genome, version))
+    files = glob.glob(pybio3.path.root_folder+"/genomes/%s.assembly.%s/*.string" % (genome, version))
     R = []
     for f in files:
         chr_name = f.rstrip(".string").split("/")[-1]
         chr_size = os.path.getsize(f)
         R.append((chr_name, chr_size))
-    files = glob.glob(pybio.path.root_folder+"/genomes/%s.assembly.%s/*.raw" % (genome, version))
+    files = glob.glob(pybio3.path.root_folder+"/genomes/%s.assembly.%s/*.raw" % (genome, version))
     for f in files:
         chr_name = f.rstrip(".raw").split("/")[-1]
         chr_size = os.path.getsize(f)
@@ -541,7 +541,7 @@ def seq_direct(genome, chr, strand, start, stop, flank="N", version=None):
     if start<0:
         seq = flank * abs(start)
     start = max(0, start) # start can only be non-negative
-    fname = os.path.join(pybio.path.root_folder, "genomes", "%s.assembly.%s" % (genome, version), "%s.string" % chr)
+    fname = os.path.join(pybio3.path.root_folder, "genomes", "%s.assembly.%s" % (genome, version), "%s.string" % chr)
     if not os.path.exists(fname):
         return ""
     f = open(fname, "rt")
@@ -550,7 +550,7 @@ def seq_direct(genome, chr, strand, start, stop, flank="N", version=None):
     diff = (stop-start+1) - len(seq)
     seq += flank * diff
     if strand=="-":
-        return pybio.sequence.reverse_complement(seq)
+        return pybio3.sequence.reverse_complement(seq)
     else:
         return seq
 

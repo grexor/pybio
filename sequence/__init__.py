@@ -1,4 +1,4 @@
-import pybio
+import pybio3
 import numpy
 
 reverse_code = { \
@@ -110,7 +110,6 @@ def draw(sequences, fname):
     import matplotlib.ticker as mticker
     from matplotlib.colors import LinearSegmentedColormap
     import matplotlib.colors as mcolors
-    import pybio
     c = mcolors.ColorConverter().to_rgb
 
     # styling
@@ -157,7 +156,6 @@ def draw(sequences, fname):
     plt.xlabel("nucleotide position")
     for name, data, color in [("A", v_a, "red"), ("U", v_u, "blue"), ("C", v_c, "green"), ("G", v_g, "orange")]:
         legend.append(name)
-        #data = pybio.utils.smooth(data, 5)
         ax.plot(range(0, max_l), data, alpha=0.7, linewidth=3, color=color)
     ax.set_xticks(range(0, max_l, 10))
     ax.set_xticklabels(range(0, max_l, 10))
