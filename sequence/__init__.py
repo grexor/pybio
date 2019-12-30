@@ -14,7 +14,7 @@ def reverse_complement(s):
 
     Reverse complement sequence
     """
-    reverse_str = lambda s: ''.join([s[i] for i in xrange(len(s)-1, -1, -1)])
+    reverse_str = lambda s: ''.join([s[i] for i in range(len(s)-1, -1, -1)])
     rs = reverse_str(s)
     new_sequence = ""
     for c in rs:

@@ -165,7 +165,7 @@ def prepare(species="hg19", version=None):
         cline += 1
         if cline%100000==0:
             print("{species}: processed {processed}M annotation rows".format(species=species, processed=cline/100000))
-        for k, item in f.data.items():
+        for k, item in list(f.data.items()):
             f.data[k.lower()] = item
         utr5_start = utr5_stop = utr3_start = utr3_stop = ""
         if f.data.get("Ensembl Gene ID", None)!=None:
@@ -279,16 +279,16 @@ def prepare(species="hg19", version=None):
         # precedence: 3utr -> 5utr -> exon
         if geneD.get("exons", None)!=None:
             for (exon_start, exon_stop) in geneD["exons"]:
-                for i in xrange(exon_start, exon_stop+1):
+                for i in range(exon_start, exon_stop+1):
                     coverage[i] = 'o'
         if geneD.get("utr5", None)!=None:
             for (utr5_start, utr5_stop) in geneD["utr5"]:
-                for i in xrange(utr5_start, utr5_stop+1):
+                for i in range(utr5_start, utr5_stop+1):
                     coverage_utrs[i] = '5'
                     coverage[i] = 'o'
         if geneD.get("utr3", None)!=None:
             for (utr3_start, utr3_stop) in geneD["utr3"]:
-                for i in xrange(utr3_start, utr3_stop+1):
+                for i in range(utr3_start, utr3_stop+1):
                     coverage_utrs[i] = '3'
                     coverage[i] = 'o'
 
@@ -338,12 +338,12 @@ def prepare(species="hg19", version=None):
                 for (_, gid) in gene_list_bylen: # first place non protein coding genes
                     if temp_genes[gid]["gene_biotype"]!="protein_coding":
                         f_log.write("%s %s %s\n" % (gid, temp_genes[gid]["gene_start"], temp_genes[gid]["gene_stop"]))
-                        for i in xrange(temp_genes[gid]["gene_start"], temp_genes[gid]["gene_stop"]+1):
+                        for i in range(temp_genes[gid]["gene_start"], temp_genes[gid]["gene_stop"]+1):
                             coverage[i] = gid
                 for (_, gid) in gene_list_bylen: # second, place protein_coding genes (they have preference)
                     if temp_genes[gid]["gene_biotype"]=="protein_coding":
                         f_log.write("%s %s %s\n" % (gid, temp_genes[gid]["gene_start"], temp_genes[gid]["gene_stop"]))
-                        for i in xrange(temp_genes[gid]["gene_start"], temp_genes[gid]["gene_stop"]+1):
+                        for i in range(temp_genes[gid]["gene_start"], temp_genes[gid]["gene_stop"]+1):
                             coverage[i] = gid
                 f_log.write("\n")
                 coverage = pybio.utils.coverage_to_intervals(coverage)

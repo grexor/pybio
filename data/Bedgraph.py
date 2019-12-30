@@ -148,7 +148,7 @@ class Bedgraph():
         # Save raw value from db_save
         # Usually db_source and db_save are the same
         self.filename = filename # set the new filename
-        print("save : {filename}, format : {format}".format(filename=filename, filetype=filetype))
+        print("save : {filename}, format : {filetype}".format(filename=filename, filetype=filetype))
         if track_id!=None:
             self.track_id = track_id
         else:

@@ -140,7 +140,7 @@ def coverage_to_intervals(coverage):
     i = None
     val_index = min(coverage.keys())
     val = coverage[val_index]
-    for i in xrange(min(coverage.keys())+1, max(coverage.keys())+1):
+    for i in range(min(coverage.keys())+1, max(coverage.keys())+1):
         new_val = coverage.get(i, None)
         if val!=None and new_val!=None and val!=new_val:
             L.append((val_index, i-1, val))
@@ -182,7 +182,7 @@ class Cmd():
     def run(self):
         output, error = self.process.communicate()
         self.returncode = self.process.returncode
-        return output, error
+        return output.decode("utf-8"), error.decode("utf-8")
 
 def process_isrunning(pid, os="linux"):
     """
@@ -240,7 +240,7 @@ def split_string(seq, length):
     return [seq[i:i+length] for i in range(0, len(seq), length)]
 
 def is_sorted(l):
-    return all(l[i] <= l[i+1] for i in xrange(len(l)-1))
+    return all(l[i] <= l[i+1] for i in range(len(l)-1))
 
 # from Orange bioinformatics stats library
 # http://orange.biolab.si
