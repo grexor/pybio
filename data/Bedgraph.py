@@ -7,8 +7,8 @@ import pysam
 import numpy as np
 
 def mix_sort(x):
-    if x.isdigit():
-        return int(x)
+    if isinstance(x, int):
+        return "0%d" % x
     else:
         return str(x)
 
@@ -165,7 +165,7 @@ class Bedgraph():
             if not without_track:
                 f_out.write('track type=bedGraph name="%s" description="%s" altColor="200,120,59" color="120,101,172" maxHeightPixels="100:50:0" visibility="full" priority="20"\n' % (self.track_id, self.track_id))
         data_save = getattr(self, db_save)
-        chr_names = sorted(data_save.keys(), key=mix_sort)
+        chr_names = sorted(list(data_save.keys()), key=mix_sort)
         for chr in chr_names:
             chr_data = data_save[chr]
             for strand, strand_data in chr_data.items():
