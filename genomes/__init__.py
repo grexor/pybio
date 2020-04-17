@@ -29,7 +29,7 @@ def get_latest_version(species):
     sd["dm6"] = "ensembl98"
     sd["at"] = "ensembl39"
     sd["mm9"] = "ensembl67"
-    sd["mm10"] = "ensembl90"
+    sd["mm10"] = "ensembl98"
     sd["hg19"] = "ensembl75"
     sd["hg38"] = "ensembl98"
     sd["rn6"] = "ensembl91"

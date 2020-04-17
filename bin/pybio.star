@@ -6,11 +6,21 @@ fastq=$3
 name=$4
 cpu=$5
 minlen=$6
+minlen=0.1
 intron_min=$7
 intron_max=$8
 
 mkdir $output_folder
 cd $output_folder
+
+echo "--genomeDir $2"
+echo "--readFilesIn $3"
+echo "--outReadsUnmapped Fastx"
+echo "--runThreadN ${cpu}"
+echo "--outFilterMatchNminOverLread ${minlen}"
+echo "--outFilterScoreMinOverLread ${minlen}"
+echo "--readFilesCommand bunzip2"
+echo "-c --alignIntronMin ${intron_min} --alignIntronMax ${intron_max}"
 
 # https://groups.google.com/forum/#!topic/rna-star/7RwKkvNLmI4
 # --genomeLoad LoadAndRemove
