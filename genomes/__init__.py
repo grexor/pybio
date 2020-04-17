@@ -469,7 +469,7 @@ def find_feature_type(species, gene_id, interval, pos):
     return {"exon":"exon", "3":"utr3", "5":"utr5", "intron":"intron"}[feature_type]
 
 def find_linear(genome_linear, pos):
-    index = bisect.bisect_left(genome_linear, (pos, "", ""))
+    index = bisect.bisect_left(genome_linear, (pos, ))
     in_gene = False
     gene_id = None
     if (genome_linear[index-1][0]<=pos<=genome_linear[index-1][1]):
