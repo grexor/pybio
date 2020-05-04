@@ -35,7 +35,7 @@ class Fastq:
         if file_name.endswith(".gz"):
             self.f = gzip.open(file_name, "rt")
         elif file_name.endswith(".bz2"):
-            self.f = bz2.BZ2File(file_name, "rt")
+            self.f = bz2.BZ2File(file_name, "r")
         else:
             self.f = open(file_name, "rt")
         self.id = ""
