@@ -1,4 +1,4 @@
-eversion="45"
+eversion="47"
 
 rm -r mar3.assembly.ensembl${eversion}
 mkdir mar3.assembly.ensembl${eversion}
