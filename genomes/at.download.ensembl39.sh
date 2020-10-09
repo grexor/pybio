@@ -1,3 +1,5 @@
+eversion="39"
+
 rm -r at.assembly.ensembl39
 mkdir at.assembly.ensembl39
 cd at.assembly.ensembl39
@@ -19,3 +21,10 @@ rm -r at.assembly.ensembl39.star
 mkdir at.assembly.ensembl39.star
 STAR --runMode genomeGenerate --genomeDir at.assembly.ensembl39.star --genomeFastaFiles at.assembly.ensembl39/at.fasta --genomeSAindexNbases 12 --runThreadN 4 --sjdbGTFfile at.annotation.ensembl39/Arabidopsis_thaliana.TAIR10.39.gtf
 gzip at.annotation.ensembl39/Arabidopsis_thaliana.TAIR10.39.gtf
+
+rm -r at.transcripts.ensembl${eversion}
+mkdir at.transcripts.ensembl${eversion}
+cd at.transcripts.ensembl${eversion}
+wget ftp://ftp.ensemblgenomes.org/pub/plants/release-39/fasta/arabidopsis_thaliana/cdna/Arabidopsis_thaliana.TAIR10.cdna.all.fa.gz
+cd ..
+salmon index -t at.transcripts.ensembl${eversion}/Arabidopsis_thaliana.TAIR10.cdna.all.fa.gz -i at.transcripts.ensembl${eversion}.salmon
