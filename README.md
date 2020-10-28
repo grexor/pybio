@@ -11,7 +11,7 @@ pybio is a Python framework for basic genomics operations. The package is a depe
 
 ## Authors
 
-[pybio](https://github.com/grexor/pybio) is developed and supported by [Gregor Rot](http://rotlab.info).
+[pybio](https://github.com/grexor/pybio) is developed and supported by [Gregor Rot](https://grexor.github.io).
 
 ## Reporting problems
 
