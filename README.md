@@ -1,5 +1,13 @@
 # pybio: basic genomics toolset
 
+* [About](#about)
+* [Installation](#installation)
+* [Documentation](#documentation)
+* [Authors](#authors)
+* [Reporting problems](#reporting-problems)
+
+
+## About
 pybio is a Python 3 framework for basic genomics operations. The package is a dependency to [apa](https://github.com/grexor/apa) (alternative polyadenylation) and [RNAmotifs2](https://github.com/grexor/rnamotifs2) (motif cluster analysis). The pybio package provides:
 
 + automatized download of genome assemblies from Ensembl and STAR indexing,
@@ -13,7 +21,7 @@ pybio is a Python 3 framework for basic genomics operations. The package is a de
 
 A few steps of how to download and setup pybio.
 
-### Close the GitHub repository
+### Clone the GitHub repository
 
 For now the most direct way of installing pybio is to clone the repository and add the containing folder to PYTHONPATH:
 
