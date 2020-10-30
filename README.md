@@ -32,7 +32,8 @@ export PYTHONPATH=$PYTHONPATH:/home/user
 There are a few software tools pybio depends on:
 
 * STAR aligner, `sudo apt-get install rna-star`
-* pysam Python module, `sudo apt-get install python-pysam`
+* pysam, `sudo apt-get install python-pysam`
+* numpy, `sudo apt-get install python-numpy`
 
 ## Documentation
 
