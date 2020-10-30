@@ -23,11 +23,14 @@ Here we provide basic pybio usage examples.
 
 ### Downloading and preparing Ensembl genomes
 
-In the folder pybio/genomes, there are several .sh scripts you can use to automatically download and pre-process Ensembl genomes. Dependencies require you to have STAR installed. For example, to download and prepare the hg38 Ensembl v98, simply run:
+In the folder pybio/genomes, there are several .sh scripts you can use to automatically download and pre-process Ensembl genomes. Dependencies require you to have [https://github.com/alexdobin/STAR](STAR) installed. For example, to download and prepare the hg38 Ensembl v98, simply run:
 
 ```
-hg38.download.ensembl98.sh
+cd pybio/genomes
+./hg38.download.ensembl98.sh
 ```
+
+
 
 ## Authors
 
