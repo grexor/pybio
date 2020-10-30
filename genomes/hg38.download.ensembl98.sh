@@ -16,14 +16,14 @@ printf 'import pybio\npybio.genomes.prepare("hg38", version="ensembl'${eversion}
 
 # https://www.biostars.org/p/279235/#279238
 wget ftp://ftp.ensembl.org/pub/release-${eversion}/gtf/homo_sapiens/Homo_sapiens.GRCh38.${eversion}.chr.gtf.gz -O Homo_sapiens.GRCh38.${eversion}.chr.gtf.gz
-gunzip Homo_sapiens.GRCh38.${eversion}.chr.gtf.gz # file must be unzipped for STAR to consider it
+gunzip -f Homo_sapiens.GRCh38.${eversion}.chr.gtf.gz # file must be unzipped for STAR to consider it
 
 cd ..
 rm -r hg38.assembly.ensembl${eversion}.star
 mkdir hg38.assembly.ensembl${eversion}.star
 STAR --runMode genomeGenerate --genomeDir hg38.assembly.ensembl${eversion}.star --genomeFastaFiles hg38.assembly.ensembl${eversion}/hg38.fasta --runThreadN 4 --sjdbGTFfile hg38.annotation.ensembl${eversion}/Homo_sapiens.GRCh38.${eversion}.chr.gtf
 
-gzip hg38.annotation.ensembl${eversion}/Homo_sapiens.GRCh38.${eversion}.chr.gtf # to save space
+gzip -f hg38.annotation.ensembl${eversion}/Homo_sapiens.GRCh38.${eversion}.chr.gtf # to save space
 
 rm -r hg38.transcripts.ensembl${eversion}
 mkdir hg38.transcripts.ensembl${eversion}
