@@ -3,6 +3,7 @@
 * [About](#about)
 * [Installation](#installation)
 * [Documentation](#documentation)
+  * [Downloading and preparing Ensembl genomes](#downloading-and-preparing-Ensembl-genomes)
 * [Authors](#authors)
 * [Reporting problems](#reporting-problems)
 
