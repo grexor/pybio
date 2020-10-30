@@ -165,7 +165,7 @@ def prepare(species="hg19", version=None):
     while f.readline():
         cline += 1
         if cline%100000==0:
-            print("{species}: processed {processed}M annotation rows".format(species=species, processed=cline/100000))
+            print("{species}: processed {processed}M annotation rows".format(species=species, processed="%.2f" % (cline/1000000)))
         for k, item in list(f.data.items()):
             f.data[k.lower()] = item
         utr5_start = utr5_stop = utr3_start = utr3_stop = ""
