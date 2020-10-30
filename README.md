@@ -3,7 +3,7 @@
 * [About](#about)
 * [Installation](#installation)
 * [Documentation](#documentation)
-  * [Downloading and preparing Ensembl genomes](#downloading-and-preparing-Ensembl-genomes)
+  * [Downloading Ensembl genomes](#downloading-Ensembl-genomes)
 * [Authors](#authors)
 * [Reporting problems](#reporting-problems)
 
@@ -48,7 +48,7 @@ There are a few software tools pybio depends on:
 
 Here we provide basic pybio usage examples.
 
-### Downloading and preparing Ensembl genomes
+### Downloading Ensembl genomes
 
 In the folder `pybio/genomes`, there are `.sh scripts` you can use to automatically download and pre-process Ensembl genomes. For example, to download and prepare the hg38 Ensembl v98, simply run:
 
