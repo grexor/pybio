@@ -11,11 +11,28 @@ pybio is a Python 3 framework for basic genomics operations. The package is a de
 
 ## Installation
 
+A few steps of how to download and setup pybio.
+
+### Close the GitHub repository
+
 For now the most direct way of installing pybio is to clone the repository and add the containing folder to PYTHONPATH:
 
 ```
 git clone https://github.com/grexor/pybio.git
 ```
+
+If, for example, you installed pybio to /home/user, you would add this command to the .profile file in the same folder:
+
+```
+export PYTHONPATH=$PYTHONPATH:/home/user
+```
+
+### Dependencies
+
+There are a few software tools pybio depends on:
+
+* STAR aligner, `sudo apt-get install rna-star`
+* pysam Python module, `sudo apt-get install python-pysam`
 
 ## Documentation
 
