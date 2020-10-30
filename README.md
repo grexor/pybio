@@ -1,5 +1,14 @@
 # pybio: basic genomics toolset
 
+* [About](#about)
+* [Installation](#installation)
+* [Documentation](#documentation)
+  * [Downloading Ensembl genomes](#downloading-Ensembl-genomes)
+* [Authors](#authors)
+* [Reporting problems](#reporting-problems)
+
+
+## About
 pybio is a Python 3 framework for basic genomics operations. The package is a dependency to [apa](https://github.com/grexor/apa) (alternative polyadenylation) and [RNAmotifs2](https://github.com/grexor/rnamotifs2) (motif cluster analysis). The pybio package provides:
 
 + automatized download of genome assemblies from Ensembl and STAR indexing,
@@ -13,7 +22,7 @@ pybio is a Python 3 framework for basic genomics operations. The package is a de
 
 A few steps of how to download and setup pybio.
 
-### Close the GitHub repository
+### Clone the GitHub repository
 
 For now the most direct way of installing pybio is to clone the repository and add the containing folder to PYTHONPATH:
 
@@ -39,16 +48,24 @@ There are a few software tools pybio depends on:
 
 Here we provide basic pybio usage examples.
 
-### Downloading and preparing Ensembl genomes
+### Downloading Ensembl genomes
 
-In the folder pybio/genomes, there are several .sh scripts you can use to automatically download and pre-process Ensembl genomes. Dependencies require you to have [STAR](https://github.com/alexdobin/STAR) installed. For example, to download and prepare the hg38 Ensembl v98, simply run:
+In the folder `pybio/genomes`, there are `.sh scripts` you can use to automatically download and pre-process Ensembl genomes. For example, to download and prepare the hg38 Ensembl v98, simply run:
 
 ```
 cd pybio/genomes
 ./hg38.download.ensembl98.sh
 ```
 
+This will download the FASTA, GTF and TAB annotation (via Biomart) of the genome, and create several folders:
 
+```
+hg38.assembly.ensembl98           # FASTA files of the genome, each chromosome in a separate file
+hg38.annotation.ensembl98         # Annotation in GTF and TAB format
+hg38.assembly.ensembl98.star      # STAR index, GTF annotation aware
+hg38.transcripts.ensembl98        # transcriptome, this is the Ensembl "cDNA" file in FASTA format
+hg38.transcripts.ensembl98.salmon # Salmon index of the transcriptome
+```
 
 ## Authors
 
