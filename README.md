@@ -4,6 +4,8 @@
 * [Installation](#installation)
 * [Documentation](#documentation)
   * [Downloading Ensembl genomes](#downloading-Ensembl-genomes)
+  * [Retrieving genomic sequence](#retrieving-genomic-sequence)
+  * [Annotate genomic position](#annotate-genomic-position)
 * [Authors](#authors)
 * [Reporting problems](#reporting-problems)
 
@@ -58,7 +60,7 @@ cd pybio/genomes
 ./hg38.download.ensembl98.sh
 ```
 
-This will download the FASTA, GTF and TAB annotation (via Biomart) of the genome, and create several folders:
+This will download the FASTA sequence, GTF and TAB annotation (via Biomart) of the genome, and create several folders:
 
 ```
 hg38.assembly.ensembl98           # FASTA files of the genome, each chromosome in a separate file
@@ -67,6 +69,36 @@ hg38.assembly.ensembl98.star      # STAR index, GTF annotation aware
 hg38.transcripts.ensembl98        # transcriptome, this is the Ensembl "cDNA" file in FASTA format
 hg38.transcripts.ensembl98.salmon # Salmon index of the transcriptome
 ```
+
+### Retrieving genomic sequence
+
+To retrieve stretches of genomic sequence, we use the seq(genome, chr, strand, position, upstream, downstream) method:
+
+```
+pybio.genomes.seq("hg38", "1", "+", 450000, -20, 20) # returns 'TACCCTGATTCTGAAACGAAAAAGCTTTACAAAATCCAAGA' for hg38, Ensembl v98
+```
+
+The above command fetches the chr1 sequence from 450000-20..450000+20, the resulting sequence is of length 41.
+
+### Annotate genomic position
+
+Given a genomic position, we can retrieve the gene at the position and the closest upstream and downstream gene on the same strand:
+
+```
+(gene_up, gene_id, gene_down, gene_interval, gene_feature) = pybio.genomes.annotate("hg38", "1", "-", 450000)
+```
+
+The above command would return:
+
+```
+      gene_id: ENSG00000237094
+gene_interval: (379972, 450701, 'i')
+ gene_feature: 'intron'
+      gene_up: 'ENSG00000284733'
+    gene_down: 'ENSG00000228463'
+```
+
+There is gene ENSG00000237094 at position 450000, specifically the position is in an intron of the gene spanning the region 379972..450701.
 
 ## Authors
 
