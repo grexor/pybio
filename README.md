@@ -43,6 +43,7 @@ There are a few software tools pybio depends on:
 * STAR aligner, `sudo apt-get install rna-star`
 * pysam, `sudo apt-get install python-pysam`
 * numpy, `sudo apt-get install python-numpy`
+* Salmon, download and install from [Salmon webpage](https://combine-lab.github.io/salmon/getting_started/)
 
 ## Documentation
 
