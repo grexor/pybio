@@ -42,10 +42,10 @@ export PYTHONPATH=$PYTHONPATH:/home/user
 
 There are a few software tools pybio depends on:
 
-* STAR aligner, `sudo apt-get install rna-star`
-* pysam, `sudo apt-get install python-pysam`
-* numpy, `sudo apt-get install python-numpy`
-* Salmon, download and install from [Salmon webpage](https://combine-lab.github.io/salmon/getting_started/)
+* [STAR aligner](https://github.com/alexdobin/STAR), `sudo apt-get install rna-star`
+* [pysam](https://pysam.readthedocs.io/en/latest/api.html), `sudo apt-get install python-pysam`
+* [numpy](https://numpy.org/), `sudo apt-get install python-numpy`
+* [Salmon](https://combine-lab.github.io/salmon/getting_started/), download and install from Salmon webpage
 
 ## Documentation
 
