@@ -7,6 +7,7 @@ import json
 import struct
 import itertools
 import copy
+import gzip
 
 code = {"R": ["A", "G"], "Y": ["C", "T"], "S": ["G", "C"], "W": ["A", "T"]}
 revCode = {'A': 'T', 'T': 'A', 'U': 'A', 'G': 'C', 'C': 'G', 'R': 'Y', 'Y': 'R', 'K': 'M', 'M': 'K', 'S': 'S', 'W': 'W', 'B': 'V', 'D': 'H', 'H': 'D', 'V': 'B', 'N': 'N'}
@@ -408,6 +409,262 @@ def prepare(species="hg19", version=None):
         chrstrand.sort()
         linear[key] = chrstrand
     f.write(json.dumps(linear))
+
+
+
+
+"""
+Prepare from GTF
+"""
+
+def prepare_gtf(species="hg19", version=None):
+
+    if version==None:
+        version = get_latest_version(species)
+
+    print("{species}: processing annotation".format(species=species))
+    annotation_folder = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version))
+    f_log = open(os.path.join(annotation_folder, "gtf_log.txt"), "wt")
+    chrs_list = pybio.genomes.chr_list(species, version)
+    assert(len(chrs_list)>0)
+    chrs_names = [name for (name, size) in chrs_list]
+    temp_genes = {}
+    temp_intervals = {}
+
+    gene_aliases = {}
+    if species=="mar5":
+        # read in mapping between mar5 to mar3 gene ids
+        print("mar5 species, reading mar5<->mar3 gene id mapping")
+        f = open(os.path.join(pybio.path.genomes_folder, "%s.annotation.%s/mar5_mar3_gene_names.tab" % (species, version)), "rt")
+        r = f.readline()
+        while r:
+            r = r.replace("\r", "").replace("\n", "").split("\t")
+            if len(r)==2:
+                gene_aliases[r[0].replace(".1", "")] = r[1].replace(".1", "")
+                gene_aliases[r[1].replace(".1", "")] = r[0].replace(".1", "")
+            r = f.readline()
+        f.close()
+    f_log.write("reading annotation from gtf file\n")
+
+    gtf_files = glob.glob(os.path.join(pybio.path.genomes_folder, "%s.annotation.%s/*.gtf.gz" % (species, version)))
+    if len(gtf_files)==0:
+        gtf_files = glob.glob(os.path.join(pybio.path.genomes_folder, "%s.annotation.%s/*.gtf" % (species, version)))
+    gtf_fname = gtf_files[0]
+
+    if gtf_fname.endswith(".gz"):
+        f = gzip.open(gtf_fname, "rt")
+    else:
+        f = open(gtf_fname, "rt")
+    r = f.readline()
+    cline = 0
+    while r:
+        r = r.replace("\r", "").replace("\n", "").split("\t")
+        if r[0][0]=="#":
+            r = f.readline()
+            continue
+        cline += 1
+        if cline%100000==0:
+            print("{species}: processed {processed}M annotation rows".format(species=species, processed="%.2f" % (cline/1000000.0)))
+        utr5_start = utr5_stop = utr3_start = utr3_stop = ""
+
+        if r[2]!="exon":
+            r = f.readline()
+            continue
+
+        data = {}
+        temp = r[-1].split("; ")
+        for el in temp:
+            el = el.split(" ")
+            el_name = el[0].replace(";", "")
+            el_value = el[1].replace("\"", "").replace("''", "").replace(";", "")
+            data[el_name] = el_value
+
+        gene_id = data["gene_id"]
+        gene_chr = r[0]
+        gene_strand = r[6]
+        if gene_chr not in chrs_names:
+            continue
+        biotype = ""
+        exon_start = int(r[3])-1
+        exon_stop = int(r[4])-1
+        geneD = temp_genes.get(gene_id, {})
+        geneD["record"] = "gene"
+        geneD["gene_id"] = gene_id
+        geneD["gene_chr"] = gene_chr
+        geneD["gene_strand"] = gene_strand
+        geneD["gene_start"] = min(exon_start, geneD.get("gene_start", float("inf")))
+        geneD["gene_stop"] = max(exon_stop, geneD.get("gene_stop", 0))
+        geneD.setdefault("utr5", [])
+        geneD.setdefault("utr3", [])
+        geneD.setdefault("exons", [])
+        geneD["gene_name"] = data.get("gene_name", gene_aliases.get(gene_id, ""))
+        geneD["gene_biotype"] = biotype
+        geneD["gene_length"] = geneD["gene_stop"] - geneD["gene_start"] + 1
+        exons = geneD.get("exons")
+        exons.append((exon_start, exon_stop))
+        geneD["exons"] = exons
+        temp_genes[gene_id] = geneD
+        r = f.readline()
+
+    max_intervals = 0
+    all_genes = len(temp_genes.keys())
+
+    current_gene = 0
+    for gene_id, geneD in temp_genes.items():
+        current_gene += 1
+        if current_gene%100==0:
+            f_log.write("%s: creating intervals: %.2f done\n" % (species, current_gene / float(all_genes)))
+        coverage = {}
+        coverage_utrs = {} # only 5' and 3'
+        geneD["exons"] = pybio.utils.merge_intervals(geneD["exons"])
+        geneD["utr5"] = pybio.utils.merge_intervals(geneD["utr5"])
+        geneD["utr3"] = pybio.utils.merge_intervals(geneD["utr3"])
+
+        # precedence: 3utr -> 5utr -> exon
+        if geneD.get("exons", None)!=None:
+            for (exon_start, exon_stop) in geneD["exons"]:
+                for i in range(exon_start, exon_stop+1):
+                    coverage[i] = 'o'
+        if geneD.get("utr5", None)!=None:
+            for (utr5_start, utr5_stop) in geneD["utr5"]:
+                for i in range(utr5_start, utr5_stop+1):
+                    coverage_utrs[i] = '5'
+                    coverage[i] = 'o'
+        if geneD.get("utr3", None)!=None:
+            for (utr3_start, utr3_stop) in geneD["utr3"]:
+                for i in range(utr3_start, utr3_stop+1):
+                    coverage_utrs[i] = '3'
+                    coverage[i] = 'o'
+
+        ints = pybio.utils.coverage_to_intervals(coverage)
+        utr_intervals = pybio.utils.coverage_to_intervals(coverage_utrs)
+        # add intronic intervals
+        all_intervals = [ints[0]]
+        for (i1_start, i1_stop, i1_value), (i2_start, i2_stop, i2_value) in zip(ints, ints[1:]):
+            if i1_stop+1<i2_start:
+                all_intervals.append((i1_stop+1, i2_start-1, 'i'))
+            all_intervals.append((i2_start, i2_stop, i2_value))
+        assert(all_intervals[0][0]==geneD["gene_start"])
+        assert(all_intervals[-1][1]==geneD["gene_stop"])
+        geneD["gene_intervals"] = all_intervals
+        geneD["gene_utrs"] = utr_intervals
+
+        # delete original annotation intervals
+        for feature in ["exons", "utr5", "utr3"]:
+            if feature in geneD:
+                del geneD[feature]
+
+    # B: all genes are read, now we need to resolve overlapping clusters of genes
+    genes_by_chrstrand = {}
+    for gene_id, geneD in temp_genes.items():
+        chrstrand = "%s:%s" % (geneD["gene_chr"], geneD["gene_strand"])
+        L = genes_by_chrstrand.get(chrstrand, [])
+        L.append((geneD["gene_start"], geneD["gene_id"]))
+        genes_by_chrstrand[chrstrand] = L
+
+    for chrstrand, gene_list in genes_by_chrstrand.items():
+        f_log.write("making clusters %s\n" % chrstrand)
+        gene_list.sort()
+        clusters = {}
+        for gene_start, gid in gene_list:
+            add_cluster(gid, temp_genes, clusters)
+
+        f_log.write("overlaying genes in clusters %s\n" % chrstrand)
+        # superimpose genes in clusters (shorter genes have preference)
+        for (start, stop), cluster_genes in clusters.items():
+            # change genes that are overlaping (they are inside |clusters|>1)
+            if len(cluster_genes)>1: # sort gene in cluster by length
+                gene_list_bylen = [(temp_genes[gid]["gene_length"], gid) for gid in cluster_genes]
+                gene_list_bylen.sort(reverse=True)
+                # give preference to genes that are protein coding
+                f_log.write("cluster len = %s, chrstrand = %s\n" % (len(cluster_genes), chrstrand))
+                coverage = {}
+                for (_, gid) in gene_list_bylen: # first place non protein coding genes
+                    if temp_genes[gid]["gene_biotype"]!="protein_coding":
+                        f_log.write("%s %s %s\n" % (gid, temp_genes[gid]["gene_start"], temp_genes[gid]["gene_stop"]))
+                        for i in range(temp_genes[gid]["gene_start"], temp_genes[gid]["gene_stop"]+1):
+                            coverage[i] = gid
+                for (_, gid) in gene_list_bylen: # second, place protein_coding genes (they have preference)
+                    if temp_genes[gid]["gene_biotype"]=="protein_coding":
+                        f_log.write("%s %s %s\n" % (gid, temp_genes[gid]["gene_start"], temp_genes[gid]["gene_stop"]))
+                        for i in range(temp_genes[gid]["gene_start"], temp_genes[gid]["gene_stop"]+1):
+                            coverage[i] = gid
+                f_log.write("\n")
+                coverage = pybio.utils.coverage_to_intervals(coverage)
+                # check coverage intervals
+                for (i1_start, i1_stop, gid1), (i2_start, i2_stop, gid2) in zip(coverage, coverage[1:]):
+                    assert(i1_stop+1==i2_start)
+
+                # it may happen that one gene completelly (exactly) overlaps another
+                # get new gene list from coverage
+                new_gene_list = [gid for (i_start, i_stop, gid) in coverage]
+                delete_genes = set(cluster_genes).difference(set(new_gene_list))
+                if len(delete_genes)>0:
+                    f_log.write("\n")
+                    f_log.write("deleted (lost) genes = %s\n" % (str(delete_genes)))
+                    f_log.write("these genes completelly (start to stop) overlap with some other gene from this cluster\n")
+                    f_log.write("\n")
+                # adjust each gene (recover intervals where the gene is defined
+                for gid in new_gene_list:
+                    limit_intervals = [(start, stop) for (start, stop, interval_gid) in coverage if interval_gid==gid]
+                    adjust_gene(gid, limit_intervals, temp_genes)
+
+        f_log.write("making genome intervals from resolved clusters %s\n" % chrstrand)
+        gi_list = temp_intervals.get(chrstrand, [])
+        for gid, geneD in temp_genes.items():
+            k = "%s:%s" % (geneD["gene_chr"], geneD["gene_strand"])
+            if k!=chrstrand:
+                continue
+            if type(geneD["gene_start"])==list:
+                f_log.write("gene %s is split (defined) on intervals:\n" % gid)
+                for (start, stop) in zip(geneD["gene_start"], geneD["gene_stop"]):
+                    f_log.write("%s %s\n" % (start, stop))
+                f_log.write("\n")
+            if type(geneD["gene_start"])==list:
+                for (gene_start, gene_stop) in zip(geneD["gene_start"], geneD["gene_stop"]):
+                    gi_list.append((gene_start, gene_stop, gid))
+            else:
+                gi_list.append((geneD["gene_start"], geneD["gene_stop"], gid))
+        gi_list.sort()
+        temp_intervals[chrstrand] = gi_list
+
+    f_log.write("saving genome intervals\n")
+    f_log.close()
+
+    f = open(os.path.join(annotation_folder, "intervals.json"), "wt")
+    f.write(json.dumps(temp_intervals))
+    f.close()
+
+    f = open(os.path.join(annotation_folder, "genes.json"), "wt")
+    f.write(json.dumps(temp_genes))
+    f.close()
+
+    linear = {}
+    f = open(os.path.join(annotation_folder, "linear.json"), "wt")
+    for gene_id, gene in temp_genes.items():
+        key = "%s:%s" % (gene["gene_chr"], gene["gene_strand"])
+        chrstrand = linear.get(key, [])
+        for (i_start, i_stop, i_type) in gene["gene_intervals"]:
+            chrstrand.append((i_start, i_stop, i_type, gene_id))
+        linear[key] = chrstrand
+    for key, chrstrand in linear.items():
+        chrstrand.sort()
+        linear[key] = chrstrand
+    f.write(json.dumps(linear))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def annotate(species, chr, strand, pos, extension = 0):
     """

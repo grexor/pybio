@@ -12,6 +12,7 @@ cd ..
 mkdir mar5.annotation.${eversion}
 cd mar5.annotation.${eversion}
 mv ../mar5.assembly.${eversion}/tak1v5.1r1_with_female_chr.gtf mar5.gtf
+wget https://raw.githubusercontent.com/AleGirFon/Mytest/master/DB/Mapoly_2_MPGs.dic.txt -O mar5_mar3_gene_names.tab
 #printf 'import pybio\npybio.genomes.prepare("mar3", version="ensembl'${eversion}'")' | python
 
 cd ..
