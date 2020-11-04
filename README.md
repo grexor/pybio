@@ -36,7 +36,8 @@ git clone https://github.com/grexor/pybio.git
 If, for example, you installed pybio to /home/user, you would add this command to the .profile file in the same folder:
 
 ```
-export PYTHONPATH=$PYTHONPATH:/home/user:/home/user/pybio/bin
+export PYTHONPATH=$PYTHONPATH:/home/user
+export PATH=$PATH:/home/user/pybio/bin
 ```
 
 ### Dependencies
