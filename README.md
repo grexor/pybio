@@ -48,6 +48,7 @@ There are a few software tools pybio depends on:
 * [pysam](https://pysam.readthedocs.io/en/latest/api.html), `sudo apt-get install python-pysam`
 * [numpy](https://numpy.org/), `sudo apt-get install python-numpy`
 * [Salmon](https://combine-lab.github.io/salmon/getting_started/), download and install from Salmon webpage
+* [samtools](http://www.htslib.org), `sudo apt-get install samtools`
 
 ## Documentation
 
