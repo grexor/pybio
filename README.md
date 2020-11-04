@@ -36,7 +36,7 @@ git clone https://github.com/grexor/pybio.git
 If, for example, you installed pybio to /home/user, you would add this command to the .profile file in the same folder:
 
 ```
-export PYTHONPATH=$PYTHONPATH:/home/user
+export PYTHONPATH=$PYTHONPATH:/home/user:/home/user/pybio/bin
 ```
 
 ### Dependencies
@@ -50,7 +50,7 @@ There are a few software tools pybio depends on:
 
 ## Documentation
 
-Here we provide basic pybio usage examples.
+Here we provide basic `pybio` usage examples.
 
 ### Downloading Ensembl genomes
 
