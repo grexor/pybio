@@ -19,3 +19,11 @@ cd ..
 rm -r mar5.assembly.${eversion}.star
 mkdir mar5.assembly.${eversion}.star
 STAR --runMode genomeGenerate --genomeDir mar5.assembly.${eversion}.star --genomeFastaFiles mar5.assembly.${eversion}/mar5.fasta --genomeSAindexNbases 12 --runThreadN 4 --sjdbGTFfile mar5.annotation.${eversion}/mar5.gtf
+
+rm -r mar5.transcripts.${eversion}
+mkdir mar5.transcripts.${eversion}
+cd mar5.transcripts.${eversion}
+wget https://marchantia.info/download/tak1v5.1/MpTak1v5.1_r1.mrna.fasta
+gzip MpTak1v5.1_r1.mrna.fasta
+cd ..
+salmon index -t mar5.transcripts.${eversion}/MpTak1v5.1_r1.mrna.fasta.gz -i mar5.transcripts.${eversion}.salmon
