@@ -84,9 +84,9 @@ class Bedgraph():
 
         temp_raw = {}
         if filename.endswith(".gz"):
-            f = gzip.open(filename, "rb")
+            f = gzip.open(filename, "rt")
         else:
-            f = open(filename)
+            f = open(filename, "rt")
         r = f.readline()
         not_converted = 0
         while r:
@@ -155,7 +155,7 @@ class Bedgraph():
             self.track_id = os.path.basename(filename)
         not_converted = 0
         if filename.endswith(".gz"):
-            f_out = gzip.open(filename, "wb")
+            f_out = gzip.open(filename, "wt")
         else:
             f_out = open(filename, "wt")
         if filetype=="complete":
