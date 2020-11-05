@@ -14,10 +14,10 @@ import bz2
 class Fastq:
 
     def read(self):
-        self.id = self.f.readline().rstrip("\r").rstrip("\n")
-        self.sequence = self.f.readline().rstrip("\r").rstrip("\n")
-        self.plus = self.f.readline().rstrip("\r").rstrip("\n") # +
-        self.quality = self.f.readline().rstrip("\r").rstrip("\n")
+        self.id = self.f.readline().decode().rstrip("\r").rstrip("\n")
+        self.sequence = self.f.readline().decode().rstrip("\r").rstrip("\n")
+        self.plus = self.f.readline().decode().rstrip("\r").rstrip("\n") # +
+        self.quality = self.f.readline().decode().rstrip("\r").rstrip("\n")
         self.uncut_sequence = self.sequence
         self.uncut_quality = self.quality
         self.count += 1
@@ -35,7 +35,7 @@ class Fastq:
         if file_name.endswith(".gz"):
             self.f = gzip.open(file_name, "rt")
         elif file_name.endswith(".bz2"):
-            self.f = bz2.BZ2File(file_name, "r")
+            self.f = bz2.BZ2File(file_name)
         else:
             self.f = open(file_name, "rt")
         self.id = ""
