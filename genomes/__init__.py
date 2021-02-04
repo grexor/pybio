@@ -763,13 +763,13 @@ def chr_list(genome, version=None):
     if version==None:
         version = get_latest_version(genome)
 
-    files = glob.glob(pybio.path.root_folder+"/genomes/%s.assembly.%s/*.string" % (genome, version))
+    files = glob.glob(pybio.path.genomes_folder+"/%s.assembly.%s/*.string" % (genome, version))
     R = []
     for f in files:
         chr_name = f.rstrip(".string").split("/")[-1]
         chr_size = os.path.getsize(f)
         R.append((chr_name, chr_size))
-    files = glob.glob(pybio.path.root_folder+"/genomes/%s.assembly.%s/*.raw" % (genome, version))
+    files = glob.glob(pybio.path.genomes_folder+"/%s.assembly.%s/*.raw" % (genome, version))
     for f in files:
         chr_name = f.rstrip(".raw").split("/")[-1]
         chr_size = os.path.getsize(f)
