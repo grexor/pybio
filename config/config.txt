@@ -1,0 +1,2 @@
+#print("This is pybio", pybio.config.version)
+#pybio.path.genomes_folder="pybio/genomes"
