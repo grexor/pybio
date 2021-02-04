@@ -17,8 +17,6 @@ wget ftp://ftp.ensemblgenomes.org/pub/protists/release-${eversion}/fasta/dictyos
 gunzip -f dd.fasta.gz
 printf 'import pybio\npybio.data.Fasta("dd.fasta").split()' | python3
 
-exit
-
 cd $gdir
 mkdir dd.annotation.ensembl${eversion}
 cd dd.annotation.ensembl${eversion}
