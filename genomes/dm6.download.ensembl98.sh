@@ -15,7 +15,7 @@ mkdir dm6.assembly.ensembl${eversion}
 cd dm6.assembly.ensembl${eversion}
 wget ftp://ftp.ensembl.org/pub/release-${eversion}/fasta/drosophila_melanogaster/dna/Drosophila_melanogaster.BDGP6.22.dna.toplevel.fa.gz -O dm6.fasta.gz
 gunzip -f dm6.fasta.gz
-printf 'import pybio\npybio.data.Fasta("dm6.fasta").split()' | python
+printf 'import pybio\npybio.data.Fasta("dm6.fasta").split()' | python3
 touch dm6.chr.ucsc.ensembl
 
 cd $gdir
@@ -23,7 +23,7 @@ mkdir dm6.annotation.ensembl${eversion}
 cd dm6.annotation.ensembl${eversion}
 export BM=`sed ':a;N;$!ba;s/\n/ /g' $sdir/dm6.biomart.ensembl${eversion}.xml`
 wget -O dm6.annotation.ensembl${eversion}.tab "http://www.ensembl.org/biomart/martservice?query=$BM"
-printf 'import pybio\npybio.genomes.prepare("dm6", version="ensembl'${eversion}'")' | python
+printf 'import pybio\npybio.genomes.prepare("dm6", version="ensembl'${eversion}'")' | python3
 
 # https://www.biostars.org/p/279235/#279238
 wget ftp://ftp.ensembl.org/pub/release-${eversion}/gtf/drosophila_melanogaster/Drosophila_melanogaster.BDGP6.22.${eversion}.chr.gtf.gz -O Drosophila_melanogaster.BDGP6.${eversion}.chr.gtf.gz

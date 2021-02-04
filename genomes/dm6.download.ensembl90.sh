@@ -15,7 +15,7 @@ mkdir dm6.assembly.ensembl${eversion}
 cd dm6.assembly.ensembl${eversion}
 wget ftp://ftp.ensembl.org/pub/release-${eversion}/fasta/drosophila_melanogaster/dna/Drosophila_melanogaster.BDGP6.dna.toplevel.fa.gz -O dm6.fasta.gz
 gunzip -f dm6.fasta.gz
-printf 'import pybio\npybio.data.Fasta("dm6.fasta").split()' | python
+printf 'import pybio\npybio.data.Fasta("dm6.fasta").split()' | python3
 touch dm6.chr.ucsc.ensembl
 
 cd $gdir

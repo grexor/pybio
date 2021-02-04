@@ -15,7 +15,7 @@ mkdir hg19.assembly.ensembl${eversion}
 cd hg19.assembly.ensembl${eversion}
 wget ftp://ftp.ensembl.org/pub/release-${eversion}/fasta/homo_sapiens/dna/Homo_sapiens.GRCh37.${eversion}.dna.primary_assembly.fa.gz -O hg19.fasta.gz
 gunzip -f hg19.fasta.gz
-printf 'import pybio\npybio.data.Fasta("hg19.fasta").split()' | python
+printf 'import pybio\npybio.data.Fasta("hg19.fasta").split()' | python3
 mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -N -e "select * from ucscToEnsembl;" hg19 > hg19.chr.ucsc.ensembl
 
 cd $gdir
@@ -23,7 +23,7 @@ mkdir hg19.annotation.ensembl${eversion}
 cd hg19.annotation.ensembl${eversion}
 export BM=`sed ':a;N;$!ba;s/\n/ /g' $sdir/hg19.biomart.ensembl${eversion}.xml`
 wget -O hg19.annotation.ensembl${eversion}.tab "http://feb2014.archive.ensembl.org/biomart/martservice?query=$BM"
-printf 'import pybio\npybio.genomes.prepare("hg19", version="ensembl${eversion}")' | python
+printf 'import pybio\npybio.genomes.prepare("hg19", version="ensembl${eversion}")' | python3
 
 # https://www.biostars.org/p/279235/#279238
 wget ftp://ftp.ensembl.org/pub/release-${eversion}/gtf/homo_sapiens/Homo_sapiens.GRCh37.${eversion}.gtf.gz -O Homo_sapiens.GRCh37.${eversion}.gtf.gz
