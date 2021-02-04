@@ -1,30 +1,38 @@
-rm -r dm6.assembly.ensembl90
-mkdir dm6.assembly.ensembl90
-cd dm6.assembly.ensembl90
-wget ftp://ftp.ensembl.org/pub/release-90/fasta/drosophila_melanogaster/dna/Drosophila_melanogaster.BDGP6.dna.toplevel.fa.gz -O dm6.fasta.gz
+eversion="90"
+sdir=`realpath .`
+gdir=$1
+if [ -z "$gdir" ]
+then
+  gdir=`realpath .`
+else
+  mkdir -p $gdir
+  gdir=`realpath $1`
+fi
+
+cd $gdir
+rm -r dm6.assembly.ensembl${eversion}
+mkdir dm6.assembly.ensembl${eversion}
+cd dm6.assembly.ensembl${eversion}
+wget ftp://ftp.ensembl.org/pub/release-${eversion}/fasta/drosophila_melanogaster/dna/Drosophila_melanogaster.BDGP6.dna.toplevel.fa.gz -O dm6.fasta.gz
 gunzip -f dm6.fasta.gz
 printf 'import pybio\npybio.data.Fasta("dm6.fasta").split()' | python
-# there is no data for dm6 chr name mappings
-#mysql --user=genome --host=genome-mysql.cse.ucsc.edu -A -N -e "select * from ucscToEnsembl;" dm6 > dm6.chr.ucsc.ensembl
 touch dm6.chr.ucsc.ensembl
-cd ..
 
-mkdir dm6.annotation.ensembl90
-cd dm6.annotation.ensembl90
-# download annotation
-export BM=`sed ':a;N;$!ba;s/\n/ /g' ../dm6.biomart.ensembl90.xml`
-wget -O dm6.annotation.ensembl90.tab "http://www.ensembl.org/biomart/martservice?query=$BM"
-printf 'import pybio\npybio.genomes.prepare("dm6")' | python
+cd $gdir
+mkdir dm6.annotation.ensembl${eversion}
+cd dm6.annotation.ensembl${eversion}
+export BM=`sed ':a;N;$!ba;s/\n/ /g' $sdir/dm6.biomart.ensembl${eversion}.xml`
+wget -O dm6.annotation.ensembl${eversion}.tab "http://www.ensembl.org/biomart/martservice?query=$BM"
+printf 'import pybio\npybio.genomes.prepare("dm6")' | python3
 
 # https://www.biostars.org/p/279235/#279238
-wget ftp://ftp.ensembl.org/pub/release-90/gtf/drosophila_melanogaster/Drosophila_melanogaster.BDGP6.90.chr.gtf.gz -O Drosophila_melanogaster.BDGP6.90.chr.gtf.gz
-gunzip Drosophila_melanogaster.BDGP6.90.chr.gtf.gz # file must be unzipped for STAR to consider it
-cd ..
+wget ftp://ftp.ensembl.org/pub/release-${eversion}/gtf/drosophila_melanogaster/Drosophila_melanogaster.BDGP6.${eversion}.chr.gtf.gz -O Drosophila_melanogaster.BDGP6.${eversion}.chr.gtf.gz
+gunzip Drosophila_melanogaster.BDGP6.${eversion}.chr.gtf.gz # file must be unzipped for STAR to consider it
 
-rm -r dm6.assembly.ensembl90.star
-mkdir dm6.assembly.ensembl90.star
+cd $gdir
+rm -r dm6.assembly.ensembl${eversion}.star
+mkdir dm6.assembly.ensembl${eversion}.star
 # https://groups.google.com/forum/#!topic/rna-star/6csLuVjxiR0
 # dm6 = 140M bases, log2(140M)/2-1 = 12.5, we set --genomeSAindexNbases to 10
-STAR --runMode genomeGenerate --genomeSAindexNbases 10 --genomeDir dm6.assembly.ensembl90.star --genomeFastaFiles dm6.assembly.ensembl90/dm6.fasta --runThreadN 8 --sjdbGTFfile dm6.annotation.ensembl90/Drosophila_melanogaster.BDGP6.90.chr.gtf
-
-gzip dm6.annotation.ensembl90/Drosophila_melanogaster.BDGP6.90.chr.gtf
+STAR --runMode genomeGenerate --genomeSAindexNbases 10 --genomeDir dm6.assembly.ensembl${eversion}.star --genomeFastaFiles dm6.assembly.ensembl${eversion}/dm6.fasta --runThreadN 8 --sjdbGTFfile dm6.annotation.ensembl${eversion}/Drosophila_melanogaster.BDGP6.${eversion}.chr.gtf
+gzip dm6.annotation.ensembl${eversion}/Drosophila_melanogaster.BDGP6.${eversion}.chr.gtf
