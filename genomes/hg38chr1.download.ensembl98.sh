@@ -31,7 +31,7 @@ gunzip -f Homo_sapiens.GRCh38.${eversion}.chr.gtf.gz # file must be unzipped for
 cd $gdir
 rm -r hg38chr1.assembly.ensembl${eversion}.star
 mkdir hg38chr1.assembly.ensembl${eversion}.star
-STAR --runMode genomeGenerate --genomeDir hg38chr1.assembly.ensembl${eversion}.star --genomeFastaFiles hg38chr1.assembly.ensembl${eversion}/hg38chr1.fasta --runThreadN 4 --sjdbGTFfile hg38chr1.annotation.ensembl${eversion}/Homo_sapiens.GRCh38.${eversion}.chr.gtf
+STAR --genomeSAindexNbases 12 --runMode genomeGenerate --genomeDir hg38chr1.assembly.ensembl${eversion}.star --genomeFastaFiles hg38chr1.assembly.ensembl${eversion}/hg38chr1.fasta --runThreadN 4 --sjdbGTFfile hg38chr1.annotation.ensembl${eversion}/Homo_sapiens.GRCh38.${eversion}.chr.gtf
 
 gzip -f hg38chr1.annotation.ensembl${eversion}/Homo_sapiens.GRCh38.${eversion}.chr.gtf # to save space
 
