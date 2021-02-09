@@ -18,9 +18,9 @@ import pybio.sequence
 import os
 
 # initialize path module
+pybio.config.init()
 pybio.path.init()
 pybio.genomes.init()
-pybio.config.init()
 
 def gff3_from_fasta(fasta_file):
     f = pybio.data.Fasta(fasta_file)

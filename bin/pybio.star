@@ -19,7 +19,7 @@ echo "--outReadsUnmapped Fastx"
 echo "--runThreadN ${cpu}"
 echo "--outFilterMatchNminOverLread ${minlen}"
 echo "--outFilterScoreMinOverLread ${minlen}"
-echo "--readFilesCommand bunzip2"
+echo "--readFilesCommand gunzip"
 echo "-c --alignIntronMin ${intron_min} --alignIntronMax ${intron_max}"
 
 # https://groups.google.com/forum/#!topic/rna-star/7RwKkvNLmI4
