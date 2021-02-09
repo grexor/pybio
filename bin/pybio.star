@@ -24,7 +24,7 @@ echo "-c --alignIntronMin ${intron_min} --alignIntronMax ${intron_max}"
 
 # https://groups.google.com/forum/#!topic/rna-star/7RwKkvNLmI4
 # --genomeLoad LoadAndRemove
-STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --runThreadN ${cpu} --outFilterMatchNminOverLread ${minlen} --outFilterScoreMinOverLread ${minlen} --readFilesCommand bunzip2 -c --alignIntronMin ${intron_min} --alignIntronMax ${intron_max}
+STAR --outFilterMultimapNmax 1 --genomeDir $2 --readFilesIn $3 --outReadsUnmapped Fastx --runThreadN ${cpu} --outFilterMatchNminOverLread ${minlen} --outFilterScoreMinOverLread ${minlen} --readFilesCommand gunzip -c --alignIntronMin ${intron_min} --alignIntronMax ${intron_max}
 
 mv Aligned.out.sam ${name}.sam
 mv Log.final.out ${name}.stats.txt
