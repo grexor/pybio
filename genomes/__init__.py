@@ -800,7 +800,7 @@ def seq_direct(genome, chr, strand, start, stop, flank="N", version=None):
     if start<0:
         seq = flank * abs(start)
     start = max(0, start) # start can only be non-negative
-    fname = os.path.join(pybio.path.root_folder, "genomes", "%s.assembly.%s" % (genome, version), "%s.string" % chr)
+    fname = os.path.join(pybio.path.genomes_folder, "%s.assembly.%s" % (genome, version), "%s.string" % chr)
     if not os.path.exists(fname):
         return ""
     f = open(fname, "rt")
