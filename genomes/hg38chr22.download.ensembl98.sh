@@ -23,6 +23,7 @@ cd hg38chr22.annotation.ensembl${eversion}
 export BM=`sed ':a;N;$!ba;s/\n/ /g' $sdir/hg38chr22.biomart.ensembl${eversion}.xml`
 wget -O hg38chr22.annotation.ensembl${eversion}.tab "http://www.ensembl.org/biomart/martservice?query=$BM"
 printf 'import pybio\npybio.genomes.prepare("hg38chr22", version="ensembl'${eversion}'")' | python3
+wget ftp://ftp.ensembl.org/pub/release-${eversion}/gtf/homo_sapiens/Homo_sapiens.GRCh38.${eversion}.chr.gtf.gz -O Homo_sapiens.GRCh38.${eversion}.chr.gtf.gz
 
 cd $gdir
 rm -r hg38chr22.assembly.ensembl${eversion}.star
