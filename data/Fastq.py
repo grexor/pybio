@@ -14,10 +14,10 @@ import bz2
 class Fastq:
 
     def read(self):
-        self.id = self.f.readline().decode().rstrip("\r").rstrip("\n")
-        self.sequence = self.f.readline().decode().rstrip("\r").rstrip("\n")
-        self.plus = self.f.readline().decode().rstrip("\r").rstrip("\n") # +
-        self.quality = self.f.readline().decode().rstrip("\r").rstrip("\n")
+        self.id = self.f.readline().rstrip("\r").rstrip("\n")
+        self.sequence = self.f.readline().rstrip("\r").rstrip("\n")
+        self.plus = self.f.readline().rstrip("\r").rstrip("\n") # +
+        self.quality = self.f.readline().rstrip("\r").rstrip("\n")
         self.uncut_sequence = self.sequence
         self.uncut_quality = self.quality
         self.count += 1
