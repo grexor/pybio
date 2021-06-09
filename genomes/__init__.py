@@ -40,6 +40,7 @@ def get_latest_version(species):
     sd["mar3"] = "ensembl47"
     sd["mar5"] = "custom"
     sd["hg38chr22"] = "ensembl98"
+    sd["cab3"] = "ensembl104"
     if sd.get(species, None)!=None:
         return sd[species]
     else:

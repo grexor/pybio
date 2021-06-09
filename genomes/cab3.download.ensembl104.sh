@@ -13,7 +13,6 @@ cd $gdir
 rm -r cab3.assembly.ensembl${eversion}
 mkdir cab3.assembly.ensembl${eversion}
 cd cab3.assembly.ensembl${eversion}
-http://ftp.ensembl.org/pub/release-104/fasta/equus_caballus/dna/Equus_caballus.EquCab3.0.dna.toplevel.fa.gz
 wget ftp://ftp.ensembl.org/pub/release-${eversion}/fasta/equus_caballus/dna/Equus_caballus.EquCab3.0.dna.toplevel.fa.gz -O cab3.fasta.gz
 gunzip -f cab3.fasta.gz
 printf 'import pybio\npybio.data.Fasta("cab3.fasta").split()' | python3
@@ -26,7 +25,6 @@ wget -O cab3.annotation.ensembl${eversion}.tab "http://www.ensembl.org/biomart/m
 printf 'import pybio\npybio.genomes.prepare("cab3", version="ensembl'${eversion}'")' | python3
 
 # https://www.biostars.org/p/279235/#279238
-http://ftp.ensembl.org/pub/release-104/gtf/equus_caballus/Equus_caballus.EquCab3.0.104.gtf.gz
 wget ftp://ftp.ensembl.org/pub/release-${eversion}/gtf/equus_caballus/Equus_caballus.EquCab3.0.${eversion}.gtf.gz -O cab3.${eversion}.chr.gtf.gz
 gunzip -f cab3.${eversion}.chr.gtf.gz # file must be unzipped for STAR to consider it
 
