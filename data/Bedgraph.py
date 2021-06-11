@@ -72,11 +72,12 @@ class Bedgraph():
                     self.add_value(chr, strand, pos, cDNA)
                     self.total_raw += cDNA
 
-    def load(self, filename, track_id=None, meta=None, fixed_cDNA=False, compute_cpm=True, genome="ensembl", fast=False, force_strand=None, min_cDNA=0):
+    def load(self, filename, track_id=None, meta=None, fixed_cDNA=False, compute_cpm=True, genome="ensembl", fast=False, force_strand=None, min_cDNA=0, silent=True):
         """
         Load Bedgraph file (can also be gzipped). A Bedgraph object load method can be called multiple times on various files, the content is added up.
         """
-        print("loading: %s" % filename)
+        if not silent:
+            print("loading: %s" % filename)
         self.filename = filename
 
         if track_id==None:
@@ -142,13 +143,14 @@ class Bedgraph():
                     cpm = raw / float(self.total_raw) * 1e6
                     self.add_value(chr, strand, pos, cpm, db="cpm")
 
-    def save(self, filename, db_save="raw", min_raw=0, min_support=0, min_cpm=0, filetype="bed", genome="ensembl", track_id=None, without_track=False):
+    def save(self, filename, db_save="raw", min_raw=0, min_support=0, min_cpm=0, filetype="bed", genome="ensembl", track_id=None, without_track=False, silent=True):
         # IF genome != "ensembl", convert chromosome names to UCSC
         # Get positions from db_source, check min_raw agains db_source
         # Save raw value from db_save
         # Usually db_source and db_save are the same
         self.filename = filename # set the new filename
-        print("save : {filename}, format : {filetype}".format(filename=filename, filetype=filetype))
+        if not silent:
+            print("save : {filename}, format : {filetype}".format(filename=filename, filetype=filetype))
         if track_id!=None:
             self.track_id = track_id
         else:
@@ -289,7 +291,7 @@ class Bedgraph():
             vector.append(data.get(chr, {}).get(strand, {}).get(i, 0))
         return vector
 
-    def cluster(self, region_up=150, region_down=150):
+    def cluster(self, region_up=150, region_down=150, silent=True):
         # go down position list: highly expressed -> lowly expressed
         # sum [region_up, region_down] and assign to main position
         """
@@ -297,7 +299,8 @@ class Bedgraph():
         """
         for chr, strand_data in self.raw.items():
             for strand, pos_data in strand_data.items():
-                print("clustering : {chr} {strand}".format(chr=chr, strand=strand))
+                if not silent:
+                    print("clustering : {chr} {strand}".format(chr=chr, strand=strand))
                 offset_up, offset_down = region_up, region_down
                 if strand=="-":
                     offset_up, offset_down = offset_down, offset_up
@@ -318,7 +321,7 @@ class Bedgraph():
 
                 self.raw[chr][strand] = temp_raw
 
-    def filter(self, min_distance=125):
+    def filter(self, min_distance=125, silent=True):
         # filter on raw data
         # sort positions and go down the list
         # only keep positions that are min_distance apart (don't sum anything)
@@ -327,7 +330,8 @@ class Bedgraph():
         """
         for chr, strand_data in self.raw.items():
             for strand, pos_data in strand_data.items():
-                print("filtering: {strand}{chr} (min distance = {min_distance} nt)".format(strand=strand, chr=chr, min_distance=min_distance))
+                if not silent:
+                    print("filtering: {strand}{chr} (min distance = {min_distance} nt)".format(strand=strand, chr=chr, min_distance=min_distance))
                 mp = 1 if strand=="+" else -1 # if same value, take downstream position first
                 positions = [(raw, mp*pos, pos) for pos, raw in pos_data.items()]
                 positions = sorted(positions, reverse=True)
