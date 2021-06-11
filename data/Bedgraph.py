@@ -193,13 +193,13 @@ class Bedgraph():
                             else:
                                 row = [chr_str, str(pos), str(pos+1)]
                             if type(val)==float:
-                                row.append("%s%.2f" % (strand_str, val))
+                                row.append("%s%.5f" % (strand_str, val))
                             else:
                                 row.append("%s%s" % (strand_str, val))
                         if filetype=="complete":
                             for mtype, mvalue in meta.items():
                                 meta[mtype] = "%.2f" % meta[mtype]
-                            row = [chr_str, strand, str(pos), str(raw), "%.2f" % cpm, str(support), json.dumps(meta)]
+                            row = [chr_str, strand, str(pos), str(raw), "%.5f" % cpm, str(support), json.dumps(meta)]
                         f_out.write("\t".join(row)+"\n")
         if not_converted>0:
             print("{not_converted} not converted during save".format(not_converted=not_converted))
