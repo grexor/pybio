@@ -66,6 +66,8 @@ class Bedgraph():
                         for i in range(len(vector)):
                             if vector[i]>0:
                                 min_stop = min(min_stop, i/2)
+                        min_start = int(min_start)
+                        min_stop = int(min_stop)
                         cDNA = bg_source.get_region(chr, strand, pos, start=min_start, stop=min_stop, db = db_source)
                     else: # else do not readjust intervals
                         cDNA = bg_source.get_region(chr, strand, pos, start=start, stop=stop, db = db_source)
