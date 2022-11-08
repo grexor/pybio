@@ -33,6 +33,7 @@ def get_latest_version(species):
     sd["mm10"] = "ensembl104"
     sd["hg19"] = "ensembl75"
     sd["hg38"] = "ensembl104"
+    sd["hg38"] = "refseq"
     sd["rn6"] = "ensembl91"
     sd["PR8"] = ""
     sd["SC35M"] = ""
@@ -81,11 +82,11 @@ def load(species, version=None, force=False):
 
     if genes.get(species, None)!=None and not force: # already loaded?
         return
-    print("{species}: loading genome".format(species=species))
     if version==None:
         version = get_latest_version(species)
 
     genes_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "genes.json")
+    print("{species}: loading genome from file {fname}".format(species=species, fname=genes_filename))
     genes[species] = json.loads(open(genes_filename).read())
     intervals_filename = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version), "intervals.json")
     intervals[species] = json.loads(open(intervals_filename).read())
@@ -732,8 +733,18 @@ def find_linear(genome_linear, pos):
     index = bisect.bisect_left(genome_linear, (pos, ))
     in_gene = False
     gene_id = None
+    # todo / check: because of missing blockA some annotations were missing
+    # block A
+    try:
+        if (genome_linear[index][0]<=pos<=genome_linear[index][1]):
+            gene_id = genome_linear[index][3]
+            return index, gene_id
+    except:
+        pass
+    # end of block A
     if (genome_linear[index-1][0]<=pos<=genome_linear[index-1][1]):
         gene_id = genome_linear[index-1][3]
+        return index-1, gene_id
     return index-1, gene_id
 
 def find_left_linear(genome_linear, index):
