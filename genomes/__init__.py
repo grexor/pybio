@@ -501,6 +501,8 @@ def prepare_gtf(species="hg19", version=None):
         geneD.setdefault("utr3", [])
         geneD.setdefault("exons", [])
         geneD["gene_name"] = data.get("gene_name", gene_aliases.get(gene_id, ""))
+        if geneD["gene_name"]=="":
+            geneD["gene_name"] = data.get("gene_symbol", "")
         geneD["gene_biotype"] = biotype
         geneD["gene_length"] = geneD["gene_stop"] - geneD["gene_start"] + 1
         exons = geneD.get("exons")
