@@ -657,26 +657,15 @@ def prepare_gtf(species="hg19", version=None):
         linear[key] = chrstrand
     f.write(json.dumps(linear))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def annotate(species, chr, strand, pos, extension = 0):
+def annotate(species, chr, strand, pos, extension = 0, version=None):
     """
     | Annotates given genomic position.
     | Returns triple (upstream_gene, position_gene, downstream_gene).
     """
-    load(species)
+    if version!=None:
+        load(species, version=version) # load specific version of the given genome
+    else:
+        load(species) # load default version for the given genome
     chrstrand = "%s:%s" % (chr, strand)
     genome_linear = linear[species].get(chrstrand, None)
     if genome_linear==None: # no genes on this chrstrand

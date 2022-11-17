@@ -1,0 +1,6 @@
+1	test	exon	1	100	.	+	.	gene_id "gene1"; transcript_id "transcript1_1"; exon_number "1"; gene_name "gene1"; gene_biotype "protein_coding"; exon_id "exon1_1";
+1	test	exon	200	300	.	+	.	gene_id "gene1"; transcript_id "transcript1_1"; exon_number "2"; gene_name "gene1"; gene_biotype "protein_coding"; exon_id "exon1_2";
+1	test	exon	400	500	.	+	.	gene_id "gene1"; transcript_id "transcript1_1"; exon_number "3"; gene_name "gene1"; gene_biotype "protein_coding"; exon_id "exon1_3";
+1	test	exon	1000	1100	.	+	.	gene_id "gene2"; transcript_id "transcript2_1"; exon_number "1"; gene_name "gene2"; gene_biotype "protein_coding"; exon_id "exon2_1";
+1	test	exon	1200	1300	.	+	.	gene_id "gene2"; transcript_id "transcript2_1"; exon_number "2"; gene_name "gene2"; gene_biotype "protein_coding"; exon_id "exon2_2";
+1	test	exon	1400	1500	.	+	.	gene_id "gene2"; transcript_id "transcript2_1"; exon_number "3"; gene_name "gene2"; gene_biotype "protein_coding"; exon_id "exon2_3";
