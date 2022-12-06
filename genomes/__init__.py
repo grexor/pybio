@@ -414,14 +414,10 @@ def prepare(species="hg19", version=None):
     f.write(json.dumps(linear))
 
 
-
-
-"""
-Prepare from GTF
-"""
-
 def prepare_gtf(species="hg19", version=None):
-
+    """
+    Prepare from GTF
+    """
     if version==None:
         version = get_latest_version(species)
 
@@ -674,6 +670,10 @@ def annotate(species, chr, strand, pos, extension = 0, version=None):
     if gene_id!=None:
         _, gid_up = find_left_linear(genome_linear, closest_index)
         _, gid_down = find_right_linear(genome_linear, closest_index)
+        if gid_up==gene_id:
+            gid_up = None
+        if gid_down==gene_id:
+            gid_down = None
         interval = (genome_linear[closest_index][0], genome_linear[closest_index][1], genome_linear[closest_index][2]) # convert linear (start, stop, i/o, gene_id) to (start, stop, i/o)
         if strand=="+":
             return (gid_up, gene_id, gid_down, interval, find_feature_type(species, gene_id, interval[2], pos))
@@ -868,4 +868,12 @@ def make_motifs_nr(motif_size):
 
 def ensembl_species():
     #https://rest.ensembl.org/info/species?content-type=application/json
+    return True
+
+def prepare_fasta(fname, species="hg38", version="latest"):
+    assembly_folder = os.path.join(pybio.path.genomes_folder, f"{species}.assembly.{version}")
+    print(f"[pybio] generating genome folder {assembly_folder}")
+    os.makedirs(assembly_folder, exist_ok=True)
+    os.system(f"cp {fname} {assembly_folder}/{species}.fasta")
+    pybio.data.Fasta(f"{assembly_folder}/{species}.fasta").split()
     return True

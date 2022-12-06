@@ -56,7 +56,12 @@ class Fasta:
         Splits FASTA file
         """
         while self.read():
+            folder_name = os.path.dirname(self.fname)
             seq_id = self.id.split(" ")[0] # take everything until first space
-            fout = open("%s.string" % seq_id, "wt")
+            print(f"[pybio] splitting fasta file {self.fname}, sequence {seq_id}")
+            if folder_name!="":
+                fout = open(f"{folder_name}/%s.string" % seq_id, "wt")
+            else:
+                fout = open("%s.string" % seq_id, "wt")
             fout.write(self.sequence)
             fout.close()
