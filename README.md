@@ -1,6 +1,11 @@
 ## pybio: basic genomics toolset
 
-* [About](#about)
+pybio is a Python 3 framework for basic genomics/transcriptomics operations/annotations. The package is a dependency to [apa](https://github.com/grexor/apa) (alternative polyadenylation) and [RNAmotifs2](https://github.com/grexor/rnamotifs2) (motif cluster analysis). The pybio package provides:
+
+Features include automagical genome assemblies+annotation download and indexing from Ensembl and STAR, support of Fasta, Fastq, bedGraph and other file formats, motif sequence searches, and specific APA feautes like alternative polyadenylation site-pair classification (same-exon, skipped-exon, composite-exon) and more.
+
+## Contents
+
 * [Installation](#installation)
 * [Documentation](#documentation)
   * [Downloading Ensembl genomes](#downloading-Ensembl-genomes)
@@ -12,20 +17,11 @@
 * [Authors](#authors)
 * [Reporting problems](#reporting-problems)
 
-### About
-
-pybio is a Python 3 framework for basic genomics/transcriptomics operations/annotations. The package is a dependency to [apa](https://github.com/grexor/apa) (alternative polyadenylation) and [RNAmotifs2](https://github.com/grexor/rnamotifs2) (motif cluster analysis). The pybio package provides:
-
-+ automatized download of genome assemblies from Ensembl and STAR indexing,
-+ automatized download of genome annotations from Ensembl GTF with fast-searching capabilities,
-+ Fasta, Fastq, bedGraph and other file format handling,
-+ motif sequence searches,
-+ alternative polyadenylation site-pair classification (same-exon, skipped-exon, composite-exon),
-+ and other.
-
 ### Installation
 
-A few steps of how to download and setup `pybio`.
+20221218: pip package in preparation, [https://pypi.org/project/pybio](https://pypi.org/project/pybio).
+
+Current installation instructions below:
 
 #### Clone the GitHub repository
 
