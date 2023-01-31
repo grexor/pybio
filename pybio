@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import argparse
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+version = "0.3"
+
+parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument('commands', help="which command to run?", nargs='*')
+parser.add_argument("-fdr", "--fdr", help="FDR threshold, default no filter", default=None, type=float)
+parser.add_argument("-logFC", "--logFC", help="logFC threshold, default=None (do not use as filter)", default=None, type=float)
+parser.add_argument("-dpfi", "--dpfi", help="delta(percentage feature inclusion) threshold, default=None (do not use as filter)", default=None, type=float)
+parser.add_argument("-version", "--version", help="Print version", action="store_true")
+args = parser.parse_args()
+
+if args.version:
+    print(f"pybio v{version}, https://github.com/grexor/pybio")
+    print("---")
+
+if len(args.commands)>0:
+    if args.commands[0]=="annotate":
+        print("pybio annotate")
