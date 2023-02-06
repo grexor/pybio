@@ -7,6 +7,7 @@ Features include automagical genome assemblies+annotation download and indexing 
 ## Contents
 
 * [Installation](#installation)
+* [Quick Start](#quickstart)
 * [Documentation](#documentation)
   * [Downloading Ensembl genomes](#downloading-Ensembl-genomes)
   * [Retrieving genomic sequence](#retrieving-genomic-sequence)
@@ -47,6 +48,10 @@ There are a few software tools pybio depends on:
 * [numpy](https://numpy.org/), `sudo apt-get install python-numpy`
 * [Salmon](https://combine-lab.github.io/salmon/getting_started/), download and install from Salmon webpage
 * [samtools](http://www.htslib.org), `sudo apt-get install samtools`
+
+### Quick Start
+
+In progress
 
 ### Documentation
 
