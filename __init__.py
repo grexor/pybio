@@ -15,6 +15,7 @@ import pybio.genomes
 import pybio.maths
 import pybio.config
 import pybio.sequence
+import pybio.core
 import os
 
 # initialize path module
