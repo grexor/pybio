@@ -7,13 +7,14 @@ declare -A ensembl_longB=( ["hg38"]="Homo_sapiens")
 declare -A ensembl_longC=( ["hg38"]="GRCh38")
 
 sdir=`realpath .`
-gdir=$3
+gdir=${3}
+echo $gdir
 if [ -z "$gdir" ]
 then
   gdir=`realpath .`
 else
   mkdir -p $gdir
-  gdir=`realpath $1`
+  gdir=`realpath ${3}`
 fi
 
 cd $gdir
