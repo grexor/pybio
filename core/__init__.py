@@ -5,6 +5,12 @@ import psutil
 import math
 import pickle
 
+genes_db = {}
+transcripts_db = {}
+exons_db = {}
+gene_bins_db = {}
+gene_bin_size = 100000
+
 process = psutil.Process(os.getpid())
 
 class Gene:
@@ -26,10 +32,8 @@ class Transcript:
     self.gene = genes_db[gene_id]
     self.start = int(start)-1
     self.stop = int(stop)-1
-    self.utr3_start = 0
-    self.utr3_stop = 0
-    self.utr5_start = 0
-    self.utr5_stop = 0
+    self.utr3 = None
+    self.utr5 = None
     self.exons = set()
     self.gene.transcripts.add(self)
 
@@ -42,11 +46,21 @@ class Exon:
     self.stop = int(stop)-1
     self.transcript.exons.add(self)
 
-genes_db = {}
-transcripts_db = {}
-exons_db = {}
-gene_bins_db = {}
-gene_bin_size = 100000
+class Utr3:
+
+  def __init__(self, transcript_id, start, stop):
+    self.transcript = transcripts_db[transcript_id]
+    self.start = int(start)-1
+    self.stop = int(stop)-1
+    self.transcript.utr3 = self
+
+class Utr5:
+
+  def __init__(self, transcript_id, start, stop):
+    self.transcript = transcripts_db[transcript_id]
+    self.start = int(start)-1
+    self.stop = int(stop)-1
+    self.transcript.utr5 = self
 
 def load():
     global gene_bins_db
@@ -58,7 +72,7 @@ def load():
     gene_bins_db = pickle.load(open("gene_bins_db.pickle", "rb"))
     print("[pybio] reading genes_db.pickle")
     genes_db = pickle.load(open("genes_db.pickle", "rb"))
-    
+
     """
     print("[pybio] reading transcripts_db.pickle")
     #transcripts_db = pickle.load(open("transcripts_db.pickle", "rb"))
@@ -70,8 +84,10 @@ def annotate(chr, strand, pos):
     genes = set()
     transcripts = set()
     exons = set()
+    utr3 = set()
+    utr5 = set()
     gene_bin = math.floor(pos/gene_bin_size)
-    gene_list = gene_bins_db[chr][gene_bin]
+    gene_list = gene_bins_db[chr].get(gene_bin, set())
     for gene_id in gene_list:
         gene = genes_db[gene_id]
         if gene.start<=pos<=gene.stop and gene.chr==chr and gene.strand==strand:
@@ -79,10 +95,16 @@ def annotate(chr, strand, pos):
             for transcript in gene.transcripts:
                 if transcript.start<=pos<=transcript.stop:
                     transcripts.add(transcript)
+                    if transcript.utr3!=None:
+                        if transcript.utr3.start<=pos<=transcript.utr3.stop:
+                            utr3.add(transcript.utr3)
+                    if transcript.utr5!=None:
+                        if transcript.utr5.start<=pos<=transcript.utr5.stop:
+                            utr5.add(transcript.utr5)
                     for exon in transcript.exons:
                         if exon.start<=pos<=exon.stop:
                             exons.add(exon)       
-    return list(genes), list(transcripts), list(exons)
+    return list(genes), list(transcripts), list(exons), list(utr3), list(utr5)
 
 def prepare():
     chr_list = set()
@@ -122,19 +144,15 @@ def prepare():
             exon = Exon(atts["exon_id"], atts["transcript_id"], data["start"], data["stop"])
             exons_db[atts["exon_id"]] = exon
         if data["feature"] == "three_prime_utr":
-            transcript = transcripts_db[atts["transcript_id"]]
-            transcript.utr3_start = int(data["start"])-1
-            transcript.utr3_stop = int(data["stop"])-1
+            utr3 = Utr3(atts["transcript_id"], data["start"], data["stop"])
         if data["feature"] == "five_prime_utr":
-            transcript = transcripts_db[atts["transcript_id"]]
-            transcript.utr5_start = int(data["start"])-1
-            transcript.utr5_stop = int(data["stop"])-1
+            utr5 = Utr5(atts["transcript_id"], data["start"], data["stop"])
         r = f.readline()
         clines += 1
         if clines%100000==0:
             print("%.2f M lines parsed, RAM GB used: %.3f" % (clines/1000000.0, process.memory_info().rss/1000000000))
-            pickle.dump(gene_bins_db, open("gene_bins_db.pickle", "wb"))
     f.close()
+    pickle.dump(gene_bins_db, open("gene_bins_db.pickle", "wb"))
 
     print("#exons = ", len(exons_db.keys()))
     print("#transcripts = ", len(transcripts_db.keys()))
@@ -145,11 +163,84 @@ def prepare():
     pickle.dump(transcripts_db, open("transcripts_db.pickle", "wb"))
     pickle.dump(genes_db, open("genes_db.pickle", "wb"))
 
-# BRCA2
-# Chromosome 13: 32315086 - 32400268 
+def test():
+    load()
+    chr_list = set()
+    gtf_fields = ["chr", "source", "feature", "start", "stop", "a1", "strand", "a2", "atts"]
+
+    f = gzip.open("/projects/site/pred/spliceosome/pybio/genomes/hg38.annotation.ensembl109/Homo_sapiens.GRCh38.109.chr.gtf.gz", "rt")
+    clines = 0
+    r = f.readline()
+    while r:
+        r = r.replace("\r", "").replace("\n", "").split("\t")
+        if r[0].startswith("#"):
+            r = f.readline()
+            continue
+        data = dict(zip(gtf_fields, r))
+        atts = {}
+        temp = data["atts"].split("; ")
+        for el in temp:
+            el1, el2 = el.split(" ")[0], " ".join(el.split(" ")[1:])
+            atts[el1] = el2[1:-1]
+        if data["feature"] == "gene":
+            gene_len = round((int(data["stop"])-int(data["start"]))/1000)
+            if gene_len<2: # test short genes only
+                print("test gene", data["chr"], data["strand"], atts["gene_id"], str(gene_len) + "K")
+                # positive test
+                for pos in range(int(data["start"])-1, int(data["stop"])):
+                    genes, _, _, _, _ = annotate(data["chr"], data["strand"], pos)
+                    genes = [gene.gene_id for gene in genes]
+                    assert(atts["gene_id"] in genes)
+                # negative test
+                for pos in range(int(data["start"])-100, int(data["start"])-1):
+                    genes, _, _, _, _ = annotate(data["chr"], data["strand"], pos)
+                    genes = [gene.gene_id for gene in genes]
+                    assert(atts["gene_id"] not in genes)
+                # negative test
+                for pos in range(int(data["stop"]), int(data["stop"])+100):
+                    genes, _, _, _, _ = annotate(data["chr"], data["strand"], pos)
+                    genes = [gene.gene_id for gene in genes]
+                    assert(atts["gene_id"] not in genes)
+        if data["feature"] == "transcript":
+            transcript_len = round((int(data["stop"])-int(data["start"]))/1000)
+            if transcript_len<=2:
+                print("test transcript", data["chr"], data["strand"], atts["transcript_id"], str(transcript_len) + "K")
+                # positive test
+                for pos in range(int(data["start"])-1, int(data["stop"])):
+                    _, transcripts, _, _, _ = annotate(data["chr"], data["strand"], pos)
+                    transcripts = [transcript.transcript_id for transcript in transcripts]
+                    assert(atts["transcript_id"] in transcripts)
+                # negative test
+                for pos in range(int(data["start"])-100, int(data["start"])-1):
+                    _, transcripts, _, _, _ = annotate(data["chr"], data["strand"], pos)
+                    transcripts = [transcript.transcript_id for transcript in transcripts]
+                    assert(atts["transcript_id"] not in transcripts)
+                # negative test
+                for pos in range(int(data["stop"]), int(data["stop"])+100):
+                    _, transcripts, _, _, _ = annotate(data["chr"], data["strand"], pos)
+                    transcripts = [transcript.transcript_id for transcript in transcripts]
+                    assert(atts["transcript_id"] not in transcripts)
+        if data["feature"] == "exon":
+            exon_len = round((int(data["stop"])-int(data["start"]))/1000)
+            if exon_len<=2:
+                print("test exon", data["chr"], data["strand"], atts["exon_id"], str(exon_len) + "K")
+                # positive test
+                for pos in range(int(data["start"])-1, int(data["stop"])):
+                    _, _, exons, _, _ = annotate(data["chr"], data["strand"], pos)
+                    exons = [exon.exon_id for exon in exons]
+                    assert(atts["exon_id"] in exons)
+                # negative test
+                for pos in range(int(data["start"])-100, int(data["start"])-1):
+                    _, _, exons, _, _ = annotate(data["chr"], data["strand"], pos)
+                    exons = [exon.exon_id for exon in exons]
+                    assert(atts["exon_id"] not in exons)
+                # negative test
+                for pos in range(int(data["stop"]), int(data["stop"])+100):
+                    _, _, exons, _, _ = annotate(data["chr"], data["strand"], pos)
+                    exons = [exon.exon_id for exon in exons]
+                    assert(atts["exon_id"] not in exons)
+        r = f.readline()
+    f.close()
 
 #prepare()
-
-load()
-for pos in range(32315086, 32315086+1000000):
-    genes, transcripts, exons = annotate("13", "-", pos)
+test()
