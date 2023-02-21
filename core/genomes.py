@@ -10,6 +10,7 @@ import copy
 import gzip
 import psutil
 import pickle
+import math
 
 process = psutil.Process(os.getpid())
 
@@ -24,6 +25,11 @@ revCode = {'A': 'T', 'T': 'A', 'U': 'A', 'G': 'C', 'C': 'G', 'R': 'Y', 'Y': 'R',
 revCodeRYSW = {'R' : 'Y', 'Y' : 'R', 'S' : 'S', 'W' : 'W'}
 chr_uscs_ensembl = {}
 chr_ensembl_ucsc = {}
+
+# ensembl names
+ensembl_longA = {"hg38":"homo_sapiens"}
+ensembl_longB = {"hg38":"Homo_sapiens"}
+ensembl_longC = {"hg38":"GRCh38"}
 
 # load existing annotations
 genes = {}
@@ -110,13 +116,20 @@ def prepare(species="hg38", version=None):
     if version==None:
         version = get_latest_version(species)
     print("[pybio] {species}: processing annotation".format(species=species))
-    annotation_folder = os.path.join(pybio.path.genomes_folder, "%s.annotation.%s" % (species, version))
-    f_log = open(os.path.join(annotation_folder, "log.txt"), "wt")
-    chrs_list = pybio.genomes.chr_list(species, version)
 
+    annotation_folder = os.path.join(pybio.config.genomes_folder, "%s.annotation.ensembl%s" % (species, version))
     chr_list = set()
     gtf_fields = ["chr", "source", "feature", "start", "stop", "a1", "strand", "a2", "atts"]
-    f = gzip.open(os.path.join(annotation_folder, "Homo_sapiens.GRCh38.109.chr.gtf.gz"), "rt")
+
+    gtf_files = glob.glob(os.path.join(annotation_folder, "*.gtf.gz"))
+    if len(gtf_files)==0:
+        gtf_files = glob.glob(os.path.join(annotation_folder, "*.gtf"))
+    gtf_fname = gtf_files[0]
+    if gtf_fname.endswith(".gz"):
+        f = gzip.open(gtf_fname, "rt")
+    else:
+        f = open(gtf_fname, "rt")
+
     clines = 0
     r = f.readline()
     while r:
@@ -165,9 +178,9 @@ def prepare(species="hg38", version=None):
     print("#genes = ", len(genes_db.keys()))
     print("chromosome list = ", "; ".join(list(chr_list)))
 
-    pickle.dump(exons_db, open("exons_db.pickle", "wb"))
-    pickle.dump(transcripts_db, open("transcripts_db.pickle", "wb"))
-    pickle.dump(genes_db, open("genes_db.pickle", "wb"))
+    pickle.dump(exons_db, open(os.path.join(annotation_folder, "exons_db.pickle"), "wb"))
+    pickle.dump(transcripts_db, open(os.path.join(annotation_folder, "transcripts_db.pickle"), "wb"))
+    pickle.dump(genes_db, open(os.path.join(annotation_folder, "genes_db.pickle"), "wb"))
 
 def genomes_list(version="ensembl90"):
     genomes = glob.glob(os.path.join(pybio.path.genomes_folder, "*.assembly.%s" % version))
@@ -999,3 +1012,36 @@ def prepare_fasta(fname, species="hg38", version="latest"):
     os.system(f"cp {fname} {assembly_folder}/{species}.fasta")
     pybio.data.Fasta(f"{assembly_folder}/{species}.fasta").split()
     return True
+
+def download(species="hg38", ensembl_version=None):
+    if ensembl_version==None:
+        return False
+    script = """
+cd {gdir}
+rm  {species}.assembly.ensembl{ensembl_version}/*
+mkdir {species}.assembly.ensembl{ensembl_version}
+cd {species}.assembly.ensembl{ensembl_version}
+wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{ensembl_version_A}/dna/{ensembl_version_B}.{ensembl_version_C}.dna.primary_assembly.fa.gz -O {species}.fasta.gz
+gunzip -f {species}.fasta.gz
+python3 -c "import pybio; pybio.data.Fasta('{species}.fasta').split()"
+
+cd ..
+mkdir {species}.annotation.ensembl{ensembl_version}
+cd {species}.annotation.ensembl{ensembl_version}
+# https://www.biostars.org/p/279235/#279238
+wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/gtf/{ensembl_version_A}/{ensembl_version_B}.{ensembl_version_C}.{ensembl_version}.chr.gtf.gz -O {ensembl_version_B}.{ensembl_version_C}.{ensembl_version}.chr.gtf.gz
+gunzip -f {ensembl_version_B}.{ensembl_version_C}.{ensembl_version}.chr.gtf.gz # file must be unzipped for STAR to consider it
+"""
+
+    command = script.format(gdir=pybio.config.genomes_folder, species=species, ensembl_version=ensembl_version, ensembl_version_A=ensembl_longA[species], ensembl_version_B=ensembl_longB[species], ensembl_version_C=ensembl_longC[species])
+    os.system(command)
+
+def star_index(species="hg38", ensembl_version=None):
+    script = """
+cd {gdir}
+rm {species}.assembly.ensembl{ensembl_version}.star/*
+mkdir {species}.assembly.ensembl{ensembl_version}.star
+STAR --runMode genomeGenerate --genomeDir {species}.assembly.ensembl{ensembl_version}.star --genomeFastaFiles {species}.assembly.ensembl{ensembl_version}/{species}.fasta --runThreadN 4 --sjdbGTFfile {species}.annotation.ensembl{ensembl_version}/{ensembl_version_B}.{ensembl_version_C}.{ensembl_version}.chr.gtf
+"""
+    command = script.format(gdir=pybio.config.genomes_folder, species=species, ensembl_version=ensembl_version, ensembl_version_B=ensembl_longB[species], ensembl_version_C=ensembl_longC[species])
+    os.system(command)

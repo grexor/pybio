@@ -5,6 +5,8 @@ import sys
 import argparse
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pybio
+import pybio.core
 
 version = "0.3"
 
@@ -21,5 +23,31 @@ if args.version:
     print("---")
 
 if len(args.commands)>0:
+
     if args.commands[0]=="annotate":
         print("pybio annotate")
+
+    if args.commands[0]=="ensembl":
+        print("pybio ensembl")
+        species = args.commands[1]
+        ensembl_version = args.commands[2]
+        pybio.core.genomes.download(species, ensembl_version)
+        pybio.core.genomes.prepare(species, ensembl_version)
+        pybio.core.genomes.star_index(species, ensembl_version)
+
+"""
+        cd $gdir
+        rm -r ${species}.assembly.ensembl${eversion}.star
+        mkdir ${species}.assembly.ensembl${eversion}.star
+        STAR --runMode genomeGenerate --genomeDir ${species}.assembly.ensembl${eversion}.star --genomeFastaFiles ${species}.assembly.ensembl${eversion}/${species}.fasta --runThreadN 4 --sjdbGTFfile ${species}.annotation.ensembl${eversion}/${ensembl_longB[hg38]}.${ensembl_longC[hg38]}.${eversion}.chr.gtf
+
+        gzip -f ${species}.annotation.ensembl${eversion}/${ensembl_longB[hg38]}.${ensembl_longC[hg38]}.${eversion}.chr.gtf # to save space
+
+        rm -r ${species}.transcripts.ensembl${eversion}
+        mkdir ${species}.transcripts.ensembl${eversion}
+        cd ${species}.transcripts.ensembl${eversion}
+        wget ftp://ftp.ensembl.org/pub/release-${eversion}/fasta/${ensembl_longA[hg38]}/cdna/${ensembl_longB[hg38]}.${ensembl_longC[hg38]}.cdna.all.fa.gz
+
+        cd $gdir
+        salmon index -t ${species}.transcripts.ensembl${eversion}/${ensembl_longB[hg38]}.${ensembl_longC[hg38]}.cdna.all.fa.gz -i ${species}.transcripts.ensembl${eversion}.salmon
+"""
