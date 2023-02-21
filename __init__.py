@@ -21,6 +21,7 @@ import os
 # initialize path module
 pybio.config.init()
 pybio.path.init()
+pybio.core.genomes.init()
 
 #pybio.genomes.init()
 

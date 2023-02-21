@@ -30,10 +30,14 @@ if len(args.commands)>0:
     if args.commands[0]=="ensembl":
         print("pybio ensembl")
         species = args.commands[1]
-        ensembl_version = args.commands[2]
-        pybio.core.genomes.download(species, ensembl_version)
+        try:
+            ensembl_version = args.commands[2]
+        except:
+            ensembl_version = pybio.config.ensembl_latest_version
+        #pybio.core.genomes.download(species, ensembl_version)
         pybio.core.genomes.prepare(species, ensembl_version)
-        pybio.core.genomes.star_index(species, ensembl_version)
+        #pybio.core.genomes.star_index(species, ensembl_version)
+        #pybio.core.genomes.salmon_index(species, ensembl_version)
 
 """
         cd $gdir

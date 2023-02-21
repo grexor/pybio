@@ -19,6 +19,7 @@ transcripts_db = {}
 exons_db = {}
 gene_bins_db = {}
 gene_bin_size = 100000
+species_db = {}
 
 code = {"R": ["A", "G"], "Y": ["C", "T"], "S": ["G", "C"], "W": ["A", "T"]}
 revCode = {'A': 'T', 'T': 'A', 'U': 'A', 'G': 'C', 'C': 'G', 'R': 'Y', 'Y': 'R', 'K': 'M', 'M': 'K', 'S': 'S', 'W': 'W', 'B': 'V', 'D': 'H', 'H': 'D', 'V': 'B', 'N': 'N'}
@@ -86,7 +87,19 @@ class Utr5:
     self.transcript.utr5 = self
 
 def init():
-    load_chr_ucsc_ensembl()
+    #load_chr_ucsc_ensembl()
+    ensembl_species_fname = os.path.join(pybio.config.genomes_folder, "ensembl_species.tab")
+    if not os.path.exists(ensembl_species_fname):
+        pybio.core.genomes.list_species()
+    f = open(os.path.join(pybio.config.genomes_folder, "ensembl_species.tab"), "rt")
+    header = f.readline().replace("\r", "").replace("\n", "").split("\t")
+    r = f.readline()
+    while r:
+        r = r.replace("\r", "").replace("\n", "").split("\t")
+        data = dict(zip(header, r))
+        species_db[data["species"]] = {"assembly": data["assembly"]}
+        r = f.readline()
+    f.close()
 
 def get_latest_version(species):
     sd = {}
@@ -1013,15 +1026,17 @@ def prepare_fasta(fname, species="hg38", version="latest"):
     pybio.data.Fasta(f"{assembly_folder}/{species}.fasta").split()
     return True
 
-def download(species="hg38", ensembl_version=None):
+def download(species="homo_sapiens", ensembl_version=None):
     if ensembl_version==None:
         return False
+    species_capital = species.capitalize()
+    assembly = species_db[species]["assembly"]
     script = """
 cd {gdir}
 rm  {species}.assembly.ensembl{ensembl_version}/*
 mkdir {species}.assembly.ensembl{ensembl_version}
 cd {species}.assembly.ensembl{ensembl_version}
-wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{ensembl_version_A}/dna/{ensembl_version_B}.{ensembl_version_C}.dna.primary_assembly.fa.gz -O {species}.fasta.gz
+wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.toplevel.fa.gz -O {species}.fasta.gz
 gunzip -f {species}.fasta.gz
 python3 -c "import pybio; pybio.data.Fasta('{species}.fasta').split()"
 
@@ -1029,19 +1044,68 @@ cd ..
 mkdir {species}.annotation.ensembl{ensembl_version}
 cd {species}.annotation.ensembl{ensembl_version}
 # https://www.biostars.org/p/279235/#279238
-wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/gtf/{ensembl_version_A}/{ensembl_version_B}.{ensembl_version_C}.{ensembl_version}.chr.gtf.gz -O {ensembl_version_B}.{ensembl_version_C}.{ensembl_version}.chr.gtf.gz
-gunzip -f {ensembl_version_B}.{ensembl_version_C}.{ensembl_version}.chr.gtf.gz # file must be unzipped for STAR to consider it
+wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz -O {species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz
+gunzip -f {species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz # file must be unzipped for STAR to consider it
 """
 
-    command = script.format(gdir=pybio.config.genomes_folder, species=species, ensembl_version=ensembl_version, ensembl_version_A=ensembl_longA[species], ensembl_version_B=ensembl_longB[species], ensembl_version_C=ensembl_longC[species])
+    command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version)
     os.system(command)
 
 def star_index(species="hg38", ensembl_version=None):
+    species_capital = species.capitalize()
+    assembly = species_db[species]["assembly"]
     script = """
 cd {gdir}
 rm {species}.assembly.ensembl{ensembl_version}.star/*
 mkdir {species}.assembly.ensembl{ensembl_version}.star
-STAR --runMode genomeGenerate --genomeDir {species}.assembly.ensembl{ensembl_version}.star --genomeFastaFiles {species}.assembly.ensembl{ensembl_version}/{species}.fasta --runThreadN 4 --sjdbGTFfile {species}.annotation.ensembl{ensembl_version}/{ensembl_version_B}.{ensembl_version_C}.{ensembl_version}.chr.gtf
+STAR --runMode genomeGenerate --genomeDir {species}.assembly.ensembl{ensembl_version}.star --genomeFastaFiles {species}.assembly.ensembl{ensembl_version}/{species}.fasta --runThreadN 4 --sjdbGTFfile {species}.annotation.ensembl{ensembl_version}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf
+gzip -f {species}.annotation.ensembl{ensembl_version}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf # to save space
 """
-    command = script.format(gdir=pybio.config.genomes_folder, species=species, ensembl_version=ensembl_version, ensembl_version_B=ensembl_longB[species], ensembl_version_C=ensembl_longC[species])
+    command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version)
     os.system(command)
+
+def salmon_index(species="hg38", ensembl_version=None):
+    species_capital = species.capitalize()
+    assembly = species_db[species]["assembly"]
+    script = """
+cd {gdir}
+rm {species}.transcripts.ensembl{ensembl_version}/*
+mkdir {species}.transcripts.ensembl{ensembl_version}
+cd {species}.transcripts.ensembl{ensembl_version}
+wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/cdna/{species_capital}.{assembly}.cdna.all.fa.gz
+
+cd {gdir}
+salmon index -t {species}.transcripts.ensembl{ensembl_version}/{species_capital}.{assembly}.cdna.all.fa.gz -i {species}.transcripts.ensembl{ensembl_version}.salmon
+"""
+    command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version)
+    os.system(command)
+
+def list_species(ensembl_version=109):
+    print("[pybio.core.genomes] getting information about all available species from Ensembl, this is done once and takes 1 minute")
+    from bs4 import BeautifulSoup
+    import requests
+    species_db = {}
+    def listFD(url, ext=''):
+        page = requests.get(url).text
+        soup = BeautifulSoup(page, 'html.parser')
+        return [node.get('href')[:-1] for node in soup.find_all('a') if node.get('href').endswith(ext)]
+    f = open(os.path.join(pybio.config.genomes_folder, "ensembl_species.tab"), "wt")
+    f.write("species\tassembly\tensembl_version\n")
+    for species in listFD(f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/", "/")[1:]:
+        dna_folder_url = f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/"
+        #fasta_file = listFD(dna_folder_url, ext='.dna.primary_assembly.fa.gz')
+        fasta_file = listFD(dna_folder_url, ext='.dna.toplevel.fa.gz')
+        if len(fasta_file)==0:
+            print(f"[pybio.core.genomes] skipping {species}, no fasta file found")
+            continue
+        fasta_file = fasta_file[0]
+        species_assembly = fasta_file.replace(".dna.toplevel.fa.g", "").split(".")
+        species_long = species_assembly[0]
+        species_assembly = ".".join(species_assembly[1:])
+        species_db[species] = (species, species_assembly)
+        f.write(f"{species}\t{species_assembly}\t{ensembl_version}\n")
+        assert(species.capitalize()==species_long)
+    f.close()
+    print("[pybio.core.genomes] species list downloaded to:", os.path.join(pybio.config.genomes_folder, "ensembl_species.tab"))
+    print("[pybio.core.genomes] example download of fasta/gtf/annotation for homo_sapiens:")
+    print("pybio ensembl homo_sapiens [ensembl_version]")
