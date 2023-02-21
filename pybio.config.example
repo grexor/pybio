@@ -1,1 +1,3 @@
-genomes_folder="pybio/genomes"
+# if no leading /, all paths (folders) are relative to pybio root folder
+genomes_folder="genomes"
+ensembl_latest_version=109
