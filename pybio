@@ -7,6 +7,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pybio
 import pybio.core
+import json
 
 version = "0.3"
 
@@ -17,6 +18,10 @@ parser.add_argument("-logFC", "--logFC", help="logFC threshold, default=None (do
 parser.add_argument("-dpfi", "--dpfi", help="delta(percentage feature inclusion) threshold, default=None (do not use as filter)", default=None, type=float)
 parser.add_argument("-version", "--version", help="Print version", action="store_true")
 args = parser.parse_args()
+
+def is_tool(name):
+    from shutil import which
+    return which(name) is not None
 
 if args.version:
     print(f"pybio v{version}, https://github.com/grexor/pybio")
@@ -34,10 +39,24 @@ if len(args.commands)>0:
             ensembl_version = args.commands[2]
         except:
             ensembl_version = pybio.config.ensembl_latest_version
-        #pybio.core.genomes.download(species, ensembl_version)
+        
+        genomes_ready_fname = os.path.join(pybio.config.genomes_folder, "genomes_ready.json")
+        if os.path.exists(genomes_ready_fname):
+            genomes_ready = json.loads(open(genomes_ready_fname, "rt").readlines())
+        else:
+            genomes_ready = {}
+
+        pybio.core.genomes.download(species, ensembl_version)
+        genomes_ready.setdefault(species, {}).setdefault(ensembl_version, {}).setdefault("downloaded", True)
         pybio.core.genomes.prepare(species, ensembl_version)
-        #pybio.core.genomes.star_index(species, ensembl_version)
-        #pybio.core.genomes.salmon_index(species, ensembl_version)
+        genomes_ready.setdefault(species, {}).setdefault(ensembl_version, {}).setdefault("prepared", True)
+
+        #if is_tool("STAR"):
+        #    pybio.core.genomes.star_index(species, ensembl_version)
+        #if is_tool("salmon"):
+        #    pybio.core.genomes.salmon_index(species, ensembl_version)
+
+        json.dump(genomes_ready, open(genomes_ready_fname, "wt"))
 
 """
         cd $gdir
