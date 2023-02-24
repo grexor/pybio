@@ -11,6 +11,7 @@ import gzip
 import psutil
 import pickle
 import math
+import requests
 
 process = psutil.Process(os.getpid())
 
@@ -184,7 +185,7 @@ def prepare(species="hg38", version=None):
         if clines%100000==0:
             print("%.2f M lines parsed, RAM GB used: %.3f" % (clines/1000000.0, process.memory_info().rss/1000000000))
     f.close()
-    pickle.dump(gene_bins_db, open("gene_bins_db.pickle", "wb"))
+    pickle.dump(gene_bins_db, open(os.path.join(annotation_folder, "gene_bins_db.pickle"), "wb"))
 
     print("#exons = ", len(exons_db.keys()))
     print("#transcripts = ", len(transcripts_db.keys()))
@@ -1026,20 +1027,38 @@ def prepare_fasta(fname, species="hg38", version="latest"):
     pybio.data.Fasta(f"{assembly_folder}/{species}.fasta").split()
     return True
 
+def url_exists(path):
+    r = requests.head(path)
+    return r.status_code == requests.codes.ok
+
 def download(species="homo_sapiens", ensembl_version=None):
     if ensembl_version==None:
         return False
     species_capital = species.capitalize()
     assembly = species_db[species]["assembly"]
+
+    # first, try primary assembly
+    fasta_url = f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.primary_assembly.fa.gz"
+    # no? download the toplevel
+    if not url_exists(fasta_url):
+        fasta_url = f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.toplevel.fa.gz"
+
     script = """
 cd {gdir}
-rm  {species}.assembly.ensembl{ensembl_version}/*
+rm {species}.assembly.ensembl{ensembl_version}/*
 mkdir {species}.assembly.ensembl{ensembl_version}
 cd {species}.assembly.ensembl{ensembl_version}
-wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.toplevel.fa.gz -O {species}.fasta.gz
+wget {fasta_url} -O {species}.fasta.gz
 gunzip -f {species}.fasta.gz
 python3 -c "import pybio; pybio.data.Fasta('{species}.fasta').split()"
+"""
 
+    # download FASTA and split
+    print(f"[pybio.core.genomes] download FASTA for {species}.ensembl{ensembl_version}")
+    command = script.format(gdir=pybio.config.genomes_folder, fasta_url=fasta_url, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version)
+    os.system(command)
+
+    script = """
 cd ..
 mkdir {species}.annotation.ensembl{ensembl_version}
 cd {species}.annotation.ensembl{ensembl_version}
@@ -1047,7 +1066,8 @@ cd {species}.annotation.ensembl{ensembl_version}
 wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz -O {species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz
 gunzip -f {species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz # file must be unzipped for STAR to consider it
 """
-
+    # download GTF
+    print(f"[pybio.core.genomes] download GTF for {species}.ensembl{ensembl_version}")
     command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version)
     os.system(command)
 
