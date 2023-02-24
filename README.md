@@ -26,22 +26,30 @@ Current installation instructions below:
 
 #### Clone the GitHub repository
 
-For now the most direct way of installing pybio is to clone the repository and add the containing folder to PYTHONPATH:
+Temporarily the most direct way of installing pybio is to clone the repository:
 
 ```
 git clone https://github.com/grexor/pybio.git
 ```
 
-If, for example, you installed `pybio` to `/home/user/pybio`, you would add this command to the `.profile` file in your home folder:
+Enter the cloned pybio folder and copy the config file from the template:
 
 ```
-export PYTHONPATH=$PYTHONPATH:/home/user
-export PATH=$PATH:/home/user/pybio/bin
+cp pybio.config.template pybio.config
 ```
+
+Finally, change your PATH and PYTHONPATH environment variables: for example, if you cloned to `/home/user/pybio`, you would add the paths like so:
+
+```
+export PYTHONPATH=$PYTHONPATH:/home/user # to import pybio in python with "import pybio"
+export PATH=$PATH:/home/user/pybio       # to run pybio on the command line with "pybio"
+```
+
+Voila.
 
 #### Dependencies
 
-There are a few software tools pybio depends on:
+There are a few software tools pybio depends on. For a quick start, you don't need to have any of these dependencies installed.
 
 * [STAR aligner](https://github.com/alexdobin/STAR), `sudo apt-get install rna-star`
 * [pysam](https://pysam.readthedocs.io/en/latest/api.html), `sudo apt-get install python-pysam`
@@ -59,24 +67,26 @@ Here we provide basic `pybio` usage examples.
 
 #### Downloading Ensembl genomes
 
-In the folder `pybio/genomes`, there are `.sh scripts` you can use to automatically download and pre-process Ensembl genomes. For example, to download and prepare the hg38 Ensembl v98, simply run:
+Downloading Ensembl genome assemblies and annotation is easy. Simply run these commands on the command line:
 
 ```
-cd pybio/genomes
-./hg38.download.ensembl98.sh
+pybio ensembl homo_sapiens      # downloads the latest version of Ensembl homo_sapiens assembly and annotation
+pybio ensembl homo_sapiens 109  # downloads a specific version of Ensembl homo_sapiens assembly and annotation
 ```
 
-This will download the FASTA sequence, GTF and TAB annotation (via Biomart) of the genome, and create several folders:
+This will download the FASTA sequence, GTF if you have STAR and salmon installed, will also build an index of the genome for both.
+
+Data will be stored in the folder specified in the file `pybio.config`. The genomes folder structure is as follows:
 
 ```
-hg38.assembly.ensembl98           # FASTA files of the genome, each chromosome in a separate file
-hg38.annotation.ensembl98         # Annotation in GTF and TAB format
-hg38.assembly.ensembl98.star      # STAR index, GTF annotation aware
-hg38.transcripts.ensembl98        # transcriptome, this is the Ensembl "cDNA" file in FASTA format
-hg38.transcripts.ensembl98.salmon # Salmon index of the transcriptome
+homo_sapiens.assembly.ensembl109             # FASTA files of the genome, each chromosome in a separate file
+homo_sapiens.annotation.ensembl109           # Annotation in GTF and TAB format
+homo_sapiens.assembly.ensembl109.star        # STAR index, GTF annotation aware
+homo_sapiens.transcripts.ensembl109          # transcriptome, this is the Ensembl "cDNA" file in FASTA format
+homo_sapiens.transcripts.ensembl109.salmon   # Salmon index of the transcriptome
 ```
 
-#### Retrieving genomic sequence
+#### Retrieving genomic sequences
 
 To retrieve stretches of genomic sequence, we use the seq(genome, chr, strand, position, upstream, downstream) method:
 
@@ -86,29 +96,29 @@ pybio.genomes.seq("hg38", "1", "+", 450000, -20, 20) # returns 'TACCCTGATTCTGAAA
 
 The above command fetches the chr1 sequence from 450000-20..450000+20, the resulting sequence is of length 41.
 
-#### Annotate genomic position
+#### Annotating genomic positions
 
-Given a genomic position, we can retrieve the gene at the position and the closest upstream and downstream gene on the same strand:
+Given a genomic position, we can quickly retrieve the gene, transcript, exon and utr5/3 information at the given position. If there are several features (genes, transcripts, exons, UTR regions) at the specified position, they are all returned.
 
 ```
-(gene_up, gene_id, gene_down, gene_interval, gene_feature) = pybio.genomes.annotate("hg38", "1", "-", 450000)
+# annotate position
+genes, transcripts, exons, utr5, utr3 = pybio.genomes.annotate("hg38", "1", "+", 11012344)
+
+# print all genes that cover the position
+for gene in genes:
+   print(gene.gene_id, gene.gene_name)
+   print(gene.start, gene.stop)
 ```
 
 The above command would return:
 
 ```
-      gene_id: ENSG00000237094
-gene_interval: (379972, 450701, 'i')
- gene_feature: 'intron'
-      gene_up: 'ENSG00000284733'
-    gene_down: 'ENSG00000228463'
+[pybio] loading genome annotation for homo_sapiens with Ensembl version 109
+ENSG00000120948, TARDBP
+11012343, 11030527
 ```
 
-There is gene ENSG00000237094 at position 450000, specifically the position is in an intron of the gene spanning the region 379972..450701.
-
-#### Importing genome annotation
-
-pybio imports genome annotations from Ensembl or from a GTF file. The Ensembl import is from the TAB separated file generated by querying Biomart.
+You can also easily access all transcripts of each gene with `gene.transcripts` and all exons of each transcript with `transcript.exons`.
 
 #### File formats
 

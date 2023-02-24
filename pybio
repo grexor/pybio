@@ -11,12 +11,15 @@ import json
 
 version = "0.3"
 
+print(f"[pybio] v{version}")
+print("Github: https://github.com/grexor/pybio")
+print()
+
 parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument('commands', help="which command to run?", nargs='*')
-parser.add_argument("-fdr", "--fdr", help="FDR threshold, default no filter", default=None, type=float)
-parser.add_argument("-logFC", "--logFC", help="logFC threshold, default=None (do not use as filter)", default=None, type=float)
-parser.add_argument("-dpfi", "--dpfi", help="delta(percentage feature inclusion) threshold, default=None (do not use as filter)", default=None, type=float)
 parser.add_argument("-version", "--version", help="Print version", action="store_true")
+parser.add_argument("-nostar", "--nostar", help="Do not process genome with STAR (index)", action="store_true")
+parser.add_argument("-nosalmon", "--nosalmon", help="Do not process transcripts with salmon (index)", action="store_true")
 args = parser.parse_args()
 
 def is_tool(name):
@@ -29,48 +32,50 @@ if args.version:
 
 if len(args.commands)>0:
 
-    if args.commands[0]=="annotate":
-        print("pybio annotate")
-
     if args.commands[0]=="ensembl":
-        print("pybio ensembl")
         species = args.commands[1]
         try:
             ensembl_version = args.commands[2]
         except:
-            ensembl_version = pybio.config.ensembl_latest_version
-        
+            ensembl_version = pybio.config.ensembl_version_latest
+
+        print(f"[pybio ensembl] species {species} and Ensembl version {ensembl_version}")
+
         genomes_ready_fname = os.path.join(pybio.config.genomes_folder, "genomes_ready.json")
         if os.path.exists(genomes_ready_fname):
-            genomes_ready = json.loads(open(genomes_ready_fname, "rt").readlines())
+            genomes_ready = json.load(open(genomes_ready_fname, "rt"))
         else:
             genomes_ready = {}
 
-        pybio.core.genomes.download(species, ensembl_version)
-        genomes_ready.setdefault(species, {}).setdefault(ensembl_version, {}).setdefault("downloaded", True)
-        pybio.core.genomes.prepare(species, ensembl_version)
-        genomes_ready.setdefault(species, {}).setdefault(ensembl_version, {}).setdefault("prepared", True)
+        assembly_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.ensembl{ensembl_version}")
+        if not genomes_ready.get(species, {}).get(ensembl_version, {}).get("assembly", False) or not os.path.exists(assembly_folder):
+            pybio.core.genomes.download_assembly(species, ensembl_version)
+            genomes_ready.setdefault(species, {}).setdefault(ensembl_version, {}).setdefault("assembly", True)
+        else:
+            print(f"[pybio ensembl] FASTA ready at {pybio.config.genomes_folder}/{species}.assembly.ensembl{ensembl_version}")
 
-        #if is_tool("STAR"):
-        #    pybio.core.genomes.star_index(species, ensembl_version)
-        #if is_tool("salmon"):
-        #    pybio.core.genomes.salmon_index(species, ensembl_version)
+        annotation_folder = os.path.join(pybio.config.genomes_folder, f"{species}.annotation.ensembl{ensembl_version}")
+        if not genomes_ready.get(species, {}).get(ensembl_version, {}).get("annotation", False) or not os.path.exists(annotation_folder):
+            pybio.core.genomes.download_annotation(species, ensembl_version)
+            pybio.core.genomes.prepare(species, ensembl_version)
+            genomes_ready.setdefault(species, {}).setdefault(ensembl_version, {}).setdefault("annotation", True)
+        else:
+            print(f"[pybio ensembl] genome annotation at {pybio.config.genomes_folder}/{species}.annotation.ensembl{ensembl_version}")
+
+        if is_tool("STAR") and not args.nostar:
+            star_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.ensembl{ensembl_version}.star")
+            if not genomes_ready.get(species, {}).get(ensembl_version, {}).get("STAR", False) or not os.path.exists(star_folder):
+                pybio.core.genomes.star_index(species, ensembl_version)
+                genomes_ready.setdefault(species, {}).setdefault(ensembl_version, {}).setdefault("STAR", True)
+            else:
+                print(f"[pybio ensembl] STAR index ready at {pybio.config.genomes_folder}/{species}.annotation.ensembl{ensembl_version}.star")
+
+        if is_tool("salmon") and not args.nosalmon:
+            salmon_folder = os.path.join(pybio.config.genomes_folder, f"{species}.transcripts.ensembl{ensembl_version}.salmon")
+            if not genomes_ready.get(species, {}).get(ensembl_version, {}).get("salmon", False) or not os.path.exists(salmon_folder):
+                pybio.core.genomes.salmon_index(species, ensembl_version)
+                genomes_ready.setdefault(species, {}).setdefault(ensembl_version, {}).setdefault("salmon", True)
+            else:
+                print(f"[pybio ensembl] salmon index ready at {pybio.config.genomes_folder}/{species}.annotation.ensembl{ensembl_version}.salmon")
 
         json.dump(genomes_ready, open(genomes_ready_fname, "wt"))
-
-"""
-        cd $gdir
-        rm -r ${species}.assembly.ensembl${eversion}.star
-        mkdir ${species}.assembly.ensembl${eversion}.star
-        STAR --runMode genomeGenerate --genomeDir ${species}.assembly.ensembl${eversion}.star --genomeFastaFiles ${species}.assembly.ensembl${eversion}/${species}.fasta --runThreadN 4 --sjdbGTFfile ${species}.annotation.ensembl${eversion}/${ensembl_longB[hg38]}.${ensembl_longC[hg38]}.${eversion}.chr.gtf
-
-        gzip -f ${species}.annotation.ensembl${eversion}/${ensembl_longB[hg38]}.${ensembl_longC[hg38]}.${eversion}.chr.gtf # to save space
-
-        rm -r ${species}.transcripts.ensembl${eversion}
-        mkdir ${species}.transcripts.ensembl${eversion}
-        cd ${species}.transcripts.ensembl${eversion}
-        wget ftp://ftp.ensembl.org/pub/release-${eversion}/fasta/${ensembl_longA[hg38]}/cdna/${ensembl_longB[hg38]}.${ensembl_longC[hg38]}.cdna.all.fa.gz
-
-        cd $gdir
-        salmon index -t ${species}.transcripts.ensembl${eversion}/${ensembl_longB[hg38]}.${ensembl_longC[hg38]}.cdna.all.fa.gz -i ${species}.transcripts.ensembl${eversion}.salmon
-"""
