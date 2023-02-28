@@ -105,12 +105,12 @@ def init():
         r = f.readline()
     f.close()
 
-def prepare(species="hg38", version=None):
-    if version==None:
-        version = get_latest_version(species)
+def prepare(species="homo_sapiens", ensembl_version=None):
+    if ensembl_version==None:
+        ensembl_version = pybio.config.ensembl_version_latest
     print("[pybio] {species}: processing annotation".format(species=species))
 
-    annotation_folder = os.path.join(pybio.config.genomes_folder, "%s.annotation.ensembl%s" % (species, version))
+    annotation_folder = os.path.join(pybio.config.genomes_folder, "%s.annotation.ensembl%s" % (species, ensembl_version))
     chr_list = set()
     gtf_fields = ["chr", "source", "feature", "start", "stop", "a1", "strand", "a2", "atts"]
 
@@ -178,12 +178,10 @@ def prepare(species="hg38", version=None):
 def seq_direct(species, chr, strand, start, stop, flank="N", ensembl_version=None):
     """
     Returns chromosome sequence from [start..stop]
-    Note: negative strand returns reverse complement; coordinates are 0-based, left and right closed; start must be < stop;
+    Note: negative strand returns reverse complement; coordinates are 0-based, left+right inclusive; start must be < stop;
     """
-
     if ensembl_version==None:
         ensembl_version = pybio.config.ensembl_version_latest
-
     if start>stop:
         start, stop = stop, start
     assert(start<=stop)
@@ -205,10 +203,10 @@ def seq_direct(species, chr, strand, start, stop, flank="N", ensembl_version=Non
         return seq
 
 # get genomic sequence
-def seq(genome, chr, strand, pos, start=0, stop=0, flank="N"):
+def seq(species, chr, strand, pos, start=0, stop=0, flank="N", ensembl_version=None):
     """
     Returns chromosome sequence from [pos-start..pos+stop]
-    Note: negative strand returns reverse complement; coordinates are 0-based, left and right closed; start must be < stop;
+    Note: negative strand returns reverse complement; coordinates are 0-based, left+right inclusive; start must be < stop;
     """
     assert(start<=stop)
     if strand=="+":
@@ -217,7 +215,7 @@ def seq(genome, chr, strand, pos, start=0, stop=0, flank="N"):
     else:
         gstart = pos-stop
         gstop = pos-start
-    return seq_direct(genome, chr, strand, gstart, gstop)
+    return seq_direct(species, chr, strand, gstart, gstop, ensembl_version=ensembl_version)
 
 def make_motifs(motif_size):
     motifs = []

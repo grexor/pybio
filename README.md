@@ -7,7 +7,7 @@ Features include automagical genome assemblies+annotation download and indexing 
 ## Contents
 
 * [Installation](#installation)
-* [Quick Start](#quickstart)
+* [Quick Start](#Quick-Start)
 * [Documentation](#documentation)
   * [Downloading Ensembl genomes](#downloading-Ensembl-genomes)
   * [Retrieving genomic sequences](#retrieving-genomic-sequences)
