@@ -14,7 +14,7 @@ Features include automagical genome assemblies+annotation download and indexing 
   * [Annotate genomic position](#annotate-genomic-position)
   * [Importing genome annotation](#importing-genome-annotation)
   * [File formats](#file-formats)
-    * [bedGraph](#bedgraph)
+  * [Genomic Coordinates](#Genomic-Coordinates)
 * [Authors](#authors)
 * [Reporting problems](#reporting-problems)
 
@@ -85,12 +85,11 @@ for gene in genes:
 However you could also start directly with transcripts, and print which genes are the transcripts assigned to:
 
 ```
-# print all genes that cover the position
 for transcript in transcripts:
   print(transcript.gene.gene_id, transcript.transcript_id)
 ```
 
-An intuitive graph representation of these relationships between feature objects:
+And an intuitive graph representation of relationships between feature objects:
 
 ```
 gene <-> transcript_1 <-> exon_1
@@ -105,7 +104,7 @@ gene <-> transcript_1 <-> exon_1
                       <-> utr3
 ```
 
-And a more descriptive representation of pointers / connections between feature objects:
+Plus a more descriptive representation of relationships between feature objects:
 
 ```
                 gene = Gene instance object
@@ -166,16 +165,14 @@ genes, transcripts, exons, utr5, utr3 = pybio.genomes.annotate("hg38", "1", "+",
 
 # print all genes that cover the position
 for gene in genes:
-   print(gene.gene_id, gene.gene_name)
-   print(gene.start, gene.stop)
+   print(gene.gene_id, gene.gene_name, gene.start, gene.stop)
 ```
 
 The above command would return:
 
 ```
 [pybio] loading genome annotation for homo_sapiens with Ensembl version 109
-ENSG00000120948, TARDBP
-11012343, 11030527
+ENSG00000120948, TARDBP, 11012343, 11030527
 ```
 
 You can also easily access all transcripts of each gene with `gene.transcripts` and all exons of each transcript with `transcript.exons`.
@@ -194,11 +191,15 @@ There are a few software tools pybio depends on. For a quick start, you don't ne
 
 Supported file formats.
 
-#### bedGraph
+Coming.
 
-```
-b = pybio.data.bedGraph()
-```
+### Genomic Coordinates
+
+All genomic coordinates we operate with inside pybio are 0-based left+right inclusive. This means, when we say for example 100-103, this would include coordinates 100, 101, 102 and 103. The first coordinate is 0.
+
+**Important**
+
+Refseq and Ensembl GTF files are 1-indexed. When we read files from refseq/ensembl, we substract 1 on all coordinates to keep this in line with other coordinate structures inside pybio (which are all 0-indexed).
 
 ### Authors
 
