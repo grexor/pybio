@@ -126,10 +126,11 @@ homo_sapiens.transcripts.ensembl109.salmon   # Salmon index of the transcriptome
 To retrieve stretches of genomic sequence, we use the seq(genome, chr, strand, position, upstream, downstream) method:
 
 ```
-pybio.genomes.seq("hg38", "1", "+", 450000, -20, 20) # returns 'TACCCTGATTCTGAAACGAAAAAGCTTTACAAAATCCAAGA' for hg38, Ensembl v98
+import pybio
+seq = pybio.core.genomes.seq("homo_sapiens", "1", "+", 450000, -20, 20)
 ```
 
-The above command fetches the chr1 sequence from 450000-20..450000+20, the resulting sequence is of length 41.
+The above command fetches the chr 1 sequence from 450000-20..450000+20, the resulting sequence is of length 41, 'TACCCTGATTCTGAAACGAAAAAGCTTTACAAAATCCAAGA'.
 
 #### Annotating genomic positions
 
