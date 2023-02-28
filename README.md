@@ -66,6 +66,30 @@ genes, transcripts, exons, UTR5, UTR3 = annotate("homo_sapiens", "1", "+", 11012
 
 This will return a list of feature objects (genes, transctipts, etc) (check [core/genomes.py](core/genomes.py) classes to see details of these objects).
 
+If you would like to know all genes that span the provided position, you could then write:
+
+```
+for gene in genes:
+   print(gene.gene_id, gene.gene_name, gene.start, gene.stop)
+```
+
+And to list all transcripts of each gene, you could extend the code like this:
+
+```
+for gene in genes:
+   print(gene.gene_id, gene.gene_name, gene.start, gene.stop)
+   for transcript in gene.transcripts:
+      print(transcript.transcript_id)
+```
+
+However you could also start directly with transcripts, and print which genes are the transcripts assigned to:
+
+```
+# print all genes that cover the position
+for transcript in transcripts:
+  print(transcript.gene.gene_id, transcript.transcript_id)
+```
+
 An intuitive graph representation of these relationships between feature objects:
 
 ```
