@@ -403,7 +403,7 @@ def test():
     load("homo_sapiens")
     chr_list = set()
     gtf_fields = ["chr", "source", "feature", "start", "stop", "a1", "strand", "a2", "atts"]
-    f = gzip.open("/projects/site/pred/spliceosome/pybio/genomes/homo_sapiens.annotation.ensembl109/Homo_sapiens.GRCh38.109.chr.gtf.gz", "rt")
+    f = gzip.open("genomes/homo_sapiens.annotation.ensembl109/Homo_sapiens.GRCh38.109.chr.gtf.gz", "rt")
     clines = 0
     r = f.readline()
     while r:

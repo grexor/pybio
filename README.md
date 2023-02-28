@@ -47,19 +47,48 @@ export PATH=$PATH:/home/user/pybio       # to run pybio on the command line with
 
 Voila.
 
-#### Dependencies
-
-There are a few software tools pybio depends on. For a quick start, you don't need to have any of these dependencies installed.
-
-* [STAR aligner](https://github.com/alexdobin/STAR), `sudo apt-get install rna-star`
-* [pysam](https://pysam.readthedocs.io/en/latest/api.html), `sudo apt-get install python-pysam`
-* [numpy](https://numpy.org/), `sudo apt-get install python-numpy`
-* [Salmon](https://combine-lab.github.io/salmon/getting_started/), download and install from Salmon webpage
-* [samtools](http://www.htslib.org), `sudo apt-get install samtools`
-
 ### Quick Start
 
-In progress
+One of the main strenghts of pybio is genomic loci search for diverse annotated features (genes -> transcripts -> exons + 5UTR + 3UTR).
+
+Let's say we are interested in the human genome. First download and prepare the genome with a single command:
+
+```
+pybio ensembl homo_sapiens   # downloads the latest version of Ensembl homo_sapiens assembly and annotation and prepare the index for search
+```
+
+Once this is done, searching a genomic position for features is easy in python:
+
+```
+import pybio
+genes, transcripts, exons, UTR5, UTR3 = annotate("homo_sapiens", "1", "+", 11012344)
+```
+
+This will return a list of feature objects (genes, transctipts, etc). Note that these returned features are connected:
+
+```
+gene.transcripts = list of all transcript objects of the gene
+transcript.gene = points to the gene of the transcript
+transcript.exons = list of all exon objects of the transcript
+transcript.utr5/utr3 = points to the UTR5 / UTR3 of the transcript
+exon.transcript = points to the transcript of the exon
+utr5/utr3.transcript = points to the transcript of the UTR5/UTR3
+```
+
+An intuitive graph representation of these relationships between feature objects:
+
+```
+gene <-> transcript_1 <-> exon_1
+                      <-> exon_2
+                      ...
+                      <-> utr5
+                      <-> utr3
+     <-> transcript_2 <-> exon_1
+                      <-> exon_2
+                      ...
+                      <-> utr5
+                      <-> utr3
+```
 
 ### Documentation
 
@@ -67,7 +96,7 @@ Here we provide basic `pybio` usage examples.
 
 #### Downloading Ensembl genomes
 
-Downloading Ensembl genome assemblies and annotation is easy. Simply run these commands on the command line:
+To download Ensembl genomes simply run a few commands on the command line. For example:
 
 ```
 pybio ensembl homo_sapiens      # downloads the latest version of Ensembl homo_sapiens assembly and annotation
@@ -120,9 +149,21 @@ ENSG00000120948, TARDBP
 
 You can also easily access all transcripts of each gene with `gene.transcripts` and all exons of each transcript with `transcript.exons`.
 
-#### File formats
+#### Dependencies
 
-##### bedGraph
+There are a few software tools pybio depends on. For a quick start, you don't need to have any of these dependencies installed.
+
+* [STAR aligner](https://github.com/alexdobin/STAR), `sudo apt-get install rna-star`
+* [pysam](https://pysam.readthedocs.io/en/latest/api.html), `sudo apt-get install python-pysam`
+* [numpy](https://numpy.org/), `sudo apt-get install python-numpy`
+* [Salmon](https://combine-lab.github.io/salmon/getting_started/), download and install from Salmon webpage
+* [samtools](http://www.htslib.org), `sudo apt-get install samtools`
+
+### File formats
+
+Supported file formats.
+
+#### bedGraph
 
 ```
 b = pybio.data.bedGraph()
@@ -132,6 +173,6 @@ b = pybio.data.bedGraph()
 
 [pybio](https://github.com/grexor/pybio) is developed and supported by [Gregor Rot](https://grexor.github.io).
 
-### Reporting problems
+### Issues and Suggestions
 
 Use the [issues page](https://github.com/grexor/pybio/issues) to report issues and leave suggestions.
