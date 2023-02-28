@@ -195,11 +195,11 @@ Coming.
 
 ### Genomic Coordinates
 
-All genomic coordinates we operate with inside oybio are 0-based left+right inclusive. This means, when we say for example 100-103, this would include coordinates 100, 101, 102 and 103. The first coordinate is 0.
+All genomic coordinates we operate with inside pybio are 0-based left+right inclusive. This means, when we say for example 100-103, this would include coordinates 100, 101, 102 and 103. The first coordinate is 0.
 
 **Important**
 
-Refseq and Ensembl GTF files are 1-indexed. When we read files from refseq/ensembl, we perform -1 on all coordinates to keep this in line with other coordinate structures inside pybio (which are all 0-indexed).
+Refseq and Ensembl GTF files are 1-indexed. When we read files from refseq/ensembl, we substract 1 on all coordinates to keep this in line with other coordinate structures inside pybio (which are all 0-indexed).
 
 ### Authors
 
