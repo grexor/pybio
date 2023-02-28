@@ -66,21 +66,6 @@ genes, transcripts, exons, UTR5, UTR3 = annotate("homo_sapiens", "1", "+", 11012
 
 This will return a list of feature objects (genes, transctipts, etc) (check [core/genomes.py](core/genomes.py) classes to see details of these objects).
 
-Note that these feature objects are connected:
-
-```
-                gene = Gene instance object
-    gene.transcripts = list of all transcript objects of the gene
-          transcript = Transcript instance object
-     transcript.gene = points to the gene of the transcript
-    transcript.exons = list of all exon objects of the transcript
-transcript.utr5/utr3 = points to the UTR5 / UTR3 of the transcript
-                exon = Exon instance object
-     exon.transcript = points to the transcript of the exon
-           utr5/utr3 = Utr5 / Utr3 instance object
-utr5/utr3.transcript = points to the transcript of the UTR5/UTR3
-```
-
 An intuitive graph representation of these relationships between feature objects:
 
 ```
@@ -94,6 +79,21 @@ gene <-> transcript_1 <-> exon_1
                       ...
                       <-> utr5
                       <-> utr3
+```
+
+And a more descriptive representation of pointers / connections between feature objects:
+
+```
+                gene = Gene instance object
+    gene.transcripts = list of all transcript objects of the gene
+          transcript = Transcript instance object
+     transcript.gene = points to the gene of the transcript
+    transcript.exons = list of all exon objects of the transcript
+transcript.utr5/utr3 = points to the UTR5 / UTR3 of the transcript
+                exon = Exon instance object
+     exon.transcript = points to the transcript of the exon
+           utr5/utr3 = Utr5 / Utr3 instance object
+utr5/utr3.transcript = points to the transcript of the UTR5/UTR3
 ```
 
 ### Documentation
