@@ -130,7 +130,7 @@ import pybio
 seq = pybio.core.genomes.seq("homo_sapiens", "1", "+", 450000, -20, 20)
 ```
 
-The above command fetches the chr 1 sequence from 450000-20..450000+20, the resulting sequence is of length 41, 'TACCCTGATTCTGAAACGAAAAAGCTTTACAAAATCCAAGA'.
+The above command fetches the chr 1 sequence from 450000-20..450000+20, the resulting sequence is of length 41, `TACCCTGATTCTGAAACGAAAAAGCTTTACAAAATCCAAGA`.
 
 #### Annotating genomic positions
 
