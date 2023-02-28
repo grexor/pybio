@@ -10,7 +10,7 @@ Features include automagical genome assemblies+annotation download and indexing 
 * [Quick Start](#quickstart)
 * [Documentation](#documentation)
   * [Downloading Ensembl genomes](#downloading-Ensembl-genomes)
-  * [Retrieving genomic sequence](#retrieving-genomic-sequence)
+  * [Retrieving genomic sequences](#retrieving-genomic-sequences)
   * [Annotate genomic position](#annotate-genomic-position)
   * [Importing genome annotation](#importing-genome-annotation)
   * [File formats](#file-formats)
@@ -47,19 +47,78 @@ export PATH=$PATH:/home/user/pybio       # to run pybio on the command line with
 
 Voila.
 
-#### Dependencies
-
-There are a few software tools pybio depends on. For a quick start, you don't need to have any of these dependencies installed.
-
-* [STAR aligner](https://github.com/alexdobin/STAR), `sudo apt-get install rna-star`
-* [pysam](https://pysam.readthedocs.io/en/latest/api.html), `sudo apt-get install python-pysam`
-* [numpy](https://numpy.org/), `sudo apt-get install python-numpy`
-* [Salmon](https://combine-lab.github.io/salmon/getting_started/), download and install from Salmon webpage
-* [samtools](http://www.htslib.org), `sudo apt-get install samtools`
-
 ### Quick Start
 
-In progress
+One of the main strenghts of pybio is genomic loci search for diverse annotated features (genes -> transcripts -> exons + 5UTR + 3UTR).
+
+Let's say we are interested in the human genome. First download and prepare the genome with a single command:
+
+```
+pybio ensembl homo_sapiens   # downloads the latest version of Ensembl homo_sapiens assembly and annotation and prepare the index for search
+```
+
+Once this is done, searching a genomic position for features is easy in python:
+
+```
+import pybio
+genes, transcripts, exons, UTR5, UTR3 = annotate("homo_sapiens", "1", "+", 11012344)
+```
+
+This will return a list of feature objects (genes, transctipts, etc) (check [core/genomes.py](core/genomes.py) classes to see details of these objects).
+
+If you would like to know all genes that span the provided position, you could then write:
+
+```
+for gene in genes:
+   print(gene.gene_id, gene.gene_name, gene.start, gene.stop)
+```
+
+And to list all transcripts of each gene, you could extend the code like this:
+
+```
+for gene in genes:
+   print(gene.gene_id, gene.gene_name, gene.start, gene.stop)
+   for transcript in gene.transcripts:
+      print(transcript.transcript_id)
+```
+
+However you could also start directly with transcripts, and print which genes are the transcripts assigned to:
+
+```
+# print all genes that cover the position
+for transcript in transcripts:
+  print(transcript.gene.gene_id, transcript.transcript_id)
+```
+
+An intuitive graph representation of these relationships between feature objects:
+
+```
+gene <-> transcript_1 <-> exon_1
+                      <-> exon_2
+                      ...
+                      <-> utr5
+                      <-> utr3
+     <-> transcript_2 <-> exon_1
+                      <-> exon_2
+                      ...
+                      <-> utr5
+                      <-> utr3
+```
+
+And a more descriptive representation of pointers / connections between feature objects:
+
+```
+                gene = Gene instance object
+    gene.transcripts = list of all transcript objects of the gene
+          transcript = Transcript instance object
+     transcript.gene = points to the gene of the transcript
+    transcript.exons = list of all exon objects of the transcript
+transcript.utr5/utr3 = points to the UTR5 / UTR3 of the transcript
+                exon = Exon instance object
+     exon.transcript = points to the transcript of the exon
+           utr5/utr3 = Utr5 / Utr3 instance object
+utr5/utr3.transcript = points to the transcript of the UTR5/UTR3
+```
 
 ### Documentation
 
@@ -67,7 +126,7 @@ Here we provide basic `pybio` usage examples.
 
 #### Downloading Ensembl genomes
 
-Downloading Ensembl genome assemblies and annotation is easy. Simply run these commands on the command line:
+To download Ensembl genomes simply run a few commands on the command line. For example:
 
 ```
 pybio ensembl homo_sapiens      # downloads the latest version of Ensembl homo_sapiens assembly and annotation
@@ -91,10 +150,11 @@ homo_sapiens.transcripts.ensembl109.salmon   # Salmon index of the transcriptome
 To retrieve stretches of genomic sequence, we use the seq(genome, chr, strand, position, upstream, downstream) method:
 
 ```
-pybio.genomes.seq("hg38", "1", "+", 450000, -20, 20) # returns 'TACCCTGATTCTGAAACGAAAAAGCTTTACAAAATCCAAGA' for hg38, Ensembl v98
+import pybio
+seq = pybio.core.genomes.seq("homo_sapiens", "1", "+", 450000, -20, 20)
 ```
 
-The above command fetches the chr1 sequence from 450000-20..450000+20, the resulting sequence is of length 41.
+The above command fetches the chr 1 sequence from 450000-20..450000+20, the resulting sequence is of length 41, `TACCCTGATTCTGAAACGAAAAAGCTTTACAAAATCCAAGA`.
 
 #### Annotating genomic positions
 
@@ -120,9 +180,21 @@ ENSG00000120948, TARDBP
 
 You can also easily access all transcripts of each gene with `gene.transcripts` and all exons of each transcript with `transcript.exons`.
 
-#### File formats
+#### Dependencies
 
-##### bedGraph
+There are a few software tools pybio depends on. For a quick start, you don't need to have any of these dependencies installed.
+
+* [STAR aligner](https://github.com/alexdobin/STAR), `sudo apt-get install rna-star`
+* [pysam](https://pysam.readthedocs.io/en/latest/api.html), `sudo apt-get install python-pysam`
+* [numpy](https://numpy.org/), `sudo apt-get install python-numpy`
+* [Salmon](https://combine-lab.github.io/salmon/getting_started/), download and install from Salmon webpage
+* [samtools](http://www.htslib.org), `sudo apt-get install samtools`
+
+### File formats
+
+Supported file formats.
+
+#### bedGraph
 
 ```
 b = pybio.data.bedGraph()
@@ -132,6 +204,6 @@ b = pybio.data.bedGraph()
 
 [pybio](https://github.com/grexor/pybio) is developed and supported by [Gregor Rot](https://grexor.github.io).
 
-### Reporting problems
+### Issues and Suggestions
 
 Use the [issues page](https://github.com/grexor/pybio/issues) to report issues and leave suggestions.

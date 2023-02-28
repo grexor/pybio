@@ -175,14 +175,14 @@ def prepare(species="hg38", version=None):
     pickle.dump(transcripts_db, open(os.path.join(annotation_folder, "transcripts_db.pickle"), "wb"))
     pickle.dump(genes_db, open(os.path.join(annotation_folder, "genes_db.pickle"), "wb"))
 
-def seq_direct(genome, chr, strand, start, stop, flank="N", version=None):
+def seq_direct(species, chr, strand, start, stop, flank="N", ensembl_version=None):
     """
     Returns chromosome sequence from [start..stop]
     Note: negative strand returns reverse complement; coordinates are 0-based, left and right closed; start must be < stop;
     """
 
-    if version==None:
-        version = get_latest_version(genome)
+    if ensembl_version==None:
+        ensembl_version = pybio.config.ensembl_version_latest
 
     if start>stop:
         start, stop = stop, start
@@ -191,10 +191,10 @@ def seq_direct(genome, chr, strand, start, stop, flank="N", version=None):
     if start<0:
         seq = flank * abs(start)
     start = max(0, start) # start can only be non-negative
-    fname = os.path.join(pybio.path.genomes_folder, "%s.assembly.%s" % (genome, version), "%s.string" % chr)
-    if not os.path.exists(fname):
+    fasta_fname = os.path.join(pybio.config.genomes_folder, "%s.assembly.ensembl%s" % (species, ensembl_version), "%s.string" % chr)
+    if not os.path.exists(fasta_fname):
         return ""
-    f = open(fname, "rt")
+    f = open(fasta_fname, "rt")
     f.seek(start, 0)
     seq += f.read(stop-start+1)
     diff = (stop-start+1) - len(seq)
@@ -403,7 +403,7 @@ def test():
     load("homo_sapiens")
     chr_list = set()
     gtf_fields = ["chr", "source", "feature", "start", "stop", "a1", "strand", "a2", "atts"]
-    f = gzip.open("/projects/site/pred/spliceosome/pybio/genomes/homo_sapiens.annotation.ensembl109/Homo_sapiens.GRCh38.109.chr.gtf.gz", "rt")
+    f = gzip.open("genomes/homo_sapiens.annotation.ensembl109/Homo_sapiens.GRCh38.109.chr.gtf.gz", "rt")
     clines = 0
     r = f.readline()
     while r:
