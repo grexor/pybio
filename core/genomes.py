@@ -57,10 +57,11 @@ class Exon:
 
   def __init__(self, exon_id, transcript_id, start, stop):
     self.exon_id = exon_id
-    self.transcript = transcripts_db[transcript_id]
+    self.transcript = transcripts_db.get(transcript_id, None)
     self.start = int(start)-1
     self.stop = int(stop)-1
-    self.transcript.exons.add(self)
+    if self.transcript!=None:
+        self.transcript.exons.add(self)
 
 class Utr3:
 
@@ -79,10 +80,10 @@ class Utr5:
     self.transcript.utr5 = self
 
 def init():
-    ensembl_species_fname = os.path.join(pybio.config.genomes_folder, "ensembl_species.tab")
-    if not os.path.exists(ensembl_species_fname):
+    genome_species_fname = os.path.join(pybio.config.genomes_folder, "genome_species.tab")
+    if not os.path.exists(genome_species_fname):
         pybio.core.genomes.list_species()
-    f = open(os.path.join(pybio.config.genomes_folder, "ensembl_species.tab"), "rt")
+    f = open(os.path.join(pybio.config.genomes_folder, "genome_species.tab"), "rt")
     header = f.readline().replace("\r", "").replace("\n", "").split("\t")
     r = f.readline()
     while r:
@@ -92,11 +93,11 @@ def init():
         r = f.readline()
     f.close()
 
-def prepare(species="homo_sapiens", ensembl_version=None):
+def prepare(species="homo_sapiens", genome_version=None):
     print("[pybio] {species}: processing annotation".format(species=species))
-    if ensembl_version==None:
-        ensembl_version = pybio.config.ensembl_version_latest
-    annotation_folder = os.path.join(pybio.config.genomes_folder, "%s.annotation.ensembl%s" % (species, ensembl_version))
+    if genome_version==None:
+        genome_version = pybio.config.ensembl_version_latest
+    annotation_folder = os.path.join(pybio.config.genomes_folder, "%s.annotation.%s" % (species, genome_version))
     chr_list = set()
     gtf_fields = ["chr", "source", "feature", "start", "stop", "a1", "strand", "a2", "atts"]
     gtf_files = glob.glob(os.path.join(annotation_folder, "*.gtf.gz"))
@@ -137,6 +138,8 @@ def prepare(species="homo_sapiens", ensembl_version=None):
             transcript = Transcript(atts["transcript_id"], atts["gene_id"], data["start"], data["stop"])
             transcripts_db[atts["transcript_id"]] = transcript
         if data["feature"] == "exon":
+            if atts.get("exon_id", None)==None:
+                atts["exon_id"] = f"exon_{data['start']}_{data['stop']}"
             exon = Exon(atts["exon_id"], atts["transcript_id"], data["start"], data["stop"])
             exons_db[atts["exon_id"]] = exon
         if data["feature"] == "three_prime_utr":
@@ -159,13 +162,13 @@ def prepare(species="homo_sapiens", ensembl_version=None):
     pickle.dump(transcripts_db, open(os.path.join(annotation_folder, "transcripts_db.pickle"), "wb"))
     pickle.dump(genes_db, open(os.path.join(annotation_folder, "genes_db.pickle"), "wb"))
 
-def seq_direct(species, chr, strand, start, stop, flank="N", ensembl_version=None):
+def seq_direct(species, chr, strand, start, stop, flank="N", genome_version=None):
     """
     Returns chromosome sequence from [start..stop]
     Note: negative strand returns reverse complement; coordinates are 0-based, left+right inclusive; start must be < stop;
     """
-    if ensembl_version==None:
-        ensembl_version = pybio.config.ensembl_version_latest
+    if genome_version==None:
+        genome_version = pybio.config.ensembl_version_latest
     if start>stop:
         start, stop = stop, start
     assert(start<=stop)
@@ -173,7 +176,7 @@ def seq_direct(species, chr, strand, start, stop, flank="N", ensembl_version=Non
     if start<0:
         seq = flank * abs(start)
     start = max(0, start) # start can only be non-negative
-    fasta_fname = os.path.join(pybio.config.genomes_folder, "%s.assembly.ensembl%s" % (species, ensembl_version), "%s.string" % chr)
+    fasta_fname = os.path.join(pybio.config.genomes_folder, "%s.assembly.%s" % (species, genome_version), "%s.string" % chr)
     if not os.path.exists(fasta_fname):
         return ""
     f = open(fasta_fname, "rt")
@@ -187,7 +190,7 @@ def seq_direct(species, chr, strand, start, stop, flank="N", ensembl_version=Non
         return seq
 
 # get genomic sequence
-def seq(species, chr, strand, pos, start=0, stop=0, flank="N", ensembl_version=None):
+def seq(species, chr, strand, pos, start=0, stop=0, flank="N", genome_version=None):
     """
     Returns chromosome sequence from [pos-start..pos+stop]
     Note: negative strand returns reverse complement; coordinates are 0-based, left+right inclusive; start must be < stop;
@@ -199,7 +202,7 @@ def seq(species, chr, strand, pos, start=0, stop=0, flank="N", ensembl_version=N
     else:
         gstart = pos-stop
         gstop = pos-start
-    return seq_direct(species, chr, strand, gstart, gstop, ensembl_version=ensembl_version)
+    return seq_direct(species, chr, strand, gstart, gstop, genome_version=genome_version)
 
 def make_motifs(motif_size):
     motifs = []
@@ -230,11 +233,12 @@ def url_exists(path):
     r = requests.head(path)
     return r.status_code == requests.codes.ok
 
-def download_assembly(species="homo_sapiens", ensembl_version=None):
-    if ensembl_version==None:
+def download_assembly(species, genome_version):
+    if genome_version==None:
         return False
     species_capital = species.capitalize()
     assembly = species_db[species]["assembly"]
+    ensembl_version = genome_version.replace("ensembl", "")
 
     # first, try primary assembly
     fasta_url = f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.primary_assembly.fa.gz"
@@ -244,70 +248,75 @@ def download_assembly(species="homo_sapiens", ensembl_version=None):
 
     script = """
 cd {gdir}
-rm {species}.assembly.ensembl{ensembl_version}/*
-mkdir {species}.assembly.ensembl{ensembl_version}
-cd {species}.assembly.ensembl{ensembl_version}
+rm {species}.assembly.{genome_version}/*
+mkdir {species}.assembly.{genome_version}
+cd {species}.assembly.{genome_version}
 wget {fasta_url} -O {species}.fasta.gz
 gunzip -f {species}.fasta.gz
 python3 -c "import pybio; pybio.data.Fasta('{species}.fasta').split()"
 """
 
     # download FASTA and split
-    print(f"[pybio.core.genomes] download FASTA for {species}.ensembl{ensembl_version}")
-    command = script.format(gdir=pybio.config.genomes_folder, fasta_url=fasta_url, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version)
+    print(f"[pybio.core.genomes] download FASTA for {species}.{genome_version}")
+    command = script.format(gdir=pybio.config.genomes_folder, fasta_url=fasta_url, species=species, species_capital=species_capital, assembly=assembly, genome_version=genome_version, ensembl_version=ensembl_version)
     os.system(command)
 
-def download_annotation(species="homo_sapiens", ensembl_version=None):
-    if ensembl_version==None:
+def download_annotation(species, genome_version):
+    if genome_version==None:
         return False
     species_capital = species.capitalize()
     assembly = species_db[species]["assembly"]
+    ensembl_version = genome_version.replace("ensembl", "")
 
     script = """
 cd {gdir}
-rm {species}.annotation.ensembl{ensembl_version}/*
-mkdir {species}.annotation.ensembl{ensembl_version}
-cd {species}.annotation.ensembl{ensembl_version}
+rm {species}.annotation.{genome_version}/*
+mkdir {species}.annotation.{genome_version}
+cd {species}.annotation.{genome_version}
 # https://www.biostars.org/p/279235/#279238
-wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz -O {species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz
+wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz -O {species}.gtf.gz
 """
     # download GTF
-    print(f"[pybio.core.genomes] download annotation GTF for {species}.ensembl{ensembl_version}")
-    command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version)
+    print(f"[pybio.core.genomes] download annotation GTF for {species}.{genome_version}")
+    command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
     os.system(command)
 
-def star_index(species="hg38", ensembl_version=None):
+def star_index(species, genome_version):
     species_capital = species.capitalize()
     assembly = species_db[species]["assembly"]
+    ensembl_version = genome_version.replace("ensembl", "")
     script = """
 cd {gdir}
-rm {species}.assembly.ensembl{ensembl_version}.star/*
-mkdir {species}.assembly.ensembl{ensembl_version}.star
-gunzip {species}.annotation.ensembl{ensembl_version}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz
-STAR --runMode genomeGenerate --genomeDir {species}.assembly.ensembl{ensembl_version}.star --genomeFastaFiles {species}.assembly.ensembl{ensembl_version}/{species}.fasta --runThreadN 4 --sjdbGTFfile {species}.annotation.ensembl{ensembl_version}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf
-gzip -f {species}.annotation.ensembl{ensembl_version}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf
+rm {species}.assembly.{genome_version}.star/*
+mkdir {species}.assembly.{genome_version}.star
+gunzip {species}.annotation.{genome_version}/{species}.gtf.gz
+STAR --runMode genomeGenerate --genomeDir {species}.assembly.{genome_version}.star --genomeFastaFiles {species}.assembly.{genome_version}/{species}.fasta --runThreadN 4 --sjdbGTFfile {species}.annotation.{genome_version}/{species}.gtf
+gzip -f {species}.annotation.{genome_version}/{species}.gtf
 """
-    command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version)
+    command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
     os.system(command)
 
-def salmon_index(species="hg38", ensembl_version=None):
+def salmon_index(species, genome_version):
     species_capital = species.capitalize()
     assembly = species_db[species]["assembly"]
+    ensembl_version = genome_version.replace("ensembl", "")
     script = """
 cd {gdir}
-rm {species}.transcripts.ensembl{ensembl_version}/*
-mkdir {species}.transcripts.ensembl{ensembl_version}
-cd {species}.transcripts.ensembl{ensembl_version}
-wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/cdna/{species_capital}.{assembly}.cdna.all.fa.gz
+rm {species}.transcripts.{genome_version}/*
+mkdir {species}.transcripts.{genome_version}
+cd {species}.transcripts.{genome_version}
+wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/cdna/{species_capital}.{assembly}.cdna.all.fa.gz -O {species}.transcripts.fasta.gz
 
 cd {gdir}
-salmon index -t {species}.transcripts.ensembl{ensembl_version}/{species_capital}.{assembly}.cdna.all.fa.gz -i {species}.transcripts.ensembl{ensembl_version}.salmon
+salmon index -t {species}.transcripts.{genome_version}/{species}.transcripts.fasta.gz -i {species}.transcripts.{genome_version}.salmon
 """
-    command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version)
+    command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
     os.system(command)
 
-def list_species(ensembl_version=109):
+def list_species():
     print("[pybio.core.genomes] getting information about all available species from Ensembl, this is done once and takes 1 minute")
+    genome_version = pybio.config.ensembl_version_latest
+    ensembl_version = genome_version.replace("ensembl", "")
     from bs4 import BeautifulSoup
     import requests
     species_db = {}
@@ -315,7 +324,7 @@ def list_species(ensembl_version=109):
         page = requests.get(url).text
         soup = BeautifulSoup(page, 'html.parser')
         return [node.get('href')[:-1] for node in soup.find_all('a') if node.get('href').endswith(ext)]
-    f = open(os.path.join(pybio.config.genomes_folder, "ensembl_species.tab"), "wt")
+    f = open(os.path.join(pybio.config.genomes_folder, "genome_species.tab"), "wt")
     f.write("species\tassembly\tensembl_version\n")
     for species in listFD(f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/", "/")[1:]:
         dna_folder_url = f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/"
@@ -332,30 +341,30 @@ def list_species(ensembl_version=109):
         f.write(f"{species}\t{species_assembly}\t{ensembl_version}\n")
         assert(species.capitalize()==species_long)
     f.close()
-    print("[pybio.core.genomes] species list downloaded to:", os.path.join(pybio.config.genomes_folder, "ensembl_species.tab"))
+    print("[pybio.core.genomes] species list downloaded to:", os.path.join(pybio.config.genomes_folder, "genome_species.tab"))
     print("[pybio.core.genomes] example download of fasta/gtf/annotation for homo_sapiens:")
-    print("pybio ensembl homo_sapiens [ensembl_version]")
+    print("pybio genome homo_sapiens 109")
 
-def load(species, ensembl_version=None):
+def load(species, genome_version=None):
     global gene_bins_db
     global genes_db
     global transcripts_db
     global exons_db
     global genome_loaded
-    if ensembl_version==None:
-        ensembl_version = pybio.config.ensembl_version_latest
-    print(f"[pybio] loading genome annotation for {species} with Ensembl version {ensembl_version}")
-    annotation_folder = os.path.join(pybio.config.genomes_folder, f"{species}.annotation.ensembl{ensembl_version}")
+    if genome_version==None:
+        genome_version = pybio.config.ensembl_version_latest
+    print(f"[pybio] loading genome annotation for {species} with Ensembl version {genome_version}")
+    annotation_folder = os.path.join(pybio.config.genomes_folder, f"{species}.annotation.{genome_version}")
     gene_bins_db = pickle.load(open(os.path.join(annotation_folder, "gene_bins_db.pickle"), "rb"))
     genes_db = pickle.load(open(os.path.join(annotation_folder, "genes_db.pickle"), "rb"))
-    genome_loaded = (species, ensembl_version)
+    genome_loaded = (species, genome_version)
 
-def annotate(species, chr, strand, pos, ensembl_version=None):
+def annotate(species, chr, strand, pos, genome_version=None):
     global genome_loaded
-    if ensembl_version==None:
-        ensembl_version = pybio.config.ensembl_version_latest
-    if genome_loaded!=(species, ensembl_version):
-        load(species, ensembl_version)
+    if genome_version==None:
+        genome_version = pybio.config.ensembl_version_latest
+    if genome_loaded!=(species, genome_version):
+        load(species, genome_version)
     genes = set()
     transcripts = set()
     exons = set()
