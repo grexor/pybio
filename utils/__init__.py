@@ -318,3 +318,8 @@ def save_pickle(obj, fname):
 
 def load_pickle(fname):
     return pickle.load(open(fname, "rb"))
+
+# is a specific software installed on the system? # uses which to check
+def is_tool(name):
+    from shutil import which
+    return which(name) is not None
