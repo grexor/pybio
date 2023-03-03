@@ -7,7 +7,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import pybio
 import pybio.core
-import json
 
 version = "0.3"
 
@@ -22,10 +21,6 @@ parser.add_argument("-nostar", "--nostar", help="Do not process genome with STAR
 parser.add_argument("-nosalmon", "--nosalmon", help="Do not process transcripts with salmon (index)", action="store_true")
 args = parser.parse_args()
 
-def is_tool(name):
-    from shutil import which
-    return which(name) is not None
-
 if args.version:
     print(f"pybio v{version}, https://github.com/grexor/pybio")
     print("---")
@@ -37,45 +32,6 @@ if len(args.commands)>0:
         try:
             ensembl_version = args.commands[2]
         except:
-            ensembl_version = pybio.config.ensembl_version_latest
+            ensembl_version = pybio.config.ensembl_version_latest            
+        pybio.genome_download_prepare(species, ensembl_version, args)
 
-        print(f"[pybio ensembl] species {species} and Ensembl version {ensembl_version}")
-
-        genomes_ready_fname = os.path.join(pybio.config.genomes_folder, "genomes_ready.json")
-        if os.path.exists(genomes_ready_fname):
-            genomes_ready = json.load(open(genomes_ready_fname, "rt"))
-        else:
-            genomes_ready = {}
-
-        assembly_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.ensembl{ensembl_version}")
-        if not genomes_ready.get(species, {}).get(ensembl_version, {}).get("assembly", False) or not os.path.exists(assembly_folder):
-            pybio.core.genomes.download_assembly(species, ensembl_version)
-            genomes_ready.setdefault(species, {}).setdefault(ensembl_version, {}).setdefault("assembly", True)
-        else:
-            print(f"[pybio ensembl] FASTA ready at {pybio.config.genomes_folder}/{species}.assembly.ensembl{ensembl_version}")
-
-        annotation_folder = os.path.join(pybio.config.genomes_folder, f"{species}.annotation.ensembl{ensembl_version}")
-        if not genomes_ready.get(species, {}).get(ensembl_version, {}).get("annotation", False) or not os.path.exists(annotation_folder):
-            pybio.core.genomes.download_annotation(species, ensembl_version)
-            pybio.core.genomes.prepare(species, ensembl_version)
-            genomes_ready.setdefault(species, {}).setdefault(ensembl_version, {}).setdefault("annotation", True)
-        else:
-            print(f"[pybio ensembl] genome annotation at {pybio.config.genomes_folder}/{species}.annotation.ensembl{ensembl_version}")
-
-        if is_tool("STAR") and not args.nostar:
-            star_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.ensembl{ensembl_version}.star")
-            if not genomes_ready.get(species, {}).get(ensembl_version, {}).get("STAR", False) or not os.path.exists(star_folder):
-                pybio.core.genomes.star_index(species, ensembl_version)
-                genomes_ready.setdefault(species, {}).setdefault(ensembl_version, {}).setdefault("STAR", True)
-            else:
-                print(f"[pybio ensembl] STAR index ready at {pybio.config.genomes_folder}/{species}.annotation.ensembl{ensembl_version}.star")
-
-        if is_tool("salmon") and not args.nosalmon:
-            salmon_folder = os.path.join(pybio.config.genomes_folder, f"{species}.transcripts.ensembl{ensembl_version}.salmon")
-            if not genomes_ready.get(species, {}).get(ensembl_version, {}).get("salmon", False) or not os.path.exists(salmon_folder):
-                pybio.core.genomes.salmon_index(species, ensembl_version)
-                genomes_ready.setdefault(species, {}).setdefault(ensembl_version, {}).setdefault("salmon", True)
-            else:
-                print(f"[pybio ensembl] salmon index ready at {pybio.config.genomes_folder}/{species}.annotation.ensembl{ensembl_version}.salmon")
-
-        json.dump(genomes_ready, open(genomes_ready_fname, "wt"))

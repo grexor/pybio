@@ -28,18 +28,6 @@ genome_loaded = None
 code = {"R": ["A", "G"], "Y": ["C", "T"], "S": ["G", "C"], "W": ["A", "T"]}
 revCode = {'A': 'T', 'T': 'A', 'U': 'A', 'G': 'C', 'C': 'G', 'R': 'Y', 'Y': 'R', 'K': 'M', 'M': 'K', 'S': 'S', 'W': 'W', 'B': 'V', 'D': 'H', 'H': 'D', 'V': 'B', 'N': 'N'}
 revCodeRYSW = {'R' : 'Y', 'Y' : 'R', 'S' : 'S', 'W' : 'W'}
-chr_uscs_ensembl = {}
-chr_ensembl_ucsc = {}
-
-# ensembl names
-ensembl_longA = {"hg38":"homo_sapiens"}
-ensembl_longB = {"hg38":"Homo_sapiens"}
-ensembl_longC = {"hg38":"GRCh38"}
-
-# load existing annotations
-genes = {}
-intervals = {}
-linear = {}
 
 class Gene:
 
@@ -91,7 +79,6 @@ class Utr5:
     self.transcript.utr5 = self
 
 def init():
-    #load_chr_ucsc_ensembl()
     ensembl_species_fname = os.path.join(pybio.config.genomes_folder, "ensembl_species.tab")
     if not os.path.exists(ensembl_species_fname):
         pybio.core.genomes.list_species()
@@ -106,14 +93,12 @@ def init():
     f.close()
 
 def prepare(species="homo_sapiens", ensembl_version=None):
+    print("[pybio] {species}: processing annotation".format(species=species))
     if ensembl_version==None:
         ensembl_version = pybio.config.ensembl_version_latest
-    print("[pybio] {species}: processing annotation".format(species=species))
-
     annotation_folder = os.path.join(pybio.config.genomes_folder, "%s.annotation.ensembl%s" % (species, ensembl_version))
     chr_list = set()
     gtf_fields = ["chr", "source", "feature", "start", "stop", "a1", "strand", "a2", "atts"]
-
     gtf_files = glob.glob(os.path.join(annotation_folder, "*.gtf.gz"))
     if len(gtf_files)==0:
         gtf_files = glob.glob(os.path.join(annotation_folder, "*.gtf"))
@@ -122,7 +107,6 @@ def prepare(species="homo_sapiens", ensembl_version=None):
         f = gzip.open(gtf_fname, "rt")
     else:
         f = open(gtf_fname, "rt")
-
     clines = 0
     r = f.readline()
     while r:
