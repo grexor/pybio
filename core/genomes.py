@@ -289,9 +289,10 @@ def star_index(species, genome_version):
 cd {gdir}
 rm {species}.assembly.{genome_version}.star/*
 mkdir {species}.assembly.{genome_version}.star
-gunzip {species}.annotation.{genome_version}/{species}.gtf.gz
-STAR --runMode genomeGenerate --genomeDir {species}.assembly.{genome_version}.star --genomeFastaFiles {species}.assembly.{genome_version}/{species}.fasta --runThreadN 4 --sjdbGTFfile {species}.annotation.{genome_version}/{species}.gtf
-gzip -f {species}.annotation.{genome_version}/{species}.gtf
+cd {species}.assembly.{genome_version}.star
+gunzip ../{species}.annotation.{genome_version}/{species}.gtf.gz
+STAR --runMode genomeGenerate --genomeDir ../{species}.assembly.{genome_version}.star --genomeFastaFiles ../{species}.assembly.{genome_version}/{species}.fasta --runThreadN 4 --sjdbGTFfile ../{species}.annotation.{genome_version}/{species}.gtf
+gzip -f ../{species}.annotation.{genome_version}/{species}.gtf
 """
     command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
     os.system(command)
