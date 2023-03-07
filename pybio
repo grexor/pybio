@@ -5,14 +5,15 @@ import sys
 import argparse
 import seaborn as sns
 import matplotlib.pyplot as plt
-import pybio
-import pybio.core
 
 version = "0.3"
 
 print(f"[pybio] v{version}")
 print("Github: https://github.com/grexor/pybio")
 print()
+
+import pybio
+import pybio.core
 
 parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument('commands', help="which command to run?", nargs='*')
@@ -57,6 +58,7 @@ if len(args.commands)>0:
             print()
             print("$ pybio genome homo_sapiens")
             print()
-
-            sys.exit(1)
         pybio.genome_prepare(species, genome_version, args)
+    if args.commands[0]=="config":
+        pybio.config.change()
+
