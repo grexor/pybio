@@ -32,18 +32,20 @@ Temporarily the most direct way of installing pybio is to clone the repository:
 git clone https://github.com/grexor/pybio.git
 ```
 
-Enter the cloned pybio folder and copy the config file from the template:
-
-```
-cp pybio.config.template pybio.config
-```
-
-Finally, change your PATH and PYTHONPATH environment variables: for example, if you cloned to `/home/user/pybio`, you would add the paths like so:
+Add pybio to your PATH and PYTHONPATH environment variables: for example, if you cloned to `/home/user/pybio`, you would add the paths like so:
 
 ```
 export PYTHONPATH=$PYTHONPATH:/home/user # to import pybio in python with "import pybio"
 export PATH=$PATH:/home/user/pybio       # to run pybio on the command line with "pybio"
 ```
+
+Run pybio for the first time for setup (change default parameters if needed):
+
+```
+$ pybio
+```
+
+You can always come back to the configuration by running `pybio config`.
 
 Voila.
 

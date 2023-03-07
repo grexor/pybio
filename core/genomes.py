@@ -325,6 +325,8 @@ def list_species():
         page = requests.get(url).text
         soup = BeautifulSoup(page, 'html.parser')
         return [node.get('href')[:-1] for node in soup.find_all('a') if node.get('href').endswith(ext)]
+    if not os.path.exists(pybio.config.genomes_folder):
+        os.makedirs(pybio.config.genomes_folder)
     f = open(os.path.join(pybio.config.genomes_folder, "genome_species.tab"), "wt")
     f.write("species\tassembly\tensembl_version\n")
     for species in listFD(f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/", "/")[1:]:
