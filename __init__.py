@@ -27,21 +27,20 @@ pybio.core.genomes.init()
 
 def genome_download(species, genome_version, args):
     print(f"[pybio genome_download] species {species} and version {genome_version}")
-
     genomes_ready_fname = os.path.join(pybio.config.genomes_folder, "genomes_ready.json")
     if os.path.exists(genomes_ready_fname):
         genomes_ready = json.load(open(genomes_ready_fname, "rt"))
     else:
         genomes_ready = {}
-
+    genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("assembly", False)
+    genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("annotation", False)
     assembly_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.{genome_version}")
     if not genomes_ready.get(species, {}).get(genome_version, {}).get("assembly", False) or not os.path.exists(assembly_folder):
         return_code = pybio.core.genomes.download_assembly(species, genome_version)
-        print("EEE", return_code)
         if return_code==0:
-            genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("assembly", True)
+            genomes_ready[species][genome_version]["assembly"] = True
         else:
-            genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("assembly", False)
+            genomes_ready[species][genome_version]["assembly"] = False
     else:
         print(f"[pybio genome] FASTA ready at {pybio.config.genomes_folder}/{species}.assembly.{genome_version}")
 
@@ -51,9 +50,9 @@ def genome_download(species, genome_version, args):
         if return_code==0:
             return_code = pybio.core.genomes.prepare(species, genome_version)
         if return_code==0:
-            genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("annotation", True)
+            genomes_ready[species][genome_version]["annotation"] = True
         else:
-            genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("annotation", False)
+            genomes_ready[species][genome_version]["annotation"] = False
     else:
         print(f"[pybio genome] genome annotation at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}")
 
@@ -66,6 +65,8 @@ def genome_import(species, genome_version, args):
         genomes_ready = json.load(open(genomes_ready_fname, "rt"))
     else:
         genomes_ready = {}
+    genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("assembly", False)
+    genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("annotation", False)
     assembly_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.{genome_version}")
     if not genomes_ready.get(species, {}).get(genome_version, {}).get("assembly", False) or not os.path.exists(assembly_folder):
         fasta_fname = args.fasta
@@ -76,9 +77,9 @@ def genome_import(species, genome_version, args):
             os.system(f"mkdir {assembly_folder}; cp {fasta_fname} {assembly_folder}/{species}.fasta")
         return_code = os.system("python3 -c \"import pybio; pybio.data.Fasta('{assembly_folder}/{species}.fasta').split()\"".format(assembly_folder=assembly_folder, species=species))
         if return_code==0:
-            genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("assembly", True)
+            genomes_ready[species][genome_version]["assembly"] = True
         else:
-            genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("assembly", False)
+            genomes_ready[species][genome_version]["assembly"] = False
     else:
         print(f"[pybio genome] FASTA ready at {pybio.config.genomes_folder}/{species}.assembly.{genome_version}")
 
@@ -92,9 +93,9 @@ def genome_import(species, genome_version, args):
             os.system(f"mkdir {annotation_folder}; cp {gtf_fname} {annotation_folder}/{species}.gtf; gzip -f {annotation_folder}/{species}.gtf")
         return_code = pybio.core.genomes.prepare(species, genome_version)
         if return_code==0:
-            genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("annotation", True)
+            genomes_ready[species][genome_version]["annotation"] = True
         else:
-            genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("annotation", False)
+            genomes_ready[species][genome_version]["annotation"] = False
     else:
         print(f"[pybio genome] genome annotation at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}")
 
@@ -106,14 +107,16 @@ def genome_prepare(species, genome_version, args):
         genomes_ready = json.load(open(genomes_ready_fname, "rt"))
     else:
         genomes_ready = {}
+    genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("assembly", False)
+    genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("annotation", False)
     if pybio.utils.is_tool("STAR") and not args.nostar:
         star_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.{genome_version}.star")
         if not genomes_ready.get(species, {}).get(genome_version, {}).get("STAR", False) or not os.path.exists(star_folder):
             return_code = pybio.core.genomes.star_index(species, genome_version)
             if return_code==0:
-                genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("STAR", True)
+                genomes_ready[species][genome_version]["STAR"] = True
             else:
-                genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("STAR", False)
+                genomes_ready[species][genome_version]["STAR"] = False
         else:
             print(f"[pybio genome] STAR index ready at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}.star")
 
@@ -122,9 +125,9 @@ def genome_prepare(species, genome_version, args):
         if not genomes_ready.get(species, {}).get(genome_version, {}).get("salmon", False) or not os.path.exists(salmon_folder):
             return_code = pybio.core.genomes.salmon_index(species, genome_version)
             if return_code==0:
-                genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("salmon", True)
+                genomes_ready[species][genome_version]["salmon"] = True
             else:
-                genomes_ready.setdefault(species, {}).setdefault(genome_version, {}).setdefault("salmon", False)
+                genomes_ready[species][genome_version]["salmon"] = False
         else:
             print(f"[pybio genome] salmon index ready at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}.salmon")
 
