@@ -37,7 +37,12 @@ if len(args.commands)>0:
         if args.genome_version!=None:
             genome_version = args.genome_version
         else:
-            genome_version = pybio.config.ensembl_version_latest
+            try:
+                genome_version = args.commands[2]
+                if genome_version.find("ensembl")==-1:
+                    genome_version = "ensembl"+genome_version
+            except:
+                genome_version = pybio.config.ensembl_version_latest
         if genome_version.find("ensembl")!=-1:
             pybio.genome_download(species, genome_version, args)
         elif args.fasta!=None and args.gtf!=None:
