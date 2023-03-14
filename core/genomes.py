@@ -161,6 +161,7 @@ def prepare(species="homo_sapiens", genome_version=None):
     pickle.dump(exons_db, open(os.path.join(annotation_folder, "exons_db.pickle"), "wb"))
     pickle.dump(transcripts_db, open(os.path.join(annotation_folder, "transcripts_db.pickle"), "wb"))
     pickle.dump(genes_db, open(os.path.join(annotation_folder, "genes_db.pickle"), "wb"))
+    return 0
 
 def seq_direct(species, chr, strand, start, stop, flank="N", genome_version=None):
     """
@@ -259,7 +260,7 @@ python3 -c "import pybio; pybio.data.Fasta('{species}.fasta').split()"
     # download FASTA and split
     print(f"[pybio.core.genomes] download FASTA for {species}.{genome_version}")
     command = script.format(gdir=pybio.config.genomes_folder, fasta_url=fasta_url, species=species, species_capital=species_capital, assembly=assembly, genome_version=genome_version, ensembl_version=ensembl_version)
-    os.system(command)
+    return os.system(command)
 
 def download_annotation(species, genome_version):
     if genome_version==None:
@@ -279,7 +280,7 @@ wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/gtf/{species}/{species_
     # download GTF
     print(f"[pybio.core.genomes] download annotation GTF for {species}.{genome_version}")
     command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
-    os.system(command)
+    return os.system(command)
 
 def star_index(species, genome_version):
     species_capital = species.capitalize()
@@ -295,7 +296,7 @@ STAR --runMode genomeGenerate --genomeDir ../{species}.assembly.{genome_version}
 gzip -f ../{species}.annotation.{genome_version}/{species}.gtf
 """
     command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
-    os.system(command)
+    return os.system(command)
 
 def salmon_index(species, genome_version):
     species_capital = species.capitalize()
@@ -312,7 +313,7 @@ cd {gdir}
 salmon index -t {species}.transcripts.{genome_version}/{species}.transcripts.fasta.gz -i {species}.transcripts.{genome_version}.salmon
 """
     command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
-    os.system(command)
+    return os.system(command)
 
 def list_species():
     print("[pybio.core.genomes] getting information about all available species from Ensembl, this is done once and takes 1 minute")
