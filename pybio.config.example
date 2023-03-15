@@ -1,3 +1,4 @@
 # if no leading /, all paths (folders) are relative to pybio root folder
 genomes_folder="genomes"
-ensembl_version_latest="ensembl109"
+ensembl_ftp="https://ftp.ensembl.org/pub"
+ensemblgenomes_ftp="https://ftp.ensemblgenomes.ebi.ac.uk/pub"
