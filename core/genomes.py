@@ -82,21 +82,22 @@ class Utr5:
 def init():
     genome_species_fname = os.path.join(pybio.config.genomes_folder, "genome_species.tab")
     if not os.path.exists(genome_species_fname):
-        pybio.core.genomes.list_species()
+        pybio.core.genomes.list_species_ensembl()
     f = open(os.path.join(pybio.config.genomes_folder, "genome_species.tab"), "rt")
     header = f.readline().replace("\r", "").replace("\n", "").split("\t")
     r = f.readline()
     while r:
         r = r.replace("\r", "").replace("\n", "").split("\t")
         data = dict(zip(header, r))
-        species_db[data["species"]] = {"assembly": data["assembly"]}
+        species_db[data["species"]] = {"assembly": data["assembly"], "genome_version": data["genome_version"], "provider": data["provider"], "provider_subfolder": data["provider_subfolder"]}
         r = f.readline()
     f.close()
 
 def prepare(species="homo_sapiens", genome_version=None):
     print("[pybio] {species}: processing annotation".format(species=species))
+    provider = species_db[species]["provider"]
     if genome_version==None:
-        genome_version = pybio.config.ensembl_version_latest
+        genome_version = species_db[species]["ensembl_version"]
     annotation_folder = os.path.join(pybio.config.genomes_folder, "%s.annotation.%s" % (species, genome_version))
     chr_list = set()
     gtf_fields = ["chr", "source", "feature", "start", "stop", "a1", "strand", "a2", "atts"]
@@ -246,7 +247,9 @@ def download_assembly(species, genome_version):
     # no? download the toplevel
     if not url_exists(fasta_url):
         fasta_url = f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.toplevel.fa.gz"
-
+    # no? download nonchromosomal
+    if not url_exists(fasta_url):
+        fasta_url = f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.nonchromosomal.fa.gz"
     script = """
 cd {gdir}
 rm {species}.assembly.{genome_version}/*
@@ -318,10 +321,32 @@ salmon index -t {species}.transcripts.{genome_version}/{species}.transcripts.fas
     command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
     return os.system(command)
 
-def list_species():
-    print("[pybio.core.genomes] getting information about all available species from Ensembl, this is done once and takes 1 minute")
-    genome_version = pybio.config.ensembl_version_latest
-    ensembl_version = genome_version.replace("ensembl", "")
+def get_latest_ensembl():
+    import requests, sys
+    server = "https://rest.ensembl.org"
+    ext = "/info/data/?"
+    r = requests.get(server+ext, headers={ "Content-Type" : "application/json"})
+    if not r.ok:
+        r.raise_for_status()
+        sys.exit()
+    decoded = r.json()
+    return str(decoded["releases"][0])
+
+def get_latest_ensemblgenomes():
+    import requests, sys   
+    server = "https://rest.ensembl.org"
+    ext = "/info/eg_version?"
+    r = requests.get(server+ext, headers={ "Content-Type" : "application/json"})
+    if not r.ok:
+        r.raise_for_status()
+        sys.exit()
+    decoded = r.json()
+    return str(decoded["version"])
+
+def list_species_ensembl():
+    print("[pybio.core.genomes] Species list from Ensembl; done once and takes ~ 1 minute")
+    ensembl_version = get_latest_ensembl()
+    ensemblgenomes_version = get_latest_ensemblgenomes()
     from bs4 import BeautifulSoup
     import requests
     species_db = {}
@@ -332,11 +357,15 @@ def list_species():
     if not os.path.exists(pybio.config.genomes_folder):
         os.makedirs(pybio.config.genomes_folder)
     f = open(os.path.join(pybio.config.genomes_folder, "genome_species.tab"), "wt")
-    f.write("species\tassembly\tensembl_version\n")
+    f.write("species\tassembly\tprovider\tprovider_subfolder\tgenome_version\n")
     for species in listFD(f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/", "/")[1:]:
+        print(f"[pybio.core.genomes] Checking {species}" + " "*30, end="\r")
         dna_folder_url = f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/"
-        #fasta_file = listFD(dna_folder_url, ext='.dna.primary_assembly.fa.gz')
-        fasta_file = listFD(dna_folder_url, ext='.dna.toplevel.fa.gz')
+        fasta_file = listFD(dna_folder_url, ext='.dna.primary_assembly.fa.gz')
+        if len(fasta_file)==0:
+            fasta_file = listFD(dna_folder_url, ext='.dna.toplevel.fa.gz')
+        if len(fasta_file)==0:
+            fasta_file = listFD(dna_folder_url, ext='.dna.nonchromosomal.fa.gz')
         if len(fasta_file)==0:
             print(f"[pybio.core.genomes] skipping {species}, no fasta file found")
             continue
@@ -345,12 +374,32 @@ def list_species():
         species_long = species_assembly[0]
         species_assembly = ".".join(species_assembly[1:])
         species_db[species] = (species, species_assembly)
-        f.write(f"{species}\t{species_assembly}\t{ensembl_version}\n")
+        f.write(f"{species}\t{species_assembly}\tensembl\t\tensembl{ensembl_version}\n")
         assert(species.capitalize()==species_long)
+
+    for subfolder in ["plants", "fungi", "protists", "metazoa"]:
+        print(f"[pybio.core.genomes] Species list from Ensembl Genomes: {subfolder}; done once and takes ~ 1 minute")
+        for species in listFD(f"https://ftp.ensemblgenomes.ebi.ac.uk/pub/{subfolder}/release-{ensemblgenomes_version}/fasta/", "/")[1:]:
+            print(f"[pybio.core.genomes] Checking {species}" + " "*30, end="\r")
+            dna_folder_url = f"https://ftp.ensemblgenomes.ebi.ac.uk/pub/{subfolder}/release-{ensemblgenomes_version}/fasta/{species}/dna/"
+            fasta_file = listFD(dna_folder_url, ext='.dna.toplevel.fa.gz')
+            if len(fasta_file)==0:
+                print(f"[pybio.core.genomes] Skipping {species}, no fasta file found")
+                continue
+            fasta_file = fasta_file[0]
+            species_assembly = fasta_file.replace(".dna.toplevel.fa.g", "").split(".")
+            species_long = species_assembly[0]
+            species_assembly = ".".join(species_assembly[1:])
+            species_db[species] = (species, species_assembly)
+            f.write(f"{species}\t{species_assembly}\tensemblgenomes\t{subfolder}\tensemblgenomes{ensemblgenomes_version}\n")
+            assert(species.capitalize()==species_long)
+
     f.close()
-    print("[pybio.core.genomes] species list downloaded to:", os.path.join(pybio.config.genomes_folder, "genome_species.tab"))
-    print("[pybio.core.genomes] example download of fasta/gtf/annotation for homo_sapiens:")
-    print("pybio genome homo_sapiens 109")
+    print()
+    print("[pybio.core.genomes] Complete species list downloaded to:", os.path.join(pybio.config.genomes_folder, "genome_species.tab"))
+    print()
+    print("[pybio.core.genomes] Example command to download and process homo_sapiens genome:")
+    print("$ pybio genome homo_sapiens 109")
 
 def load(species, genome_version=None):
     global gene_bins_db
