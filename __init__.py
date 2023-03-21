@@ -97,6 +97,8 @@ def genome_import(species, genome_version, args):
             genomes_ready[species][genome_version]["annotation"] = True
         else:
             genomes_ready[species][genome_version]["annotation"] = False
+            genomes_ready[species][genome_version]["STAR"] = False
+            genomes_ready[species][genome_version]["salmon"] = False
     else:
         print(f"[pybio genome] genome annotation at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}")
     json.dump(genomes_ready, open(genomes_ready_fname, "wt"))

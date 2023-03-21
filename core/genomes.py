@@ -287,17 +287,23 @@ def download_annotation(species, genome_version):
     if subfolder!="":
         ftp_address = f"{ftp_address}/{subfolder}"
 
+    # first, try primary assembly
+    fasta_url = f"{ftp_address}/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz"
+    # no? download the toplevel
+    if not url_exists(fasta_url):
+        fasta_url = f"{ftp_address}/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.gtf.gz"
+
     script = """
 cd {gdir}
 rm {species}.annotation.{genome_version}/*
 mkdir {species}.annotation.{genome_version}
 cd {species}.annotation.{genome_version}
 # https://www.biostars.org/p/279235/#279238
-wget {ftp_address}/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz -O {species}.gtf.gz
+wget {fasta_url} -O {species}.gtf.gz
 """
     # download GTF
     print(f"[pybio.core.genomes] download annotation GTF for {species}.{genome_version}")
-    command = script.format(ftp_address=ftp_address, gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
+    command = script.format(fasta_url=fasta_url, gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
     return os.system(command)
 
 def star_index(species, genome_version):

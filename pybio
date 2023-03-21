@@ -32,6 +32,9 @@ if args.version:
 
 if len(args.commands)>0:
 
+    if args.commands[0]=="species":
+        os.system(f"cat {pybio.config.genomes_folder}/genome_species.tab")
+
     if args.commands[0]=="genome":
         species = args.commands[1]
         if args.genome_version!=None:

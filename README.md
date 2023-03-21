@@ -51,7 +51,7 @@ Voila.
 
 ### Quick Start
 
-One of the main strenghts of pybio is genomic loci search for diverse annotated features (genes -> transcripts -> exons + 5UTR + 3UTR).
+pybio is strongly integrated with Ensembl and provides genomic loci search for diverse annotated features (genes -> transcripts -> exons + 5UTR + 3UTR).
 
 Let's say we are interested in the human genome. First download and prepare the genome with a single command:
 
@@ -131,7 +131,7 @@ To download Ensembl genomes simply run a few commands on the command line. For e
 
 ```
 pybio ensembl homo_sapiens      # downloads the latest version of Ensembl homo_sapiens assembly and annotation
-pybio ensembl homo_sapiens 109  # downloads a specific version of Ensembl homo_sapiens assembly and annotation
+pybio ensembl homo_sapiens 109  # downloads a specific version (in this case, v109) of Ensembl homo_sapiens assembly and annotation
 ```
 
 This will download the FASTA sequence, GTF if you have STAR and salmon installed, will also build an index of the genome for both.
@@ -145,6 +145,33 @@ homo_sapiens.assembly.ensembl109.star        # STAR index, GTF annotation aware
 homo_sapiens.transcripts.ensembl109          # transcriptome, this is the Ensembl "cDNA" file in FASTA format
 homo_sapiens.transcripts.ensembl109.salmon   # Salmon index of the transcriptome
 ```
+
+pybio also supports the download of Ensembl Genomes (Ensembl Fungi, Ensembl Plants, Ensembl Protists, Ensembl Metazoa). You simply provide the name of the species on the command line to automagically download the genome, the assembly and prepare STAR and salmon indices.
+
+For example, to download the latest version of the Dictyostelium discoideum genome, you would write:
+
+```
+pybio genome dictyostelium_discoideum
+```
+
+Or to download the latest Arabidopsis thaliana genome, you would write:
+
+```
+pybio genome arabidopsis_thaliana
+```
+
+To see all available species, simply browse the `pybio/genomes/genome_species.tab` file (this file is located in your genomes data folder, by default usually `pybio/genomes`). You can also type `pybio species` and the list of all available Ensembl genomes will be returned on the command line.
+
+For example, to see all available arabidopsis genomes, you could run:
+
+```
+$ pybio species | grep arabidopsis
+arabidopsis_halleri	Ahal2.2	ensemblgenomes	plants	ensemblgenomes56
+arabidopsis_lyrata	v.1.0	ensemblgenomes	plants	ensemblgenomes56
+arabidopsis_thaliana	TAIR10	ensemblgenomes	plants	ensemblgenomes56
+```
+
+Voila.
 
 #### Retrieving genomic sequences
 
