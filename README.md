@@ -130,8 +130,8 @@ Here we provide basic `pybio` usage examples.
 To download Ensembl genomes simply run a few commands on the command line. For example:
 
 ```
-pybio ensembl homo_sapiens      # downloads the latest version of Ensembl homo_sapiens assembly and annotation
-pybio ensembl homo_sapiens 109  # downloads a specific version (in this case, v109) of Ensembl homo_sapiens assembly and annotation
+$ pybio ensembl homo_sapiens      # downloads the latest version of Ensembl homo_sapiens assembly and annotation
+$ pybio ensembl homo_sapiens 109  # downloads a specific version (in this case, v109) of Ensembl homo_sapiens assembly and annotation
 ```
 
 This will download the FASTA sequence, GTF if you have STAR and salmon installed, will also build an index of the genome for both.
@@ -151,21 +151,19 @@ pybio also supports the download of Ensembl Genomes (Ensembl Fungi, Ensembl Plan
 For example, to download the latest version of the Dictyostelium discoideum genome, you would write:
 
 ```
-pybio genome dictyostelium_discoideum
+$ pybio genome dictyostelium_discoideum
 ```
 
 Or to download the latest Arabidopsis thaliana genome, you would write:
 
 ```
-pybio genome arabidopsis_thaliana
+$ pybio genome arabidopsis_thaliana
 ```
 
-To see all available species, simply browse the `pybio/genomes/genome_species.tab` file (this file is located in your genomes data folder, by default usually `pybio/genomes`). You can also type `pybio species` and the list of all available Ensembl genomes will be returned on the command line.
-
-For example, to see all available arabidopsis genomes, you could run:
+To see all available species, simply run `pybio species`. Moreover, to see all available `arabidopsis` genomes, you could run:
 
 ```
-$ pybio species | grep arabidopsis
+$ pybio species arabidopsis
 arabidopsis_halleri	Ahal2.2	ensemblgenomes	plants	ensemblgenomes56
 arabidopsis_lyrata	v.1.0	ensemblgenomes	plants	ensemblgenomes56
 arabidopsis_thaliana	TAIR10	ensemblgenomes	plants	ensemblgenomes56
