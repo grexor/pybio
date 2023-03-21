@@ -17,6 +17,10 @@ import requests
 
 process = psutil.Process(os.getpid())
 
+providers_ftp = {}
+providers_ftp["ensembl"] = "https://ftp.ensembl.org/pub"
+providers_ftp["ensemblgenomes"] = "https://ftp.ensemblgenomes.ebi.ac.uk/pub"
+
 genes_db = {}
 transcripts_db = {}
 exons_db = {}
@@ -241,15 +245,20 @@ def download_assembly(species, genome_version):
     species_capital = species.capitalize()
     assembly = species_db[species]["assembly"]
     ensembl_version = genome_version.replace("ensembl", "")
+    ensembl_version = ensembl_version.replace("genomes", "")
 
+    ftp_address = providers_ftp[species_db[species]["provider"]]
+    subfolder = species_db[species]["provider_subfolder"]
+    if subfolder!="":
+        ftp_address = f"{ftp_address}/{subfolder}"
     # first, try primary assembly
-    fasta_url = f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.primary_assembly.fa.gz"
+    fasta_url = f"{ftp_address}/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.primary_assembly.fa.gz"
     # no? download the toplevel
     if not url_exists(fasta_url):
-        fasta_url = f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.toplevel.fa.gz"
+        fasta_url = f"{ftp_address}/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.toplevel.fa.gz"
     # no? download nonchromosomal
     if not url_exists(fasta_url):
-        fasta_url = f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.nonchromosomal.fa.gz"
+        fasta_url = f"{ftp_address}/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.nonchromosomal.fa.gz"
     script = """
 cd {gdir}
 rm {species}.assembly.{genome_version}/*
@@ -271,6 +280,18 @@ def download_annotation(species, genome_version):
     species_capital = species.capitalize()
     assembly = species_db[species]["assembly"]
     ensembl_version = genome_version.replace("ensembl", "")
+    ensembl_version = ensembl_version.replace("genomes", "")
+
+    ftp_address = providers_ftp[species_db[species]["provider"]]
+    subfolder = species_db[species]["provider_subfolder"]
+    if subfolder!="":
+        ftp_address = f"{ftp_address}/{subfolder}"
+
+    # first, try primary assembly
+    fasta_url = f"{ftp_address}/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz"
+    # no? download the toplevel
+    if not url_exists(fasta_url):
+        fasta_url = f"{ftp_address}/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.gtf.gz"
 
     script = """
 cd {gdir}
@@ -278,17 +299,18 @@ rm {species}.annotation.{genome_version}/*
 mkdir {species}.annotation.{genome_version}
 cd {species}.annotation.{genome_version}
 # https://www.biostars.org/p/279235/#279238
-wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz -O {species}.gtf.gz
+wget {fasta_url} -O {species}.gtf.gz
 """
     # download GTF
     print(f"[pybio.core.genomes] download annotation GTF for {species}.{genome_version}")
-    command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
+    command = script.format(fasta_url=fasta_url, gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
     return os.system(command)
 
 def star_index(species, genome_version):
     species_capital = species.capitalize()
     assembly = species_db[species]["assembly"]
     ensembl_version = genome_version.replace("ensembl", "")
+    ensembl_version = ensembl_version.replace("genomes", "")
     script = """
 cd {gdir}
 rm {species}.assembly.{genome_version}.star/*
@@ -308,17 +330,23 @@ def salmon_index(species, genome_version):
     species_capital = species.capitalize()
     assembly = species_db[species]["assembly"]
     ensembl_version = genome_version.replace("ensembl", "")
+    ensembl_version = ensembl_version.replace("genomes", "")
+    ftp_address = providers_ftp[species_db[species]["provider"]]
+    subfolder = species_db[species]["provider_subfolder"]
+    if subfolder!="":
+        ftp_address = f"{ftp_address}/{subfolder}"
+    
     script = """
 cd {gdir}
 rm {species}.transcripts.{genome_version}/*
 mkdir {species}.transcripts.{genome_version}
 cd {species}.transcripts.{genome_version}
-wget ftp://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/cdna/{species_capital}.{assembly}.cdna.all.fa.gz -O {species}.transcripts.fasta.gz
+wget {ftp_address}/release-{ensembl_version}/fasta/{species}/cdna/{species_capital}.{assembly}.cdna.all.fa.gz -O {species}.transcripts.fasta.gz
 
 cd {gdir}
 salmon index -t {species}.transcripts.{genome_version}/{species}.transcripts.fasta.gz -i {species}.transcripts.{genome_version}.salmon
 """
-    command = script.format(gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
+    command = script.format(ftp_address=ftp_address, gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
     return os.system(command)
 
 def get_latest_ensembl():
