@@ -82,6 +82,7 @@ def genome_import(species, genome_version, args):
             genomes_ready[species][genome_version]["assembly"] = False
     else:
         print(f"[pybio genome] FASTA ready at {pybio.config.genomes_folder}/{species}.assembly.{genome_version}")
+    json.dump(genomes_ready, open(genomes_ready_fname, "wt"))
 
     annotation_folder = os.path.join(pybio.config.genomes_folder, f"{species}.annotation.{genome_version}")
     if not genomes_ready.get(species, {}).get(genome_version, {}).get("annotation", False) or not os.path.exists(annotation_folder):
@@ -98,7 +99,6 @@ def genome_import(species, genome_version, args):
             genomes_ready[species][genome_version]["annotation"] = False
     else:
         print(f"[pybio genome] genome annotation at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}")
-
     json.dump(genomes_ready, open(genomes_ready_fname, "wt"))
 
 def genome_prepare(species, genome_version, args):

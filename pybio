@@ -43,13 +43,15 @@ if len(args.commands)>0:
                     print("Unknown genome version, examples: ensembl109 or ensemblgenomes56")
                     sys.exit(1)
             except:
-                genome_version = pybio.core.genomes.species_db[species]["genome_version"]
+                genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", "")
         if genome_version.find("ensembl")!=-1:
             pybio.genome_download(species, genome_version, args)
+            pybio.genome_prepare(species, genome_version, args)
         elif args.fasta!=None and args.gtf!=None:
             pybio.genome_import(species, genome_version, args)
+            pybio.genome_prepare(species, genome_version, args)
         elif (args.fasta==None or args.gtf==None) and (genome_version.find("ensembl")==-1):
-            print("[pybio genome] Missing -fasta and -gtf file parameters for the given custom genome_version.")
+            print("[pybio genome] Missing -fasta and -gtf file parameters for the given species / genome version.")
             print("[pybio genome] To import a custom genome from your own FASTA and GTF files, an example call would be:")
             print()
             print("$ pybio genome homo_sapiens -fasta /path/to/fasta -gtf /path/to/gtf -genome_version version1")
@@ -64,7 +66,6 @@ if len(args.commands)>0:
             print()
             print("$ pybio genome homo_sapiens")
             print()
-        pybio.genome_prepare(species, genome_version, args)
     if args.commands[0]=="config":
         pybio.config.change()
 
