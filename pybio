@@ -21,7 +21,7 @@ parser.add_argument("-version", "--version", help="Print version", action="store
 parser.add_argument("-nostar", "--nostar", help="Do not process genome with STAR (index)", action="store_true")
 parser.add_argument("-nosalmon", "--nosalmon", help="Do not process transcripts with salmon (index)", action="store_true")
 parser.add_argument("-species", "--species", help="Species name, e.g. homo_sapiens")
-parser.add_argument("-genome_version", "--genome_version", help="Version of the genome, e.g. ensembl109")
+parser.add_argument("-genome_version", "--genome_version", help="Version of the genome, e.g. ensembl109; if not provided, the latest Ensembl version is used")
 parser.add_argument("-fasta", "--fasta", help="Fasta file to import")
 parser.add_argument("-gtf", "--gtf", help="GTF file to import")
 args = parser.parse_args()
@@ -40,9 +40,10 @@ if len(args.commands)>0:
             try:
                 genome_version = args.commands[2]
                 if genome_version.find("ensembl")==-1:
-                    genome_version = "ensembl"+genome_version
+                    print("Unknown genome version, examples: ensembl109 or ensemblgenomes56")
+                    sys.exit(1)
             except:
-                genome_version = pybio.config.ensembl_version_latest
+                genome_version = pybio.core.genomes.species_db[species]["genome_version"]
         if genome_version.find("ensembl")!=-1:
             pybio.genome_download(species, genome_version, args)
         elif args.fasta!=None and args.gtf!=None:
@@ -51,13 +52,13 @@ if len(args.commands)>0:
             print("[pybio genome] Missing -fasta and -gtf file parameters for the given custom genome_version.")
             print("[pybio genome] To import a custom genome from your own FASTA and GTF files, an example call would be:")
             print()
-            print("$ pybio genome homo_sapiens -fasta /path/to/fasta -gtf /path/to/gtf -genome_version mygenome1")
+            print("$ pybio genome homo_sapiens -fasta /path/to/fasta -gtf /path/to/gtf -genome_version version1")
             print()
-            print("The above imported genome would be reachable under species \"homo_sapiens\" and genome_version \"mygenome1\".")
+            print("The above imported genome would be reachable under species \"homo_sapiens\" and genome_version \"version1\".")
             print("---")
             print("[pybio genome] To import a specific Ensembl genome+annotation version for a species:")
             print()
-            print("$ pybio genome homo_sapiens -genome_version ensembl109")
+            print("$ pybio genome homo_sapiens -genome_version 109")
             print()
             print("[pybio genome] To download the latest version of the Ensembl genome+annotation for a species:")
             print()
