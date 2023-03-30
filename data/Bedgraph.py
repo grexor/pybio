@@ -278,19 +278,13 @@ class Bedgraph():
             region_sum += data.get(chr, {}).get(strand, {}).get(i, 0)
         return region_sum
 
-    def get_vector(self, chr, strand, pos, start, stop, db="raw"):
-        # returns vector of values around pos
-        # considers strand but does not reverse the vector
-        # example: strand=-, start=-10, stop=20, would return a vector of pos-20 .. pos+10
-        # example: strand=+, start=-10, stop=20, would return a vector of pos-10 .. pos+20
+    def get_vector(self, chr, strand, start, stop, db="raw"):
         vector = []
-        # only for raw and cpm
-        data = getattr(self, db)
-        if strand=="-":
-            start, stop = -start, -stop
-        start, stop = min(start, stop), max(start, stop)
-        for i in range(pos+start, pos+stop+1):
+        data = getattr(self, db) # only for raw and cpm
+        for i in range(start, stop+1):
             vector.append(data.get(chr, {}).get(strand, {}).get(i, 0))
+        if strand=="-":
+            vector.reverse()
         return vector
 
     def cluster(self, region_up=150, region_down=150, silent=True):
