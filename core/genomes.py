@@ -244,6 +244,7 @@ def download_assembly(species, genome_version):
         return False
     species_capital = species.capitalize()
     assembly = species_db[species]["assembly"]
+    print(assembly)
     ensembl_version = genome_version.replace("ensembl", "")
     ensembl_version = ensembl_version.replace("genomes", "")
 
@@ -259,6 +260,7 @@ def download_assembly(species, genome_version):
     # no? download nonchromosomal
     if not url_exists(fasta_url):
         fasta_url = f"{ftp_address}/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.nonchromosomal.fa.gz"
+    print(fasta_url)
     script = """
 cd {gdir}
 rm {species}.assembly.{genome_version}/*
@@ -398,7 +400,7 @@ def list_species_ensembl():
             print(f"[pybio.core.genomes] skipping {species}, no fasta file found")
             continue
         fasta_file = fasta_file[0]
-        species_assembly = fasta_file.replace(".dna.toplevel.fa.g", "").split(".")
+        species_assembly = fasta_file.replace(".dna.toplevel.fa.g", "").replace(".dna.primary_assembly.fa.g", "").replace(".dna.nonchromosomal.fa.g", "").split(".")
         species_long = species_assembly[0]
         species_assembly = ".".join(species_assembly[1:])
         species_db[species] = (species, species_assembly)

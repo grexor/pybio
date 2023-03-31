@@ -18,6 +18,7 @@ def init():
             continue
         k, v = cline.split("=")
         if k.find("folder")!=-1:
+            v = os.path.expanduser(v) # full path to potentially provided home folder of the user
             if not v.startswith("/"):
                 v = "\"" + os.path.join(pybio_folder, eval(v)) + "\""
         setattr(config_module, k, eval(v))
