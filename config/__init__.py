@@ -18,6 +18,7 @@ def init():
             continue
         k, v = cline.split("=")
         if k.find("folder")!=-1:
+            v = os.path.expanduser(v)
             if not v.startswith("/"):
                 v = "\"" + os.path.join(pybio_folder, eval(v)) + "\""
         setattr(config_module, k, eval(v))
@@ -37,8 +38,10 @@ def change():
         if cline.startswith("#"):
             continue
         k, v = cline.split("=")
-        v = v.replace("\n", "").replace("\r", "")
-        v = input(f"{k} [{v}]: ") or eval(v)
+        v = v.replace("\n", "").replace("\r", "").replace("\"", "").replace("'", "")
+        v = os.path.expanduser(v)
+        print("D", v)
+        v = input(f"{k} [{v}]: ") or v
         new_config.append((k, str(v)))
         setattr(config_module, k, v)
     f = open(config_file, "wt")

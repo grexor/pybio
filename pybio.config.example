@@ -1,2 +1,2 @@
 # if no leading /, all paths (folders) are relative to pybio root folder
-genomes_folder="genomes"
+genomes_folder="~/.genomes"
