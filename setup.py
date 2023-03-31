@@ -20,4 +20,5 @@ setup(
     package_data={
         'pybio': ['pybio.config.example'],
     },
+    install_requires=["pysam", "numpy", "psutil", "bs4", "requests"],
 )
