@@ -1,7 +1,7 @@
 from setuptools import setup
 from setuptools import find_packages
 
-with open("src/pybio/README.md", "r") as fh:
+with open("pybio/README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
@@ -11,6 +11,7 @@ setup(
     packages=find_packages("src"),
     description='pybio genomics',
     long_description = long_description,
+    long_description_content_type = "text/markdown",
     classifiers=[
         'Programming Language :: Python :: 3',
     ],
