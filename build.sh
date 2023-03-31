@@ -1,4 +1,4 @@
 # https://packaging.python.org/en/latest/tutorials/packaging-projects/
 # https://stackoverflow.com/questions/50879668/python-setup-py-some-files-are-missing
 
-python -m build
+python setup.py bdist_wheel
