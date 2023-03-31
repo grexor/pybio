@@ -14,7 +14,6 @@ import pybio.data
 import pybio.map
 import pybio.utils
 import pybio.expression
-import pybio.genomes
 import pybio.maths
 import pybio.config
 import pybio.sequence
