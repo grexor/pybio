@@ -1,12 +1,16 @@
 from setuptools import setup
 from setuptools import find_packages
 
+with open("src/pybio/README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
     name='pybio',
     version = "0.3",
     package_dir = {"":"src"},
     packages=find_packages("src"),
     description='pybio genomics',
+    long_description = long_description,
     classifiers=[
         'Programming Language :: Python :: 3',
     ],
