@@ -40,6 +40,7 @@ def change():
         v = v.replace("\n", "").replace("\r", "").replace("\"", "").replace("'", "")
         v = os.path.expanduser(v)
         v = input(f"{k} [{v}]: ") or v
+        v = os.path.expanduser(v)
         new_config.append((k, str(v)))
         setattr(config_module, k, v)
     f = open(config_file, "wt")
