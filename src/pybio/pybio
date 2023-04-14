@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import argparse
+
+version = "0.3"
+
+print(f"[pybio] v{version}")
+print("Github: https://github.com/grexor/pybio")
+print()
+
+import pybio
+import pybio.core
+
+parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument('commands', help="which command to run?", nargs='*')
+parser.add_argument("-version", "--version", help="Print version", action="store_true")
+parser.add_argument("-nostar", "--nostar", help="Do not process genome with STAR (index)", action="store_true")
+parser.add_argument("-nosalmon", "--nosalmon", help="Do not process transcripts with salmon (index)", action="store_true")
+parser.add_argument("-species", "--species", help="Species name, e.g. homo_sapiens")
+parser.add_argument("-genome_version", "--genome_version", help="Version of the genome, e.g. ensembl109; if not provided, the latest Ensembl version is used")
+parser.add_argument("-fasta", "--fasta", help="Process sequences from fasta file")
+parser.add_argument("-gtf", "--gtf", help="GTF file to import")
+args = parser.parse_args()
+
+if args.version:
+    print(f"pybio v{version}, https://github.com/grexor/pybio")
+    print("---")
+
+if len(args.commands)>0:
+
+    if args.commands[0]=="species":
+        if len(args.commands)>1:
+            search = args.commands[1]
+            os.system(f"cat {pybio.config.genomes_folder}/genome_species.tab | grep {search}")
+        else:
+            os.system(f"cat {pybio.config.genomes_folder}/genome_species.tab")
+
+    if args.commands[0]=="genome":
+        species = args.commands[1]
+        if args.genome_version!=None:
+            genome_version = args.genome_version
+        else:
+            try:
+                genome_version = args.commands[2]
+                if genome_version.find("ensembl")==-1:
+                    print("Unknown genome version, examples: ensembl109 or ensemblgenomes56")
+                    sys.exit(1)
+            except:
+                genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", "")
+        if genome_version.find("ensembl")!=-1:
+            pybio.genome_download(species, genome_version, args)
+            pybio.genome_prepare(species, genome_version, args)
+        elif args.fasta!=None and args.gtf!=None:
+            pybio.genome_import(species, genome_version, args)
+            pybio.genome_prepare(species, genome_version, args)
+        elif (args.fasta==None or args.gtf==None) and (genome_version.find("ensembl")==-1):
+            print("[pybio genome] Missing -fasta and -gtf file parameters for the given species / genome version.")
+            print("[pybio genome] To import a custom genome from your own FASTA and GTF files, an example call would be:")
+            print()
+            print("$ pybio genome homo_sapiens -fasta /path/to/fasta -gtf /path/to/gtf -genome_version version1")
+            print()
+            print("The above imported genome would be reachable under species \"homo_sapiens\" and genome_version \"version1\".")
+            print("---")
+            print("[pybio genome] To import a specific Ensembl genome+annotation version for a species:")
+            print()
+            print("$ pybio genome homo_sapiens -genome_version 109")
+            print()
+            print("[pybio genome] To download the latest version of the Ensembl genome+annotation for a species:")
+            print()
+            print("$ pybio genome homo_sapiens")
+            print()
+    if args.commands[0]=="config":
+        pybio.config.change()
+
