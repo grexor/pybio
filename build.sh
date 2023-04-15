@@ -3,3 +3,4 @@
 
 rm dist/*
 python -m build # build
+pip install .

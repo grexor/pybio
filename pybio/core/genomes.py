@@ -244,7 +244,6 @@ def download_assembly(species, genome_version):
         return False
     species_capital = species.capitalize()
     assembly = species_db[species]["assembly"]
-    print(assembly)
     ensembl_version = genome_version.replace("ensembl", "")
     ensembl_version = ensembl_version.replace("genomes", "")
 
