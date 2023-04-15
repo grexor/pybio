@@ -1,5 +1,6 @@
 from setuptools import setup
 from setuptools import find_packages
+#import pybio
 
 with open("README.md", "r") as fh:
     long_desc = fh.read()
@@ -7,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='pybio',
-    version = "0.3.2",
+    version = open("pybio/version", "rt").readlines()[0].replace("\n", "").replace("\r", ""),
     #package_dir = {"":"src"},
     packages=find_packages(),
     description='pybio genomics',
@@ -24,7 +25,7 @@ setup(
     keywords=['pybio', 'bioinformatics'],
     include_package_data=True,
     package_data={
-        'pybio': ['pybio.config.example'],
+        'pybio': ['pybio.config.example', 'version'],
     },
     install_requires=["pysam", "numpy", "psutil", "bs4", "requests"],
 )

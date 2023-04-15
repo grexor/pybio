@@ -3,13 +3,6 @@
 import os
 import sys
 import argparse
-
-version = "0.3"
-
-print(f"[pybio] v{version}")
-print("Github: https://github.com/grexor/pybio")
-print()
-
 import pybio
 import pybio.core
 
@@ -23,6 +16,15 @@ parser.add_argument("-genome_version", "--genome_version", help="Version of the 
 parser.add_argument("-fasta", "--fasta", help="Process sequences from fasta file")
 parser.add_argument("-gtf", "--gtf", help="GTF file to import")
 args = parser.parse_args()
+
+help_genome = """
+Please specify species, example:
+
+$ pybio genome homo_sapiens
+
+The above will download the latest Ensembl genome assembly and annotation for homo_sapiens.
+
+"""
 
 if args.version:
     print(f"pybio v{version}, https://github.com/grexor/pybio")
@@ -38,6 +40,9 @@ if len(args.commands)>0:
             os.system(f"cat {pybio.config.genomes_folder}/genome_species.tab")
 
     if args.commands[0]=="genome":
+        if len(args.commands)==1:
+            print(help_genome)
+            sys.exit()
         species = args.commands[1]
         if args.genome_version!=None:
             genome_version = args.genome_version

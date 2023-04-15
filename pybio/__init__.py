@@ -19,6 +19,14 @@ import pybio.config
 import pybio.sequence
 import pybio.core
 
+pybio_path = os.path.abspath(__file__)
+pybio_folder = os.path.dirname(pybio_path)
+version = open(os.path.join(pybio_folder, "version"), "rt").readlines()[0].replace("\n", "").replace("\r", "")
+
+print(f"[pybio] v{version}")
+print("Github: https://github.com/grexor/pybio")
+print()
+
 # initialize path module
 pybio.config.init()
 pybio.path.init()
