@@ -1,3 +1,5 @@
+# pybio, https://github.com/grexor/pybio
+
 from setuptools import setup
 from setuptools import find_packages
 
