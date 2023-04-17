@@ -8,7 +8,6 @@ with open("README.md", "r") as fh:
 setup(
     name='pybio',
     version = open("pybio/version", "rt").readlines()[0].replace("\n", "").replace("\r", ""),
-    #package_dir = {"":"src"},
     packages=find_packages(),
     description='pybio genomics',
     long_description = long_desc,
