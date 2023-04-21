@@ -18,17 +18,35 @@ parser.add_argument("-gtf", "--gtf", help="GTF file to import")
 args = parser.parse_args()
 
 help_genome = """
-Please specify species, example:
+To download genomes, please specify species.
+
+Example:
 
 $ pybio genome homo_sapiens
 
-The above will download the latest Ensembl genome assembly and annotation for homo_sapiens.
-
+The above will download the latest Ensembl human genome.
 """
 
 if args.version:
-    print(f"pybio v{version}, https://github.com/grexor/pybio")
-    print("---")
+    print(f"Version: v{pybio.version}")
+
+def is_known_species(species):
+    species = species.lower()
+    return species in pybio.core.genomes.species_db
+
+def determine_species(species):
+    provided_species = species
+    id_species = None
+    species = species.lower()
+    potential_hits = []
+    for species_id, species_data in pybio.core.genomes.species_db.items():
+        display_name = species_data["display_name"].lower()
+        if display_name.find(species)!=-1:
+            potential_hits.append((len(display_name), species_id, display_name))
+    potential_hits.sort()
+    if len(potential_hits)>0:
+        return potential_hits
+    return []
 
 if len(args.commands)>0:
 
@@ -41,9 +59,20 @@ if len(args.commands)>0:
 
     if args.commands[0]=="genome":
         if len(args.commands)==1:
+            print("All genomes data stored at: " + pybio.config.genomes_folder)
             print(help_genome)
             sys.exit()
         species = args.commands[1]
+        known_species = is_known_species(species)
+        if not known_species:
+            potential_hits = determine_species(species)
+            if len(potential_hits)>1:
+                print(f"We found >1 genome hits for your provided genome species `{species}`.\nPlease choose the one you would like to download:\n")
+                for hit in potential_hits:
+                    print(f"Species = '{hit[1]}', display name = '{hit[2]}'")
+                sys.exit(1)
+            elif len(potential_hits)==1:
+                species = potential_hits[0][1]
         if args.genome_version!=None:
             genome_version = args.genome_version
         else:
@@ -57,25 +86,17 @@ if len(args.commands)>0:
         if genome_version.find("ensembl")!=-1:
             pybio.genome_download(species, genome_version, args)
             pybio.genome_prepare(species, genome_version, args)
-        elif args.fasta!=None and args.gtf!=None:
+        elif args.fasta!=None and args.gtf!=None: # provided genome, specified species, fasta, gtf and genome_version, ok
             pybio.genome_import(species, genome_version, args)
             pybio.genome_prepare(species, genome_version, args)
         elif (args.fasta==None or args.gtf==None) and (genome_version.find("ensembl")==-1):
-            print("[pybio genome] Missing -fasta and -gtf file parameters for the given species / genome version.")
-            print("[pybio genome] To import a custom genome from your own FASTA and GTF files, an example call would be:")
-            print()
-            print("$ pybio genome homo_sapiens -fasta /path/to/fasta -gtf /path/to/gtf -genome_version version1")
-            print()
-            print("The above imported genome would be reachable under species \"homo_sapiens\" and genome_version \"version1\".")
-            print("---")
-            print("[pybio genome] To import a specific Ensembl genome+annotation version for a species:")
-            print()
-            print("$ pybio genome homo_sapiens -genome_version 109")
-            print()
-            print("[pybio genome] To download the latest version of the Ensembl genome+annotation for a species:")
-            print()
-            print("$ pybio genome homo_sapiens")
-            print()
+            print(f"Could not find a match for the provided species '{species}'.")
+            print("If you would like to import a custom genome from your own FASTA and GTF files,\nan example call would be:\n")
+            print("$ pybio genome custom_species -fasta /path/to/fasta -gtf /path/to/gtf -genome_version genome_v1\n")
+            print("The above imported genome would be reachable under species 'custom_species' and genome_version 'genome_v1'.\n")
+            print("In case you would like to import an Ensembl ready genome:\n")
+            print("$ pybio genome homo_sapiens ensembl109\n")
+            print("Ommiting the genome version will download the latest Ensembl release.\n")
     if args.commands[0]=="config":
         pybio.config.change()
 

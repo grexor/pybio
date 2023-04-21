@@ -30,7 +30,7 @@ def change():
     if not os.path.exists(config_file):
         os.system(f"cp {config_example_file} {config_file}")
     config_lines = open(config_file).readlines()
-    print(f"Note: all paths are relative to the pybio home folder {pybio_folder}.")
+    print(f"Note: you can specify absolute or relative paths. Relative paths are relative to: {pybio_folder}")
     print()
     new_config = []
     for cline in config_lines:

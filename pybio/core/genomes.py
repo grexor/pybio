@@ -93,7 +93,7 @@ def init():
     while r:
         r = r.replace("\r", "").replace("\n", "").split("\t")
         data = dict(zip(header, r))
-        species_db[data["species"]] = {"assembly": data["assembly"], "genome_version": data["genome_version"], "provider": data["provider"], "provider_subfolder": data["provider_subfolder"]}
+        species_db[data["species"]] = {"display_name":data["display_name"], "assembly": data["assembly"], "genome_version": data["genome_version"], "provider": data["provider"], "provider_subfolder": data["provider_subfolder"]}
         r = f.readline()
     f.close()
 
@@ -372,6 +372,15 @@ def get_latest_ensemblgenomes():
     decoded = r.json()
     return str(decoded["version"])
 
+def get_genome_info(genome_id): 
+  server = "https://rest.ensembl.org"
+  ext = f"/info/genomes/{genome_id}?"
+  r = requests.get(server+ext, headers={ "Content-Type" : "application/json"})
+  if not r.ok:
+      return {}
+  decoded = r.json()
+  return decoded
+
 def list_species_ensembl():
     print("[pybio.core.genomes] Species list from Ensembl; done once and takes ~ 1 minute")
     ensembl_version = get_latest_ensembl()
@@ -386,7 +395,7 @@ def list_species_ensembl():
     if not os.path.exists(pybio.config.genomes_folder):
         os.makedirs(pybio.config.genomes_folder)
     f = open(os.path.join(pybio.config.genomes_folder, "genome_species.tab"), "wt")
-    f.write("species\tassembly\tprovider\tprovider_subfolder\tgenome_version\n")
+    f.write("species\tassembly\tprovider\tprovider_subfolder\tgenome_version\tdisplay_name\n")
     for species in listFD(f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/", "/")[1:]:
         print(f"[pybio.core.genomes] Checking {species}" + " "*30, end="\r")
         dna_folder_url = f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/"
@@ -403,7 +412,8 @@ def list_species_ensembl():
         species_long = species_assembly[0]
         species_assembly = ".".join(species_assembly[1:])
         species_db[species] = (species, species_assembly)
-        f.write(f"{species}\t{species_assembly}\tensembl\t\tensembl{ensembl_version}\n")
+        genome_data = get_genome_info(species)
+        f.write(f"{species}\t{species_assembly}\tensembl\t\tensembl{ensembl_version}\t{genome_data.get('display_name', '')}\n")
         assert(species.capitalize()==species_long)
 
     for subfolder in ["plants", "fungi", "protists", "metazoa"]:
@@ -420,7 +430,8 @@ def list_species_ensembl():
             species_long = species_assembly[0]
             species_assembly = ".".join(species_assembly[1:])
             species_db[species] = (species, species_assembly)
-            f.write(f"{species}\t{species_assembly}\tensemblgenomes\t{subfolder}\tensemblgenomes{ensemblgenomes_version}\n")
+            genome_data = get_genome_info(species)
+            f.write(f"{species}\t{species_assembly}\tensemblgenomes\t{subfolder}\tensemblgenomes{ensemblgenomes_version}\t{genome_data.get('display_name', '')}\n")
             assert(species.capitalize()==species_long)
 
     f.close()
