@@ -21,34 +21,16 @@ Features include automagical genome assemblies+annotation download and indexing 
 
 ### Installation
 
-20221218: pip package in preparation, [https://pypi.org/project/pybio](https://pypi.org/project/pybio).
+The easiest way to install pybio is running:
 
-Current installation instructions below:
+`pip install pybio`
 
-#### Clone the GitHub repository
-
-Temporarily the most direct way of installing pybio is to clone the repository:
+If you would like instead to install the latest developmental version from this repository:
 
 ```
 git clone https://github.com/grexor/pybio.git
+./build.sh # will build and install the developmental version from this repository
 ```
-
-Add pybio to your PATH and PYTHONPATH environment variables: for example, if you cloned to `/home/user/pybio`, you would add the paths like so:
-
-```
-export PYTHONPATH=$PYTHONPATH:/home/user # to import pybio in python with "import pybio"
-export PATH=$PATH:/home/user/pybio       # to run pybio on the command line with "pybio"
-```
-
-Run pybio for the first time for setup (change default parameters if needed):
-
-```
-$ pybio
-```
-
-You can always come back to the configuration by running `pybio config`.
-
-Voila.
 
 ### Quick Start
 
@@ -57,17 +39,17 @@ pybio is strongly integrated with Ensembl and provides genomic loci search for d
 Let's say we are interested in the human genome. First download and prepare the genome with a single command:
 
 ```
-pybio ensembl homo_sapiens   # downloads the latest version of Ensembl homo_sapiens assembly and annotation and prepare the index for search
+pybio genome homo_sapiens
 ```
 
-Once this is done, searching a genomic position for features is easy in python:
+Searching a genomic position for features is easy in python, for example:
 
 ```
 import pybio
 genes, transcripts, exons, UTR5, UTR3 = annotate("homo_sapiens", "1", "+", 11012344)
 ```
 
-This will return a list of feature objects (genes, transctipts, etc) (check [core/genomes.py](core/genomes.py) classes to see details of these objects).
+This will return a list of feature objects (genes, transctipts, exons, 3'-UTR and 5'-UTR) (check [core/genomes.py](core/genomes.py) classes to see details of these objects).
 
 If you would like to know all genes that span the provided position, you could then write:
 
@@ -85,7 +67,7 @@ for gene in genes:
       print(transcript.transcript_id)
 ```
 
-However you could also start directly with transcripts, and print which genes are the transcripts assigned to:
+However you could also start directly with transcripts, and print to which genes are transcripts assigned to:
 
 ```
 for transcript in transcripts:
@@ -107,7 +89,7 @@ gene <-> transcript_1 <-> exon_1
                       <-> utr3
 ```
 
-Plus a more descriptive representation of relationships between feature objects:
+Representation of relationships between feature objects:
 
 ```
                 gene = Gene instance object
@@ -131,11 +113,12 @@ Here we provide basic `pybio` usage examples.
 To download Ensembl genomes simply run a few commands on the command line. For example:
 
 ```
-$ pybio ensembl homo_sapiens      # downloads the latest version of Ensembl homo_sapiens assembly and annotation
-$ pybio ensembl homo_sapiens 109  # downloads a specific version (in this case, v109) of Ensembl homo_sapiens assembly and annotation
+$ pybio genome homo_sapiens      # downloads the latest version of Ensembl homo_sapiens assembly and annotation
+$ pybio genome homo_sapiens 109  # downloads a specific version (in this case, v109) of Ensembl homo_sapiens assembly and annotation
+$ pybio genome elephant          # will list all available elephant genomes and make you choose which one to download
 ```
 
-This will download the FASTA sequence, GTF if you have STAR and salmon installed, will also build an index of the genome for both.
+The above will download the FASTA sequence and GTF annotation. If you have STAR and salmon installed on your system, pybio will also build an index of the genome for both.
 
 Data will be stored in the folder specified in the file `pybio.config`. The genomes folder structure is as follows:
 
@@ -152,10 +135,11 @@ pybio also supports the download of Ensembl Genomes (Ensembl Fungi, Ensembl Plan
 For example, to download the latest version of the Dictyostelium discoideum genome, you would write:
 
 ```
-$ pybio genome dictyostelium_discoideum
+$ pybio genome dicty                      # would search for genomes with "dicty" in the name of the species or description
+$ pybio genome dictyostelium_discoideum   # also directly providing the exact genome species works
 ```
 
-Or to download the latest Arabidopsis thaliana genome, you would write:
+Another example is download the latest Arabidopsis thaliana genome:
 
 ```
 $ pybio genome arabidopsis_thaliana
