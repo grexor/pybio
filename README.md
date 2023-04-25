@@ -28,8 +28,11 @@ The easiest way to install pybio is running:
 If you would like instead to install the latest developmental version from this repository:
 
 ```
+# clone pybio repository locally
 git clone https://github.com/grexor/pybio.git
-./build.sh # will build and install the developmental version from this repository
+
+# build and install
+./build.sh
 ```
 
 ### Quick Start
