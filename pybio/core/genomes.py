@@ -84,8 +84,8 @@ class Utr5:
     self.transcript.utr5 = self
 
 def init():
-    genome_species_fname = os.path.join(pybio.config.genomes_folder, "genome_species.tab")
-    if not os.path.exists(genome_species_fname):
+    genome_species_fname_finished = os.path.join(pybio.config.genomes_folder, "genome_species.tab.finished")
+    if not os.path.exists(genome_species_fname_finished):
         pybio.core.genomes.list_species_ensembl()
     f = open(os.path.join(pybio.config.genomes_folder, "genome_species.tab"), "rt")
     header = f.readline().replace("\r", "").replace("\n", "").split("\t")
@@ -382,6 +382,9 @@ def get_genome_info(genome_id):
   return decoded
 
 def list_species_ensembl():
+    genome_species_fname_finished = os.path.join(pybio.config.genomes_folder, "genome_species.tab.finished")
+    os.system(f"rm {genome_species_fname_finished} >/dev/null 2>&1")
+
     print("[pybio.core.genomes] Species list from Ensembl; done once and takes ~ 1 minute")
     ensembl_version = get_latest_ensembl()
     ensemblgenomes_version = get_latest_ensemblgenomes()
@@ -435,6 +438,9 @@ def list_species_ensembl():
             assert(species.capitalize()==species_long)
 
     f.close()
+
+    os.system(f"touch {genome_species_fname_finished} >/dev/null 2>&1")
+
     print()
     print("[pybio.core.genomes] Complete species list downloaded to:", os.path.join(pybio.config.genomes_folder, "genome_species.tab"))
     print()

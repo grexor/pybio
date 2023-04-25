@@ -1,8 +1,5 @@
-import pybio
 import os
 import sys
-
-version = 0.3
 
 def init():
     config_module = sys.modules[__name__]

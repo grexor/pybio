@@ -4,8 +4,6 @@ import os
 import sys
 import argparse
 import pybio
-import pybio.core
-import pybio.config
 
 parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument('commands', help="which command to run?", nargs='*')
