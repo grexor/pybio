@@ -173,7 +173,7 @@ The above command fetches the chr 1 sequence from 450000-20..450000+20, the resu
 
 #### Annotating genomic positions
 
-Given a genomic position, we can quickly retrieve the gene, transcript, exon and utr5/3 information at the given position. If there are several features (genes, transcripts, exons, UTR regions) at the specified position, they are all returned.
+Given a genomic position, we can quickly retrieve the gene, transcript, exon and utr5/3 information at the given position. If there are several features (genes, transcripts, exons, UTR regions) at the specified position, they are all reported by pybio.
 
 ```
 # annotate position
@@ -191,7 +191,7 @@ The above command would return:
 ENSG00000120948, TARDBP, 11012343, 11030527
 ```
 
-You can also easily access all transcripts of each gene with `gene.transcripts` and all exons of each transcript with `transcript.exons`.
+We can also easily access all transcripts of each gene with `gene.transcripts` and all exons of each transcript with `transcript.exons`.
 
 #### Dependencies
 
