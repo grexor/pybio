@@ -127,7 +127,7 @@ def genome_prepare(species, genome_version, args):
             else:
                 genomes_ready[species][genome_version]["STAR"] = False
         else:
-            print(f"[pybio genome] STAR index ready at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}.star")
+            print(f"[pybio genome] STAR index ready at {pybio.config.genomes_folder}/{species}.assembly.{genome_version}.star")
 
     if pybio.utils.is_tool("salmon") and not args.nosalmon:
         salmon_folder = os.path.join(pybio.config.genomes_folder, f"{species}.transcripts.{genome_version}.salmon")
@@ -138,6 +138,6 @@ def genome_prepare(species, genome_version, args):
             else:
                 genomes_ready[species][genome_version]["salmon"] = False
         else:
-            print(f"[pybio genome] salmon index ready at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}.salmon")
+            print(f"[pybio genome] salmon index ready at {pybio.config.genomes_folder}/{species}.transcripts.{genome_version}.salmon")
 
     json.dump(genomes_ready, open(genomes_ready_fname, "wt"))

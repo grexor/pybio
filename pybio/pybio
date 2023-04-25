@@ -41,7 +41,7 @@ def determine_species(species):
     potential_hits = []
     for species_id, species_data in pybio.core.genomes.species_db.items():
         display_name = species_data["display_name"].lower()
-        if display_name.find(species)!=-1:
+        if display_name.find(species)!=-1 or species_id.find(species)!=-1:
             potential_hits.append((len(display_name), species_id, display_name))
     potential_hits.sort()
     if len(potential_hits)>0:
@@ -67,9 +67,12 @@ if len(args.commands)>0:
         if not known_species:
             potential_hits = determine_species(species)
             if len(potential_hits)>1:
-                print(f"We found >1 genome hits for your provided genome species `{species}`.\nPlease choose the one you would like to download:\n")
+                print(f"We found >1 genome hits for your provided genome species `{species}`.\nPlease choose the species genome you would like to download:\n")
                 for hit in potential_hits:
                     print(f"Species = '{hit[1]}', display name = '{hit[2]}'")
+                print(f"\nFor example, to download the first hit from the list above, you could write:\n")
+                print(f"$ pybio genome {potential_hits[0][1]}")
+                print()
                 sys.exit(1)
             elif len(potential_hits)==1:
                 species = potential_hits[0][1]
