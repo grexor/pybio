@@ -14,7 +14,7 @@ Features include genome+annotation download from Ensembl and processing with STA
 * [Documentation](#documentation)
   * [Downloading Ensembl genomes](#downloading-Ensembl-genomes)
   * [Retrieving genomic sequences](#retrieving-genomic-sequences)
-  * [Annotate genomic position](#annotating-genomic-position)
+  * [Annotating genomic positions](#annotating-genomic-positions)
   * [File formats](#file-formats)
   * [Genomic Coordinates](#Genomic-Coordinates)
 * [Authors](#authors)
