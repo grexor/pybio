@@ -262,8 +262,8 @@ def download_assembly(species, genome_version):
     print(fasta_url)
     script = """
 cd {gdir}
-rm {species}.assembly.{genome_version}/*
-mkdir {species}.assembly.{genome_version}
+rm {species}.assembly.{genome_version}/* >/dev/null 2>&1
+mkdir {species}.assembly.{genome_version} >/dev/null 2>&1
 cd {species}.assembly.{genome_version}
 wget {fasta_url} -O {species}.fasta.gz
 gunzip -f {species}.fasta.gz
@@ -296,8 +296,8 @@ def download_annotation(species, genome_version):
 
     script = """
 cd {gdir}
-rm {species}.annotation.{genome_version}/*
-mkdir {species}.annotation.{genome_version}
+rm {species}.annotation.{genome_version}/* >/dev/null 2>&1
+mkdir {species}.annotation.{genome_version} >/dev/null 2>&1
 cd {species}.annotation.{genome_version}
 # https://www.biostars.org/p/279235/#279238
 wget {fasta_url} -O {species}.gtf.gz
@@ -314,8 +314,8 @@ def star_index(species, genome_version):
     ensembl_version = ensembl_version.replace("genomes", "")
     script = """
 cd {gdir}
-rm {species}.assembly.{genome_version}.star/*
-mkdir {species}.assembly.{genome_version}.star
+rm {species}.assembly.{genome_version}.star/* >/dev/null 2>&1
+mkdir {species}.assembly.{genome_version}.star >/dev/null 2>&1
 cd {species}.assembly.{genome_version}.star
 gunzip ../{species}.annotation.{genome_version}/{species}.gtf.gz
 STAR --runMode genomeGenerate --genomeSAindexNbases {genomeSAindexNbases} --genomeDir ../{species}.assembly.{genome_version}.star --genomeFastaFiles ../{species}.assembly.{genome_version}/{species}.fasta --runThreadN 4 --sjdbGTFfile ../{species}.annotation.{genome_version}/{species}.gtf
@@ -339,8 +339,8 @@ def salmon_index(species, genome_version):
     
     script = """
 cd {gdir}
-rm {species}.transcripts.{genome_version}/*
-mkdir {species}.transcripts.{genome_version}
+rm {species}.transcripts.{genome_version}/* >/dev/null 2>&1
+mkdir {species}.transcripts.{genome_version} >/dev/null 2>&1
 cd {species}.transcripts.{genome_version}
 wget {ftp_address}/release-{ensembl_version}/fasta/{species}/cdna/{species_capital}.{assembly}.cdna.all.fa.gz -O {species}.transcripts.fasta.gz
 
