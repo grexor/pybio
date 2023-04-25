@@ -191,19 +191,13 @@ You can also easily access all transcripts of each gene with `gene.transcripts` 
 
 #### Dependencies
 
-There are a few software tools pybio depends on. For a quick start, you don't need to have any of these dependencies installed.
+Basic dependencies include [pysam](https://pysam.readthedocs.io/en/latest/api.html), [numpy](https://numpy.org/) and [samtools](http://www.htslib.org) and should be installed automatically by pip when you install pybio over `pip install pybio`.
 
-* [STAR aligner](https://github.com/alexdobin/STAR), `sudo apt-get install rna-star`
-* [pysam](https://pysam.readthedocs.io/en/latest/api.html), `sudo apt-get install python-pysam`
-* [numpy](https://numpy.org/), `sudo apt-get install python-numpy`
-* [Salmon](https://combine-lab.github.io/salmon/getting_started/), download and install from Salmon webpage
-* [samtools](http://www.htslib.org), `sudo apt-get install samtools`
+Optional dependencies include [STAR](https://github.com/alexdobin/STAR) and [salmon](https://combine-lab.github.io/salmon/getting_started/) if you would like to build genome/transcriptome indices and align reads.
 
 ### File formats
 
-Supported file formats.
-
-Coming.
+Supported file formats. Work in progress.
 
 ### Genomic Coordinates
 
