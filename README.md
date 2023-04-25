@@ -54,7 +54,7 @@ import pybio
 genes, transcripts, exons, UTR5, UTR3 = annotate("homo_sapiens", "1", "+", 11012344)
 ```
 
-This will return a list of feature objects (genes, transctipts, exons, 3'-UTR and 5'-UTR) (check [core/genomes.py](core/genomes.py) classes to see details of these objects).
+This will return a list of feature objects (genes, transctipts, exons, 3'-UTR and 5'-UTR) (check [pybio/core/genomes.py](pybio/core/genomes.py) classes to see details of these objects).
 
 If you would like to know all genes that span the provided position, you could then write:
 
