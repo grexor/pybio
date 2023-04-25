@@ -5,6 +5,7 @@ import sys
 import argparse
 import pybio
 import pybio.core
+import pybio.config
 
 parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument('commands', help="which command to run?", nargs='*')
@@ -100,6 +101,10 @@ if len(args.commands)>0:
             print("In case you would like to import an Ensembl ready genome:\n")
             print("$ pybio genome homo_sapiens ensembl109\n")
             print("Ommiting the genome version will download the latest Ensembl release.\n")
+
     if args.commands[0]=="config":
-        pybio.config.change()
+        if len(args.commands)>1:
+            pybio.config.change(args.commands[1]) # pybio config genome_folder
+        else:
+            pybio.config.change() # ask for genome folder
 

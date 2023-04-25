@@ -98,7 +98,7 @@ def init():
     f.close()
 
 def prepare(species="homo_sapiens", genome_version=None):
-    print("[pybio] {species}: processing annotation".format(species=species))
+    print(f"[pybio.core.genomes] {species}: processing annotation".format(species=species))
     provider = species_db[species]["provider"]
     if genome_version==None:
         genome_version = species_db[species]["ensembl_version"]
