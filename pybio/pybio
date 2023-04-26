@@ -26,8 +26,12 @@ $ pybio genome homo_sapiens
 The above will download the latest Ensembl human genome.
 """
 
+print(f"[pybio] v{pybio.version}, https://github.com/grexor/pybio")
+print(f"[pybio] genomes folder: {pybio.config.genomes_folder}")
+print()
+
 if args.version:
-    print(f"Version: v{pybio.version}")
+    sys.exit(0)
 
 def is_known_species(species):
     species = species.lower()

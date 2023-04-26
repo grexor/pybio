@@ -23,15 +23,10 @@ pybio_path = os.path.abspath(__file__)
 pybio_folder = os.path.dirname(pybio_path)
 version = open(os.path.join(pybio_folder, "version"), "rt").readlines()[0].replace("\n", "").replace("\r", "")
 
-print(f"[pybio] v{version}, https://github.com/grexor/pybio")
-
 # initialize path module
 pybio.config.init()
 pybio.path.init()
 pybio.core.genomes.init()
-
-print(f"[pybio] genomes folder: {pybio.config.genomes_folder}")
-print()
 
 def genome_download(species, genome_version, args):
     print(f"[pybio genome_download] species {species} and version {genome_version}")
