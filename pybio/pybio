@@ -47,14 +47,22 @@ def determine_species(species):
         return potential_hits
     return []
 
+def display_potential_hits(potential_hits, search_text):
+    print(f"We found {len(potential_hits)} genome hits for your provided genome species `{search_text}`.\nPlease choose the species genome you would like to download:\n")
+    for hit in potential_hits:
+        print(f"Species = '{hit[1]}', display name = '{hit[2]}'")
+    if len(potential_hits)>0:
+        print(f"\nFor example, to download the first hit from the list above, you could write:\n")
+        print(f"$ pybio genome {potential_hits[0][1]}")
+        print()
+    sys.exit(1)
+
 if len(args.commands)>0:
 
     if args.commands[0]=="species":
         if len(args.commands)>1:
-            search = args.commands[1]
-            os.system(f"cat {pybio.config.genomes_folder}/genome_species.tab | grep {search}")
-        else:
-            os.system(f"cat {pybio.config.genomes_folder}/genome_species.tab")
+            potential_hits = determine_species(args.commands[1])
+            display_potential_hits(potential_hits, args.commands[1])
 
     if args.commands[0]=="genome":
         if len(args.commands)==1:
@@ -66,13 +74,7 @@ if len(args.commands)>0:
         if not known_species:
             potential_hits = determine_species(species)
             if len(potential_hits)>1:
-                print(f"We found >1 genome hits for your provided genome species `{species}`.\nPlease choose the species genome you would like to download:\n")
-                for hit in potential_hits:
-                    print(f"Species = '{hit[1]}', display name = '{hit[2]}'")
-                print(f"\nFor example, to download the first hit from the list above, you could write:\n")
-                print(f"$ pybio genome {potential_hits[0][1]}")
-                print()
-                sys.exit(1)
+                display_potential_hits(potential_hits, species)
             elif len(potential_hits)==1:
                 species = potential_hits[0][1]
         if args.genome_version!=None:
