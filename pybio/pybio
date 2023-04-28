@@ -26,6 +26,26 @@ $ pybio genome homo_sapiens
 The above will download the latest Ensembl human genome.
 """
 
+help_star = """
+Aligning reads to a reference genome with STAR:
+
+Example:
+
+# single-end sequencing
+$ pybio star homo_sapiens r1.fastq.gz output.bam
+
+# paired-end sequencing
+$ pybio star homo_sapiens r1.fastq.gz r2.fastq.gz output.bam
+"""
+
+help_sam2bam = """
+Convert .sam to .bam file:
+
+Example:
+
+$ pybio sam2bam file1.sam file1.bam
+"""
+
 print(f"[pybio] v{pybio.version}, https://github.com/grexor/pybio")
 print(f"[pybio] genomes folder: {pybio.config.genomes_folder}")
 print()
@@ -72,7 +92,7 @@ if len(args.commands)>0:
         if len(args.commands)==1:
             print("All genomes data stored at: " + pybio.config.genomes_folder)
             print(help_genome)
-            sys.exit()
+            sys.exit(0)
         species = args.commands[1]
         known_species = is_known_species(species)
         if not known_species:
@@ -98,7 +118,7 @@ if len(args.commands)>0:
             pybio.genome_import(species, genome_version, args)
             pybio.genome_prepare(species, genome_version, args)
         elif (args.fasta==None or args.gtf==None) and (genome_version.find("ensembl")==-1):
-            print(f"Could not find a match for the provided species '{species}'.")
+            print(f"Could not find a match for the species '{species}'.")
             print("If you would like to import a custom genome from your own FASTA and GTF files,\nan example call would be:\n")
             print("$ pybio genome custom_species -fasta /path/to/fasta -gtf /path/to/gtf -genome_version genome_v1\n")
             print("The above imported genome would be reachable under species 'custom_species' and genome_version 'genome_v1'.\n")
@@ -112,3 +132,51 @@ if len(args.commands)>0:
         else:
             pybio.config.change() # ask for genome folder
 
+    if args.commands[0]=="sam2bam":
+        if len(args.commands) not in [3]:
+            print(help_sam2bam)
+            sys.exit()
+        input_fname = args.commands[1]
+        output_fname = args.commands[2]
+        os.system(f"samtools view -F 4 -bS {input_fname} -o {output_fname} # -F 4 means only mapped reads")
+        os.system(f"samtools sort {output_fname} -o {output_fname}")
+        os.system(f"samtools index {output_fname}")
+
+    if args.commands[0]=="star":
+        if len(args.commands) not in [4,5]:
+            print(help_star)
+            sys.exit()
+        
+        species = args.commands[1]
+        if args.genome_version!=None:
+            genome_version = args.genome_version
+        else:
+            genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)
+        if genome_version==None:
+            print("Could not determine genome version")
+            sys.exit(0)
+        star_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.{genome_version}.star")
+        if len(args.commands)==4:
+            file1=args.commands[2]
+            output = args.commands[3]
+        else:
+            file1=args.commands[2]
+            file2=args.commands[3]
+            output = args.commands[4]
+
+        print(f"STAR --outFileNamePrefix {output}_ --outFilterMultimapNmax 1 --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat")
+        os.system(f"STAR --outFileNamePrefix {output}_ --outFilterMultimapNmax 1 --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat")
+
+        os.system(f"pybio sam2bam {output}_Aligned.out.sam {output}.bam")
+        os.system(f"mv {output}_Log.final.out {output}.stats.txt")
+        os.system(f"mv {output}_Log.out {output}.log.txt")
+        os.system(f"mv {output}_Log.progress.out {output}.progress.txt")
+        os.system(f"rm {output}_Aligned.out.sam")
+        os.system(f"mv {output}_SJ.out.tab {output}.splice.tab")
+        
+        # unmapped reads
+        #os.system(f"mv Unmapped.out.mate1 {output}.unmapped_R1.fastq")
+        #os.system(f"mv Unmapped.out.mate2 {output}.unmapped_R2.fastq")
+        #os.system(f"gzip -f {output}.unmapped_R1.fastq")
+        #os.system(f"gzip -f {output}.unmapped_R2.fastq")
+        #os.system(f"mv SJ.out.tab {output}.splice.tab")
