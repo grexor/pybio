@@ -7,7 +7,7 @@ Downloading an Ensembl genome+annotation takes one line: `pybio genome homo_sapi
 
 Features include genome+annotation download from Ensembl and processing with STAR and salmon, support of Fasta, Fastq, bedGraph and other file formats, motif sequence searches, and specific APA feautes like alternative polyadenylation site-pair classification (same-exon, skipped-exon, composite-exon) and more.
 
-### Contents
+## Contents
 
 * [Installation](#installation)
 * [Quick Start](#Quick-Start)
@@ -20,7 +20,7 @@ Features include genome+annotation download from Ensembl and processing with STA
 * [Authors](#authors)
 * [Reporting problems](#reporting-problems)
 
-#### Installation
+### Installation
 
 The easiest way to install pybio is running:
 
@@ -36,7 +36,7 @@ git clone https://github.com/grexor/pybio.git
 ./build.sh
 ```
 
-#### Quick Start
+### Quick Start
 
 pybio is strongly integrated with Ensembl and provides genomic loci search for diverse annotated features (genes -> transcripts -> exons + 5UTR + 3UTR).
 
@@ -108,11 +108,11 @@ transcript.utr5/utr3 = points to the UTR5 / UTR3 of the transcript
 utr5/utr3.transcript = points to the transcript of the UTR5/UTR3
 ```
 
-#### Documentation
+### Documentation
 
 Here we provide basic `pybio` usage examples.
 
-##### Downloading Ensembl genomes
+#### Downloading Ensembl genomes
 
 To download Ensembl genomes simply run a few commands on the command line. For example:
 
@@ -160,7 +160,7 @@ arabidopsis_thaliana	TAIR10	ensemblgenomes	plants	ensemblgenomes56
 
 Voila.
 
-##### Retrieving genomic sequences
+#### Retrieving genomic sequences
 
 To retrieve stretches of genomic sequence, we use the seq(genome, chr, strand, position, upstream, downstream) method:
 
@@ -171,7 +171,7 @@ seq = pybio.core.genomes.seq("homo_sapiens", "1", "+", 450000, -20, 20)
 
 The above command fetches the chr 1 sequence from 450000-20..450000+20, the resulting sequence is of length 41, `TACCCTGATTCTGAAACGAAAAAGCTTTACAAAATCCAAGA`.
 
-##### Annotating genomic positions
+#### Annotating genomic positions
 
 Given a genomic position, we can quickly retrieve the gene, transcript, exon and utr5/3 information at the given position. If there are several features (genes, transcripts, exons, UTR regions) at the specified position, they are all reported by pybio.
 
@@ -193,17 +193,17 @@ ENSG00000120948, TARDBP, 11012343, 11030527
 
 We can also easily access all transcripts of each gene with `gene.transcripts` and all exons of each transcript with `transcript.exons`.
 
-##### Dependencies
+#### Dependencies
 
 Basic dependencies include [pysam](https://pysam.readthedocs.io/en/latest/api.html), [numpy](https://numpy.org/) and [samtools](http://www.htslib.org) and should be installed automatically by pip when you install pybio over `pip install pybio`.
 
 Optional dependencies include [STAR](https://github.com/alexdobin/STAR) and [salmon](https://combine-lab.github.io/salmon/getting_started/) if you would like to build genome/transcriptome indices and align reads.
 
-#### File formats
+### File formats
 
 Supported file formats. Work in progress.
 
-#### Genomic Coordinates
+### Genomic Coordinates
 
 All genomic coordinates we operate with inside pybio are 0-based left+right inclusive. This means, when we say for example 100-103, this would include coordinates 100, 101, 102 and 103. The first coordinate is 0.
 
@@ -211,10 +211,10 @@ All genomic coordinates we operate with inside pybio are 0-based left+right incl
 
 Refseq and Ensembl GTF files are 1-indexed. When we read files from refseq/ensembl, we substract 1 on all coordinates to keep this in line with other coordinate structures inside pybio (which are all 0-indexed).
 
-#### Authors
+### Authors
 
 [pybio](https://github.com/grexor/pybio) is developed and supported by [Gregor Rot](https://grexor.github.io).
 
-#### Issues and Suggestions
+### Issues and Suggestions
 
 Use the [issues page](https://github.com/grexor/pybio/issues) to report issues and leave suggestions.
