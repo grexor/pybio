@@ -158,13 +158,17 @@ if len(args.commands)>0:
         star_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.{genome_version}.star")
         if len(args.commands)==4:
             file1=args.commands[2]
+            file2=None
             output = args.commands[3]
         else:
             file1=args.commands[2]
             file2=args.commands[3]
             output = args.commands[4]
 
-        os.system(f"STAR --outFileNamePrefix {output}_ --outFilterMultimapNmax 1 --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat")
+        if file2!=None: # paired-end
+            os.system(f"STAR --outFileNamePrefix {output}_ --outFilterMultimapNmax 1 --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat")
+        if file2==None: # single-end
+            os.system(f"STAR --outFileNamePrefix {output}_ --outFilterMultimapNmax 1 --genomeDir {star_folder} --readFilesIn {file1} --readFilesCommand zcat")
 
         # remove .bam if provided
         if output.endswith(".bam"):

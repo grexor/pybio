@@ -174,7 +174,9 @@ def seq_direct(species, chr, strand, start, stop, flank="N", genome_version=None
     Note: negative strand returns reverse complement; coordinates are 0-based, left+right inclusive; start must be < stop;
     """
     if genome_version==None:
-        genome_version = pybio.config.ensembl_version_latest
+        genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)
+    if genome_version==None:
+        return ""
     if start>stop:
         start, stop = stop, start
     assert(start<=stop)
