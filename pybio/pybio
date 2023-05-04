@@ -14,6 +14,7 @@ parser.add_argument("-species", "--species", help="Species name, e.g. homo_sapie
 parser.add_argument("-genome_version", "--genome_version", help="Version of the genome, e.g. ensembl109; if not provided, the latest Ensembl version is used")
 parser.add_argument("-fasta", "--fasta", help="Process sequences from fasta file")
 parser.add_argument("-gtf", "--gtf", help="GTF file to import")
+parser.add_argument("-threads", "--threads", default="1", help="Number of threads to use (default: 1)")
 args = parser.parse_args()
 
 help_genome = """
@@ -81,7 +82,39 @@ def display_potential_hits(potential_hits, search_text):
         print()
     sys.exit(1)
 
+def resolve_species_version(species, args):
+    known_species = is_known_species(species)
+    potential_hits = []
+    if not known_species:
+        potential_hits = determine_species(species)
+        if len(potential_hits)==1:
+            species = potential_hits[0][1]
+    if args.genome_version!=None:
+        genome_version = args.genome_version
+    else:
+        try:
+            genome_version = args.commands[2]
+            if genome_version.find("ensembl")==-1:
+                genome_version = None
+        except:
+            genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)
+    return species, genome_version, potential_hits
+
 if len(args.commands)>0:
+
+    if args.commands[0]=="path":
+        if len(args.commands)<2:
+            print("Please provide species, e.g.:\n\n$ pybio path homo_sapiens\n")
+            sys.exit(0)
+        species = args.commands[1]
+        species, genome_version, potential_hits = resolve_species_version(species, args)
+        annotation_folder = os.path.join(pybio.config.genomes_folder, "%s.annotation.%s" % (species, genome_version))
+        assembly_folder = os.path.join(pybio.config.genomes_folder, "%s.assembly.%s" % (species, genome_version))
+        fasta_file = os.path.join(assembly_folder, f"{species}.fasta")
+        gtf_file = os.path.join(annotation_folder, f"{species}.gtf.gz")
+        print(fasta_file)
+        print(gtf_file)
+        sys.exit(0)
 
     if args.commands[0]=="species":
         if len(args.commands)>1:
@@ -94,23 +127,12 @@ if len(args.commands)>0:
             print(help_genome)
             sys.exit(0)
         species = args.commands[1]
-        known_species = is_known_species(species)
-        if not known_species:
-            potential_hits = determine_species(species)
-            if len(potential_hits)>1:
-                display_potential_hits(potential_hits, species)
-            elif len(potential_hits)==1:
-                species = potential_hits[0][1]
-        if args.genome_version!=None:
-            genome_version = args.genome_version
-        else:
-            try:
-                genome_version = args.commands[2]
-                if genome_version.find("ensembl")==-1:
-                    print("Unknown genome version, examples: ensembl109 or ensemblgenomes56")
-                    sys.exit(1)
-            except:
-                genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", "")
+        species, genome_version, potential_hits = resolve_species_version(species, args)
+        if len(potential_hits)>1:
+            display_potential_hits(potential_hits, species)
+        if genome_version==None:
+            print("Unknown genome version, examples: ensembl109 or ensemblgenomes56")
+            sys.exit(1)
         if genome_version.find("ensembl")!=-1:
             pybio.genome_download(species, genome_version, args)
             pybio.genome_prepare(species, genome_version, args)
@@ -166,9 +188,9 @@ if len(args.commands)>0:
             output = args.commands[4]
 
         if file2!=None: # paired-end
-            os.system(f"STAR --outFileNamePrefix {output}_ --outFilterMultimapNmax 1 --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat")
+            os.system(f"STAR --runThreadN {args.threads} --outFileNamePrefix {output}_ --outFilterMultimapNmax 1 --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat")
         if file2==None: # single-end
-            os.system(f"STAR --outFileNamePrefix {output}_ --outFilterMultimapNmax 1 --genomeDir {star_folder} --readFilesIn {file1} --readFilesCommand zcat")
+            os.system(f"STAR --runThreadN {args.threads} --outFileNamePrefix {output}_ --outFilterMultimapNmax 1 --genomeDir {star_folder} --readFilesIn {file1} --readFilesCommand zcat")
 
         # remove .bam if provided
         if output.endswith(".bam"):
