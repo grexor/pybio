@@ -5,7 +5,7 @@ import sys
 import argparse
 import pybio
 
-parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
+parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter, add_help=False)
 parser.add_argument('commands', help="which command to run?", nargs='*')
 parser.add_argument("-version", "--version", help="Print version", action="store_true")
 parser.add_argument("-nostar", "--nostar", help="Do not process genome with STAR (index)", action="store_true")
@@ -15,7 +15,32 @@ parser.add_argument("-genome_version", "--genome_version", help="Version of the 
 parser.add_argument("-fasta", "--fasta", help="Process sequences from fasta file")
 parser.add_argument("-gtf", "--gtf", help="GTF file to import")
 parser.add_argument("-threads", "--threads", default="1", help="Number of threads to use (default: 1)")
+parser.add_argument("-help", "-h", "--help", action="store_true")
 args = parser.parse_args()
+
+help_0 = """
+Usage: pybio <command> [options]
+
+Commands:
+  -- Genome
+     genome species        Download and prepare latest genome version 
+
+  -- Search
+     search search_text    Displays all available genomes matching search_text
+
+  -- Configuration
+     config [folder]       If no folder provided, prompts for location of genomes data folder
+     path species          Prints FASTA and GTF file path for provided species (one per line, two last lines of output)
+
+Options:
+
+     -nostar, -nosalmon    Avoid building STAR and samlmon index for the genome
+     -threads n            Number of threads to use (STAR mapping, etc), default: 1
+     -fasta fasta_file     Fasta file for custom genome
+     -gtf gtf_file         GTF file for custom genome
+     -version              Display pybio version
+
+"""
 
 help_genome = """
 To download genomes, please specify species.
@@ -52,6 +77,10 @@ print(f"[pybio] genomes folder: {pybio.config.genomes_folder}")
 print()
 
 if args.version:
+    sys.exit(0)
+
+if len(args.commands)==0 and args.help:
+    print(help_0)
     sys.exit(0)
 
 def is_known_species(species):
