@@ -116,7 +116,7 @@ if len(args.commands)>0:
         print(gtf_file)
         sys.exit(0)
 
-    if args.commands[0]=="species":
+    if args.commands[0] in ["species", "search"]:
         if len(args.commands)>1:
             potential_hits = determine_species(args.commands[1])
             display_potential_hits(potential_hits, args.commands[1])
