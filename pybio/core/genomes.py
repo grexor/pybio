@@ -290,23 +290,41 @@ def download_annotation(species, genome_version):
     if subfolder!="":
         ftp_address = f"{ftp_address}/{subfolder}"
 
-    # first, try primary assembly
-    fasta_url = f"{ftp_address}/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz"
+    # prepare GFF3 download
+    gff3_url = f"{ftp_address}/release-{ensembl_version}/gff3/{species}/{species_capital}.{assembly}.{ensembl_version}.chr.gff3.gz"
     # no? download the toplevel
-    if not url_exists(fasta_url):
-        fasta_url = f"{ftp_address}/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.gtf.gz"
-
+    if not url_exists(gff3_url):
+        gff3_url = f"{ftp_address}/release-{ensembl_version}/gff3/{species}/{species_capital}.{assembly}.{ensembl_version}.gff3.gz"
     script = """
 cd {gdir}
 rm {species}.annotation.{genome_version}/* >/dev/null 2>&1
 mkdir {species}.annotation.{genome_version} >/dev/null 2>&1
 cd {species}.annotation.{genome_version}
 # https://www.biostars.org/p/279235/#279238
-wget {fasta_url} -O {species}.gtf.gz
+wget {gff3_url} -O {species}.gff3.gz
+"""
+    # download GFF3
+    print(f"[pybio.core.genomes] download annotation GFF3 for {species}.{genome_version}")
+    command = script.format(gff3_url=gff3_url, gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
+    print(command)
+    os.system(command)
+
+    # prepare GTF download
+    gtf_url = f"{ftp_address}/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.chr.gtf.gz"
+    # no? download the toplevel
+    if not url_exists(gtf_url):
+        gtf_url = f"{ftp_address}/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.gtf.gz"
+
+    script = """
+cd {gdir}
+mkdir {species}.annotation.{genome_version} >/dev/null 2>&1
+cd {species}.annotation.{genome_version}
+# https://www.biostars.org/p/279235/#279238
+wget {gtf_url} -O {species}.gtf.gz
 """
     # download GTF
     print(f"[pybio.core.genomes] download annotation GTF for {species}.{genome_version}")
-    command = script.format(fasta_url=fasta_url, gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
+    command = script.format(gtf_url=gtf_url, gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
     return os.system(command)
 
 def star_index(species, genome_version, threads=1):

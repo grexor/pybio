@@ -141,8 +141,10 @@ if len(args.commands)>0:
         assembly_folder = os.path.join(pybio.config.genomes_folder, "%s.assembly.%s" % (species, genome_version))
         fasta_file = os.path.join(assembly_folder, f"{species}.fasta")
         gtf_file = os.path.join(annotation_folder, f"{species}.gtf.gz")
+        gff3_file = os.path.join(annotation_folder, f"{species}.gff3.gz")
         print(fasta_file)
         print(gtf_file)
+        print(gff3_file)
         sys.exit(0)
 
     if args.commands[0] in ["species", "search"]:
