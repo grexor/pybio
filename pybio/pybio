@@ -181,9 +181,7 @@ if len(args.commands)>0:
 
     if args.commands[0]=="config":
         if len(args.commands)>1:
-            pybio.config.change(args.commands[1]) # pybio config genome_folder
-        else:
-            pybio.config.change() # ask for genome folder
+            pybio.config.init(args.commands[1]) # pybio config genome_folder
 
     if args.commands[0]=="sam2bam":
         if len(args.commands) not in [3]:
