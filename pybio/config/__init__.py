@@ -29,5 +29,5 @@ def init(genomes_folder=None):
         for (k, v) in new_config:
             f.write(f"{k}=\"{v}\"\n")
         f.close()
-        print(f"[pybio] pybio genome folder changed to: '{genomes_folder}'")
+        print(f"[pybio] genome folder changed to: '{genomes_folder}'")
 

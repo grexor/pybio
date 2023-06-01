@@ -216,14 +216,14 @@ if len(args.commands)>0:
             file2=args.commands[3]
             output = args.commands[4]
 
+        # remove .bam if provided
+        if output.endswith(".bam"):
+            output = output[:-4]
+
         if file2!=None: # paired-end
             os.system(f"STAR --runThreadN {args.threads} --outFileNamePrefix {output}_ --outFilterMultimapNmax 1 --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat")
         if file2==None: # single-end
             os.system(f"STAR --runThreadN {args.threads} --outFileNamePrefix {output}_ --outFilterMultimapNmax 1 --genomeDir {star_folder} --readFilesIn {file1} --readFilesCommand zcat")
-
-        # remove .bam if provided
-        if output.endswith(".bam"):
-            output = output[:-4]
 
         os.system(f"pybio sam2bam {output}_Aligned.out.sam {output}.bam")
         os.system(f"mv {output}_Log.final.out {output}.stats.txt")
