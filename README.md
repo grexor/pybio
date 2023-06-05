@@ -26,7 +26,7 @@ Features include genome+annotation download from Ensembl and processing with STA
 
 The easiest way to install pybio is running:
 
-`pip install pybio`
+`$ pip install pybio`
 
 Note that on some systems, pip is installing the executable scripts under `~/.local/bin`. However this folder is not in the PATH which will result in `command not found` if you try to run `$ pybio` on the command line. To fix this, please execute `export PATH="$PATH:~/.local/bin"` (and add this to your `.profile`). Another suggestion is to install inside a virtual environment (using `virtualenv`).
 
