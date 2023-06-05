@@ -3,7 +3,9 @@
 
 pybio is a Python framework for handling genomics operations and a direct interface to Ensembl genomes.
 
-Downloading an Ensembl genome+annotation takes one line: `pybio genome homo_sapiens`.
+Downloading an Ensembl genome+annotation takes one line:
+
+`$ pybio genome homo_sapiens`
 
 Features include genome+annotation download from Ensembl and processing with STAR and salmon, support of Fasta, Fastq, bedGraph and other file formats, motif sequence searches, and specific APA feautes like alternative polyadenylation site-pair classification (same-exon, skipped-exon, composite-exon) and more.
 
@@ -25,6 +27,8 @@ Features include genome+annotation download from Ensembl and processing with STA
 The easiest way to install pybio is running:
 
 `pip install pybio`
+
+Note that on some systems, pip is installing the software under `~/.local/bin` however this folder is not in the PATH. This will result in `command not found` if you try to run `pybio` on the command line. To fix this, please execute `export PATH="$PATH:~/.local/bin"` (and add this to your `.profile`).
 
 If you would like instead to install the latest developmental version from this repository:
 
