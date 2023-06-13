@@ -73,6 +73,7 @@ $ pybio sam2bam file1.sam file1.bam
 """
 
 print(f"[pybio] v{pybio.version}, https://github.com/grexor/pybio")
+print(f"[pybio] config file: {pybio.config.config_fname()}")
 print(f"[pybio] genomes folder: {pybio.config.genomes_folder}")
 print()
 

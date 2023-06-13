@@ -1,10 +1,15 @@
 import os
 import sys
 
+# pybio config file stored to ~/.pybio
+def config_fname():
+    config_fname = os.path.expanduser("~/.pybio")
+    return config_fname
+
 def init(genomes_folder=None):
     config_module = sys.modules[__name__]
     pybio_folder = os.path.abspath(os.path.join(os.path.abspath(__file__), "..", "..")) 
-    config_file = os.path.abspath(os.path.join(pybio_folder, "pybio.config"))
+    config_file = config_fname()
     config_example_file = os.path.abspath(os.path.join(pybio_folder, "pybio.config.example"))
     if not os.path.exists(config_file):
         config_example_file = os.path.abspath(os.path.join(pybio_folder, "pybio.config.example"))
