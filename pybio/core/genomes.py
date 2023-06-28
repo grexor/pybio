@@ -594,3 +594,16 @@ def test():
                     assert(atts["exon_id"] not in exons)
         r = f.readline()
     f.close()
+
+# find genes (gene_id, gene_name) by exact match of a search term
+def find_genes(search):
+    results = set()
+    for gene_id, gene in genes_db.items():
+        if gene.gene_name==search:
+            results.add((0, gene_id, gene.gene_name))
+        elif gene.gene_name.find(search)!=-1:
+            results.add((1, gene_id, gene.gene_name))
+    results = list(results)
+    results.sort()
+    results = [(e1, e2) for (_, e1, e2) in results]
+    return results
