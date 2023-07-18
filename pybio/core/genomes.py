@@ -55,6 +55,7 @@ class Transcript:
     self.utr3 = None
     self.utr5 = None
     self.exons = set()
+    self.exons_list = [] # list of exons, (start, stop), sorted in 5->3 reading direction, start<=stop
     self.gene.transcripts.add(self)
 
 class Exon:
@@ -162,6 +163,17 @@ def prepare(species="homo_sapiens", genome_version=None):
     print("#transcripts = ", len(transcripts_db.keys()))
     print("#genes = ", len(genes_db.keys()))
     print("chromosome list = ", "; ".join(list(chr_list)))
+
+    # sort exons
+    print("pybio: sorting exons of transcripts to be given in 5'->3' order")
+    for gene_id, gene in genes_db.items():
+        for transcript in gene.transcripts:
+            exons_list = [(exon.start, exon.stop) for exon in transcript.exons]
+            if gene.strand=="+":
+                exons_list.sort(key = lambda x: x[0])
+            else:
+                exons_list.sort(key = lambda x: x[1], reverse=True)
+            transcript.exons_list = exons_list
 
     pickle.dump(exons_db, open(os.path.join(annotation_folder, "exons_db.pickle"), "wb"))
     pickle.dump(transcripts_db, open(os.path.join(annotation_folder, "transcripts_db.pickle"), "wb"))
