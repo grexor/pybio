@@ -1,4 +1,4 @@
-<picture><img src="media/pybio.png" width="70"/></picture>
+<picture><img src="media/pybio.png" height="30"/></picture>
 ## pybio: basic genomics toolset
 
 pybio is a Python framework for handling genomics operations and a direct interface to Ensembl genomes.

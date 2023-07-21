@@ -250,7 +250,7 @@ def make_motifs_nr(motif_size):
     return motifs
 
 def url_exists(path):
-    r = requests.head(path)
+    r = requests.head(path, verify=False)
     return r.status_code == requests.codes.ok
 
 def download_assembly(species, genome_version):
@@ -279,7 +279,7 @@ cd {gdir}
 rm {species}.assembly.{genome_version}/* >/dev/null 2>&1
 mkdir {species}.assembly.{genome_version} >/dev/null 2>&1
 cd {species}.assembly.{genome_version}
-wget {fasta_url} -O {species}.fasta.gz
+wget {fasta_url} -O {species}.fasta.gz --no-check-certificate
 gunzip -f {species}.fasta.gz
 python3 -c "import pybio; pybio.data.Fasta('{species}.fasta').split()"
 """
@@ -313,7 +313,7 @@ rm {species}.annotation.{genome_version}/* >/dev/null 2>&1
 mkdir {species}.annotation.{genome_version} >/dev/null 2>&1
 cd {species}.annotation.{genome_version}
 # https://www.biostars.org/p/279235/#279238
-wget {gff3_url} -O {species}.gff3.gz
+wget {gff3_url} -O {species}.gff3.gz --no-check-certificate
 """
     # download GFF3
     print(f"[pybio.core.genomes] download annotation GFF3 for {species}.{genome_version}")
@@ -332,7 +332,7 @@ cd {gdir}
 mkdir {species}.annotation.{genome_version} >/dev/null 2>&1
 cd {species}.annotation.{genome_version}
 # https://www.biostars.org/p/279235/#279238
-wget {gtf_url} -O {species}.gtf.gz
+wget {gtf_url} -O {species}.gtf.gz --no-check-certificate
 """
     # download GTF
     print(f"[pybio.core.genomes] download annotation GTF for {species}.{genome_version}")
@@ -374,7 +374,7 @@ cd {gdir}
 rm {species}.transcripts.{genome_version}/* >/dev/null 2>&1
 mkdir {species}.transcripts.{genome_version} >/dev/null 2>&1
 cd {species}.transcripts.{genome_version}
-wget {ftp_address}/release-{ensembl_version}/fasta/{species}/cdna/{species_capital}.{assembly}.cdna.all.fa.gz -O {species}.transcripts.fasta.gz
+wget {ftp_address}/release-{ensembl_version}/fasta/{species}/cdna/{species_capital}.{assembly}.cdna.all.fa.gz -O {species}.transcripts.fasta.gz --no-check-certificate
 
 cd {gdir}
 salmon index -t {species}.transcripts.{genome_version}/{species}.transcripts.fasta.gz -i {species}.transcripts.{genome_version}.salmon
@@ -386,7 +386,7 @@ def get_latest_ensembl():
     import requests, sys
     server = "https://rest.ensembl.org"
     ext = "/info/data/?"
-    r = requests.get(server+ext, headers={ "Content-Type" : "application/json"})
+    r = requests.get(server+ext, headers={ "Content-Type" : "application/json"}, verify=False)
     if not r.ok:
         r.raise_for_status()
         sys.exit()
@@ -397,7 +397,7 @@ def get_latest_ensemblgenomes():
     import requests, sys   
     server = "https://rest.ensembl.org"
     ext = "/info/eg_version?"
-    r = requests.get(server+ext, headers={ "Content-Type" : "application/json"})
+    r = requests.get(server+ext, headers={ "Content-Type" : "application/json"}, verify=False)
     if not r.ok:
         r.raise_for_status()
         sys.exit()
@@ -407,7 +407,7 @@ def get_latest_ensemblgenomes():
 def get_genome_info(genome_id): 
   server = "https://rest.ensembl.org"
   ext = f"/info/genomes/{genome_id}?"
-  r = requests.get(server+ext, headers={ "Content-Type" : "application/json"})
+  r = requests.get(server+ext, headers={ "Content-Type" : "application/json"}, verify=False)
   if not r.ok:
       return {}
   decoded = r.json()
@@ -423,7 +423,7 @@ def list_species_ensembl(prepared=True):
         if not os.path.exists(pybio.config.genomes_folder):
             os.makedirs(pybio.config.genomes_folder)
         genome_species_online = "https://raw.githubusercontent.com/grexor/pybio/master/ensembl/genome_species.tab"
-        r = requests.get(genome_species_online, allow_redirects=True)
+        r = requests.get(genome_species_online, allow_redirects=True, verify=False)
         open(os.path.join(pybio.config.genomes_folder, "genome_species.tab"), "wb").write(r.content)
     else:
         print("[pybio.core.genomes] Species list from Ensembl; done once and takes ~ 1 minute")
@@ -431,7 +431,7 @@ def list_species_ensembl(prepared=True):
         ensemblgenomes_version = get_latest_ensemblgenomes()
         species_db = {}
         def listFD(url, ext=''):
-            page = requests.get(url).text
+            page = requests.get(url, verify=False).text
             soup = BeautifulSoup(page, 'html.parser')
             return [node.get('href')[:-1] for node in soup.find_all('a') if node.get('href').endswith(ext)]
         if not os.path.exists(pybio.config.genomes_folder):
