@@ -14,6 +14,8 @@ import psutil
 import pickle
 import math
 import requests
+import sys
+requests.packages.urllib3.disable_warnings()
 
 process = psutil.Process(os.getpid())
 
@@ -383,7 +385,6 @@ salmon index -t {species}.transcripts.{genome_version}/{species}.transcripts.fas
     return os.system(command)
 
 def get_latest_ensembl():
-    import requests, sys
     server = "https://rest.ensembl.org"
     ext = "/info/data/?"
     r = requests.get(server+ext, headers={ "Content-Type" : "application/json"}, verify=False)
@@ -394,7 +395,6 @@ def get_latest_ensembl():
     return str(decoded["releases"][0])
 
 def get_latest_ensemblgenomes():
-    import requests, sys   
     server = "https://rest.ensembl.org"
     ext = "/info/eg_version?"
     r = requests.get(server+ext, headers={ "Content-Type" : "application/json"}, verify=False)
@@ -415,7 +415,6 @@ def get_genome_info(genome_id):
 
 def list_species_ensembl(prepared=True):
     from bs4 import BeautifulSoup
-    import requests
     genome_species_fname_finished = os.path.join(pybio.config.genomes_folder, "genome_species.tab.finished")
     os.system(f"rm {genome_species_fname_finished} >/dev/null 2>&1")
     # download prepared file? (do not query Ensembl)
