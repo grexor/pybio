@@ -116,6 +116,7 @@ def prepare(species="homo_sapiens", genome_version=None):
         f = gzip.open(gtf_fname, "rt")
     else:
         f = open(gtf_fname, "rt")
+    print(f"[pybio] reading {gtf_fname}")
     clines = 0
     r = f.readline()
     while r:
@@ -351,9 +352,8 @@ cd {gdir}
 rm {species}.assembly.{genome_version}.star/* >/dev/null 2>&1
 mkdir {species}.assembly.{genome_version}.star >/dev/null 2>&1
 cd {species}.assembly.{genome_version}.star
-gunzip ../{species}.annotation.{genome_version}/{species}.gtf.gz
+gunzip -k ../{species}.annotation.{genome_version}/{species}.gtf.gz # -k to keep both .gz and uncompressed GTF, some tools require uncompressed GTF
 STAR --runMode genomeGenerate --genomeSAindexNbases {genomeSAindexNbases} --genomeDir ../{species}.assembly.{genome_version}.star --genomeFastaFiles ../{species}.assembly.{genome_version}/{species}.fasta --runThreadN {threads} --sjdbGTFfile ../{species}.annotation.{genome_version}/{species}.gtf
-gzip -f ../{species}.annotation.{genome_version}/{species}.gtf
 """
     fasta_file = f"{pybio.config.genomes_folder}/{species}.assembly.{genome_version}/{species}.fasta"
     fasta_size = os.path.getsize(fasta_file)
