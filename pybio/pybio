@@ -222,10 +222,12 @@ if len(args.commands)>0:
         if output.endswith(".bam"):
             output = output[:-4]
 
+        # --outFilterMultimapNmax 1
         if file2!=None: # paired-end
-            os.system(f"STAR --runThreadN {args.threads} --outFileNamePrefix {output}_ --outFilterMultimapNmax 1 --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat")
+            print(f"STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat")
+            os.system(f"STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat")
         if file2==None: # single-end
-            os.system(f"STAR --runThreadN {args.threads} --outFileNamePrefix {output}_ --outFilterMultimapNmax 1 --genomeDir {star_folder} --readFilesIn {file1} --readFilesCommand zcat")
+            os.system(f"STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} --readFilesCommand zcat")
 
         os.system(f"pybio sam2bam {output}_Aligned.out.sam {output}.bam -threads {args.threads}")
         os.system(f"mv {output}_Log.final.out {output}.stats.txt")
