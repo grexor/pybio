@@ -149,6 +149,16 @@ def prepare(species="homo_sapiens", genome_version=None):
         if data["feature"] == "exon":
             if atts.get("exon_id", None)==None:
                 atts["exon_id"] = f"exon_{data['start']}_{data['stop']}"
+            # note: some annotations don't have "transcript" records, just "transcript_id" in their "exon" records
+            if transcripts_db.get(atts["transcript_id"], None)==None:
+                transcript = Transcript(atts["transcript_id"], atts["gene_id"], data["start"], data["stop"])
+                transcripts_db[atts["transcript_id"]] = transcript
+            # we also need to update the transcript start/stop if its already there
+            else:
+                transcript = transcripts_db[atts["transcript_id"]]
+                transcript.start = min(int(data["start"])-1, transcript.start)
+                transcript.stop = max(int(data["stop"])-1, transcript.stop)
+                transcripts_db[atts["transcript_id"]] = transcript
             exon = Exon(atts["exon_id"], atts["transcript_id"], data["start"], data["stop"])
             exons_db[atts["exon_id"]] = exon
         if data["feature"] == "three_prime_utr":
