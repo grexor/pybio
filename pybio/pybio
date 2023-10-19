@@ -153,6 +153,8 @@ if len(args.commands)>0:
         if len(args.commands)>1:
             potential_hits = determine_species(args.commands[1])
             display_potential_hits(potential_hits, args.commands[1])
+        else:
+            print(f"Please provide a search term for the species, otherwise all available Ensembl genome species are stored in the local database at:\n\n{pybio.config.genomes_folder}/genome_species.tab")
 
     if args.commands[0]=="genome":
         if len(args.commands)==1:

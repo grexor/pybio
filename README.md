@@ -1,13 +1,14 @@
 <picture><img src="media/pybio.png" height="30"/></picture>
 ## pybio: basic genomics toolset
 
-pybio is a Python framework for handling genomics operations and a direct interface to Ensembl genomes.
+pybio is a Python framework for handling genomics operations and a direct interface to Ensembl genome assemblies and annotations.
 
-Downloading an Ensembl genome+annotation takes one line:
+Downloading an Ensembl genome + annotation:
 
+`$ pip install pybio`
 `$ pybio genome homo_sapiens`
 
-Features include genome+annotation download from Ensembl and processing with STAR and salmon, support of Fasta, Fastq, bedGraph and other file formats, motif sequence searches, and specific APA feautes like alternative polyadenylation site-pair classification (same-exon, skipped-exon, composite-exon) and more.
+Features include genome+annotation download from Ensembl and processing with STAR and salmon, support of Fasta, Fastq and bedGraph file formats, motif sequence searches.
 
 ## Contents
 
