@@ -1,10 +1,7 @@
 import gzip
-import bisect
 import pybio
 import os
 import json
-import pysam
-import numpy as np
 
 def mix_sort(x):
     if isinstance(x, int):

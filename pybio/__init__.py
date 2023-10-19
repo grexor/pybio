@@ -11,9 +11,7 @@ import os
 import json
 import pybio.path
 import pybio.data
-import pybio.map
 import pybio.utils
-import pybio.expression
 import pybio.maths
 import pybio.config
 import pybio.sequence
