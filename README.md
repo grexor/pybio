@@ -1,14 +1,33 @@
 <picture><img src="media/pybio.png" height="30"/></picture>
 ## pybio: basic genomics toolset
 
-pybio is a Python framework for handling genomics operations and a direct interface to Ensembl genome assemblies and annotations.
+*pybio* is a comprehensive Python framework designed to streamline genomics operations. It offers a direct interface to Ensembl genome assemblies and annotations, while also accommodating custom genomes via FASTA/GTF inputs. The primary objective of *pybio* is to simplify genome management. It achieves this by providing wrappers for STAR RNA-seq indexing and mapping, as well as Python genomic feature search and sequence retrieval from the managed genomes.
 
 ## Quick Start
+
+Install via pip and download + prepare human genome:
 
 ```
 pip install pybio
 pybio genome homo_sapiens
 ```
+
+Search genome features (exons, transcripts, genes) from Python:
+
+```
+import pybio
+result = pybio.core.genomes.annotate("homo_sapiens", "1", "+", 11012344)
+genes, transcripts, exons, UTR5, UTR3 = result
+```
+
+Retrieve genomic sequences from Python:
+
+```
+import pybio
+seq = pybio.core.genomes.seq("homo_sapiens", "1", "+", 450000, -20, 20)
+```
+
+Check documentation for more examples.
 
 ## Documentation
 
