@@ -104,7 +104,7 @@ def determine_species(species):
     return []
 
 def display_potential_hits(potential_hits, search_text):
-    print(f"We found {len(potential_hits)} genome hits for your provided genome species `{search_text}`.\nPlease choose the species genome you would like to download:\n")
+    print(f"We found {len(potential_hits)} genome hits for your provided genome species `{search_text}`.\n")
     for hit in potential_hits:
         print(f"Species = '{hit[1]}', display name = '{hit[2]}'")
     if len(potential_hits)>0:
