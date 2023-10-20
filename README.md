@@ -1,7 +1,7 @@
 <picture><img src="media/pybio.png" height="30"/></picture>
 ## pybio: basic genomics toolset
 
-*pybio* is a comprehensive Python framework designed to streamline genomics operations. It offers a direct interface to Ensembl genome assemblies and annotations, while also accommodating custom genomes via FASTA/GTF inputs. The primary objective of *pybio* is to simplify genome management. It achieves this by providing wrappers for STAR RNA-seq indexing and mapping, as well as Python genomic feature search and sequence retrieval from the managed genomes.
+*pybio* is a comprehensive Python framework designed to streamline genomics operations. It offers a direct interface to Ensembl genome assemblies and annotations, while also accommodating custom genomes via FASTA/GTF inputs. The primary objective of *pybio* is to simplify genome management. It achieves this by providing automatic download of Ensembl genome assemblies and annotation, provides Python genomic feature search and sequence retrieval from the managed genomes, STAR indexing and mapping and more.
 
 ## Quick Start
 
