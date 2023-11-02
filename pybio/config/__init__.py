@@ -21,7 +21,7 @@ def init(genomes_folder=None):
             continue
         k, v = cline.split("=")
         if k=="genomes_folder" and genomes_folder!=None:
-            v = genomes_folder
+            v = os.path.abspath(os.path.expanduser(genomes_folder))
         v = v.replace("\n", "").replace("\r", "").replace("\"", "").replace("'", "")
         v = os.path.expanduser(v)
         if k.find("folder")!=-1:
