@@ -139,6 +139,9 @@ if len(args.commands)>0:
             sys.exit(0)
         species = args.commands[1]
         species, genome_version, potential_hits = resolve_species_version(species, args)
+        if genome_version==None:
+            print(f"pybio couldn't find any genomes for species '{species}'.\nPlease provide a valid genome species to retrieve paths.")
+            sys.exit(0)
         annotation_folder = os.path.join(pybio.config.genomes_folder, "%s.annotation.%s" % (species, genome_version))
         assembly_folder = os.path.join(pybio.config.genomes_folder, "%s.assembly.%s" % (species, genome_version))
         fasta_file = os.path.join(assembly_folder, f"{species}.fasta")
