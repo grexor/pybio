@@ -196,7 +196,7 @@ if len(args.commands)>0:
             sys.exit()
         input_fname = args.commands[1]
         output_fname = args.commands[2]
-        os.system(f"samtools view -F 4 -bS {input_fname} -o {output_fname} # -F 4 means only mapped reads -@ {args.threads}")
+        os.system(f"samtools view -F 4 -bS {input_fname} -o {output_fname} -@ {args.threads} # -F 4 means only mapped reads")
         os.system(f"samtools sort {output_fname} -o {output_fname} -@ {args.threads}")
         os.system(f"samtools index {output_fname} -@ {args.threads}")
 
