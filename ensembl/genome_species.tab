@@ -1,824 +1,852 @@
 species	assembly	provider	provider_subfolder	genome_version	display_name
-acanthochromis_polyacanthus	ASM210954v1	ensembl		ensembl110	Spiny chromis
-accipiter_nisus	Accipiter_nisus_ver1.0	ensembl		ensembl110	Eurasian sparrowhawk
-ailuropoda_melanoleuca	ASM200744v2	ensembl		ensembl110	Giant panda
-amazona_collaria	ASM394721v1	ensembl		ensembl110	Yellow-billed parrot
-amphilophus_citrinellus	Midas_v5	ensembl		ensembl110	Midas cichlid
-amphiprion_ocellaris	AmpOce1.0	ensembl		ensembl110	Clown anemonefish
-amphiprion_percula	Nemo_v1	ensembl		ensembl110	Orange clownfish
-anabas_testudineus	fAnaTes1.2	ensembl		ensembl110	Climbing perch
-anas_platyrhynchos	ASM874695v1	ensembl		ensembl110	Mallard
-anas_platyrhynchos_platyrhynchos	CAU_duck1.0	ensembl		ensembl110	Duck
-anas_zonorhyncha	ASM222487v1	ensembl		ensembl110	Eastern spot-billed duck
-anolis_carolinensis	AnoCar2.0v2	ensembl		ensembl110	Green anole
-anser_brachyrhynchus	ASM259213v1	ensembl		ensembl110	Pink-footed goose
-anser_cygnoides	GooseV1.0	ensembl		ensembl110	Swan goose
-aotus_nancymaae	Anan_2.0	ensembl		ensembl110	Ma's night monkey
-apteryx_haastii	aptHaa1	ensembl		ensembl110	Great spotted kiwi
-apteryx_owenii	aptOwe1	ensembl		ensembl110	Little spotted kiwi
-apteryx_rowi	aptRow1	ensembl		ensembl110	Okarito brown kiwi
-aquila_chrysaetos_chrysaetos	bAquChr1.2	ensembl		ensembl110	Golden eagle
-astatotilapia_calliptera	fAstCal1.2	ensembl		ensembl110	Eastern happy
-astyanax_mexicanus	Astyanax_mexicanus-2.0	ensembl		ensembl110	Mexican tetra
-astyanax_mexicanus_pachon	Astyanax_mexicanus-1.0.2	ensembl		ensembl110	Pachon cavefish
-athene_cunicularia	athCun1	ensembl		ensembl110	Burrowing owl
-balaenoptera_musculus	mBalMus1.v2	ensembl		ensembl110	Blue whale
-betta_splendens	fBetSpl5.2	ensembl		ensembl110	Siamese fighting fish
-bison_bison_bison	Bison_UMD1.0	ensembl		ensembl110	American bison
-bos_grunniens	LU_Bosgru_v3.0	ensembl		ensembl110	Domestic yak
-bos_indicus_hybrid	UOA_Brahman_1	ensembl		ensembl110	Hybrid - Bos Indicus
-bos_mutus	BosGru_v2.0	ensembl		ensembl110	Wild yak
-bos_taurus	ARS-UCD1.2	ensembl		ensembl110	Cow
-bos_taurus_hybrid	UOA_Angus_1	ensembl		ensembl110	Hybrid - Bos Taurus
-bubo_bubo	BubBub1.0	ensembl		ensembl110	Eurasian eagle-owl
-buteo_japonicus	ButJap1.0	ensembl		ensembl110	Eastern buzzard
-caenorhabditis_elegans	WBcel235	ensembl		ensembl110	Caenorhabditis elegans (PRJNA13758)
-cairina_moschata_domestica	CaiMos1.0	ensembl		ensembl110	Muscovy Duck (domestic type)
-calidris_pugnax	ASM143184v1	ensembl		ensembl110	Ruff
-calidris_pygmaea	ASM369795v1	ensembl		ensembl110	Spoon-billed sandpiper
-callithrix_jacchus	mCalJac1.pat.X	ensembl		ensembl110	White-tufted-ear marmoset
-callorhinchus_milii	Callorhinchus_milii-6.1.3	ensembl		ensembl110	Elephant shark
-camarhynchus_parvulus	Camarhynchus_parvulus_V1.1	ensembl		ensembl110	Small tree finch
-camelus_dromedarius	CamDro2	ensembl		ensembl110	Arabian camel
-canis_lupus_dingo	ASM325472v1	ensembl		ensembl110	Dingo
-canis_lupus_familiaris	ROS_Cfam_1.0	ensembl		ensembl110	Dog
-canis_lupus_familiarisbasenji	Basenji_breed-1.1	ensembl		ensembl110	Dog - Basenji
-canis_lupus_familiarisboxer	Dog10K_Boxer_Tasha	ensembl		ensembl110	Dog - Boxer
-canis_lupus_familiarisgreatdane	UMICH_Zoey_3.1	ensembl		ensembl110	Dog - Great Dane
-canis_lupus_familiarisgsd	UU_Cfam_GSD_1.0	ensembl		ensembl110	Dog - German Shepherd
-capra_hircus	ARS1	ensembl		ensembl110	Goat
-capra_hircus_blackbengal	CVASU_BBG_1.0	ensembl		ensembl110	Goat (black bengal)
-carassius_auratus	ASM336829v1	ensembl		ensembl110	Goldfish
-carlito_syrichta	Tarsius_syrichta-2.0.1	ensembl		ensembl110	Tarsier
-castor_canadensis	C.can_genome_v1.0	ensembl		ensembl110	American beaver
-catagonus_wagneri	CatWag_v2_BIUU_UCD	ensembl		ensembl110	Chacoan peccary
-catharus_ustulatus	bCatUst1.pri	ensembl		ensembl110	Swainson's thrush
-cavia_aperea	CavAp1.0	ensembl		ensembl110	Brazilian guinea pig
-cavia_porcellus	Cavpor3.0	ensembl		ensembl110	Guinea Pig
-cebus_imitator	Cebus_imitator-1.0	ensembl		ensembl110	Panamanian white-faced capuchin
-cercocebus_atys	Caty_1.0	ensembl		ensembl110	Sooty mangabey
-cervus_hanglu_yarkandensis	CEY_v1	ensembl		ensembl110	Yarkand deer
-chelonoidis_abingdonii	ASM359739v1	ensembl		ensembl110	Abingdon island giant tortoise
-chelydra_serpentina	Chelydra_serpentina-1.0	ensembl		ensembl110	Common snapping turtle
-chinchilla_lanigera	ChiLan1.0	ensembl		ensembl110	Long-tailed chinchilla
-chlorocebus_sabaeus	ChlSab1.1	ensembl		ensembl110	Vervet-AGM
-choloepus_hoffmanni	choHof1	ensembl		ensembl110	Sloth
-chrysemys_picta_bellii	Chrysemys_picta_bellii-3.0.3	ensembl		ensembl110	Painted turtle
-chrysolophus_pictus	Chrysolophus_pictus_GenomeV1.0	ensembl		ensembl110	Golden pheasant
-ciona_intestinalis	KH	ensembl		ensembl110	C.intestinalis
-ciona_savignyi	CSAV2.0	ensembl		ensembl110	C.savignyi
-clupea_harengus	Ch_v2.0.2	ensembl		ensembl110	Atlantic herring
-colobus_angolensis_palliatus	Cang.pa_1.0	ensembl		ensembl110	Angola colobus
-corvus_moneduloides	bCorMon1.pri	ensembl		ensembl110	New Caledonian crow
-cottoperca_gobio	fCotGob3.1	ensembl		ensembl110	Channel bull blenny
-coturnix_japonica	Coturnix_japonica_2.0	ensembl		ensembl110	Japanese quail
-cricetulus_griseus_chok1gshd	CHOK1GS_HDv1	ensembl		ensembl110	Chinese hamster CHOK1GS
-cricetulus_griseus_crigri	CriGri_1.0	ensembl		ensembl110	Chinese hamster CriGri
-cricetulus_griseus_picr	CriGri-PICRH-1.0	ensembl		ensembl110	Chinese hamster PICR
-crocodylus_porosus	CroPor_comp1	ensembl		ensembl110	Australian saltwater crocodile
-cyanistes_caeruleus	cyaCae2	ensembl		ensembl110	Blue tit
-cyclopterus_lumpus	fCycLum1.pri	ensembl		ensembl110	Lumpfish
-cynoglossus_semilaevis	Cse_v1.0	ensembl		ensembl110	Tongue sole
-cyprinodon_variegatus	C_variegatus-1.0	ensembl		ensembl110	Sheepshead minnow
-cyprinus_carpio_carpio	Cypcar_WagV4.0	ensembl		ensembl110	Common carp
-cyprinus_carpio_germanmirror	German_Mirror_carp_1.0	ensembl		ensembl110	Common carp german mirror
-cyprinus_carpio_hebaored	Hebao_red_carp_1.0	ensembl		ensembl110	Common carp hebao red
-cyprinus_carpio_huanghe	Hunaghe_carp_2.0	ensembl		ensembl110	Common carp huanghe
-danio_rerio	GRCz11	ensembl		ensembl110	Zebrafish
-dasypus_novemcinctus	Dasnov3.0	ensembl		ensembl110	Armadillo
-delphinapterus_leucas	ASM228892v3	ensembl		ensembl110	Beluga whale
-denticeps_clupeoides	fDenClu1.1	ensembl		ensembl110	Denticle herring
-dicentrarchus_labrax	dlabrax2021	ensembl		ensembl110	European seabass
-dipodomys_ordii	Dord_2.0	ensembl		ensembl110	Kangaroo rat
-dromaius_novaehollandiae	droNov1	ensembl		ensembl110	Emu
-drosophila_melanogaster	BDGP6.46	ensembl		ensembl110	Drosophila melanogaster (Fruit fly)
-echeneis_naucrates	fEcheNa1.1	ensembl		ensembl110	Live sharksucker
-echinops_telfairi	TENREC	ensembl		ensembl110	Lesser hedgehog tenrec
-electrophorus_electricus	Ee_SOAP_WITH_SSPACE	ensembl		ensembl110	Electric eel
-eptatretus_burgeri	Eburgeri_3.2	ensembl		ensembl110	Hagfish
-equus_asinus	ASM1607732v2	ensembl		ensembl110	Donkey
-equus_caballus	EquCab3.0	ensembl		ensembl110	Horse
-erinaceus_europaeus	HEDGEHOG	ensembl		ensembl110	Hedgehog
-erpetoichthys_calabaricus	fErpCal1.1	ensembl		ensembl110	Reedfish
-erythrura_gouldiae	GouldianFinch	ensembl		ensembl110	Gouldian finch
-esox_lucius	Eluc_v4	ensembl		ensembl110	Northern pike
-falco_tinnunculus	FalTin1.0	ensembl		ensembl110	Common kestrel
-felis_catus	Felis_catus_9.0	ensembl		ensembl110	Cat
-ficedula_albicollis	FicAlb1.5	ensembl		ensembl110	Collared flycatcher
-fukomys_damarensis	DMR_v1.0	ensembl		ensembl110	Damara mole rat
-fundulus_heteroclitus	Fundulus_heteroclitus-3.0.2	ensembl		ensembl110	Mummichog
-gadus_morhua	gadMor3.0	ensembl		ensembl110	Atlantic cod
-gallus_gallus	bGalGal1.mat.broiler.GRCg7b	ensembl		ensembl110	Chicken
-gallus_gallus_gca000002315v5	GRCg6a	ensembl		ensembl110	Chicken (Red Jungle fowl)
-gallus_gallus_gca016700215v2	bGalGal1.pat.whiteleghornlayer.GRCg7w	ensembl		ensembl110	Chicken (paternal White leghorn layer)
-gambusia_affinis	ASM309773v1	ensembl		ensembl110	Western mosquitofish
-gasterosteus_aculeatus	BROADS1	ensembl		ensembl110	Stickleback
-geospiza_fortis	GeoFor_1.0	ensembl		ensembl110	Medium ground-finch
-gopherus_agassizii	ASM289641v1	ensembl		ensembl110	Agassiz's desert tortoise
-gopherus_evgoodei	rGopEvg1_v1.p	ensembl		ensembl110	Goodes thornscrub tortoise
-gorilla_gorilla	gorGor4	ensembl		ensembl110	Gorilla
-gouania_willdenowi	fGouWil2.1	ensembl		ensembl110	Blunt-snouted clingfish
-haplochromis_burtoni	AstBur1.0	ensembl		ensembl110	Burton's mouthbrooder
-heterocephalus_glaber_female	Naked_mole-rat_maternal	ensembl		ensembl110	Naked mole-rat female
-heterocephalus_glaber_male	Naked_mole-rat_paternal	ensembl		ensembl110	Naked mole-rat male
-hippocampus_comes	H_comes_QL1_v1	ensembl		ensembl110	Tiger tail seahorse
-homo_sapiens	GRCh38	ensembl		ensembl110	Human
-hucho_hucho	ASM331708v1	ensembl		ensembl110	Huchen
-ictalurus_punctatus	IpCoco_1.2	ensembl		ensembl110	Channel catfish
-ictidomys_tridecemlineatus	SpeTri2.0	ensembl		ensembl110	Squirrel
-jaculus_jaculus	JacJac1.0	ensembl		ensembl110	Lesser Egyptian jerboa
-junco_hyemalis	ASM382977v1	ensembl		ensembl110	Dark-eyed junco
-kryptolebias_marmoratus	ASM164957v1	ensembl		ensembl110	Mangrove rivulus
-labrus_bergylta	BallGen_V1	ensembl		ensembl110	Ballan wrasse
-larimichthys_crocea	L_crocea_2.0	ensembl		ensembl110	Large yellow croaker
-lates_calcarifer	ASB_HGAPassembly_v1	ensembl		ensembl110	Barramundi perch
-laticauda_laticaudata	latLat_1.0	ensembl		ensembl110	Blue-ringed sea krait
-latimeria_chalumnae	LatCha1	ensembl		ensembl110	Coelacanth
-lepidothrix_coronata	Lepidothrix_coronata-1.0	ensembl		ensembl110	Blue-crowned manakin
-lepisosteus_oculatus	LepOcu1	ensembl		ensembl110	Spotted gar
-leptobrachium_leishanense	ASM966780v1	ensembl		ensembl110	Leishan spiny toad
-lonchura_striata_domestica	LonStrDom1	ensembl		ensembl110	Bengalese finch
-loxodonta_africana	loxAfr3	ensembl		ensembl110	Elephant
-lynx_canadensis	mLynCan4_v1.p	ensembl		ensembl110	Canada lynx
-macaca_fascicularis	Macaca_fascicularis_6.0	ensembl		ensembl110	Crab-eating macaque
-macaca_mulatta	Mmul_10	ensembl		ensembl110	Macaque
-macaca_nemestrina	Mnem_1.0	ensembl		ensembl110	Pig-tailed macaque
-malurus_cyaneus_samueli	mCya_1.0	ensembl		ensembl110	Superb fairywren
-manacus_vitellinus	ASM171598v2	ensembl		ensembl110	Golden-collared manakin
-mandrillus_leucophaeus	Mleu.le_1.0	ensembl		ensembl110	Drill
-marmota_marmota_marmota	marMar2.1	ensembl		ensembl110	Alpine marmot
-mastacembelus_armatus	fMasArm1.2	ensembl		ensembl110	Zig-zag eel
-maylandia_zebra	M_zebra_UMD2a	ensembl		ensembl110	Zebra mbuna
-meleagris_gallopavo	Turkey_5.1	ensembl		ensembl110	Turkey
-melopsittacus_undulatus	bMelUnd1.mat.Z	ensembl		ensembl110	Budgerigar
-meriones_unguiculatus	MunDraft-v1.0	ensembl		ensembl110	Mongolian gerbil
-mesocricetus_auratus	MesAur1.0	ensembl		ensembl110	Golden Hamster
-microcebus_murinus	Mmur_3.0	ensembl		ensembl110	Mouse Lemur
-microtus_ochrogaster	MicOch1.0	ensembl		ensembl110	Prairie vole
-mola_mola	ASM169857v1	ensembl		ensembl110	Ocean sunfish
-monodelphis_domestica	ASM229v1	ensembl		ensembl110	Opossum
-monodon_monoceros	NGI_Narwhal_1	ensembl		ensembl110	Narwhal
-monopterus_albus	M_albus_1.0	ensembl		ensembl110	Swamp eel
-moschus_moschiferus	MosMos_v2_BIUU_UCD	ensembl		ensembl110	Siberian musk deer
-mus_caroli	CAROLI_EIJ_v1.1	ensembl		ensembl110	Ryukyu mouse
-mus_musculus	GRCm39	ensembl		ensembl110	Mouse
-mus_musculus_129s1svimj	129S1_SvImJ_v1	ensembl		ensembl110	Mouse 129S1/SvImJ
-mus_musculus_aj	A_J_v1	ensembl		ensembl110	Mouse A/J
-mus_musculus_akrj	AKR_J_v1	ensembl		ensembl110	Mouse AKR/J
-mus_musculus_balbcj	BALB_cJ_v1	ensembl		ensembl110	Mouse BALB/cJ
-mus_musculus_c3hhej	C3H_HeJ_v1	ensembl		ensembl110	Mouse C3H/HeJ
-mus_musculus_c57bl6nj	C57BL_6NJ_v1	ensembl		ensembl110	Mouse C57BL/6NJ
-mus_musculus_casteij	CAST_EiJ_v1	ensembl		ensembl110	Mouse CAST/EiJ
-mus_musculus_cbaj	CBA_J_v1	ensembl		ensembl110	Mouse CBA/J
-mus_musculus_dba2j	DBA_2J_v1	ensembl		ensembl110	Mouse DBA/2J
-mus_musculus_fvbnj	FVB_NJ_v1	ensembl		ensembl110	Mouse FVB/NJ
-mus_musculus_lpj	LP_J_v1	ensembl		ensembl110	Mouse LP/J
-mus_musculus_nodshiltj	NOD_ShiLtJ_v1	ensembl		ensembl110	Mouse NOD/ShiLtJ
-mus_musculus_nzohlltj	NZO_HlLtJ_v1	ensembl		ensembl110	Mouse NZO/HlLtJ
-mus_musculus_pwkphj	PWK_PhJ_v1	ensembl		ensembl110	Mouse PWK/PhJ
-mus_musculus_wsbeij	WSB_EiJ_v1	ensembl		ensembl110	Mouse WSB/EiJ
-mus_pahari	PAHARI_EIJ_v1.1	ensembl		ensembl110	Shrew mouse
-mus_spicilegus	MUSP714	ensembl		ensembl110	Steppe mouse
-mus_spretus	SPRET_EiJ_v1	ensembl		ensembl110	Algerian mouse
-mustela_putorius_furo	MusPutFur1.0	ensembl		ensembl110	Ferret
-myotis_lucifugus	Myoluc2.0	ensembl		ensembl110	Microbat
-myripristis_murdjan	fMyrMur1.1	ensembl		ensembl110	Pinecone soldierfish
-naja_naja	Nana_v5	ensembl		ensembl110	Indian cobra
-nannospalax_galili	S.galili_v1.0	ensembl		ensembl110	Upper Galilee mountains blind mole rat
-neogobius_melanostomus	RGoby_Basel_V2	ensembl		ensembl110	Round goby
-neolamprologus_brichardi	NeoBri1.0	ensembl		ensembl110	Lyretail cichlid
-neovison_vison	NNQGG.v01	ensembl		ensembl110	American mink
-nomascus_leucogenys	Nleu_3.0	ensembl		ensembl110	Gibbon
-notamacropus_eugenii	Meug_1.0	ensembl		ensembl110	Wallaby
-notechis_scutatus	TS10Xv2-PRI	ensembl		ensembl110	Mainland tiger snake
-nothobranchius_furzeri	Nfu_20140520	ensembl		ensembl110	Turquoise killifish
-nothoprocta_perdicaria	notPer1	ensembl		ensembl110	Chilean tinamou
-numida_meleagris	NumMel1.0	ensembl		ensembl110	Helmeted guineafowl
-ochotona_princeps	OchPri2.0-Ens	ensembl		ensembl110	Pika
-octodon_degus	OctDeg1.0	ensembl		ensembl110	Degu
-oncorhynchus_kisutch	Okis_V2	ensembl		ensembl110	Coho salmon
-oncorhynchus_mykiss	USDA_OmykA_1.1	ensembl		ensembl110	Rainbow trout
-oncorhynchus_tshawytscha	Otsh_v1.0	ensembl		ensembl110	Chinook salmon
-oreochromis_aureus	ASM587006v1	ensembl		ensembl110	Blue tilapia
-oreochromis_niloticus	O_niloticus_UMD_NMBU	ensembl		ensembl110	Nile tilapia
-ornithorhynchus_anatinus	mOrnAna1.p.v1	ensembl		ensembl110	Platypus
-oryctolagus_cuniculus	OryCun2.0	ensembl		ensembl110	Rabbit
-oryzias_javanicus	OJAV_1.1	ensembl		ensembl110	Javanese ricefish
-oryzias_latipes	ASM223467v1	ensembl		ensembl110	Japanese medaka HdrR
-oryzias_latipes_hni	ASM223471v1	ensembl		ensembl110	Japanese medaka HNI
-oryzias_latipes_hsok	ASM223469v1	ensembl		ensembl110	Japanese medaka HSOK
-oryzias_melastigma	Om_v0.7.RACA	ensembl		ensembl110	Indian medaka
-oryzias_sinensis	ASM858656v1	ensembl		ensembl110	Chinese medaka
-otolemur_garnettii	OtoGar3	ensembl		ensembl110	Bushbaby
-otus_sunia	OtuSun1.0	ensembl		ensembl110	Oriental scops-owl
-ovis_aries	Oar_v3.1	ensembl		ensembl110	Sheep (texel)
-ovis_aries_rambouillet	Oar_rambouillet_v1.0	ensembl		ensembl110	Sheep
-pan_paniscus	panpan1.1	ensembl		ensembl110	Bonobo
-pan_troglodytes	Pan_tro_3.0	ensembl		ensembl110	Chimpanzee
-panthera_leo	PanLeo1.0	ensembl		ensembl110	Lion
-panthera_pardus	PanPar1.0	ensembl		ensembl110	Leopard
-panthera_tigris_altaica	PanTig1.0	ensembl		ensembl110	Tiger
-papio_anubis	Panubis1.0	ensembl		ensembl110	Olive baboon
-parambassis_ranga	fParRan2.1	ensembl		ensembl110	Indian glassy fish
-paramormyrops_kingsleyae	PKINGS_0.1	ensembl		ensembl110	Paramormyrops kingsleyae
-parus_major	Parus_major1.1	ensembl		ensembl110	Great Tit
-pavo_cristatus	AIIM_Pcri_1.0	ensembl		ensembl110	Indian peafowl
-pelodiscus_sinensis	PelSin_1.0	ensembl		ensembl110	Chinese softshell turtle
-pelusios_castaneus	Pelusios_castaneus-1.0	ensembl		ensembl110	West African mud turtle
-periophthalmus_magnuspinnatus	PM.fa	ensembl		ensembl110	Periophthalmus magnuspinnatus
-peromyscus_maniculatus_bairdii	HU_Pman_2.1	ensembl		ensembl110	Northern American deer mouse
-petromyzon_marinus	Pmarinus_7.0	ensembl		ensembl110	Lamprey
-phascolarctos_cinereus	phaCin_unsw_v4.1	ensembl		ensembl110	Koala
-phasianus_colchicus	ASM414374v1	ensembl		ensembl110	Ring-necked pheasant
-phocoena_sinus	mPhoSin1.pri	ensembl		ensembl110	Vaquita
-physeter_catodon	ASM283717v2	ensembl		ensembl110	Sperm whale
-piliocolobus_tephrosceles	ASM277652v2	ensembl		ensembl110	Ugandan red Colobus
-podarcis_muralis	PodMur_1.0	ensembl		ensembl110	Common wall lizard
-poecilia_formosa	PoeFor_5.1.2	ensembl		ensembl110	Amazon molly
-poecilia_latipinna	P_latipinna-1.0	ensembl		ensembl110	Sailfin molly
-poecilia_mexicana	P_mexicana-1.0	ensembl		ensembl110	Shortfin molly
-poecilia_reticulata	Guppy_female_1.0_MT	ensembl		ensembl110	Guppy
-pogona_vitticeps	pvi1.1	ensembl		ensembl110	Central bearded dragon
-pongo_abelii	Susie_PABv2	ensembl		ensembl110	Sumatran orangutan
-procavia_capensis	proCap1	ensembl		ensembl110	Hyrax
-prolemur_simus	Prosim_1.0	ensembl		ensembl110	Greater bamboo lemur
-propithecus_coquereli	Pcoq_1.0	ensembl		ensembl110	Coquerel's sifaka
-pseudonaja_textilis	EBS10Xv2-PRI	ensembl		ensembl110	Eastern brown snake
-pteropus_vampyrus	pteVam1	ensembl		ensembl110	Megabat
-pundamilia_nyererei	PunNye1.0	ensembl		ensembl110	Makobe Island cichlid
-pygocentrus_nattereri	Pygocentrus_nattereri-1.0.2	ensembl		ensembl110	Red-bellied piranha
-rattus_norvegicus	mRatBN7.2	ensembl		ensembl110	Rat
-rattus_norvegicus_shrspbbbutx	UTH_Rnor_SHRSP_BbbUtx_1.0	ensembl		ensembl110	Rat - SHRSP/BbbUtx
-rattus_norvegicus_shrutx	UTH_Rnor_SHR_Utx	ensembl		ensembl110	Rat - SHR/Utx RGD_8142385
-rattus_norvegicus_wkybbb	UTH_Rnor_WKY_Bbb_1.0	ensembl		ensembl110	Rat - WKY/Bbb RGD_1581635
-rhinolophus_ferrumequinum	mRhiFer1_v1.p	ensembl		ensembl110	Greater horseshoe bat
-rhinopithecus_bieti	ASM169854v1	ensembl		ensembl110	Black snub-nosed monkey
-rhinopithecus_roxellana	Rrox_v1	ensembl		ensembl110	Golden snub-nosed monkey
-saccharomyces_cerevisiae	R64-1-1	ensembl		ensembl110	Saccharomyces cerevisiae
-saimiri_boliviensis_boliviensis	SaiBol1.0	ensembl		ensembl110	Bolivian squirrel monkey
-salarias_fasciatus	fSalaFa1.1	ensembl		ensembl110	Jewelled blenny
-salmo_salar	Ssal_v3.1	ensembl		ensembl110	Atlantic salmon
-salmo_trutta	fSalTru1.1	ensembl		ensembl110	Brown trout
-salvator_merianae	HLtupMer3	ensembl		ensembl110	Argentine black and white tegu
-sander_lucioperca	SLUC_FBN_1	ensembl		ensembl110	Pike-perch
-sarcophilus_harrisii	mSarHar1.11	ensembl		ensembl110	Tasmanian devil
-sciurus_vulgaris	mSciVul1.1	ensembl		ensembl110	Eurasian red squirrel
-scleropages_formosus	fSclFor1.1	ensembl		ensembl110	Asian bonytongue
-scophthalmus_maximus	ASM1334776v1	ensembl		ensembl110	Turbot
-serinus_canaria	SCA1	ensembl		ensembl110	Common canary
-seriola_dumerili	Sdu_1.0	ensembl		ensembl110	Greater amberjack
-seriola_lalandi_dorsalis	Sedor1	ensembl		ensembl110	Yellowtail amberjack
-sinocyclocheilus_anshuiensis	SAMN03320099.WGS_v1.1	ensembl		ensembl110	Blind barbel
-sinocyclocheilus_grahami	SAMN03320097.WGS_v1.1	ensembl		ensembl110	Golden-line barbel
-sinocyclocheilus_rhinocerous	SAMN03320098_v1.1	ensembl		ensembl110	Horned golden-line barbel
-sorex_araneus	COMMON_SHREW1	ensembl		ensembl110	Shrew
-sparus_aurata	fSpaAur1.1	ensembl		ensembl110	Gilthead seabream
-spermophilus_dauricus	ASM240643v1	ensembl		ensembl110	Daurian ground squirrel
-sphaeramia_orbicularis	fSphaOr1.1	ensembl		ensembl110	Orbiculate cardinalfish
-sphenodon_punctatus	ASM311381v1	ensembl		ensembl110	Tuatara
-stachyris_ruficeps	ASM869450v1	ensembl		ensembl110	Rufous-capped babbler
-stegastes_partitus	Stegastes_partitus-1.0.2	ensembl		ensembl110	Bicolor damselfish
-strigops_habroptila	bStrHab1_v1.p	ensembl		ensembl110	Kakapo
-strix_occidentalis_caurina	Soccid_v01	ensembl		ensembl110	Northern spotted owl
-struthio_camelus_australis	ASM69896v1	ensembl		ensembl110	African ostrich
-suricata_suricatta	meerkat_22Aug2017_6uvM2_HiC	ensembl		ensembl110	Meerkat
-sus_scrofa	Sscrofa11.1	ensembl		ensembl110	Pig
-sus_scrofa_bamei	Bamei_pig_v1	ensembl		ensembl110	Pig - Bamei
-sus_scrofa_berkshire	Berkshire_pig_v1	ensembl		ensembl110	Pig - Berkshire
-sus_scrofa_hampshire	Hampshire_pig_v1	ensembl		ensembl110	Pig - Hampshire
-sus_scrofa_jinhua	Jinhua_pig_v1	ensembl		ensembl110	Pig - Jinhua
-sus_scrofa_landrace	Landrace_pig_v1	ensembl		ensembl110	Pig - Landrace
-sus_scrofa_largewhite	Large_White_v1	ensembl		ensembl110	Pig - Largewhite
-sus_scrofa_meishan	Meishan_pig_v1	ensembl		ensembl110	Pig - Meishan
-sus_scrofa_pietrain	Pietrain_pig_v1	ensembl		ensembl110	Pig - Pietrain
-sus_scrofa_rongchang	Rongchang_pig_v1	ensembl		ensembl110	Pig - Rongchang
-sus_scrofa_tibetan	Tibetan_Pig_v2	ensembl		ensembl110	Pig - Tibetan
-sus_scrofa_usmarc	USMARCv1.0	ensembl		ensembl110	Pig USMARC
-sus_scrofa_wuzhishan	minipig_v1.0	ensembl		ensembl110	Pig - Wuzhishan
-taeniopygia_guttata	bTaeGut1_v1.p	ensembl		ensembl110	Zebra finch
-takifugu_rubripes	fTakRub1.2	ensembl		ensembl110	Fugu
-terrapene_carolina_triunguis	T_m_triunguis-2.0	ensembl		ensembl110	Three-toed box turtle
-tetraodon_nigroviridis	TETRAODON8	ensembl		ensembl110	Tetraodon
-theropithecus_gelada	Tgel_1.0	ensembl		ensembl110	Gelada
-tupaia_belangeri	TREESHREW	ensembl		ensembl110	Tree Shrew
-tursiops_truncatus	turTru1	ensembl		ensembl110	Dolphin
-urocitellus_parryii	ASM342692v1	ensembl		ensembl110	Arctic ground squirrel
-ursus_americanus	ASM334442v1	ensembl		ensembl110	American black bear
-ursus_maritimus	UrsMar_1.0	ensembl		ensembl110	Polar bear
-ursus_thibetanus_thibetanus	ASM966005v1	ensembl		ensembl110	Asiatic black bear
-varanus_komodoensis	ASM479886v1	ensembl		ensembl110	Komodo dragon
-vicugna_pacos	vicPac1	ensembl		ensembl110	Alpaca
-vombatus_ursinus	bare-nosed_wombat_genome_assembly	ensembl		ensembl110	Common wombat
-vulpes_vulpes	VulVul2.2	ensembl		ensembl110	Red fox
-xenopus_tropicalis	UCB_Xtro_10.0	ensembl		ensembl110	Tropical clawed frog
-xiphophorus_couchianus	Xiphophorus_couchianus-4.0.1	ensembl		ensembl110	Monterrey platyfish
-xiphophorus_maculatus	X_maculatus-5.0-male	ensembl		ensembl110	Platyfish
-zalophus_californianus	mZalCal1.pri	ensembl		ensembl110	California sea lion
-zonotrichia_albicollis	Zonotrichia_albicollis-1.0.1	ensembl		ensembl110	White-throated sparrow
-zosterops_lateralis_melanops	ASM128173v1	ensembl		ensembl110	Silver-eye
-actinidia_chinensis	Red5_PS1_1.69.0	ensemblgenomes	plants	ensemblgenomes57	Actinidia chinensis
-aegilops_tauschii	Aet_v4.0	ensemblgenomes	plants	ensemblgenomes57	Aegilops tauschii
-amborella_trichopoda	AMTR1.0	ensemblgenomes	plants	ensemblgenomes57	Amborella trichopoda
-ananas_comosus	F153	ensemblgenomes	plants	ensemblgenomes57	Ananas comosus
-arabidopsis_halleri	Ahal2.2	ensemblgenomes	plants	ensemblgenomes57	Arabidopsis halleri
-arabidopsis_lyrata	v.1.0	ensemblgenomes	plants	ensemblgenomes57	Arabidopsis lyrata
-arabidopsis_thaliana	TAIR10	ensemblgenomes	plants	ensemblgenomes57	Arabidopsis thaliana
-arabis_alpina	A_alpina_V4	ensemblgenomes	plants	ensemblgenomes57	Arabis alpina
-asparagus_officinalis	Aspof.V1	ensemblgenomes	plants	ensemblgenomes57	Asparagus officinalis
-avena_sativa_ot3098	Oat_OT3098_v2	ensemblgenomes	plants	ensemblgenomes57	Avena sativa OT3098
-avena_sativa_sang	Asativa_sang.v1.1	ensemblgenomes	plants	ensemblgenomes57	Avena sativa Sang
-beta_vulgaris	RefBeet-1.2.2	ensemblgenomes	plants	ensemblgenomes57	Beta vulgaris
-brachypodium_distachyon	Brachypodium_distachyon_v3.0	ensemblgenomes	plants	ensemblgenomes57	Brachypodium distachyon
-brassica_juncea	ASM1870372v1	ensemblgenomes	plants	ensemblgenomes57	Brassica juncea
-brassica_napus	AST_PRJEB5043_v1	ensemblgenomes	plants	ensemblgenomes57	Brassica napus
-brassica_oleracea	BOL	ensemblgenomes	plants	ensemblgenomes57	Brassica oleracea
-brassica_rapa	Brapa_1.0	ensemblgenomes	plants	ensemblgenomes57	Brassica rapa
-brassica_rapa_ro18	SCU_BraROA_2.3	ensemblgenomes	plants	ensemblgenomes57	Brassica rapa R-o-18
-cajanus_cajan	C.cajan_V1.0	ensemblgenomes	plants	ensemblgenomes57	Cajanus cajan (pigeon pea) - GCA_000340665.1
-camelina_sativa	Cs	ensemblgenomes	plants	ensemblgenomes57	Camelina sativa
-cannabis_sativa_female	cs10	ensemblgenomes	plants	ensemblgenomes57	Cannabis sativa female
-capsicum_annuum	ASM51225v2	ensemblgenomes	plants	ensemblgenomes57	Capsicum annuum
-chara_braunii	Cbr_1.0	ensemblgenomes	plants	ensemblgenomes57	Chara braunii
-chenopodium_quinoa	ASM168347v1	ensemblgenomes	plants	ensemblgenomes57	Chenopodium quinoa
-chlamydomonas_reinhardtii	Chlamydomonas_reinhardtii_v5.5	ensemblgenomes	plants	ensemblgenomes57	Chlamydomonas reinhardtii
-chondrus_crispus	ASM35022v2	ensemblgenomes	plants	ensemblgenomes57	Chondrus crispus
-citrullus_lanatus	Cla97_v1	ensemblgenomes	plants	ensemblgenomes57	Citrullus lanatus
-citrus_clementina	Citrus_clementina_v1.0	ensemblgenomes	plants	ensemblgenomes57	Citrus clementina
-coffea_canephora	AUK_PRJEB4211_v1	ensemblgenomes	plants	ensemblgenomes57	Coffea canephora
-corchorus_capsularis	CCACVL1_1.0	ensemblgenomes	plants	ensemblgenomes57	Corchorus capsularis
-corylus_avellana	CavTom2PMs-1.0	ensemblgenomes	plants	ensemblgenomes57	Corylus avellana
-corymbia_citriodora	Ccitriodora_v2_1	ensemblgenomes	plants	ensemblgenomes57	Corymbia citriodora
-cucumis_melo	Melonv4	ensemblgenomes	plants	ensemblgenomes57	Cucumis melo
-cucumis_sativus	ASM407v2	ensemblgenomes	plants	ensemblgenomes57	Cucumis sativus
-cyanidioschyzon_merolae	ASM9120v1	ensemblgenomes	plants	ensemblgenomes57	Cyanidioschyzon merolae
-cynara_cardunculus	CcrdV1	ensemblgenomes	plants	ensemblgenomes57	Cynara cardunculus
-daucus_carota	ASM162521v1	ensemblgenomes	plants	ensemblgenomes57	Daucus carota
-digitaria_exilis	Fonio_CM05836	ensemblgenomes	plants	ensemblgenomes57	Digitaria exilis
-dioscorea_rotundata	TDr96_F1_v2_PseudoChromosome	ensemblgenomes	plants	ensemblgenomes57	Dioscorea rotundata
-echinochloa_crusgalli	ec_v3	ensemblgenomes	plants	ensemblgenomes57	Echinochloa crus-galli
-eragrostis_curvula	CERZOS_E.curvula1.0	ensemblgenomes	plants	ensemblgenomes57	Eragrostis curvula
-eragrostis_tef	Salk_teff_dabbi_3.0	ensemblgenomes	plants	ensemblgenomes57	Eragrostis tef
-eucalyptus_grandis	Egrandis1_0	ensemblgenomes	plants	ensemblgenomes57	Eucalyptus grandis
-eutrema_salsugineum	Eutsalg1_0	ensemblgenomes	plants	ensemblgenomes57	Eutrema salsugineum
-ficus_carica	UNIPI_FiCari_1.0	ensemblgenomes	plants	ensemblgenomes57	Ficus carica
-fraxinus_excelsior	BATG-0.5	ensemblgenomes	plants	ensemblgenomes57	Fraxinus excelsior
-galdieria_sulphuraria	ASM34128v1	ensemblgenomes	plants	ensemblgenomes57	Galdieria sulphuraria
-glycine_max	Glycine_max_v2.1	ensemblgenomes	plants	ensemblgenomes57	Glycine max
-gossypium_raimondii	Graimondii2_0_v6	ensemblgenomes	plants	ensemblgenomes57	Gossypium raimondii
-helianthus_annuus	HanXRQr2.0-SUNRISE	ensemblgenomes	plants	ensemblgenomes57	Helianthus annuus
-hordeum_vulgare	MorexV3_pseudomolecules_assembly	ensemblgenomes	plants	ensemblgenomes57	Hordeum vulgare
-hordeum_vulgare_goldenpromise	GPv1	ensemblgenomes	plants	ensemblgenomes57	Hordeum vulgare GoldenPromise
-hordeum_vulgare_tritex	Morex_V2_scaf	ensemblgenomes	plants	ensemblgenomes57	Hordeum vulgare TRITEX
-ipomoea_triloba	ASM357664v1	ensemblgenomes	plants	ensemblgenomes57	Ipomoea triloba
-juglans_regia	Walnut_2.0	ensemblgenomes	plants	ensemblgenomes57	Juglans regia
-kalanchoe_fedtschenkoi	K_fedtschenkoi_M2_v1	ensemblgenomes	plants	ensemblgenomes57	Kalanchoe fedtschenkoi
-lactuca_sativa	Lsat_Salinas_v7	ensemblgenomes	plants	ensemblgenomes57	Lactuca sativa
-leersia_perrieri	Lperr_V1.4	ensemblgenomes	plants	ensemblgenomes57	Leersia perrieri
-lolium_perenne	MPB_Lper_Kyuss_1697	ensemblgenomes	plants	ensemblgenomes57	Lolium perenne
-lupinus_angustifolius	LupAngTanjil_v1.0	ensemblgenomes	plants	ensemblgenomes57	Lupinus angustifolius
-malus_domestica_golden	ASM211411v1	ensemblgenomes	plants	ensemblgenomes57	Malus domestica Golden
-manihot_esculenta	Manihot_esculenta_v6	ensemblgenomes	plants	ensemblgenomes57	Manihot esculenta
-marchantia_polymorpha	Marchanta_polymorpha_v1	ensemblgenomes	plants	ensemblgenomes57	Marchantia polymorpha
-medicago_truncatula	MedtrA17_4.0	ensemblgenomes	plants	ensemblgenomes57	Medicago truncatula
-musa_acuminata	Musa_acuminata_v2	ensemblgenomes	plants	ensemblgenomes57	Musa acuminata
-nicotiana_attenuata	NIATTr2	ensemblgenomes	plants	ensemblgenomes57	Nicotiana attenuata
-nymphaea_colorata	ASM883128v1	ensemblgenomes	plants	ensemblgenomes57	Nymphaea colorata
-olea_europaea	OLEA9	ensemblgenomes	plants	ensemblgenomes57	Olea europaea
-olea_europaea_sylvestris	O_europaea_v1	ensemblgenomes	plants	ensemblgenomes57	Olea europaea var. sylvestris
-oryza_barthii	O.barthii_v1	ensemblgenomes	plants	ensemblgenomes57	Oryza barthii
-oryza_brachyantha	Oryza_brachyantha.v1.4b	ensemblgenomes	plants	ensemblgenomes57	Oryza brachyantha
-oryza_glaberrima	Oryza_glaberrima_V1	ensemblgenomes	plants	ensemblgenomes57	Oryza glaberrima
-oryza_glumipatula	Oryza_glumaepatula_v1.5	ensemblgenomes	plants	ensemblgenomes57	Oryza glumipatula
-oryza_indica	ASM465v1	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa Indica Group
-oryza_longistaminata	O_longistaminata_v1.0	ensemblgenomes	plants	ensemblgenomes57	Oryza longistaminata
-oryza_meridionalis	Oryza_meridionalis_v1.3	ensemblgenomes	plants	ensemblgenomes57	Oryza meridionalis
-oryza_nivara	Oryza_nivara_v1.0	ensemblgenomes	plants	ensemblgenomes57	Oryza nivara
-oryza_punctata	Oryza_punctata_v1.2	ensemblgenomes	plants	ensemblgenomes57	Oryza punctata
-oryza_rufipogon	OR_W1943	ensemblgenomes	plants	ensemblgenomes57	Oryza rufipogon
-oryza_sativa	IRGSP-1.0	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa Japonica Group
-oryza_sativa_arc	Os117425RS1	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (circum-Basmati var. ARC 10497)
-oryza_sativa_azucena	AzucenaRS1	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (Geng/Japonica-trop1 var. Azucena)
-oryza_sativa_chaomeo	Os132278RS1	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (Geng/Japonica-sbtrp var. Chao Meo)
-oryza_sativa_gobolsailbalam	Os132424RS1	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (Xian/Indica-2A var. Gobol Sail)
-oryza_sativa_ir64	OsIR64RS1	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (Xian/Indica-1B1 var. IR64)
-oryza_sativa_ketannangka	Os128077RS1	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (Geng/Japonica-trop2 var. Ketan Nangka)
-oryza_sativa_khaoyaiguang	Os127518RS1	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (Xian/Indica-3B1 var. Khao Yai Guang)
-oryza_sativa_larhamugad	Os125619RS1	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (Xian/Indica-2B var. Larha Mugad)
-oryza_sativa_lima	Os127564RS1	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (Xian/Indica-3A var. Lima)
-oryza_sativa_liuxu	Os125827RS1	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (Xian/Indica-3B2 var. Liu Xu)
-oryza_sativa_mh63	MH63RS2	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (Xian/Indica-adm var. Minghui 63)
-oryza_sativa_n22	OsN22RS2	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (circum-Aus1 var. N22)
-oryza_sativa_natelboro	Os127652RS1	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (circum-Aus2 var. Natel Boro)
-oryza_sativa_pr106	Os127742RS1	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (Xian/Indica-1B2 var. PR106)
-oryza_sativa_zs97	ZS97RS3	ensemblgenomes	plants	ensemblgenomes57	Oryza sativa (Xian/Indica-1A var. Zhenshan 97)
-ostreococcus_lucimarinus	ASM9206v1	ensemblgenomes	plants	ensemblgenomes57	Ostreococcus lucimarinus
-panicum_hallii	PhalliiHAL_v2.1	ensemblgenomes	plants	ensemblgenomes57	Panicum hallii HAL2
-panicum_hallii_fil2	PHallii_v3.1	ensemblgenomes	plants	ensemblgenomes57	Panicum hallii FIL2
-papaver_somniferum	ASM357369v1	ensemblgenomes	plants	ensemblgenomes57	Papaver somniferum
-phaseolus_vulgaris	PhaVulg1_0	ensemblgenomes	plants	ensemblgenomes57	Phaseolus vulgaris
-physcomitrium_patens	Phypa_V3	ensemblgenomes	plants	ensemblgenomes57	Physcomitrium patens
-pistacia_vera	PisVer_v2	ensemblgenomes	plants	ensemblgenomes57	Pistacia vera
-pisum_sativum	Pisum_sativum_v1a	ensemblgenomes	plants	ensemblgenomes57	Pisum sativum
-populus_trichocarpa	Pop_tri_v4	ensemblgenomes	plants	ensemblgenomes57	Populus trichocarpa
-prunus_avium	PAV_r1.0	ensemblgenomes	plants	ensemblgenomes57	Prunus avium
-prunus_dulcis	ALMONDv2	ensemblgenomes	plants	ensemblgenomes57	Prunus dulcis
-prunus_persica	Prunus_persica_NCBIv2	ensemblgenomes	plants	ensemblgenomes57	Prunus persica
-quercus_lobata	ValleyOak3.0	ensemblgenomes	plants	ensemblgenomes57	Quercus lobata
-quercus_suber	CorkOak1.0	ensemblgenomes	plants	ensemblgenomes57	Quercus suber
-rosa_chinensis	RchiOBHm-V2	ensemblgenomes	plants	ensemblgenomes57	Rosa chinensis
-saccharum_spontaneum	Sspon.HiC_chr_asm	ensemblgenomes	plants	ensemblgenomes57	Saccharum spontaneum
-secale_cereale	Rye_Lo7_2018_v1p1p1	ensemblgenomes	plants	ensemblgenomes57	Secale cereale
-selaginella_moellendorffii	v1.0	ensemblgenomes	plants	ensemblgenomes57	Selaginella moellendorffii
-sesamum_indicum	S_indicum_v1.0	ensemblgenomes	plants	ensemblgenomes57	Sesamum indicum
-setaria_italica	Setaria_italica_v2.0	ensemblgenomes	plants	ensemblgenomes57	Setaria italica
-setaria_viridis	Setaria_viridis_v2.0	ensemblgenomes	plants	ensemblgenomes57	Setaria viridis
-solanum_lycopersicum	SL3.0	ensemblgenomes	plants	ensemblgenomes57	Solanum lycopersicum
-solanum_tuberosum	SolTub_3.0	ensemblgenomes	plants	ensemblgenomes57	Solanum tuberosum
-solanum_tuberosum_rh8903916	ASM1418947v1	ensemblgenomes	plants	ensemblgenomes57	Solanum tuberosum RH89-039-16
-sorghum_bicolor	Sorghum_bicolor_NCBIv3	ensemblgenomes	plants	ensemblgenomes57	Sorghum bicolor
-theobroma_cacao	Theobroma_cacao_20110822	ensemblgenomes	plants	ensemblgenomes57	Theobroma cacao Matina 1-6
-theobroma_cacao_criollo	Criollo_cocoa_genome_V2	ensemblgenomes	plants	ensemblgenomes57	Theobroma cacao Belizian Criollo B97-61/B2
-trifolium_pratense	Trpr	ensemblgenomes	plants	ensemblgenomes57	Trifolium pratense
-triticum_aestivum	IWGSC	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum
-triticum_aestivum_arinalrfor	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Arinalrfor
-triticum_aestivum_cadenza	EIv1.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Cadenza
-triticum_aestivum_claire	EIv1.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Claire
-triticum_aestivum_jagger	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Jagger
-triticum_aestivum_julius	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Julius
-triticum_aestivum_kariega	Tae_Kariega_v1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Kariega
-triticum_aestivum_lancer	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Lancer
-triticum_aestivum_landmark	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Landmark
-triticum_aestivum_mace	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Mace
-triticum_aestivum_mattis	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Sy Mattis
-triticum_aestivum_norin61	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Norin61
-triticum_aestivum_paragon	EIv1.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Paragon
-triticum_aestivum_refseqv2	IWGSC_RefSeq_v2.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Refseqv2
-triticum_aestivum_renan	Triticum_aestivum_Renan_v2.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Renan
-triticum_aestivum_robigus	EIv1.1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Robigus
-triticum_aestivum_stanley	PGSBv2.2	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Stanley
-triticum_aestivum_weebil	WeebilV1	ensemblgenomes	plants	ensemblgenomes57	Triticum aestivum Weebill
-triticum_dicoccoides	WEWSeq_v.1.0	ensemblgenomes	plants	ensemblgenomes57	Triticum dicoccoides
-triticum_spelta	PGSBv2.0	ensemblgenomes	plants	ensemblgenomes57	Triticum spelta
-triticum_turgidum	Svevo.v1	ensemblgenomes	plants	ensemblgenomes57	Triticum turgidum
-triticum_urartu	IGDB	ensemblgenomes	plants	ensemblgenomes57	Triticum urartu
-vigna_angularis	Vigan1.1	ensemblgenomes	plants	ensemblgenomes57	Vigna angularis
-vigna_radiata	Vradiata_ver6	ensemblgenomes	plants	ensemblgenomes57	Vigna radiata
-vigna_unguiculata	ASM411807v1	ensemblgenomes	plants	ensemblgenomes57	Vigna unguiculata
-vitis_vinifera	PN40024.v4	ensemblgenomes	plants	ensemblgenomes57	Vitis vinifera
-zea_mays	Zm-B73-REFERENCE-NAM-5.0	ensemblgenomes	plants	ensemblgenomes57	Zea mays
-aphanomyces_astaci	GCA000520075v1	ensemblgenomes	fungi	ensemblgenomes57	Aphanomyces astaci
-aphanomyces_invadans	GCA000520115v1	ensemblgenomes	fungi	ensemblgenomes57	Aphanomyces invadans
-ashbya_gossypii	ASM9102v1	ensemblgenomes	fungi	ensemblgenomes57	Ashbya gossypii
-aspergillus_clavatus	ASM271v1	ensemblgenomes	fungi	ensemblgenomes57	Aspergillus clavatus NRRL 1
-aspergillus_flavus	JCVI-afl1-v2.0	ensemblgenomes	fungi	ensemblgenomes57	Aspergillus flavus NRRL3357
-aspergillus_fumigatus	ASM265v1	ensemblgenomes	fungi	ensemblgenomes57	Aspergillus fumigatus Af293
-aspergillus_fumigatusa1163	ASM15014v1	ensemblgenomes	fungi	ensemblgenomes57	Aspergillus fumigatus A1163
-aspergillus_nidulans	ASM1142v1	ensemblgenomes	fungi	ensemblgenomes57	Aspergillus nidulans
-aspergillus_niger	ASM285v2	ensemblgenomes	fungi	ensemblgenomes57	Aspergillus niger
-aspergillus_oryzae	ASM18445v3	ensemblgenomes	fungi	ensemblgenomes57	Aspergillus oryzae RIB40
-aspergillus_terreus	ASM14961v1	ensemblgenomes	fungi	ensemblgenomes57	Aspergillus terreus NIH2624
-beauveria_bassiana	ASM168263v1	ensemblgenomes	fungi	ensemblgenomes57	Beauveria bassiana
-blumeria_graminis	EF2	ensemblgenomes	fungi	ensemblgenomes57	Blumeria graminis
-botrytis_cinerea	ASM83294v1	ensemblgenomes	fungi	ensemblgenomes57	Botrytis cinerea B05.10
-candida_albicans	GCA000182965v3	ensemblgenomes	fungi	ensemblgenomes57	Candida albicans
-candida_auris	GCA002759435v2	ensemblgenomes	fungi	ensemblgenomes57	Candida auris
-candida_duobushaemulonis	GCA002926085v1	ensemblgenomes	fungi	ensemblgenomes57	Candida duobushaemulonis
-candida_glabrata	GCA000002545v2	ensemblgenomes	fungi	ensemblgenomes57	Candida glabrata
-candida_haemuloni	GCA002926055v1	ensemblgenomes	fungi	ensemblgenomes57	[Candida] haemuloni
-candida_parapsilosis	GCA000182765v2	ensemblgenomes	fungi	ensemblgenomes57	Candida parapsilosis
-candida_pseudohaemulonis	GCA003013735v1	ensemblgenomes	fungi	ensemblgenomes57	[Candida] pseudohaemulonii
-candida_tropicalis	GCA000006335v3	ensemblgenomes	fungi	ensemblgenomes57	Candida tropicalis
-colletotrichum_gloeosporioides	GCA_000319635.1	ensemblgenomes	fungi	ensemblgenomes57	Colletotrichum gloeosporioides
-colletotrichum_graminicola	C_graminicola_M1_001_V1	ensemblgenomes	fungi	ensemblgenomes57	Colletotrichum graminicola
-colletotrichum_higginsianum	GCA_000313795.2	ensemblgenomes	fungi	ensemblgenomes57	Colletotrichum higginsianum
-colletotrichum_orbiculare	GCA_000350065.1	ensemblgenomes	fungi	ensemblgenomes57	Colletotrichum orbiculare
-cryptococcus_neoformans	ASM9104v1	ensemblgenomes	fungi	ensemblgenomes57	Cryptococcus neoformans var. neoformans JEC21
-dothistroma_septosporum	GCA_000340195.1	ensemblgenomes	fungi	ensemblgenomes57	Dothistroma septosporum
-fusarium_culmorum	EF1	ensemblgenomes	fungi	ensemblgenomes57	Fusarium culmorum UK99
-fusarium_fujikuroi	EF1	ensemblgenomes	fungi	ensemblgenomes57	Fusarium fujikuroi
-fusarium_graminearum	RR1	ensemblgenomes	fungi	ensemblgenomes57	Fusarium graminearum str. PH-1
-fusarium_oxysporum	FO2	ensemblgenomes	fungi	ensemblgenomes57	Fusarium oxysporum
-fusarium_pseudograminearum	GCA_000303195.1	ensemblgenomes	fungi	ensemblgenomes57	Fusarium pseudograminearum
-fusarium_solani	v2.0	ensemblgenomes	fungi	ensemblgenomes57	Fusarium solani
-fusarium_verticillioides	ASM14955v1	ensemblgenomes	fungi	ensemblgenomes57	Fusarium verticillioides
-gaeumannomyces_graminis	Gae_graminis_V2	ensemblgenomes	fungi	ensemblgenomes57	Gaeumannomyces tritici R3-111a-1
-globisporangium_ultimum	GCA000143045v1	ensemblgenomes	fungi	ensemblgenomes57	Globisporangium ultimum
-histoplasma_capsulatum	GCA000170615v1	ensemblgenomes	fungi	ensemblgenomes57	Histoplasma capsulatum
-komagataella_pastoris	GCA_000027005.1	ensemblgenomes	fungi	ensemblgenomes57	Komagataella pastoris
-leptosphaeria_maculans	ASM23037v1	ensemblgenomes	fungi	ensemblgenomes57	Leptosphaeria maculans
-magnaporthe_oryzae	MG8	ensemblgenomes	fungi	ensemblgenomes57	Magnaporthe oryzae
-magnaporthe_poae	Mag_poae_ATCC_64411_V1	ensemblgenomes	fungi	ensemblgenomes57	Magnaporthe poae
-melampsora_laricipopulina	GCA_000204055.1	ensemblgenomes	fungi	ensemblgenomes57	Melampsora larici-populina
-microbotryum_violaceum	GCA_000166175.1	ensemblgenomes	fungi	ensemblgenomes57	Microbotryum violaceum
-neosartorya_fischeri	ASM14964v1	ensemblgenomes	fungi	ensemblgenomes57	Aspergillus fischeri NRRL 181
-neurospora_crassa	NC12	ensemblgenomes	fungi	ensemblgenomes57	Neurospora crassa
-phaeosphaeria_nodorum	ASM14691v1	ensemblgenomes	fungi	ensemblgenomes57	Phaeosphaeria nodorum
-phanerochaete_chrysosporium	GCA000167175v1	ensemblgenomes	fungi	ensemblgenomes57	Phanerochaete chrysosporium
-puccinia_graminis	ASM14992v1	ensemblgenomes	fungi	ensemblgenomes57	Puccinia graminis
-puccinia_graminisug99	v1	ensemblgenomes	fungi	ensemblgenomes57	Puccinia graminis Ug99
-puccinia_striiformis	PST-130_1.0	ensemblgenomes	fungi	ensemblgenomes57	Puccinia striiformis f. sp. tritici PST-130 str. Race 130
-puccinia_triticina	ASM15152v1	ensemblgenomes	fungi	ensemblgenomes57	Puccinia triticina
-pyrenophora_teres	GCA_000166005.1	ensemblgenomes	fungi	ensemblgenomes57	Pyrenophora teres
-pyrenophora_triticirepentis	ASM14998v1	ensemblgenomes	fungi	ensemblgenomes57	Pyrenophora tritici-repentis Pt-1C-BFP
-pyricularia_oryzae	GCA900474545v2	ensemblgenomes	fungi	ensemblgenomes57	Magnaporthe oryzae
-saccharomyces_cerevisiae	R64-1-1	ensemblgenomes	fungi	ensemblgenomes57	Saccharomyces cerevisiae
-schizosaccharomyces_cryophilus	GCA_000004155.2	ensemblgenomes	fungi	ensemblgenomes57	Schizosaccharomyces cryophilus
-schizosaccharomyces_japonicus	GCA_000149845.2	ensemblgenomes	fungi	ensemblgenomes57	Schizosaccharomyces japonicus
-schizosaccharomyces_octosporus	GCA_000150505.2	ensemblgenomes	fungi	ensemblgenomes57	Schizosaccharomyces octosporus
-schizosaccharomyces_pombe	ASM294v2	ensemblgenomes	fungi	ensemblgenomes57	Schizosaccharomyces pombe
-sclerotinia_sclerotiorum	ASM14694v1	ensemblgenomes	fungi	ensemblgenomes57	Sclerotinia sclerotiorum
-sporisorium_reilianum	GCA_000230245.1	ensemblgenomes	fungi	ensemblgenomes57	Sporisorium reilianum
-trichoderma_reesei	GCA_000167675.2	ensemblgenomes	fungi	ensemblgenomes57	Trichoderma reesei
-trichoderma_virens	ASM17099v1	ensemblgenomes	fungi	ensemblgenomes57	Trichoderma virens
-tuber_melanosporum	ASM15164v1	ensemblgenomes	fungi	ensemblgenomes57	Tuber melanosporum
-ustilago_maydis	Umaydis521_2.0	ensemblgenomes	fungi	ensemblgenomes57	Ustilago maydis
-verticillium_dahliae	ASM15067v2	ensemblgenomes	fungi	ensemblgenomes57	Verticillium dahliae
-verticillium_dahliaejr2	VDAG_JR2v.4.0	ensemblgenomes	fungi	ensemblgenomes57	Verticillium dahliae JR2
-yarrowia_lipolytica	GCA_000002525.1	ensemblgenomes	fungi	ensemblgenomes57	Yarrowia lipolytica
-zymoseptoria_tritici	MG2	ensemblgenomes	fungi	ensemblgenomes57	Zymoseptoria tritici
-albugo_laibachii	ENA1	ensemblgenomes	protists	ensemblgenomes57	Albugo laibachii
-bigelowiella_natans	Bigna1	ensemblgenomes	protists	ensemblgenomes57	Bigelowiella natans
-dictyostelium_discoideum	dicty_2.7	ensemblgenomes	protists	ensemblgenomes57	Dictyostelium discoideum
-emiliania_huxleyi	Emiliana_huxleyi_CCMP1516_main_genome_assembly_v1.0	ensemblgenomes	protists	ensemblgenomes57	Emiliania huxleyi
-entamoeba_histolytica	JCVI-ESG2-1.0	ensemblgenomes	protists	ensemblgenomes57	Entamoeba histolytica
-giardia_lamblia	GL2	ensemblgenomes	protists	ensemblgenomes57	Giardia lamblia
-guillardia_theta	Guith1	ensemblgenomes	protists	ensemblgenomes57	Guillardia theta CCMP2712
-hyaloperonospora_arabidopsidis	HyaAraEmoy2_2.0	ensemblgenomes	protists	ensemblgenomes57	Hyaloperonospora arabidopsidis
-leishmania_major	ASM272v2	ensemblgenomes	protists	ensemblgenomes57	Leishmania major
-paramecium_tetraurelia	ASM16542v1	ensemblgenomes	protists	ensemblgenomes57	Paramecium tetraurelia
-phaeodactylum_tricornutum	ASM15095v2	ensemblgenomes	protists	ensemblgenomes57	Phaeodactylum tricornutum
-phytophthora_infestans	ASM14294v1	ensemblgenomes	protists	ensemblgenomes57	Phytophthora infestans
-phytophthora_kernoviae	PhyKer238_432v1	ensemblgenomes	protists	ensemblgenomes57	Phytophthora kernoviae
-phytophthora_lateralis	MPF4_v1.0	ensemblgenomes	protists	ensemblgenomes57	Phytophthora lateralis
-phytophthora_parasitica	Phyt_para_P1569_V1	ensemblgenomes	protists	ensemblgenomes57	Phytophthora parasitica
-phytophthora_ramorum	ASM14973v1	ensemblgenomes	protists	ensemblgenomes57	Phytophthora ramorum
-phytophthora_sojae	P_sojae_V3_0	ensemblgenomes	protists	ensemblgenomes57	Phytophthora sojae
-plasmodium_berghei	PBANKA01	ensemblgenomes	protists	ensemblgenomes57	Plasmodium berghei
-plasmodium_chabaudi	PCHAS01	ensemblgenomes	protists	ensemblgenomes57	Plasmodium chabaudi
-plasmodium_falciparum	ASM276v2	ensemblgenomes	protists	ensemblgenomes57	Plasmodium falciparum 3D7
-plasmodium_knowlesi	ASM635v1	ensemblgenomes	protists	ensemblgenomes57	Plasmodium knowlesi
-plasmodium_vivax	ASM241v2	ensemblgenomes	protists	ensemblgenomes57	Plasmodium vivax
-pseudonitzschia_multistriata	ASM90066040v1	ensemblgenomes	protists	ensemblgenomes57	Pseudo-nitzschia multistriata
-pythium_aphanidermatum	pag1_scaffolds_v1	ensemblgenomes	protists	ensemblgenomes57	Pythium aphanidermatum
-pythium_arrhenomanes	par_scaffolds_v1	ensemblgenomes	protists	ensemblgenomes57	Pythium arrhenomanes
-pythium_irregulare	pir_scaffolds_v1	ensemblgenomes	protists	ensemblgenomes57	Pythium irregulare
-pythium_iwayamai	piw_scaffolds_v1	ensemblgenomes	protists	ensemblgenomes57	Pythium iwayamai
-pythium_ultimum	pug	ensemblgenomes	protists	ensemblgenomes57	Pythium ultimum
-pythium_vexans	pve_scaffolds_v1	ensemblgenomes	protists	ensemblgenomes57	Pythium vexans
-tetrahymena_thermophila	JCVI-TTA1-2.2	ensemblgenomes	protists	ensemblgenomes57	Tetrahymena thermophila
-thalassiosira_pseudonana	ASM14940v2	ensemblgenomes	protists	ensemblgenomes57	Thalassiosira pseudonana
-toxoplasma_gondii	TGA4	ensemblgenomes	protists	ensemblgenomes57	Toxoplasma gondii ME49
-trypanosoma_brucei	TryBru_Apr2005_chr11	ensemblgenomes	protists	ensemblgenomes57	Trypanosoma brucei
-acanthaster_planci_gca001949145v1	OKI_Apl_1.0	ensemblgenomes	metazoa	ensemblgenomes57	Acanthaster planci (Crown-of-thorns starfish)
-acromyrmex_echinatior_gca000204515v1rs	Aech_3.9	ensemblgenomes	metazoa	ensemblgenomes57	Acromyrmex echinatior (Panamanian leaf-cutter ant)
-acropora_millepora_gca013753865v1	Amil_v2.1	ensemblgenomes	metazoa	ensemblgenomes57	Acropora millepora (Stony coral, JS-1)
-actinia_equina_gca011057435	equina_smartden.arrow4.noredun	ensemblgenomes	metazoa	ensemblgenomes57	Actinia equina (Beadlet anemone, AE1)
-actinia_tenebrosa_gca009602425v1	ASM960242v1	ensemblgenomes	metazoa	ensemblgenomes57	Actinia tenebrosa (Australian red waratah sea anemone)
-acyrthosiphon_pisum	pea_aphid_22Mar2018_4r6ur	ensemblgenomes	metazoa	ensemblgenomes57	Acyrthosiphon pisum (Pea aphid, AL4f)
-acyrthosiphon_pisum_gca005508785v2rs	pea_aphid_22Mar2018_4r6ur_v2	ensemblgenomes	metazoa	ensemblgenomes57	Acyrthosiphon pisum (Pea aphid, AL4f)
-adineta_vaga	AMS_PRJEB1171_v1	ensemblgenomes	metazoa	ensemblgenomes57	Adineta vaga (Rotifer)
-aedes_aegypti_lvpagwg	AaegL5	ensemblgenomes	metazoa	ensemblgenomes57	Aedes aegypti (Yellow fever mosquito, LVP_AGWG)
-aedes_albopictus	AaloF1	ensemblgenomes	metazoa	ensemblgenomes57	Aedes albopictus (Asian tiger mosquito, Foshan)
-agrilus_planipennis_gca000699045v2	Apla_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Agrilus planipennis (Emerald ash borer, EAB-ADULT)
-amphibalanus_amphitrite_gca019059575v1	NRLGWU_Aamphi_draft	ensemblgenomes	metazoa	ensemblgenomes57	Amphibalanus amphitrite (Acorn barnacle, SeventyFive)
-amphimedon_queenslandica	Aqu1	ensemblgenomes	metazoa	ensemblgenomes57	Amphimedon queenslandica (Demosponge)
-amphimedon_queenslandica_gca000090795v2rs	v1.1	ensemblgenomes	metazoa	ensemblgenomes57	Amphimedon queenslandica (Demosponge)
-amyelois_transitella_gca001186105v1rs	ASM118610v1	ensemblgenomes	metazoa	ensemblgenomes57	Amyelois transitella (Naval orange worm, UIUC subculture of SPIRL-1966)
-anneissia_japonica_gca011630105v1	ASM1163010v1	ensemblgenomes	metazoa	ensemblgenomes57	Anneissia japonica (Sea lily, Jap-2015-1)
-anopheles_albimanus	AalbS2	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles albimanus (Mosquito, STECLA)
-anopheles_arabiensis	AaraD1	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles arabiensis (Mosquito, Dongola)
-anopheles_atroparvus_gca914969975	atroparvus_hifiasm_n225_277Mb	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles atroparvus (Mosquito, Infravec2 EBRE)
-anopheles_christyi	AchrA1	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles christyi (Mosquito, ACHKN1017)
-anopheles_coluzzii	AcolM1	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles coluzzii (Mosquito, Mali-NIH)
-anopheles_coluzzii_ngousso	AcolN1	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles coluzzii (Mosquito, Ngousso)
-anopheles_culicifacies	AculA1	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles culicifacies (Mosquito, A-37)
-anopheles_darlingi	AdarC3	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles darlingi (American malaria mosquito, Coari)
-anopheles_dirus	AdirW1	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles dirus (Mosquito, WRAIR2)
-anopheles_epiroticus	AepiE1	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles epiroticus (Mosquito, Epiroticus2)
-anopheles_farauti	AfarF2	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles farauti (Mosquito, FAR1)
-anopheles_funestus	AfunF3	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles funestus (African malaria mosquito, FUMOZ)
-anopheles_gambiae	AgamP4	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles gambiae (African malaria mosquito, PEST)
-anopheles_maculatus	AmacM1	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles maculatus (Mosquito, maculatus3)
-anopheles_melas	AmelC2	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles melas (Mosquito, CM1001059_A)
-anopheles_merus	AmerM2	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles merus (Mosquito, MAF)
-anopheles_minimus	AminM1	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles minimus (Mosquito, MINIMUS1)
-anopheles_quadriannulatus	AquaS1	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles quadriannulatus (Mosquito, SANGWE)
-anopheles_sinensis	AsinS2	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles sinensis (Mosquito, SINENSIS)
-anopheles_sinensis_china	AsinC2	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles sinensis (Mosquito, China)
-anopheles_stephensi	AsteS1	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles stephensi (Asian malaria mosquito, SDA-500)
-anopheles_stephensi_indian	AsteI2	ensemblgenomes	metazoa	ensemblgenomes57	Anopheles stephensi (Asian malaria mosquito, Indian)
-anoplophora_glabripennis	Agla_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Anoplophora glabripennis (Asian long-horned beetle, ALB-LARVAE)
-anthonomus_grandis_gca022605725v3rs	icAntGran1.3	ensemblgenomes	metazoa	ensemblgenomes57	Anthonomus grandis grandis (Boll weevil)
-aphidius_gifuensis_gca014905175v1	ASM1490517v1	ensemblgenomes	metazoa	ensemblgenomes57	Aphidius gifuensis (Parasitoid wasp, YNYX2018)
-apis_dorsata_gca000469605v1rs	Apis_dorsata_1.3	ensemblgenomes	metazoa	ensemblgenomes57	Apis dorsata (Giant honeybee)
-apis_florea_gca000184785v2rs	Aflo_1.0	ensemblgenomes	metazoa	ensemblgenomes57	Apis florea (Dwarf honeybee)
-apis_mellifera	Amel_HAv3.1	ensemblgenomes	metazoa	ensemblgenomes57	Apis mellifera (Honey bee, DH4)
-aplysia_californica_gca000002075v2	AplCal3.0	ensemblgenomes	metazoa	ensemblgenomes57	Aplysia californica (California sea hare, F4 #8)
-ascaris_suum	ASM18702v3	ensemblgenomes	metazoa	ensemblgenomes57	Ascaris suum (Pig roundworm, AG01)
-asterias_rubens_gca902459465v3	eAstRub1.3	ensemblgenomes	metazoa	ensemblgenomes57	Asterias rubens (European starfish)
-athalia_rosae_gca000344095v2	Aros_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Athalia rosae (Coleseed sawfly, CS-ADULT)
-athalia_rosae_gca917208135v1	iyAthRosa1.1	ensemblgenomes	metazoa	ensemblgenomes57	Athalia rosae (Coleseed sawfly, reference)
-atta_cephalotes	Attacep1.0	ensemblgenomes	metazoa	ensemblgenomes57	Atta cephalotes (Leaf-cutter ant)
-bactrocera_dorsalis_gca000789215v2	ASM78921v2	ensemblgenomes	metazoa	ensemblgenomes57	Bactrocera dorsalis (Oriental fruit fly, Punador)
-bactrocera_latifrons_gca001853355v1	ASM185335v1	ensemblgenomes	metazoa	ensemblgenomes57	Bactrocera latifrons (Solanum fruit fly, USDA-ARS-PBARC rearing strain)
-bactrocera_tryoni_gca016617805v2	CSIRO_BtryS06_freeze1	ensemblgenomes	metazoa	ensemblgenomes57	Bactrocera tryoni (Queensland fruitfly, S06)
-belgica_antarctica	ASM77530v1	ensemblgenomes	metazoa	ensemblgenomes57	Belgica antarctica (Antarctic midge)
-bemisia_tabaci_asiaii5	ASIAII5_n227_616Mb	ensemblgenomes	metazoa	ensemblgenomes57	Bemisia tabaci (Silverleaf whitefly, Asia II-5)
-bemisia_tabaci_ssa1nig	SSA1SG1_Nigeria_n4493_656Mb	ensemblgenomes	metazoa	ensemblgenomes57	Bemisia tabaci (Silverleaf whitefly, SSA1-SG1 Ng)
-bemisia_tabaci_ssa1ug	SSA1_SG1_Uganda_n955_657Mb	ensemblgenomes	metazoa	ensemblgenomes57	Bemisia tabaci (Silverleaf whitefly, SSA1-SG1 Ug)
-bemisia_tabaci_ssa2nig	SSA2_Nigeria_n785_625mb	ensemblgenomes	metazoa	ensemblgenomes57	Bemisia tabaci (Silverleaf whitefly, SSA2 Ng)
-bemisia_tabaci_ssa3nig	SSA3_Nigeria_2278n_648mb	ensemblgenomes	metazoa	ensemblgenomes57	Bemisia tabaci (Silverleaf whitefly, SSA3 Ng)
-bemisia_tabaci_uganda1	Uganda1_n5713_630Mb	ensemblgenomes	metazoa	ensemblgenomes57	Bemisia tabaci (Silverleaf whitefly, Uganda-1)
-bicyclus_anynana_gca900239965v1rs	Bicyclus_anynana_v1.2	ensemblgenomes	metazoa	ensemblgenomes57	Bicyclus anynana (Squinting bush brown)
-biomphalaria_glabrata	BglaB1	ensemblgenomes	metazoa	ensemblgenomes57	Biomphalaria glabrata (Bloodfluke planorb, BB02)
-bombus_impatiens	BIMP_2.2	ensemblgenomes	metazoa	ensemblgenomes57	Bombus impatiens (Common eastern bumblebee)
-bombus_terrestris	Bter_1.0	ensemblgenomes	metazoa	ensemblgenomes57	Bombus terrestris (Buff-tailed bumblebee)
-bombus_terrestris_gca910591885v2	iyBomTerr1.2	ensemblgenomes	metazoa	ensemblgenomes57	Bombus terrestris (buff-tailed bumblebee, reference)
-bombyx_mandarina_gca003987935v1rs	ASM398793v1	ensemblgenomes	metazoa	ensemblgenomes57	Bombyx mandarina (Wild silkworm, Bman2017)
-bombyx_mori	Bmori_2016v1.0	ensemblgenomes	metazoa	ensemblgenomes57	Bombyx mori (Domestic silkworm, p50T)
-branchiostoma_lanceolatum	BraLan2	ensemblgenomes	metazoa	ensemblgenomes57	Branchiostoma lanceolatum (Amphioxus)
-brugia_malayi	Bmal-4.0	ensemblgenomes	metazoa	ensemblgenomes57	Brugia malayi (Nematode, FR3)
-caenorhabditis_brenneri	C_brenneri-6.0.1b	ensemblgenomes	metazoa	ensemblgenomes57	Caenorhabditis brenneri (Nematode)
-caenorhabditis_briggsae	CB4	ensemblgenomes	metazoa	ensemblgenomes57	Caenorhabditis briggsae (Nematode)
-caenorhabditis_elegans	WBcel235	ensemblgenomes	metazoa	ensemblgenomes57	Caenorhabditis elegans (PRJNA13758)
-caenorhabditis_japonica	C_japonica-7.0.1	ensemblgenomes	metazoa	ensemblgenomes57	Caenorhabditis japonica (Nematode)
-caenorhabditis_remanei	C_remanei-15.0.1	ensemblgenomes	metazoa	ensemblgenomes57	Caenorhabditis remanei (Nematode)
-camponotus_floridanus_gca003227725v1rs	Cflo_v7.5	ensemblgenomes	metazoa	ensemblgenomes57	Camponotus floridanus (Florida carpenter ant, SB8)
-capitella_teleta	Capitella_teleta_v1.0	ensemblgenomes	metazoa	ensemblgenomes57	Capitella teleta (Bristle worm)
-centruroides_sculpturatus_gca000671375v2	Cexi_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Centruroides sculpturatus (Bark scorpion, CEXI.00-Female)
-ceratitis_capitata_gca000347755v4	Ccap_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Ceratitis capitata (Mediterranean fruit fly)
-chelonus_insularis_gca013357705v1rs	ASM1335770v1	ensemblgenomes	metazoa	ensemblgenomes57	Chelonus insularis (Parasitoid wasp, UGA/USDA-ARS -01)
-cimex_lectularius	Clec_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Cimex lectularius (Bed bug, Harlan)
-clytia_hemisphaerica_gca902728285	Clytia_hemisphaerica_genome_assembly	ensemblgenomes	metazoa	ensemblgenomes57	Clytia hemisphaerica (Jellyfish, Z4C2)
-copidosoma_floridanum_gca000648655v2	Cflo_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Copidosoma floridanum (Parasitoid wasp, CFLO.00-Male)
-cotesia_glomerata_gca020080835v1	MPM_Cglom_v2.3	ensemblgenomes	metazoa	ensemblgenomes57	Cotesia glomerata (White butterfly parasite wasp, CgM1)
-crassostrea_gigas	cgigas_uk_roslin_v1	ensemblgenomes	metazoa	ensemblgenomes57	Crassostrea gigas (Pacific oyster)
-crassostrea_virginica_gca002022765v4	C_virginica_3.0	ensemblgenomes	metazoa	ensemblgenomes57	Crassostrea virginica (Eastern oyster, RU13XGHG1-28)
-culex_quinquefasciatus	CpipJ2	ensemblgenomes	metazoa	ensemblgenomes57	Culex quinquefasciatus (Southern house mosquito, Johannesburg)
-culex_quinquefasciatus_gca015732765v1	VPISU_Cqui_1.0_pri_paternal	ensemblgenomes	metazoa	ensemblgenomes57	Culex quinquefasciatus (Southern house mosquito, JHB)
-culicoides_sonorensis	Cson1	ensemblgenomes	metazoa	ensemblgenomes57	Culicoides sonorensis (Biting Midge)
-danaus_plexippus	Dplex_v4	ensemblgenomes	metazoa	ensemblgenomes57	Danaus plexippus plexippus (Monarch butterfly, F-2)
-daphnia_magna_gca020631705v2	ASM2063170v1.1	ensemblgenomes	metazoa	ensemblgenomes57	Daphnia magna (Fresh water planktonic, NIES)
-daphnia_pulex	V1.0	ensemblgenomes	metazoa	ensemblgenomes57	Daphnia pulex (Common water flea)
-daphnia_pulex_gca021134715v1rs	ASM2113471v1	ensemblgenomes	metazoa	ensemblgenomes57	Daphnia pulex (Common water flea, KAP4)
-daphnia_pulicaria_gca021234035v2rs	SC_F0_13B	ensemblgenomes	metazoa	ensemblgenomes57	Daphnia pulicaria (Water flea, SC F1-1A)
-dendroctonus_ponderosae_gca000355655v1	DendPond_male_gca000355655v1.0	ensemblgenomes	metazoa	ensemblgenomes57	Dendroctonus ponderosae (Mountain pine beetle)
-dendronephthya_gigantea_gca004324835v1	DenGig_1.0	ensemblgenomes	metazoa	ensemblgenomes57	Dendronephthya gigantea (Carnation coral, DGI-Jeju-01)
-dermacentor_andersoni_gca023375885v2rs	qqDerAnde1.2	ensemblgenomes	metazoa	ensemblgenomes57	Dermacentor andersoni (Rocky Mountain wood tick, qqDerAnde1)
-dermacentor_silvarum_gca013339745v1	ASM1333974v1	ensemblgenomes	metazoa	ensemblgenomes57	Dermacentor silvarum (Tick, Dsil-2018)
-dermatophagoides_pteronyssinus_gca001901225v2	ASM190122v2	ensemblgenomes	metazoa	ensemblgenomes57	Dermatophagoides pteronyssinus (European house dust mite, airmid)
-diabrotica_virgifera_gca003013835v2	Dvir_v2.0	ensemblgenomes	metazoa	ensemblgenomes57	Diabrotica virgifera virgifera (Western corn rootworm, Ped12-6-A-3)
-diabrotica_virgifera_gca917563875v2rs	PGI_DIABVI_V3a	ensemblgenomes	metazoa	ensemblgenomes57	Diabrotica virgifera virgifera (Western corn rootworm)
-dimorphilus_gyrociliatus_gca904063045v1	Dgyrociliatus_assembly	ensemblgenomes	metazoa	ensemblgenomes57	Dimorphilus gyrociliatus (Segmented worms)
-dinothrombium_tinctorium	DtinU1	ensemblgenomes	metazoa	ensemblgenomes57	Dinothrombium tinctorium (Red velvet mite, UoL-WK)
-diuraphis_noxia_gca001186385v1	Dnoxia_1.0	ensemblgenomes	metazoa	ensemblgenomes57	Diuraphis noxia (Russian wheat aphid, RWA2)
-drosophila_ananassae	dana_caf1	ensemblgenomes	metazoa	ensemblgenomes57	Drosophila ananassae (Fruit fly, TSC#14024-0371.13)
-drosophila_erecta	dere_caf1	ensemblgenomes	metazoa	ensemblgenomes57	Drosophila erecta (Fruit fly, TSC#14021-0224.01)
-drosophila_grimshawi	dgri_caf1	ensemblgenomes	metazoa	ensemblgenomes57	Drosophila grimshawi (Fruit fly, TSC#15287-2541.00)
-drosophila_melanogaster	BDGP6.46	ensemblgenomes	metazoa	ensemblgenomes57	Drosophila melanogaster (Fruit fly)
-drosophila_mojavensis	dmoj_caf1	ensemblgenomes	metazoa	ensemblgenomes57	Drosophila mojavensis (Fruit fly, TSC#15081-1352.22)
-drosophila_persimilis	dper_caf1	ensemblgenomes	metazoa	ensemblgenomes57	Drosophila persimilis (Fruit fly, MSH-3)
-drosophila_pseudoobscura	Dpse_3.0	ensemblgenomes	metazoa	ensemblgenomes57	Drosophila pseudoobscura pseudoobscura (Fruit fly, MV2-25)
-drosophila_sechellia	dsec_caf1	ensemblgenomes	metazoa	ensemblgenomes57	Drosophila sechellia (Fruit fly, Rob3c)
-drosophila_simulans	ASM75419v3	ensemblgenomes	metazoa	ensemblgenomes57	Drosophila simulans (Fruit fly, w501)
-drosophila_virilis	dvir_caf1	ensemblgenomes	metazoa	ensemblgenomes57	Drosophila virilis (Fruit fly, TSC#15010-1051.87)
-drosophila_willistoni	dwil_caf1	ensemblgenomes	metazoa	ensemblgenomes57	Drosophila willistoni (Fruit fly, TSC#14030-0811.24)
-drosophila_yakuba	dyak_caf1	ensemblgenomes	metazoa	ensemblgenomes57	Drosophila yakuba (Fruit fly, Tai18E2)
-dufourea_novaeangliae_gca001272555v1rs	ASM127255v1	ensemblgenomes	metazoa	ensemblgenomes57	Dufourea novaeangliae (Bee, 0120121106)
-echinococcus_granulosus_gca000524195v1rs	ASM52419v1	ensemblgenomes	metazoa	ensemblgenomes57	Echinococcus granulosus (Dog tapeworm)
-eufriesea_mexicana_gca001483705v1rs	ASM148370v1	ensemblgenomes	metazoa	ensemblgenomes57	Eufriesea mexicana (Bee, 0111107269)
-eurytemora_affinis_gca000591075v2	Eaff_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Eurytemora affinis (Calanoid copepod, Atlantic clade)
-exaiptasia_diaphana_gca001417965v1	Aiptasia_genome_1.1	ensemblgenomes	metazoa	ensemblgenomes57	Exaiptasia diaphana (Sea anemone, CC7)
-folsomia_candida	ASM221717v1	ensemblgenomes	metazoa	ensemblgenomes57	Folsomia candida (Springtail, str. VU population)
-galendromus_occidentalis_gca000255335v2rs	Mocc_1.0	ensemblgenomes	metazoa	ensemblgenomes57	Galendromus occidentalis (Western predatory mite)
-galleria_mellonella_gca003640425v2rs	ASM364042v2	ensemblgenomes	metazoa	ensemblgenomes57	Galleria mellonella (Greater wax moth, Carbio01_MB)
-gigantopelta_aegis_gca016097555v1	Gae_host_genome	ensemblgenomes	metazoa	ensemblgenomes57	Gigantopelta aegis (Deep sea snail, Gae_Host)
-glossina_austeni	GausT1	ensemblgenomes	metazoa	ensemblgenomes57	Glossina austeni (Tsetse fly, TTRI)
-glossina_brevipalpis	GbreI1	ensemblgenomes	metazoa	ensemblgenomes57	Glossina brevipalpis (Tsetse fly, IAEA)
-glossina_fuscipes	Yale_Gfus_2	ensemblgenomes	metazoa	ensemblgenomes57	Glossina fuscipes (Tsetse fly, IAEA_lab_2018)
-glossina_morsitans	GmorY1	ensemblgenomes	metazoa	ensemblgenomes57	Glossina morsitans morsitans (Tsetse fly, Yale)
-glossina_pallidipes	GpalI1	ensemblgenomes	metazoa	ensemblgenomes57	Glossina pallidipes (Tsetse fly, IAEA)
-glossina_palpalis	GpapI1	ensemblgenomes	metazoa	ensemblgenomes57	Glossina palpalis gambiensis (Tsetse fly, IAEA)
-habropoda_laboriosa_gca001263275v1rs	ASM126327v1	ensemblgenomes	metazoa	ensemblgenomes57	Habropoda laboriosa (Southeastern blueberry bee, 0110345459)
-haemaphysalis_longicornis_gca013339765v1	ASM1333976v1	ensemblgenomes	metazoa	ensemblgenomes57	Haemaphysalis longicornis (Longhorned tick, HaeL-2018)
-haliotis_rubra_gca003918875v1rs	ASM391887v1	ensemblgenomes	metazoa	ensemblgenomes57	Haliotis rubra (Blacklip abalone, DU_JTF1)
-haliotis_rufescens_gca023055435v1rs	xgHalRufe1.0.p	ensemblgenomes	metazoa	ensemblgenomes57	Haliotis rufescens (Red abalone, VD_foot)
-harpegnathos_saltator_gca003227715v2rs	Hsal_v8.5	ensemblgenomes	metazoa	ensemblgenomes57	Harpegnathos saltator (Indian jumping ant, DR-91)
-heliconius_melpomene	Hmel1	ensemblgenomes	metazoa	ensemblgenomes57	Heliconius melpomene (Postman butterfly)
-helicoverpa_armigera_gca023701775v1rs	HaSCD2	ensemblgenomes	metazoa	ensemblgenomes57	Helicoverpa armigera (Cotton bollworm, SCD)
-helicoverpa_zea_gca022581195v1rs	ilHelZeax1.1	ensemblgenomes	metazoa	ensemblgenomes57	Helicoverpa zea (Corn earworm, HzStark_Cry1AcR)
-helobdella_robusta	Helro1	ensemblgenomes	metazoa	ensemblgenomes57	Helobdella robusta (Freshwater leech)
-hermetia_illucens_gca905115235v1	iHerIll2.2.curated.20191125	ensemblgenomes	metazoa	ensemblgenomes57	Hermetia illucens (Black soldier fly)
-hofstenia_miamia	HmiaM1	ensemblgenomes	metazoa	ensemblgenomes57	Hofstenia miamia (Panther worm, MS-H3)
-homalodisca_vitripennis_gca021130785v2rs	UT_GWSS_2.1	ensemblgenomes	metazoa	ensemblgenomes57	Homalodisca vitripennis (Glassy winged sharpshooter, AUS2020)
-homarus_americanus_gca018991925v1	GMGI_Hamer_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Homarus americanus (American lobster, GMGI-L3)
-hyalella_azteca_gca000764305v2	Hazt_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Hyalella azteca (Amphipod, HAZT.00-mixed)
-hyalomma_asiaticum_gca013339685v1	ASM1333968v1	ensemblgenomes	metazoa	ensemblgenomes57	Hyalomma asiaticum (Tick, Hyas-2018)
-hydra_vulgaris_gca000004095v1	Hydra_RP_1.0	ensemblgenomes	metazoa	ensemblgenomes57	Hydra vulgaris (Swiftwater hydra, 105)
-hydra_vulgaris_gca022113875v1rs	Hydra_105_v3	ensemblgenomes	metazoa	ensemblgenomes57	Hydra vulgaris (Swiftwater hydra, 105)
-hymenolepis_microstoma	HMN_v3	ensemblgenomes	metazoa	ensemblgenomes57	Hymenolepis microstoma (Rodent tapeworm)
-hypsibius_exemplaris_gca002082055v1	nHd_3.1	ensemblgenomes	metazoa	ensemblgenomes57	Hypsibius exemplaris (Water bear tardigrade, Z151)
-ixodes_persulcatus_gca013358835v1	BIME_Iper_1.3	ensemblgenomes	metazoa	ensemblgenomes57	Ixodes persulcatus (Taiga tick, Iper-2018)
-ixodes_scapularis	IscaW1	ensemblgenomes	metazoa	ensemblgenomes57	Ixodes scapularis (Black-legged tick, Wikel)
-ixodes_scapularis_gca016920785v2	ASM1692078v2	ensemblgenomes	metazoa	ensemblgenomes57	Ixodes scapularis (Black-legged tick, PalLabHiFi)
-ixodes_scapularis_ise6	IscaI1	ensemblgenomes	metazoa	ensemblgenomes57	Ixodes scapularis (Black-legged tick, ISE6)
-leguminivora_glycinivorella_gca023078275v1rs	LegGlyc_1.1	ensemblgenomes	metazoa	ensemblgenomes57	Leguminivora glycinivorella (Soybean pod borer, SPB_JAAS2020)
-lepeophtheirus_salmonis	LSalAtl2s	ensemblgenomes	metazoa	ensemblgenomes57	Lepeophtheirus salmonis (Salmon louse)
-lepeophtheirus_salmonis_gca016086655v3rs	UVic_Lsal_1.0	ensemblgenomes	metazoa	ensemblgenomes57	Lepeophtheirus salmonis (Salmon louse, Lsal2020)
-leptinotarsa_decemlineata_gca000500325v2	Ldec_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Leptinotarsa decemlineata (Colorado potato beetle, Imidocloprid resistant)
-leptotrombidium_deliense	LdelU1	ensemblgenomes	metazoa	ensemblgenomes57	Leptotrombidium deliense (Harvest mite, UoL-UT)
-limulus_polyphemus_gca000517525v1	Limulus_polyphemus_2.1.2	ensemblgenomes	metazoa	ensemblgenomes57	Limulus polyphemus (Atlantic horseshoe crab)
-linepithema_humile_gca000217595v1rs	Lhum_UMD_V04	ensemblgenomes	metazoa	ensemblgenomes57	Linepithema humile (Argentine ant)
-lingula_anatina	LinAna1.0	ensemblgenomes	metazoa	ensemblgenomes57	Lingula anatina (Lamp shell)
-lingula_anatina_gca001039355v2	LinAna2.0	ensemblgenomes	metazoa	ensemblgenomes57	Lingula anatina (Lamp shell, Amm_Jpn)
-loa_loa	Loa_loa_V3	ensemblgenomes	metazoa	ensemblgenomes57	Loa loa (Eye worm, Cameroon SouthWest Province isolate)
-lottia_gigantea	Lotgi1	ensemblgenomes	metazoa	ensemblgenomes57	Lottia gigantea (Owl limpet)
-lucilia_cuprina	ASM118794v1	ensemblgenomes	metazoa	ensemblgenomes57	Lucilia cuprina (Australian sheep blowfly, LS)
-lucilia_cuprina_gca022045245v1rs	ASM2204524v1	ensemblgenomes	metazoa	ensemblgenomes57	Lucilia cuprina (Australian sheep blowfly, Lc7/37)
-lutzomyia_longipalpis	LlonJ1	ensemblgenomes	metazoa	ensemblgenomes57	Lutzomyia longipalpis (Sand fly, Jacobina)
-lytechinus_variegatus_gca018143015v1	Lvar_3.0	ensemblgenomes	metazoa	ensemblgenomes57	Lytechinus variegatus (Green sea urchin, NC3)
-manduca_sexta_gca014839805v1rs	JHU_Msex_v1.0	ensemblgenomes	metazoa	ensemblgenomes57	Manduca sexta (Tobacco hornworm, Smith_Timp_Sample1)
-mayetiola_destructor	Mdes_1.0	ensemblgenomes	metazoa	ensemblgenomes57	Mayetiola destructor (Hessian fly, Kansas Great Plain)
-megachile_rotundata_gca000220905v1rs	MROT_1.0	ensemblgenomes	metazoa	ensemblgenomes57	Megachile rotundata (Alfalfa leafcutting bee)
-megaselia_scalaris	Msca1	ensemblgenomes	metazoa	ensemblgenomes57	Megaselia scalaris (Coffin fly)
-melitaea_cinxia	MelCinx1.0	ensemblgenomes	metazoa	ensemblgenomes57	Melitaea cinxia (Glanville fritillary)
-melitaea_cinxia_gca905220565v1	ilMelCinx1.1	ensemblgenomes	metazoa	ensemblgenomes57	Melitaea cinxia (Glanville fritillary, reference)
-mercenaria_mercenaria_gca014805675v2	ASM1480567v1.1	ensemblgenomes	metazoa	ensemblgenomes57	Mercenaria mercenaria (Hard clam (quahog), YKG-2019)
-mizuhopecten_yessoensis_gca002113885v2	ASM211388v2	ensemblgenomes	metazoa	ensemblgenomes57	Mizuhopecten yessoensis (Yesso scallop, PY_sf001)
-mnemiopsis_leidyi	MneLei_Aug2011	ensemblgenomes	metazoa	ensemblgenomes57	Mnemiopsis leidyi (Warty comb jelly)
-monomorium_pharaonis_gca013373865v2	ASM1337386v2	ensemblgenomes	metazoa	ensemblgenomes57	Monomorium pharaonis (Pharaoh ant, MP-MQ-018)
-musca_domestica	MdomA1	ensemblgenomes	metazoa	ensemblgenomes57	Musca domestica (House fly, aabys)
-nasonia_vitripennis	Nvit_psr_1.1	ensemblgenomes	metazoa	ensemblgenomes57	Nasonia vitripennis (Jewel wasp, AsymCx)
-necator_americanus	N_americanus_v1	ensemblgenomes	metazoa	ensemblgenomes57	Necator americanus (New World hookworm, N. amaericanus Hunan isolate)
-nematostella_vectensis	ASM20922v1	ensemblgenomes	metazoa	ensemblgenomes57	Nematostella vectensis (Starlet sea anemone, CH2 x CH6)
-neodiprion_lecontei_gca021901455v1rs	iyNeoLeco1.1	ensemblgenomes	metazoa	ensemblgenomes57	Neodiprion lecontei (Redheaded pine sawfly, iyNeoLeco1)
-neodiprion_pinetum_gca021155775v1rs	iyNeoPine1.1	ensemblgenomes	metazoa	ensemblgenomes57	Neodiprion pinetum (White pine sawfly, iyNeoPine1)
-nilaparvata_lugens_gca014356525v1rs	ASM1435652v1	ensemblgenomes	metazoa	ensemblgenomes57	Nilaparvata lugens (Brown planthopper, BPH)
-octopus_bimaculoides	PRJNA270931	ensemblgenomes	metazoa	ensemblgenomes57	Octopus bimaculoides (California two-spot octopus)
-octopus_bimaculoides_gca001194135v1	Octopus_bimaculoides_v2_0	ensemblgenomes	metazoa	ensemblgenomes57	Octopus bimaculoides (Octopus, UCB-OBI-ISO-001)
-octopus_sinensis_gca006345805v1	ASM634580v1	ensemblgenomes	metazoa	ensemblgenomes57	Octopus sinensis (East Asian common octopus)
-onchocerca_volvulus	ASM49940v2	ensemblgenomes	metazoa	ensemblgenomes57	Onchocerca volvulus (Nematode, O. volvulus Cameroon isolate)
-onthophagus_taurus_gca000648695v2	Otau_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Onthophagus taurus (Dung beetle)
-ooceraea_biroi_gca003672135v1	Obir_v5.4	ensemblgenomes	metazoa	ensemblgenomes57	Ooceraea biroi (Clonal raider ant, clonal line C1)
-orbicella_faveolata_gca002042975v1	ofav_dov_v1	ensemblgenomes	metazoa	ensemblgenomes57	Orbicella faveolata (Mountainous star coral, FL)
-orchesella_cincta	ASM171814v1	ensemblgenomes	metazoa	ensemblgenomes57	Orchesella cincta (Springtail)
-orussus_abietinus_gca000612105v2	Oabi_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Orussus abietinus (Parasitic wood wasp, OABI.00-Male)
-owenia_fusiformis_gca903813345v1	Owenia_assembly_annotated	ensemblgenomes	metazoa	ensemblgenomes57	Owenia fusiformis (Segmented worms)
-parasteatoda_tepidariorum_gca000365465v3	Ptep_3.0	ensemblgenomes	metazoa	ensemblgenomes57	Parasteatoda tepidariorum (Common house spider, Goettingen)
-patiria_miniata_gca015706575v1	Pmin_3.0	ensemblgenomes	metazoa	ensemblgenomes57	Patiria miniata (Bat star starfish, m_02_andy)
-pectinophora_gossypiella_gca024362695v1rs	ilPecGoss1.1	ensemblgenomes	metazoa	ensemblgenomes57	Pectinophora gossypiella (Pink bollworm)
-pediculus_humanus	PhumU2	ensemblgenomes	metazoa	ensemblgenomes57	Pediculus humanus corporis (Human body louse, USDA)
-penaeus_chinensis_gca019202785v2rs	ASM1920278v2	ensemblgenomes	metazoa	ensemblgenomes57	Penaeus chinensis (Fleshy prawn)
-penaeus_japonicus_gca017312705v1	Mj_TUMSAT_v1.0	ensemblgenomes	metazoa	ensemblgenomes57	Penaeus japonicus (Kuruma shrimp, Ginoza2017)
-penaeus_monodon_gca015228065v1	NSTDA_Pmon_1	ensemblgenomes	metazoa	ensemblgenomes57	Penaeus monodon (Black tiger shrimp, SGIC_2016)
-penaeus_vannamei_gca003789085v1	ASM378908v1	ensemblgenomes	metazoa	ensemblgenomes57	Penaeus vannamei (Pacific white shrimp)
-phlebotomus_papatasi	PpapI1	ensemblgenomes	metazoa	ensemblgenomes57	Phlebotomus papatasi (Sand fly, Israel)
-phlebotomus_perniciosus_gca918844115	pperniciosus_illum_n82538_165Mb	ensemblgenomes	metazoa	ensemblgenomes57	Phlebotomus perniciosus (Sand fly, Murcia)
-phlebotomus_perniciosus_gca918844115v2	pperniciosus_asm_v2.0	ensemblgenomes	metazoa	ensemblgenomes57	Phlebotomus perniciosus (Murcia)
-pocillopora_damicornis_gca003704095v1	ASM370409v1	ensemblgenomes	metazoa	ensemblgenomes57	Pocillopora damicornis (Cauliflower coral, RSMAS)
-pogonomyrmex_barbatus_gca000187915v1rs	Pbar_UMD_V03	ensemblgenomes	metazoa	ensemblgenomes57	Pogonomyrmex barbatus (Red harvester ant)
-polistes_canadensis_gca001313835v1rs	ASM131383v1	ensemblgenomes	metazoa	ensemblgenomes57	Polistes canadensis (Red paper wasp, GaletaPanama2010)
-polistes_dominula_gca001465965v1rs	Pdom_r1.2	ensemblgenomes	metazoa	ensemblgenomes57	Polistes dominula (European paper wasp, PdomPennStateAug2009)
-polistes_fuscatus_gca010416935v1rs	CU_Pfus_HIC	ensemblgenomes	metazoa	ensemblgenomes57	Polistes fuscatus (Common paper wasp, 324)
-pollicipes_pollicipes_gca011947565v2	Ppol_2	ensemblgenomes	metazoa	ensemblgenomes57	Pollicipes pollicipes (Goose neck barnacle, AB1234)
-pomacea_canaliculata_gca003073045v1	ASM307304v1	ensemblgenomes	metazoa	ensemblgenomes57	Pomacea canaliculata (Apple snail, SZHN2017)
-pomphorhynchus_laevis_gca012934845v2gb	ASM1293484v2	ensemblgenomes	metazoa	ensemblgenomes57	Pomphorhynchus laevis (Thorny-headed worm, GPI110)
-portunus_trituberculatus_gca017591435v1	ASM1759143v1	ensemblgenomes	metazoa	ensemblgenomes57	Portunus trituberculatus (Swimming crab, SZX2019)
-priapulus_caudatus_gca000485595v2	Priapulus_caudatus-5.0.1	ensemblgenomes	metazoa	ensemblgenomes57	Priapulus caudatus (Penis worm)
-pristionchus_pacificus	El_Paco_fix	ensemblgenomes	metazoa	ensemblgenomes57	Pristionchus pacificus (Nematode, PS312)
-procambarus_clarkii_gca020424385v2	ASM2042438v2	ensemblgenomes	metazoa	ensemblgenomes57	Procambarus clarkii (Red swamp crayfish, Jiangsu)
-rhagoletis_pomonella_gca013731165v1	Rhpom_1.0	ensemblgenomes	metazoa	ensemblgenomes57	Rhagoletis pomonella (Apple magot fly, Grant_MI)
-rhipicephalus_microplus_gca013339725v1	ASM1333972v1	ensemblgenomes	metazoa	ensemblgenomes57	Rhipicephalus microplus (Southern cattle tick, Rmic-2018)
-rhipicephalus_sanguineus_gca013339695v1	ASM1333969v1	ensemblgenomes	metazoa	ensemblgenomes57	Rhipicephalus sanguineus (Brown dog tick, Rsan-2018)
-rhodnius_prolixus	RproC3	ensemblgenomes	metazoa	ensemblgenomes57	Rhodnius prolixus (Kissing bug, CDC)
-rhopalosiphum_maidis_gca003676215v3	ASM367621v3	ensemblgenomes	metazoa	ensemblgenomes57	Rhopalosiphum maidis (Corn leaf aphid, BTI-1)
-saccoglossus_kowalevskii_gca000003605v1	Skow_1.1	ensemblgenomes	metazoa	ensemblgenomes57	Saccoglossus kowalevskii (Acorn worm)
-sarcoptes_scabiei	ASM1459567v1	ensemblgenomes	metazoa	ensemblgenomes57	Sarcoptes scabiei (Itch mite, SSS_KF_BRIS2020)
-schistocerca_americana_gca021461395v2rs	iqSchAmer2.1	ensemblgenomes	metazoa	ensemblgenomes57	Schistocerca americana (American grasshopper, TAMUIC-IGC-003095)
-schistosoma_haematobium_gca000699445v2rs	SchHae_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Schistosoma haematobium (Urinary blood fluke)
-schistosoma_mansoni	Smansoni_v7	ensemblgenomes	metazoa	ensemblgenomes57	Schistosoma mansoni (Flatworm)
-sipha_flava_gca003268045v1	YSA_version1	ensemblgenomes	metazoa	ensemblgenomes57	Sipha flava (Yellow sugarcane aphid, LNK)
-sitophilus_oryzae_gca002938485v2rs	Soryzae_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Sitophilus oryzae (Rice weevil)
-solenopsis_invicta	UNIL_Sinv_3.0	ensemblgenomes	metazoa	ensemblgenomes57	Solenopsis invicta (Red fire ant, M01_SB)
-stegodyphus_dumicola_gca010614865v2rs	ASM1061486v2	ensemblgenomes	metazoa	ensemblgenomes57	Stegodyphus dumicola (Social spider, AA2019)
-stegodyphus_mimosarum	Stegodyphus_mimosarum_v1	ensemblgenomes	metazoa	ensemblgenomes57	Stegodyphus mimosarum (African social velvet spider)
-stomoxys_calcitrans	ScalU1	ensemblgenomes	metazoa	ensemblgenomes57	Stomoxys calcitrans (Stable fly, USDA)
-strigamia_maritima	Smar1	ensemblgenomes	metazoa	ensemblgenomes57	Strigamia maritima (Soil centipede)
-strongylocentrotus_purpuratus	Spur_5.0	ensemblgenomes	metazoa	ensemblgenomes57	Strongylocentrotus purpuratus (Purple sea urchin, Spur 01)
-strongyloides_ratti	S_ratti_ED321_v5_0_4	ensemblgenomes	metazoa	ensemblgenomes57	Strongyloides ratti (Threadworm)
-stylophora_pistillata_gca002571385v1	Stylophora_pistillata_v1	ensemblgenomes	metazoa	ensemblgenomes57	Stylophora pistillata (Hood coral, CSM Monaco)
-teleopsis_dalmanni	ASM223713v2	ensemblgenomes	metazoa	ensemblgenomes57	Teleopsis dalmanni (Malaysian stalk-eyed fly, 2A)
-tetranychus_urticae	ASM23943v1	ensemblgenomes	metazoa	ensemblgenomes57	Tetranychus urticae (Two-spotted spider mite)
-thelohanellus_kitauei	ASM82789v1	ensemblgenomes	metazoa	ensemblgenomes57	Thelohanellus kitauei (Myxozoan endoparasite)
-thrips_palmi_gca012932325v1rs	TpBJ_2018v1	ensemblgenomes	metazoa	ensemblgenomes57	Thrips palmi (Melon Thrips, BJ-2018)
-tigriopus_californicus_gca007210705	Tcal_SD_v2.1	ensemblgenomes	metazoa	ensemblgenomes57	Tigriopus californicus (Copepod, San Diego)
-trialeurodes_vaporariorum_gca011764245	ASM1176424v1	ensemblgenomes	metazoa	ensemblgenomes57	Trialeurodes vaporariorum (Greenhouse whitefly, IVF)
-tribolium_castaneum	Tcas5.2	ensemblgenomes	metazoa	ensemblgenomes57	Tribolium castaneum (Red flour beetle, Georgia GA2)
-trichinella_spiralis	Tspiralis1	ensemblgenomes	metazoa	ensemblgenomes57	Trichinella spiralis (Pork worm, ISS_195)
-trichogramma_pretiosum_gca000599845v3	Tpre_2.0	ensemblgenomes	metazoa	ensemblgenomes57	Trichogramma pretiosum (Parasitoid wasp, Unisexual culture from Peru)
-trichoplax_adhaerens	ASM15027v1	ensemblgenomes	metazoa	ensemblgenomes57	Trichoplax adhaerens (Placozoa, Grell-BS-1999)
-trichuris_muris	TMUE3.0	ensemblgenomes	metazoa	ensemblgenomes57	Trichuris muris (Nematode)
-varroa_destructor_gca002443255	Vdes_3.0	ensemblgenomes	metazoa	ensemblgenomes57	Varroa destructor (Honeybee mite)
-venturia_canescens_gca019457755v1rs	ASM1945775v1	ensemblgenomes	metazoa	ensemblgenomes57	Venturia canescens (Endoparasitoid wasp, UGA)
-zerene_cesonia_gca012273895v2rs	Zerene_cesonia_1.1	ensemblgenomes	metazoa	ensemblgenomes57	Zerene cesonia (Southern Dogface)
-zootermopsis_nevadensis	ZooNev1.0	ensemblgenomes	metazoa	ensemblgenomes57	Zootermopsis nevadensis (Nevada dampwood termite)
+acanthochromis_polyacanthus	ASM210954v1	ensembl		ensembl111	Spiny chromis
+accipiter_nisus	Accipiter_nisus_ver1.0	ensembl		ensembl111	Eurasian sparrowhawk
+ailuropoda_melanoleuca	ASM200744v2	ensembl		ensembl111	Giant panda
+amazona_collaria	ASM394721v1	ensembl		ensembl111	Yellow-billed parrot
+amphilophus_citrinellus	Midas_v5	ensembl		ensembl111	Midas cichlid
+amphiprion_ocellaris	AmpOce1.0	ensembl		ensembl111	Clown anemonefish
+amphiprion_percula	Nemo_v1	ensembl		ensembl111	Orange clownfish
+anabas_testudineus	fAnaTes1.2	ensembl		ensembl111	Climbing perch
+anas_platyrhynchos	ASM874695v1	ensembl		ensembl111	Mallard
+anas_platyrhynchos_platyrhynchos	CAU_duck1.0	ensembl		ensembl111	Duck
+anas_zonorhyncha	ASM222487v1	ensembl		ensembl111	Eastern spot-billed duck
+anolis_carolinensis	AnoCar2.0v2	ensembl		ensembl111	Green anole
+anser_brachyrhynchus	ASM259213v1	ensembl		ensembl111	Pink-footed goose
+anser_cygnoides	GooseV1.0	ensembl		ensembl111	Swan goose
+aotus_nancymaae	Anan_2.0	ensembl		ensembl111	Ma's night monkey
+apteryx_haastii	aptHaa1	ensembl		ensembl111	Great spotted kiwi
+apteryx_owenii	aptOwe1	ensembl		ensembl111	Little spotted kiwi
+apteryx_rowi	aptRow1	ensembl		ensembl111	Okarito brown kiwi
+aquila_chrysaetos_chrysaetos	bAquChr1.2	ensembl		ensembl111	Golden eagle
+astatotilapia_calliptera	fAstCal1.2	ensembl		ensembl111	Eastern happy
+astyanax_mexicanus	Astyanax_mexicanus-2.0	ensembl		ensembl111	Mexican tetra
+astyanax_mexicanus_pachon	Astyanax_mexicanus-1.0.2	ensembl		ensembl111	Pachon cavefish
+athene_cunicularia	athCun1	ensembl		ensembl111	Burrowing owl
+balaenoptera_musculus	mBalMus1.v2	ensembl		ensembl111	Blue whale
+betta_splendens	fBetSpl5.2	ensembl		ensembl111	Siamese fighting fish
+bison_bison_bison	Bison_UMD1.0	ensembl		ensembl111	American bison
+bos_grunniens	LU_Bosgru_v3.0	ensembl		ensembl111	Domestic yak
+bos_indicus_hybrid	UOA_Brahman_1	ensembl		ensembl111	Hybrid - Bos Indicus
+bos_mutus	BosGru_v2.0	ensembl		ensembl111	Wild yak
+bos_taurus	ARS-UCD1.3	ensembl		ensembl111	Cow
+bos_taurus_hybrid	UOA_Angus_1	ensembl		ensembl111	Hybrid - Bos Taurus
+bubo_bubo	BubBub1.0	ensembl		ensembl111	Eurasian eagle-owl
+buteo_japonicus	ButJap1.0	ensembl		ensembl111	Eastern buzzard
+caenorhabditis_elegans	WBcel235	ensembl		ensembl111	Caenorhabditis elegans (Nematode, N2)
+cairina_moschata_domestica	CaiMos1.0	ensembl		ensembl111	Muscovy Duck (domestic type)
+calidris_pugnax	ASM143184v1	ensembl		ensembl111	Ruff
+calidris_pygmaea	ASM369795v1	ensembl		ensembl111	Spoon-billed sandpiper
+callithrix_jacchus	mCalJac1.pat.X	ensembl		ensembl111	White-tufted-ear marmoset
+callorhinchus_milii	Callorhinchus_milii-6.1.3	ensembl		ensembl111	Elephant shark
+camarhynchus_parvulus	Camarhynchus_parvulus_V1.1	ensembl		ensembl111	Small tree finch
+camelus_dromedarius	CamDro2	ensembl		ensembl111	Arabian camel
+canis_lupus_dingo	ASM325472v1	ensembl		ensembl111	Dingo
+canis_lupus_familiaris	ROS_Cfam_1.0	ensembl		ensembl111	Dog
+canis_lupus_familiarisbasenji	Basenji_breed-1.1	ensembl		ensembl111	Dog - Basenji
+canis_lupus_familiarisboxer	Dog10K_Boxer_Tasha	ensembl		ensembl111	Dog - Boxer
+canis_lupus_familiarisgreatdane	UMICH_Zoey_3.1	ensembl		ensembl111	Dog - Great Dane
+canis_lupus_familiarisgsd	UU_Cfam_GSD_1.0	ensembl		ensembl111	Dog - German Shepherd
+capra_hircus	ARS1	ensembl		ensembl111	Goat
+capra_hircus_blackbengal	CVASU_BBG_1.0	ensembl		ensembl111	Goat (black bengal)
+carassius_auratus	ASM336829v1	ensembl		ensembl111	Goldfish
+carlito_syrichta	Tarsius_syrichta-2.0.1	ensembl		ensembl111	Tarsier
+castor_canadensis	C.can_genome_v1.0	ensembl		ensembl111	American beaver
+catagonus_wagneri	CatWag_v2_BIUU_UCD	ensembl		ensembl111	Chacoan peccary
+catharus_ustulatus	bCatUst1.pri	ensembl		ensembl111	Swainson's thrush
+cavia_aperea	CavAp1.0	ensembl		ensembl111	Brazilian guinea pig
+cavia_porcellus	Cavpor3.0	ensembl		ensembl111	Guinea Pig
+cebus_imitator	Cebus_imitator-1.0	ensembl		ensembl111	Panamanian white-faced capuchin
+cercocebus_atys	Caty_1.0	ensembl		ensembl111	Sooty mangabey
+cervus_hanglu_yarkandensis	CEY_v1	ensembl		ensembl111	Yarkand deer
+chelonoidis_abingdonii	ASM359739v1	ensembl		ensembl111	Abingdon island giant tortoise
+chelydra_serpentina	Chelydra_serpentina-1.0	ensembl		ensembl111	Common snapping turtle
+chinchilla_lanigera	ChiLan1.0	ensembl		ensembl111	Long-tailed chinchilla
+chlorocebus_sabaeus	ChlSab1.1	ensembl		ensembl111	Vervet-AGM
+choloepus_hoffmanni	choHof1	ensembl		ensembl111	Sloth
+chrysemys_picta_bellii	Chrysemys_picta_bellii-3.0.3	ensembl		ensembl111	Painted turtle
+chrysolophus_pictus	Chrysolophus_pictus_GenomeV1.0	ensembl		ensembl111	Golden pheasant
+ciona_intestinalis	KH	ensembl		ensembl111	C.intestinalis
+ciona_savignyi	CSAV2.0	ensembl		ensembl111	C.savignyi
+clupea_harengus	Ch_v2.0.2	ensembl		ensembl111	Atlantic herring 
+colobus_angolensis_palliatus	Cang.pa_1.0	ensembl		ensembl111	Angola colobus
+corvus_moneduloides	bCorMon1.pri	ensembl		ensembl111	New Caledonian crow
+cottoperca_gobio	fCotGob3.1	ensembl		ensembl111	Channel bull blenny
+coturnix_japonica	Coturnix_japonica_2.0	ensembl		ensembl111	Japanese quail
+cricetulus_griseus_chok1gshd	CHOK1GS_HDv1	ensembl		ensembl111	Chinese hamster CHOK1GS
+cricetulus_griseus_crigri	CriGri_1.0	ensembl		ensembl111	Chinese hamster CriGri
+cricetulus_griseus_picr	CriGri-PICRH-1.0	ensembl		ensembl111	Chinese hamster PICR
+crocodylus_porosus	CroPor_comp1	ensembl		ensembl111	Australian saltwater crocodile
+cyanistes_caeruleus	cyaCae2	ensembl		ensembl111	Blue tit
+cyclopterus_lumpus	fCycLum1.pri	ensembl		ensembl111	Lumpfish
+cynoglossus_semilaevis	Cse_v1.0	ensembl		ensembl111	Tongue sole
+cyprinodon_variegatus	C_variegatus-1.0	ensembl		ensembl111	Sheepshead minnow
+cyprinus_carpio_carpio	Cypcar_WagV4.0	ensembl		ensembl111	Common carp
+cyprinus_carpio_germanmirror	German_Mirror_carp_1.0	ensembl		ensembl111	Common carp german mirror
+cyprinus_carpio_hebaored	Hebao_red_carp_1.0	ensembl		ensembl111	Common carp hebao red
+cyprinus_carpio_huanghe	Hunaghe_carp_2.0	ensembl		ensembl111	Common carp huanghe
+danio_rerio	GRCz11	ensembl		ensembl111	Zebrafish
+dasypus_novemcinctus	Dasnov3.0	ensembl		ensembl111	Armadillo
+delphinapterus_leucas	ASM228892v3	ensembl		ensembl111	Beluga whale
+denticeps_clupeoides	fDenClu1.1	ensembl		ensembl111	Denticle herring
+dicentrarchus_labrax	dlabrax2021	ensembl		ensembl111	European seabass
+dipodomys_ordii	Dord_2.0	ensembl		ensembl111	Kangaroo rat
+dromaius_novaehollandiae	droNov1	ensembl		ensembl111	Emu
+drosophila_melanogaster	BDGP6.46	ensembl		ensembl111	Drosophila melanogaster (Fruit fly)
+echeneis_naucrates	fEcheNa1.1	ensembl		ensembl111	Live sharksucker
+echinops_telfairi	TENREC	ensembl		ensembl111	Lesser hedgehog tenrec
+electrophorus_electricus	Ee_SOAP_WITH_SSPACE	ensembl		ensembl111	Electric eel
+eptatretus_burgeri	Eburgeri_3.2	ensembl		ensembl111	Hagfish
+equus_asinus	ASM1607732v2	ensembl		ensembl111	Donkey
+equus_caballus	EquCab3.0	ensembl		ensembl111	Horse
+erinaceus_europaeus	HEDGEHOG	ensembl		ensembl111	Hedgehog
+erpetoichthys_calabaricus	fErpCal1.1	ensembl		ensembl111	Reedfish
+erythrura_gouldiae	GouldianFinch	ensembl		ensembl111	Gouldian finch
+esox_lucius	Eluc_v4	ensembl		ensembl111	Northern pike
+falco_tinnunculus	FalTin1.0	ensembl		ensembl111	Common kestrel
+felis_catus	Felis_catus_9.0	ensembl		ensembl111	Cat
+ficedula_albicollis	FicAlb1.5	ensembl		ensembl111	Collared flycatcher
+fukomys_damarensis	DMR_v1.0	ensembl		ensembl111	Damara mole rat
+fundulus_heteroclitus	Fundulus_heteroclitus-3.0.2	ensembl		ensembl111	Mummichog
+gadus_morhua	gadMor3.0	ensembl		ensembl111	Atlantic cod
+gallus_gallus	bGalGal1.mat.broiler.GRCg7b	ensembl		ensembl111	Chicken
+gallus_gallus_gca000002315v5	GRCg6a	ensembl		ensembl111	Chicken (Red Jungle fowl)
+gallus_gallus_gca016700215v2	bGalGal1.pat.whiteleghornlayer.GRCg7w	ensembl		ensembl111	Chicken (paternal White leghorn layer)
+gambusia_affinis	ASM309773v1	ensembl		ensembl111	Western mosquitofish
+gasterosteus_aculeatus	BROADS1	ensembl		ensembl111	Stickleback
+geospiza_fortis	GeoFor_1.0	ensembl		ensembl111	Medium ground-finch
+gopherus_agassizii	ASM289641v1	ensembl		ensembl111	Agassiz's desert tortoise
+gopherus_evgoodei	rGopEvg1_v1.p	ensembl		ensembl111	Goodes thornscrub tortoise
+gorilla_gorilla	gorGor4	ensembl		ensembl111	Gorilla
+gouania_willdenowi	fGouWil2.1	ensembl		ensembl111	Blunt-snouted clingfish
+haplochromis_burtoni	AstBur1.0	ensembl		ensembl111	Burton's mouthbrooder
+heterocephalus_glaber_female	Naked_mole-rat_maternal	ensembl		ensembl111	Naked mole-rat female
+heterocephalus_glaber_male	Naked_mole-rat_paternal	ensembl		ensembl111	Naked mole-rat male
+hippocampus_comes	H_comes_QL1_v1	ensembl		ensembl111	Tiger tail seahorse
+homo_sapiens	GRCh38	ensembl		ensembl111	Human
+hucho_hucho	ASM331708v1	ensembl		ensembl111	Huchen
+ictalurus_punctatus	IpCoco_1.2	ensembl		ensembl111	Channel catfish
+ictidomys_tridecemlineatus	SpeTri2.0	ensembl		ensembl111	Squirrel
+jaculus_jaculus	JacJac1.0	ensembl		ensembl111	Lesser Egyptian jerboa
+junco_hyemalis	ASM382977v1	ensembl		ensembl111	Dark-eyed junco
+kryptolebias_marmoratus	ASM164957v1	ensembl		ensembl111	Mangrove rivulus
+labrus_bergylta	BallGen_V1	ensembl		ensembl111	Ballan wrasse
+larimichthys_crocea	L_crocea_2.0	ensembl		ensembl111	Large yellow croaker
+lates_calcarifer	ASB_HGAPassembly_v1	ensembl		ensembl111	Barramundi perch
+laticauda_laticaudata	latLat_1.0	ensembl		ensembl111	Blue-ringed sea krait
+latimeria_chalumnae	LatCha1	ensembl		ensembl111	Coelacanth
+lepidothrix_coronata	Lepidothrix_coronata-1.0	ensembl		ensembl111	Blue-crowned manakin
+lepisosteus_oculatus	LepOcu1	ensembl		ensembl111	Spotted gar
+leptobrachium_leishanense	ASM966780v1	ensembl		ensembl111	Leishan spiny toad
+lonchura_striata_domestica	LonStrDom1	ensembl		ensembl111	Bengalese finch
+loxodonta_africana	loxAfr3	ensembl		ensembl111	Elephant
+lynx_canadensis	mLynCan4_v1.p	ensembl		ensembl111	Canada lynx
+macaca_fascicularis	Macaca_fascicularis_6.0	ensembl		ensembl111	Crab-eating macaque
+macaca_mulatta	Mmul_10	ensembl		ensembl111	Macaque
+macaca_nemestrina	Mnem_1.0	ensembl		ensembl111	Pig-tailed macaque
+malurus_cyaneus_samueli	mCya_1.0	ensembl		ensembl111	Superb fairywren
+manacus_vitellinus	ASM171598v2	ensembl		ensembl111	Golden-collared manakin
+mandrillus_leucophaeus	Mleu.le_1.0	ensembl		ensembl111	Drill
+marmota_marmota_marmota	marMar2.1	ensembl		ensembl111	Alpine marmot
+mastacembelus_armatus	fMasArm1.2	ensembl		ensembl111	Zig-zag eel
+maylandia_zebra	M_zebra_UMD2a	ensembl		ensembl111	Zebra mbuna
+meleagris_gallopavo	Turkey_5.1	ensembl		ensembl111	Turkey
+melopsittacus_undulatus	bMelUnd1.mat.Z	ensembl		ensembl111	Budgerigar
+meriones_unguiculatus	MunDraft-v1.0	ensembl		ensembl111	Mongolian gerbil
+mesocricetus_auratus	MesAur1.0	ensembl		ensembl111	Golden Hamster
+microcebus_murinus	Mmur_3.0	ensembl		ensembl111	Mouse Lemur
+microtus_ochrogaster	MicOch1.0	ensembl		ensembl111	Prairie vole
+mola_mola	ASM169857v1	ensembl		ensembl111	Ocean sunfish
+monodelphis_domestica	ASM229v1	ensembl		ensembl111	Opossum
+monodon_monoceros	NGI_Narwhal_1	ensembl		ensembl111	Narwhal
+monopterus_albus	M_albus_1.0	ensembl		ensembl111	Swamp eel
+moschus_moschiferus	MosMos_v2_BIUU_UCD	ensembl		ensembl111	Siberian musk deer
+mus_caroli	CAROLI_EIJ_v1.1	ensembl		ensembl111	Ryukyu mouse
+mus_musculus	GRCm39	ensembl		ensembl111	Mouse
+mus_musculus_129s1svimj	129S1_SvImJ_v1	ensembl		ensembl111	Mouse 129S1/SvImJ
+mus_musculus_aj	A_J_v1	ensembl		ensembl111	Mouse A/J
+mus_musculus_akrj	AKR_J_v1	ensembl		ensembl111	Mouse AKR/J
+mus_musculus_balbcj	BALB_cJ_v1	ensembl		ensembl111	Mouse BALB/cJ
+mus_musculus_c3hhej	C3H_HeJ_v1	ensembl		ensembl111	Mouse C3H/HeJ
+mus_musculus_c57bl6nj	C57BL_6NJ_v1	ensembl		ensembl111	Mouse C57BL/6NJ
+mus_musculus_casteij	CAST_EiJ_v1	ensembl		ensembl111	Mouse CAST/EiJ
+mus_musculus_cbaj	CBA_J_v1	ensembl		ensembl111	Mouse CBA/J
+mus_musculus_dba2j	DBA_2J_v1	ensembl		ensembl111	Mouse DBA/2J
+mus_musculus_fvbnj	FVB_NJ_v1	ensembl		ensembl111	Mouse FVB/NJ
+mus_musculus_lpj	LP_J_v1	ensembl		ensembl111	Mouse LP/J
+mus_musculus_nodshiltj	NOD_ShiLtJ_v1	ensembl		ensembl111	Mouse NOD/ShiLtJ
+mus_musculus_nzohlltj	NZO_HlLtJ_v1	ensembl		ensembl111	Mouse NZO/HlLtJ
+mus_musculus_pwkphj	PWK_PhJ_v1	ensembl		ensembl111	Mouse PWK/PhJ
+mus_musculus_wsbeij	WSB_EiJ_v1	ensembl		ensembl111	Mouse WSB/EiJ
+mus_pahari	PAHARI_EIJ_v1.1	ensembl		ensembl111	Shrew mouse
+mus_spicilegus	MUSP714	ensembl		ensembl111	Steppe mouse
+mus_spretus	SPRET_EiJ_v1	ensembl		ensembl111	Algerian mouse
+mustela_putorius_furo	MusPutFur1.0	ensembl		ensembl111	Ferret
+myotis_lucifugus	Myoluc2.0	ensembl		ensembl111	Microbat
+myripristis_murdjan	fMyrMur1.1	ensembl		ensembl111	Pinecone soldierfish
+naja_naja	Nana_v5	ensembl		ensembl111	Indian cobra
+nannospalax_galili	S.galili_v1.0	ensembl		ensembl111	Upper Galilee mountains blind mole rat
+neogobius_melanostomus	RGoby_Basel_V2	ensembl		ensembl111	Round goby
+neolamprologus_brichardi	NeoBri1.0	ensembl		ensembl111	Lyretail cichlid
+neovison_vison	NNQGG.v01	ensembl		ensembl111	American mink
+nomascus_leucogenys	Nleu_3.0	ensembl		ensembl111	Gibbon
+notamacropus_eugenii	Meug_1.0	ensembl		ensembl111	Wallaby
+notechis_scutatus	TS10Xv2-PRI	ensembl		ensembl111	Mainland tiger snake
+nothobranchius_furzeri	Nfu_20140520	ensembl		ensembl111	Turquoise killifish
+nothoprocta_perdicaria	notPer1	ensembl		ensembl111	Chilean tinamou
+numida_meleagris	NumMel1.0	ensembl		ensembl111	Helmeted guineafowl
+ochotona_princeps	OchPri2.0-Ens	ensembl		ensembl111	Pika
+octodon_degus	OctDeg1.0	ensembl		ensembl111	Degu
+oncorhynchus_kisutch	Okis_V2	ensembl		ensembl111	Coho salmon
+oncorhynchus_mykiss	USDA_OmykA_1.1	ensembl		ensembl111	Rainbow trout
+oncorhynchus_tshawytscha	Otsh_v1.0	ensembl		ensembl111	Chinook salmon
+oreochromis_aureus	ASM587006v1	ensembl		ensembl111	Blue tilapia
+oreochromis_niloticus	O_niloticus_UMD_NMBU	ensembl		ensembl111	Nile tilapia
+ornithorhynchus_anatinus	mOrnAna1.p.v1	ensembl		ensembl111	Platypus
+oryctolagus_cuniculus	OryCun2.0	ensembl		ensembl111	Rabbit
+oryzias_javanicus	OJAV_1.1	ensembl		ensembl111	Javanese ricefish
+oryzias_latipes	ASM223467v1	ensembl		ensembl111	Japanese medaka HdrR
+oryzias_latipes_hni	ASM223471v1	ensembl		ensembl111	Japanese medaka HNI
+oryzias_latipes_hsok	ASM223469v1	ensembl		ensembl111	Japanese medaka HSOK
+oryzias_melastigma	Om_v0.7.RACA	ensembl		ensembl111	Indian medaka
+oryzias_sinensis	ASM858656v1	ensembl		ensembl111	Chinese medaka
+otolemur_garnettii	OtoGar3	ensembl		ensembl111	Bushbaby
+otus_sunia	OtuSun1.0	ensembl		ensembl111	Oriental scops-owl
+ovis_aries	Oar_v3.1	ensembl		ensembl111	Sheep (texel)
+ovis_aries_rambouillet	ARS-UI_Ramb_v2.0	ensembl		ensembl111	Sheep
+pan_paniscus	panpan1.1	ensembl		ensembl111	Bonobo
+pan_troglodytes	Pan_tro_3.0	ensembl		ensembl111	Chimpanzee
+panthera_leo	PanLeo1.0	ensembl		ensembl111	Lion
+panthera_pardus	PanPar1.0	ensembl		ensembl111	Leopard
+panthera_tigris_altaica	PanTig1.0	ensembl		ensembl111	Tiger
+papio_anubis	Panubis1.0	ensembl		ensembl111	Olive baboon
+parambassis_ranga	fParRan2.1	ensembl		ensembl111	Indian glassy fish
+paramormyrops_kingsleyae	PKINGS_0.1	ensembl		ensembl111	Paramormyrops kingsleyae
+parus_major	Parus_major1.1	ensembl		ensembl111	Great Tit
+pavo_cristatus	AIIM_Pcri_1.0	ensembl		ensembl111	Indian peafowl
+pelodiscus_sinensis	PelSin_1.0	ensembl		ensembl111	Chinese softshell turtle
+pelusios_castaneus	Pelusios_castaneus-1.0	ensembl		ensembl111	West African mud turtle
+periophthalmus_magnuspinnatus	PM.fa	ensembl		ensembl111	Korean mudskipper
+peromyscus_maniculatus_bairdii	HU_Pman_2.1	ensembl		ensembl111	Northern American deer mouse
+petromyzon_marinus	Pmarinus_7.0	ensembl		ensembl111	Lamprey
+phascolarctos_cinereus	phaCin_unsw_v4.1	ensembl		ensembl111	Koala
+phasianus_colchicus	ASM414374v1	ensembl		ensembl111	Ring-necked pheasant
+phocoena_sinus	mPhoSin1.pri	ensembl		ensembl111	Vaquita
+physeter_catodon	ASM283717v2	ensembl		ensembl111	Sperm whale
+piliocolobus_tephrosceles	ASM277652v2	ensembl		ensembl111	Ugandan red Colobus
+podarcis_muralis	PodMur_1.0	ensembl		ensembl111	Common wall lizard
+poecilia_formosa	PoeFor_5.1.2	ensembl		ensembl111	Amazon molly
+poecilia_latipinna	P_latipinna-1.0	ensembl		ensembl111	Sailfin molly
+poecilia_mexicana	P_mexicana-1.0	ensembl		ensembl111	Shortfin molly
+poecilia_reticulata	Guppy_female_1.0_MT	ensembl		ensembl111	Guppy
+pogona_vitticeps	pvi1.1	ensembl		ensembl111	Central bearded dragon
+pongo_abelii	Susie_PABv2	ensembl		ensembl111	Sumatran orangutan
+procavia_capensis	proCap1	ensembl		ensembl111	Hyrax
+prolemur_simus	Prosim_1.0	ensembl		ensembl111	Greater bamboo lemur
+propithecus_coquereli	Pcoq_1.0	ensembl		ensembl111	Coquerel's sifaka
+pseudonaja_textilis	EBS10Xv2-PRI	ensembl		ensembl111	Eastern brown snake
+pteropus_vampyrus	pteVam1	ensembl		ensembl111	Megabat
+pundamilia_nyererei	PunNye1.0	ensembl		ensembl111	Makobe Island cichlid
+pygocentrus_nattereri	Pygocentrus_nattereri-1.0.2	ensembl		ensembl111	Red-bellied piranha
+rattus_norvegicus	mRatBN7.2	ensembl		ensembl111	Rat
+rattus_norvegicus_shrspbbbutx	UTH_Rnor_SHRSP_BbbUtx_1.0	ensembl		ensembl111	Rat - SHRSP/BbbUtx
+rattus_norvegicus_shrutx	UTH_Rnor_SHR_Utx	ensembl		ensembl111	Rat - SHR/Utx RGD_8142385
+rattus_norvegicus_wkybbb	UTH_Rnor_WKY_Bbb_1.0	ensembl		ensembl111	Rat - WKY/Bbb RGD_1581635
+rhinolophus_ferrumequinum	mRhiFer1_v1.p	ensembl		ensembl111	Greater horseshoe bat
+rhinopithecus_bieti	ASM169854v1	ensembl		ensembl111	Black snub-nosed monkey
+rhinopithecus_roxellana	Rrox_v1	ensembl		ensembl111	Golden snub-nosed monkey
+saccharomyces_cerevisiae	R64-1-1	ensembl		ensembl111	Saccharomyces cerevisiae
+saimiri_boliviensis_boliviensis	SaiBol1.0	ensembl		ensembl111	Bolivian squirrel monkey
+salarias_fasciatus	fSalaFa1.1	ensembl		ensembl111	Jewelled blenny
+salmo_salar	Ssal_v3.1	ensembl		ensembl111	Atlantic salmon
+salmo_trutta	fSalTru1.1	ensembl		ensembl111	Brown trout
+salvator_merianae	HLtupMer3	ensembl		ensembl111	Argentine black and white tegu
+sander_lucioperca	SLUC_FBN_1	ensembl		ensembl111	Pike-perch
+sarcophilus_harrisii	mSarHar1.11	ensembl		ensembl111	Tasmanian devil
+sciurus_vulgaris	mSciVul1.1	ensembl		ensembl111	Eurasian red squirrel
+scleropages_formosus	fSclFor1.1	ensembl		ensembl111	Asian bonytongue
+scophthalmus_maximus	ASM1334776v1	ensembl		ensembl111	Turbot
+serinus_canaria	SCA1	ensembl		ensembl111	Common canary
+seriola_dumerili	Sdu_1.0	ensembl		ensembl111	Greater amberjack
+seriola_lalandi_dorsalis	Sedor1	ensembl		ensembl111	Yellowtail amberjack
+sinocyclocheilus_anshuiensis	SAMN03320099.WGS_v1.1	ensembl		ensembl111	Blind barbel
+sinocyclocheilus_grahami	SAMN03320097.WGS_v1.1	ensembl		ensembl111	Golden-line barbel
+sinocyclocheilus_rhinocerous	SAMN03320098_v1.1	ensembl		ensembl111	Horned golden-line barbel
+sorex_araneus	COMMON_SHREW1	ensembl		ensembl111	Shrew
+sparus_aurata	fSpaAur1.1	ensembl		ensembl111	Gilthead seabream
+spermophilus_dauricus	ASM240643v1	ensembl		ensembl111	Daurian ground squirrel
+sphaeramia_orbicularis	fSphaOr1.1	ensembl		ensembl111	Orbiculate cardinalfish
+sphenodon_punctatus	ASM311381v1	ensembl		ensembl111	Tuatara
+stachyris_ruficeps	ASM869450v1	ensembl		ensembl111	Rufous-capped babbler
+stegastes_partitus	Stegastes_partitus-1.0.2	ensembl		ensembl111	Bicolor damselfish
+strigops_habroptila	bStrHab1_v1.p	ensembl		ensembl111	Kakapo
+strix_occidentalis_caurina	Soccid_v01	ensembl		ensembl111	Northern spotted owl
+struthio_camelus_australis	ASM69896v1	ensembl		ensembl111	African ostrich
+suricata_suricatta	meerkat_22Aug2017_6uvM2_HiC	ensembl		ensembl111	Meerkat
+sus_scrofa	Sscrofa11.1	ensembl		ensembl111	Pig
+sus_scrofa_bamei	Bamei_pig_v1	ensembl		ensembl111	Pig - Bamei
+sus_scrofa_berkshire	Berkshire_pig_v1	ensembl		ensembl111	Pig - Berkshire
+sus_scrofa_hampshire	Hampshire_pig_v1	ensembl		ensembl111	Pig - Hampshire
+sus_scrofa_jinhua	Jinhua_pig_v1	ensembl		ensembl111	Pig - Jinhua
+sus_scrofa_landrace	Landrace_pig_v1	ensembl		ensembl111	Pig - Landrace
+sus_scrofa_largewhite	Large_White_v1	ensembl		ensembl111	Pig - Largewhite
+sus_scrofa_meishan	Meishan_pig_v1	ensembl		ensembl111	Pig - Meishan
+sus_scrofa_pietrain	Pietrain_pig_v1	ensembl		ensembl111	Pig - Pietrain
+sus_scrofa_rongchang	Rongchang_pig_v1	ensembl		ensembl111	Pig - Rongchang
+sus_scrofa_tibetan	Tibetan_Pig_v2	ensembl		ensembl111	Pig - Tibetan
+sus_scrofa_usmarc	USMARCv1.0	ensembl		ensembl111	Pig USMARC
+sus_scrofa_wuzhishan	minipig_v1.0	ensembl		ensembl111	Pig - Wuzhishan
+taeniopygia_guttata	bTaeGut1_v1.p	ensembl		ensembl111	Zebra finch
+takifugu_rubripes	fTakRub1.2	ensembl		ensembl111	Fugu
+terrapene_carolina_triunguis	T_m_triunguis-2.0	ensembl		ensembl111	Three-toed box turtle
+tetraodon_nigroviridis	TETRAODON8	ensembl		ensembl111	Tetraodon
+theropithecus_gelada	Tgel_1.0	ensembl		ensembl111	Gelada
+tupaia_belangeri	TREESHREW	ensembl		ensembl111	Tree Shrew
+tursiops_truncatus	turTru1	ensembl		ensembl111	Dolphin
+urocitellus_parryii	ASM342692v1	ensembl		ensembl111	Arctic ground squirrel
+ursus_americanus	ASM334442v1	ensembl		ensembl111	American black bear
+ursus_maritimus	UrsMar_1.0	ensembl		ensembl111	Polar bear
+ursus_thibetanus_thibetanus	ASM966005v1	ensembl		ensembl111	Asiatic black bear
+varanus_komodoensis	ASM479886v1	ensembl		ensembl111	Komodo dragon
+vicugna_pacos	vicPac1	ensembl		ensembl111	Alpaca
+vombatus_ursinus	bare-nosed_wombat_genome_assembly	ensembl		ensembl111	Common wombat
+vulpes_vulpes	VulVul2.2	ensembl		ensembl111	Red fox
+xenopus_tropicalis	UCB_Xtro_10.0	ensembl		ensembl111	Tropical clawed frog
+xiphophorus_couchianus	Xiphophorus_couchianus-4.0.1	ensembl		ensembl111	Monterrey platyfish
+xiphophorus_maculatus	X_maculatus-5.0-male	ensembl		ensembl111	Platyfish
+zalophus_californianus	mZalCal1.pri	ensembl		ensembl111	California sea lion
+zonotrichia_albicollis	Zonotrichia_albicollis-1.0.1	ensembl		ensembl111	White-throated sparrow
+zosterops_lateralis_melanops	ASM128173v1	ensembl		ensembl111	Silver-eye
+actinidia_chinensis	Red5_PS1_1.69.0	ensemblgenomes	plants	ensemblgenomes58	Actinidia chinensis
+aegilops_tauschii	Aet_v4.0	ensemblgenomes	plants	ensemblgenomes58	Aegilops tauschii
+amborella_trichopoda	AMTR1.0	ensemblgenomes	plants	ensemblgenomes58	Amborella trichopoda
+ananas_comosus	F153	ensemblgenomes	plants	ensemblgenomes58	Ananas comosus
+arabidopsis_halleri	Ahal2.2	ensemblgenomes	plants	ensemblgenomes58	Arabidopsis halleri
+arabidopsis_lyrata	v.1.0	ensemblgenomes	plants	ensemblgenomes58	Arabidopsis lyrata
+arabidopsis_thaliana	TAIR10	ensemblgenomes	plants	ensemblgenomes58	Arabidopsis thaliana
+arabis_alpina	A_alpina_V4	ensemblgenomes	plants	ensemblgenomes58	Arabis alpina
+asparagus_officinalis	Aspof.V1	ensemblgenomes	plants	ensemblgenomes58	Asparagus officinalis
+avena_sativa_ot3098	Oat_OT3098_v2	ensemblgenomes	plants	ensemblgenomes58	Avena sativa OT3098
+avena_sativa_sang	Asativa_sang.v1.1	ensemblgenomes	plants	ensemblgenomes58	Avena sativa Sang
+beta_vulgaris	RefBeet-1.2.2	ensemblgenomes	plants	ensemblgenomes58	Beta vulgaris
+brachypodium_distachyon	Brachypodium_distachyon_v3.0	ensemblgenomes	plants	ensemblgenomes58	Brachypodium distachyon
+brassica_juncea	ASM1870372v1	ensemblgenomes	plants	ensemblgenomes58	Brassica juncea
+brassica_napus	AST_PRJEB5043_v1	ensemblgenomes	plants	ensemblgenomes58	Brassica napus
+brassica_oleracea	BOL	ensemblgenomes	plants	ensemblgenomes58	Brassica oleracea
+brassica_rapa	Brapa_1.0	ensemblgenomes	plants	ensemblgenomes58	Brassica rapa
+brassica_rapa_ro18	SCU_BraROA_2.3	ensemblgenomes	plants	ensemblgenomes58	Brassica rapa R-o-18
+cajanus_cajan	C.cajan_V1.0	ensemblgenomes	plants	ensemblgenomes58	Cajanus cajan (pigeon pea) - GCA_000340665.1
+camelina_sativa	Cs	ensemblgenomes	plants	ensemblgenomes58	Camelina sativa
+cannabis_sativa_female	cs10	ensemblgenomes	plants	ensemblgenomes58	Cannabis sativa female
+capsicum_annuum	ASM51225v2	ensemblgenomes	plants	ensemblgenomes58	Capsicum annuum
+chara_braunii	Cbr_1.0	ensemblgenomes	plants	ensemblgenomes58	Chara braunii
+chenopodium_quinoa	ASM168347v1	ensemblgenomes	plants	ensemblgenomes58	Chenopodium quinoa
+chlamydomonas_reinhardtii	Chlamydomonas_reinhardtii_v5.5	ensemblgenomes	plants	ensemblgenomes58	Chlamydomonas reinhardtii
+chondrus_crispus	ASM35022v2	ensemblgenomes	plants	ensemblgenomes58	Chondrus crispus
+citrullus_lanatus	Cla97_v1	ensemblgenomes	plants	ensemblgenomes58	Citrullus lanatus
+citrus_clementina	Citrus_clementina_v1.0	ensemblgenomes	plants	ensemblgenomes58	Citrus clementina
+coffea_canephora	AUK_PRJEB4211_v1	ensemblgenomes	plants	ensemblgenomes58	Coffea canephora
+corchorus_capsularis	CCACVL1_1.0	ensemblgenomes	plants	ensemblgenomes58	Corchorus capsularis
+corylus_avellana	CavTom2PMs-1.0	ensemblgenomes	plants	ensemblgenomes58	Corylus avellana
+corymbia_citriodora	Ccitriodora_v2_1	ensemblgenomes	plants	ensemblgenomes58	Corymbia citriodora
+cucumis_melo	Melonv4	ensemblgenomes	plants	ensemblgenomes58	Cucumis melo
+cucumis_sativus	ASM407v2	ensemblgenomes	plants	ensemblgenomes58	Cucumis sativus
+cyanidioschyzon_merolae	ASM9120v1	ensemblgenomes	plants	ensemblgenomes58	Cyanidioschyzon merolae
+cynara_cardunculus	CcrdV1	ensemblgenomes	plants	ensemblgenomes58	Cynara cardunculus
+daucus_carota	ASM162521v1	ensemblgenomes	plants	ensemblgenomes58	Daucus carota
+digitaria_exilis	Fonio_CM05836	ensemblgenomes	plants	ensemblgenomes58	Digitaria exilis
+dioscorea_rotundata	TDr96_F1_v2_PseudoChromosome	ensemblgenomes	plants	ensemblgenomes58	Dioscorea rotundata
+echinochloa_crusgalli	ec_v3	ensemblgenomes	plants	ensemblgenomes58	Echinochloa crus-galli
+eragrostis_curvula	CERZOS_E.curvula1.0	ensemblgenomes	plants	ensemblgenomes58	Eragrostis curvula
+eragrostis_tef	Salk_teff_dabbi_3.0	ensemblgenomes	plants	ensemblgenomes58	Eragrostis tef
+eucalyptus_grandis	Egrandis1_0	ensemblgenomes	plants	ensemblgenomes58	Eucalyptus grandis
+eutrema_salsugineum	Eutsalg1_0	ensemblgenomes	plants	ensemblgenomes58	Eutrema salsugineum
+ficus_carica	UNIPI_FiCari_1.0	ensemblgenomes	plants	ensemblgenomes58	Ficus carica
+fraxinus_excelsior	BATG-0.5	ensemblgenomes	plants	ensemblgenomes58	Fraxinus excelsior
+galdieria_sulphuraria	ASM34128v1	ensemblgenomes	plants	ensemblgenomes58	Galdieria sulphuraria
+glycine_max	Glycine_max_v2.1	ensemblgenomes	plants	ensemblgenomes58	Glycine max
+glycine_soja	ASM419377v2	ensemblgenomes	plants	ensemblgenomes58	Glycine soja (Wild soybean)
+gossypium_raimondii	Graimondii2_0_v6	ensemblgenomes	plants	ensemblgenomes58	Gossypium raimondii
+helianthus_annuus	HanXRQr2.0-SUNRISE	ensemblgenomes	plants	ensemblgenomes58	Helianthus annuus
+hordeum_vulgare	MorexV3_pseudomolecules_assembly	ensemblgenomes	plants	ensemblgenomes58	Hordeum vulgare
+hordeum_vulgare_goldenpromise	GPv1	ensemblgenomes	plants	ensemblgenomes58	Hordeum vulgare GoldenPromise
+hordeum_vulgare_tritex	Morex_V2_scaf	ensemblgenomes	plants	ensemblgenomes58	Hordeum vulgare TRITEX
+ipomoea_triloba	ASM357664v1	ensemblgenomes	plants	ensemblgenomes58	Ipomoea triloba
+juglans_regia	Walnut_2.0	ensemblgenomes	plants	ensemblgenomes58	Juglans regia
+kalanchoe_fedtschenkoi	K_fedtschenkoi_M2_v1	ensemblgenomes	plants	ensemblgenomes58	Kalanchoe fedtschenkoi
+lactuca_sativa	Lsat_Salinas_v7	ensemblgenomes	plants	ensemblgenomes58	Lactuca sativa
+leersia_perrieri	Lperr_V1.4	ensemblgenomes	plants	ensemblgenomes58	Leersia perrieri
+lolium_perenne	MPB_Lper_Kyuss_1697	ensemblgenomes	plants	ensemblgenomes58	Lolium perenne
+lupinus_angustifolius	LupAngTanjil_v1.0	ensemblgenomes	plants	ensemblgenomes58	Lupinus angustifolius
+malus_domestica_golden	ASM211411v1	ensemblgenomes	plants	ensemblgenomes58	Malus domestica Golden
+manihot_esculenta	Manihot_esculenta_v6	ensemblgenomes	plants	ensemblgenomes58	Manihot esculenta
+marchantia_polymorpha	Marchanta_polymorpha_v1	ensemblgenomes	plants	ensemblgenomes58	Marchantia polymorpha
+medicago_truncatula	MedtrA17_4.0	ensemblgenomes	plants	ensemblgenomes58	Medicago truncatula
+musa_acuminata	Musa_acuminata_v2	ensemblgenomes	plants	ensemblgenomes58	Musa acuminata
+nicotiana_attenuata	NIATTr2	ensemblgenomes	plants	ensemblgenomes58	Nicotiana attenuata
+nymphaea_colorata	ASM883128v1	ensemblgenomes	plants	ensemblgenomes58	Nymphaea colorata
+olea_europaea	OLEA9	ensemblgenomes	plants	ensemblgenomes58	Olea europaea
+olea_europaea_sylvestris	O_europaea_v1	ensemblgenomes	plants	ensemblgenomes58	Olea europaea var. sylvestris
+oryza_barthii	O.barthii_v1	ensemblgenomes	plants	ensemblgenomes58	Oryza barthii
+oryza_brachyantha	Oryza_brachyantha.v1.4b	ensemblgenomes	plants	ensemblgenomes58	Oryza brachyantha
+oryza_glaberrima	Oryza_glaberrima_V1	ensemblgenomes	plants	ensemblgenomes58	Oryza glaberrima
+oryza_glumipatula	Oryza_glumaepatula_v1.5	ensemblgenomes	plants	ensemblgenomes58	Oryza glumipatula
+oryza_indica	ASM465v1	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa Indica Group
+oryza_longistaminata	O_longistaminata_v1.0	ensemblgenomes	plants	ensemblgenomes58	Oryza longistaminata
+oryza_meridionalis	Oryza_meridionalis_v1.3	ensemblgenomes	plants	ensemblgenomes58	Oryza meridionalis
+oryza_nivara	Oryza_nivara_v1.0	ensemblgenomes	plants	ensemblgenomes58	Oryza nivara
+oryza_punctata	Oryza_punctata_v1.2	ensemblgenomes	plants	ensemblgenomes58	Oryza punctata
+oryza_rufipogon	OR_W1943	ensemblgenomes	plants	ensemblgenomes58	Oryza rufipogon
+oryza_sativa	IRGSP-1.0	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa Japonica Group
+oryza_sativa_arc	Os117425RS1	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (circum-Basmati var. ARC 10497)
+oryza_sativa_azucena	AzucenaRS1	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (Geng/Japonica-trop1 var. Azucena)
+oryza_sativa_chaomeo	Os132278RS1	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (Geng/Japonica-sbtrp var. Chao Meo)
+oryza_sativa_gobolsailbalam	Os132424RS1	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (Xian/Indica-2A var. Gobol Sail)
+oryza_sativa_ir64	OsIR64RS1	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (Xian/Indica-1B1 var. IR64)
+oryza_sativa_ketannangka	Os128077RS1	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (Geng/Japonica-trop2 var. Ketan Nangka)
+oryza_sativa_khaoyaiguang	Os127518RS1	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (Xian/Indica-3B1 var. Khao Yai Guang)
+oryza_sativa_larhamugad	Os125619RS1	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (Xian/Indica-2B var. Larha Mugad)
+oryza_sativa_lima	Os127564RS1	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (Xian/Indica-3A var. Lima)
+oryza_sativa_liuxu	Os125827RS1	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (Xian/Indica-3B2 var. Liu Xu)
+oryza_sativa_mh63	MH63RS2	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (Xian/Indica-adm var. Minghui 63)
+oryza_sativa_n22	OsN22RS2	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (circum-Aus1 var. N22)
+oryza_sativa_natelboro	Os127652RS1	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (circum-Aus2 var. Natel Boro)
+oryza_sativa_pr106	Os127742RS1	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (Xian/Indica-1B2 var. PR106)
+oryza_sativa_zs97	ZS97RS3	ensemblgenomes	plants	ensemblgenomes58	Oryza sativa (Xian/Indica-1A var. Zhenshan 97)
+ostreococcus_lucimarinus	ASM9206v1	ensemblgenomes	plants	ensemblgenomes58	Ostreococcus lucimarinus
+panicum_hallii	PhalliiHAL_v2.1	ensemblgenomes	plants	ensemblgenomes58	Panicum hallii HAL2
+panicum_hallii_fil2	PHallii_v3.1	ensemblgenomes	plants	ensemblgenomes58	Panicum hallii FIL2
+papaver_somniferum	ASM357369v1	ensemblgenomes	plants	ensemblgenomes58	Papaver somniferum
+phaseolus_vulgaris	PhaVulg1_0	ensemblgenomes	plants	ensemblgenomes58	Phaseolus vulgaris
+physcomitrium_patens	Phypa_V3	ensemblgenomes	plants	ensemblgenomes58	Physcomitrium patens
+pistacia_vera	PisVer_v2	ensemblgenomes	plants	ensemblgenomes58	Pistacia vera
+pisum_sativum	Pisum_sativum_v1a	ensemblgenomes	plants	ensemblgenomes58	Pisum sativum
+populus_trichocarpa	Pop_tri_v4	ensemblgenomes	plants	ensemblgenomes58	Populus trichocarpa
+prunus_avium	PAV_r1.0	ensemblgenomes	plants	ensemblgenomes58	Prunus avium
+prunus_dulcis	ALMONDv2	ensemblgenomes	plants	ensemblgenomes58	Prunus dulcis
+prunus_persica	Prunus_persica_NCBIv2	ensemblgenomes	plants	ensemblgenomes58	Prunus persica
+quercus_lobata	ValleyOak3.0	ensemblgenomes	plants	ensemblgenomes58	Quercus lobata
+quercus_suber	CorkOak1.0	ensemblgenomes	plants	ensemblgenomes58	Quercus suber
+rosa_chinensis	RchiOBHm-V2	ensemblgenomes	plants	ensemblgenomes58	Rosa chinensis
+saccharum_spontaneum	Sspon.HiC_chr_asm	ensemblgenomes	plants	ensemblgenomes58	Saccharum spontaneum
+secale_cereale	Rye_Lo7_2018_v1p1p1	ensemblgenomes	plants	ensemblgenomes58	Secale cereale
+selaginella_moellendorffii	v1.0	ensemblgenomes	plants	ensemblgenomes58	Selaginella moellendorffii
+sesamum_indicum	S_indicum_v1.0	ensemblgenomes	plants	ensemblgenomes58	Sesamum indicum
+setaria_italica	Setaria_italica_v2.0	ensemblgenomes	plants	ensemblgenomes58	Setaria italica
+setaria_viridis	Setaria_viridis_v2.0	ensemblgenomes	plants	ensemblgenomes58	Setaria viridis
+solanum_lycopersicum	SL3.0	ensemblgenomes	plants	ensemblgenomes58	Solanum lycopersicum
+solanum_tuberosum	SolTub_3.0	ensemblgenomes	plants	ensemblgenomes58	Solanum tuberosum
+solanum_tuberosum_rh8903916	ASM1418947v1	ensemblgenomes	plants	ensemblgenomes58	Solanum tuberosum RH89-039-16
+sorghum_bicolor	Sorghum_bicolor_NCBIv3	ensemblgenomes	plants	ensemblgenomes58	Sorghum bicolor
+theobroma_cacao	Theobroma_cacao_20110822	ensemblgenomes	plants	ensemblgenomes58	Theobroma cacao Matina 1-6
+theobroma_cacao_criollo	Criollo_cocoa_genome_V2	ensemblgenomes	plants	ensemblgenomes58	Theobroma cacao Belizian Criollo B97-61/B2
+trifolium_pratense	Trpr	ensemblgenomes	plants	ensemblgenomes58	Trifolium pratense
+triticum_aestivum	IWGSC	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum
+triticum_aestivum_arinalrfor	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Arinalrfor
+triticum_aestivum_cadenza	EIv1.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Cadenza
+triticum_aestivum_claire	EIv1.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Claire
+triticum_aestivum_jagger	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Jagger
+triticum_aestivum_julius	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Julius
+triticum_aestivum_kariega	Tae_Kariega_v1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Kariega
+triticum_aestivum_lancer	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Lancer
+triticum_aestivum_landmark	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Landmark
+triticum_aestivum_mace	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Mace
+triticum_aestivum_mattis	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Sy Mattis
+triticum_aestivum_norin61	PGSBv2.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Norin61
+triticum_aestivum_paragon	EIv1.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Paragon
+triticum_aestivum_refseqv2	IWGSC_RefSeq_v2.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Refseqv2
+triticum_aestivum_renan	Triticum_aestivum_Renan_v2.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Renan
+triticum_aestivum_robigus	EIv1.1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Robigus
+triticum_aestivum_stanley	PGSBv2.2	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Stanley
+triticum_aestivum_weebil	WeebilV1	ensemblgenomes	plants	ensemblgenomes58	Triticum aestivum Weebill
+triticum_dicoccoides	WEWSeq_v.1.0	ensemblgenomes	plants	ensemblgenomes58	Triticum dicoccoides
+triticum_spelta	PGSBv2.0	ensemblgenomes	plants	ensemblgenomes58	Triticum spelta
+triticum_turgidum	Svevo.v1	ensemblgenomes	plants	ensemblgenomes58	Triticum turgidum
+triticum_urartu	IGDB	ensemblgenomes	plants	ensemblgenomes58	Triticum urartu
+vigna_angularis	Vigan1.1	ensemblgenomes	plants	ensemblgenomes58	Vigna angularis
+vigna_radiata	Vradiata_ver6	ensemblgenomes	plants	ensemblgenomes58	Vigna radiata
+vigna_unguiculata	ASM411807v1	ensemblgenomes	plants	ensemblgenomes58	Vigna unguiculata
+vitis_vinifera	PN40024.v4	ensemblgenomes	plants	ensemblgenomes58	Vitis vinifera
+zea_mays	Zm-B73-REFERENCE-NAM-5.0	ensemblgenomes	plants	ensemblgenomes58	Zea mays
+aphanomyces_astaci	GCA000520075v1	ensemblgenomes	fungi	ensemblgenomes58	Aphanomyces astaci
+aphanomyces_invadans	GCA000520115v1	ensemblgenomes	fungi	ensemblgenomes58	Aphanomyces invadans
+ashbya_gossypii	ASM9102v1	ensemblgenomes	fungi	ensemblgenomes58	Ashbya gossypii
+aspergillus_clavatus	ASM271v1	ensemblgenomes	fungi	ensemblgenomes58	Aspergillus clavatus NRRL 1
+aspergillus_flavus	JCVI-afl1-v2.0	ensemblgenomes	fungi	ensemblgenomes58	Aspergillus flavus NRRL3357
+aspergillus_fumigatus	ASM265v1	ensemblgenomes	fungi	ensemblgenomes58	Aspergillus fumigatus Af293
+aspergillus_fumigatusa1163	ASM15014v1	ensemblgenomes	fungi	ensemblgenomes58	Aspergillus fumigatus A1163
+aspergillus_nidulans	ASM1142v1	ensemblgenomes	fungi	ensemblgenomes58	Aspergillus nidulans
+aspergillus_niger	ASM285v2	ensemblgenomes	fungi	ensemblgenomes58	Aspergillus niger
+aspergillus_oryzae	ASM18445v3	ensemblgenomes	fungi	ensemblgenomes58	Aspergillus oryzae RIB40
+aspergillus_terreus	ASM14961v1	ensemblgenomes	fungi	ensemblgenomes58	Aspergillus terreus NIH2624
+beauveria_bassiana	ASM168263v1	ensemblgenomes	fungi	ensemblgenomes58	Beauveria bassiana
+blumeria_graminis	EF2	ensemblgenomes	fungi	ensemblgenomes58	Blumeria graminis
+botrytis_cinerea	ASM83294v1	ensemblgenomes	fungi	ensemblgenomes58	Botrytis cinerea B05.10
+candida_albicans	GCA000182965v3	ensemblgenomes	fungi	ensemblgenomes58	Candida albicans
+candida_auris	GCA002759435v2	ensemblgenomes	fungi	ensemblgenomes58	Candida auris
+candida_duobushaemulonis	GCA002926085v1	ensemblgenomes	fungi	ensemblgenomes58	Candida duobushaemulonis
+candida_glabrata	GCA000002545v2	ensemblgenomes	fungi	ensemblgenomes58	Candida glabrata
+candida_haemuloni	GCA002926055v1	ensemblgenomes	fungi	ensemblgenomes58	[Candida] haemuloni
+candida_parapsilosis	GCA000182765v2	ensemblgenomes	fungi	ensemblgenomes58	Candida parapsilosis
+candida_pseudohaemulonis	GCA003013735v1	ensemblgenomes	fungi	ensemblgenomes58	[Candida] pseudohaemulonii
+candida_tropicalis	GCA000006335v3	ensemblgenomes	fungi	ensemblgenomes58	Candida tropicalis
+colletotrichum_gloeosporioides	GCA_000319635.1	ensemblgenomes	fungi	ensemblgenomes58	Colletotrichum gloeosporioides
+colletotrichum_graminicola	C_graminicola_M1_001_V1	ensemblgenomes	fungi	ensemblgenomes58	Colletotrichum graminicola
+colletotrichum_higginsianum	GCA_000313795.2	ensemblgenomes	fungi	ensemblgenomes58	Colletotrichum higginsianum
+colletotrichum_orbiculare	GCA_000350065.1	ensemblgenomes	fungi	ensemblgenomes58	Colletotrichum orbiculare
+cryptococcus_neoformans	ASM9104v1	ensemblgenomes	fungi	ensemblgenomes58	Cryptococcus neoformans var. neoformans JEC21
+dothistroma_septosporum	GCA_000340195.1	ensemblgenomes	fungi	ensemblgenomes58	Dothistroma septosporum
+fusarium_culmorum	EF1	ensemblgenomes	fungi	ensemblgenomes58	Fusarium culmorum UK99
+fusarium_fujikuroi	EF1	ensemblgenomes	fungi	ensemblgenomes58	Fusarium fujikuroi
+fusarium_graminearum	RR1	ensemblgenomes	fungi	ensemblgenomes58	Fusarium graminearum str. PH-1
+fusarium_oxysporum	FO2	ensemblgenomes	fungi	ensemblgenomes58	Fusarium oxysporum
+fusarium_pseudograminearum	GCA_000303195.1	ensemblgenomes	fungi	ensemblgenomes58	Fusarium pseudograminearum
+fusarium_solani	v2.0	ensemblgenomes	fungi	ensemblgenomes58	Fusarium solani
+fusarium_verticillioides	ASM14955v1	ensemblgenomes	fungi	ensemblgenomes58	Fusarium verticillioides
+gaeumannomyces_graminis	Gae_graminis_V2	ensemblgenomes	fungi	ensemblgenomes58	Gaeumannomyces tritici R3-111a-1
+globisporangium_ultimum	GCA000143045v1	ensemblgenomes	fungi	ensemblgenomes58	Globisporangium ultimum
+histoplasma_capsulatum	GCA000170615v1	ensemblgenomes	fungi	ensemblgenomes58	Histoplasma capsulatum
+komagataella_pastoris	GCA_000027005.1	ensemblgenomes	fungi	ensemblgenomes58	Komagataella pastoris
+leptosphaeria_maculans	ASM23037v1	ensemblgenomes	fungi	ensemblgenomes58	Leptosphaeria maculans
+magnaporthe_oryzae	MG8	ensemblgenomes	fungi	ensemblgenomes58	Magnaporthe oryzae
+magnaporthe_poae	Mag_poae_ATCC_64411_V1	ensemblgenomes	fungi	ensemblgenomes58	Magnaporthe poae
+melampsora_laricipopulina	GCA_000204055.1	ensemblgenomes	fungi	ensemblgenomes58	Melampsora larici-populina
+microbotryum_violaceum	GCA_000166175.1	ensemblgenomes	fungi	ensemblgenomes58	Microbotryum violaceum
+neosartorya_fischeri	ASM14964v1	ensemblgenomes	fungi	ensemblgenomes58	Aspergillus fischeri NRRL 181
+neurospora_crassa	NC12	ensemblgenomes	fungi	ensemblgenomes58	Neurospora crassa
+phaeosphaeria_nodorum	ASM14691v1	ensemblgenomes	fungi	ensemblgenomes58	Phaeosphaeria nodorum
+phanerochaete_chrysosporium	GCA000167175v1	ensemblgenomes	fungi	ensemblgenomes58	Phanerochaete chrysosporium
+puccinia_graminis	ASM14992v1	ensemblgenomes	fungi	ensemblgenomes58	Puccinia graminis
+puccinia_graminisug99	v1	ensemblgenomes	fungi	ensemblgenomes58	Puccinia graminis Ug99
+puccinia_striiformis	PST-130_1.0	ensemblgenomes	fungi	ensemblgenomes58	Puccinia striiformis f. sp. tritici PST-130 str. Race 130
+puccinia_triticina	ASM15152v1	ensemblgenomes	fungi	ensemblgenomes58	Puccinia triticina
+pyrenophora_teres	GCA_000166005.1	ensemblgenomes	fungi	ensemblgenomes58	Pyrenophora teres
+pyrenophora_triticirepentis	ASM14998v1	ensemblgenomes	fungi	ensemblgenomes58	Pyrenophora tritici-repentis Pt-1C-BFP
+pyricularia_oryzae	GCA900474545v2	ensemblgenomes	fungi	ensemblgenomes58	Magnaporthe oryzae
+saccharomyces_cerevisiae	R64-1-1	ensemblgenomes	fungi	ensemblgenomes58	Saccharomyces cerevisiae
+schizosaccharomyces_cryophilus	GCA_000004155.2	ensemblgenomes	fungi	ensemblgenomes58	Schizosaccharomyces cryophilus
+schizosaccharomyces_japonicus	GCA_000149845.2	ensemblgenomes	fungi	ensemblgenomes58	Schizosaccharomyces japonicus
+schizosaccharomyces_octosporus	GCA_000150505.2	ensemblgenomes	fungi	ensemblgenomes58	Schizosaccharomyces octosporus
+schizosaccharomyces_pombe	ASM294v2	ensemblgenomes	fungi	ensemblgenomes58	Schizosaccharomyces pombe
+sclerotinia_sclerotiorum	ASM14694v1	ensemblgenomes	fungi	ensemblgenomes58	Sclerotinia sclerotiorum
+sporisorium_reilianum	GCA_000230245.1	ensemblgenomes	fungi	ensemblgenomes58	Sporisorium reilianum
+trichoderma_reesei	GCA_000167675.2	ensemblgenomes	fungi	ensemblgenomes58	Trichoderma reesei
+trichoderma_virens	ASM17099v1	ensemblgenomes	fungi	ensemblgenomes58	Trichoderma virens
+tuber_melanosporum	ASM15164v1	ensemblgenomes	fungi	ensemblgenomes58	Tuber melanosporum
+ustilago_maydis	Umaydis521_2.0	ensemblgenomes	fungi	ensemblgenomes58	Ustilago maydis
+verticillium_dahliae	ASM15067v2	ensemblgenomes	fungi	ensemblgenomes58	Verticillium dahliae
+verticillium_dahliaejr2	VDAG_JR2v.4.0	ensemblgenomes	fungi	ensemblgenomes58	Verticillium dahliae JR2
+yarrowia_lipolytica	GCA_000002525.1	ensemblgenomes	fungi	ensemblgenomes58	Yarrowia lipolytica
+zymoseptoria_tritici	MG2	ensemblgenomes	fungi	ensemblgenomes58	Zymoseptoria tritici
+albugo_laibachii	ENA1	ensemblgenomes	protists	ensemblgenomes58	Albugo laibachii
+bigelowiella_natans	Bigna1	ensemblgenomes	protists	ensemblgenomes58	Bigelowiella natans
+dictyostelium_discoideum	dicty_2.7	ensemblgenomes	protists	ensemblgenomes58	Dictyostelium discoideum
+emiliania_huxleyi	Emiliana_huxleyi_CCMP1516_main_genome_assembly_v1.0	ensemblgenomes	protists	ensemblgenomes58	Emiliania huxleyi
+entamoeba_histolytica	JCVI-ESG2-1.0	ensemblgenomes	protists	ensemblgenomes58	Entamoeba histolytica
+giardia_lamblia	GL2	ensemblgenomes	protists	ensemblgenomes58	Giardia lamblia
+guillardia_theta	Guith1	ensemblgenomes	protists	ensemblgenomes58	Guillardia theta CCMP2712
+hyaloperonospora_arabidopsidis	HyaAraEmoy2_2.0	ensemblgenomes	protists	ensemblgenomes58	Hyaloperonospora arabidopsidis
+leishmania_major	ASM272v2	ensemblgenomes	protists	ensemblgenomes58	Leishmania major
+paramecium_tetraurelia	ASM16542v1	ensemblgenomes	protists	ensemblgenomes58	Paramecium tetraurelia
+phaeodactylum_tricornutum	ASM15095v2	ensemblgenomes	protists	ensemblgenomes58	Phaeodactylum tricornutum
+phytophthora_infestans	ASM14294v1	ensemblgenomes	protists	ensemblgenomes58	Phytophthora infestans
+phytophthora_kernoviae	PhyKer238_432v1	ensemblgenomes	protists	ensemblgenomes58	Phytophthora kernoviae
+phytophthora_lateralis	MPF4_v1.0	ensemblgenomes	protists	ensemblgenomes58	Phytophthora lateralis
+phytophthora_parasitica	Phyt_para_P1569_V1	ensemblgenomes	protists	ensemblgenomes58	Phytophthora parasitica
+phytophthora_ramorum	ASM14973v1	ensemblgenomes	protists	ensemblgenomes58	Phytophthora ramorum
+phytophthora_sojae	P_sojae_V3_0	ensemblgenomes	protists	ensemblgenomes58	Phytophthora sojae
+plasmodium_berghei	PBANKA01	ensemblgenomes	protists	ensemblgenomes58	Plasmodium berghei
+plasmodium_chabaudi	PCHAS01	ensemblgenomes	protists	ensemblgenomes58	Plasmodium chabaudi
+plasmodium_falciparum	ASM276v2	ensemblgenomes	protists	ensemblgenomes58	Plasmodium falciparum 3D7
+plasmodium_knowlesi	ASM635v1	ensemblgenomes	protists	ensemblgenomes58	Plasmodium knowlesi
+plasmodium_vivax	ASM241v2	ensemblgenomes	protists	ensemblgenomes58	Plasmodium vivax
+pseudonitzschia_multistriata	ASM90066040v1	ensemblgenomes	protists	ensemblgenomes58	Pseudo-nitzschia multistriata
+pythium_aphanidermatum	pag1_scaffolds_v1	ensemblgenomes	protists	ensemblgenomes58	Pythium aphanidermatum
+pythium_arrhenomanes	par_scaffolds_v1	ensemblgenomes	protists	ensemblgenomes58	Pythium arrhenomanes
+pythium_irregulare	pir_scaffolds_v1	ensemblgenomes	protists	ensemblgenomes58	Pythium irregulare
+pythium_iwayamai	piw_scaffolds_v1	ensemblgenomes	protists	ensemblgenomes58	Pythium iwayamai
+pythium_ultimum	pug	ensemblgenomes	protists	ensemblgenomes58	Pythium ultimum
+pythium_vexans	pve_scaffolds_v1	ensemblgenomes	protists	ensemblgenomes58	Pythium vexans
+tetrahymena_thermophila	JCVI-TTA1-2.2	ensemblgenomes	protists	ensemblgenomes58	Tetrahymena thermophila
+thalassiosira_pseudonana	ASM14940v2	ensemblgenomes	protists	ensemblgenomes58	Thalassiosira pseudonana
+toxoplasma_gondii	TGA4	ensemblgenomes	protists	ensemblgenomes58	Toxoplasma gondii ME49
+trypanosoma_brucei	TryBru_Apr2005_chr11	ensemblgenomes	protists	ensemblgenomes58	Trypanosoma brucei
+acanthaster_planci_gca001949145v1	OKI_Apl_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Acanthaster planci (Crown-of-thorns starfish)
+acromyrmex_echinatior_gca000204515v1rs	Aech_3.9	ensemblgenomes	metazoa	ensemblgenomes58	Acromyrmex echinatior (Panamanian leaf-cutter ant)
+acropora_millepora_gca013753865v1	Amil_v2.1	ensemblgenomes	metazoa	ensemblgenomes58	Acropora millepora (Stony coral, JS-1)
+actinia_equina_gca011057435	equina_smartden.arrow4.noredun	ensemblgenomes	metazoa	ensemblgenomes58	Actinia equina (Beadlet anemone, AE1)
+actinia_tenebrosa_gca009602425v1	ASM960242v1	ensemblgenomes	metazoa	ensemblgenomes58	Actinia tenebrosa (Australian red waratah sea anemone)
+acyrthosiphon_pisum_gca005508785v2rs	pea_aphid_22Mar2018_4r6ur_v2	ensemblgenomes	metazoa	ensemblgenomes58	Acyrthosiphon pisum (Pea aphid, AL4f)
+adelges_cooleyi_gca023614345v1rs	UGA_ACOO_1.1	ensemblgenomes	metazoa	ensemblgenomes58	Adelges cooleyi (Spruce gall adelgid, 19-005CV)
+adineta_vaga	AMS_PRJEB1171_v1	ensemblgenomes	metazoa	ensemblgenomes58	Adineta vaga (Rotifer)
+aedes_aegypti_lvpagwg	AaegL5	ensemblgenomes	metazoa	ensemblgenomes58	Aedes aegypti (Yellow fever mosquito, LVP_AGWG)
+aedes_albopictus	AaloF1	ensemblgenomes	metazoa	ensemblgenomes58	Aedes albopictus (Asian tiger mosquito, Foshan)
+aethina_tumida_gca024364675v1rs	icAetTumi1.1	ensemblgenomes	metazoa	ensemblgenomes58	Aethina tumida (Small hive beetle, Nest 87)
+agrilus_planipennis_gca000699045v2	Apla_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Agrilus planipennis (Emerald ash borer, EAB-ADULT)
+amblyteles_armatorius_gca933228735v1	iyAmbArma2.1	ensemblgenomes	metazoa	ensemblgenomes58	Amblyteles armatorius (Ichneumon Wasp, reference)
+amphibalanus_amphitrite_gca019059575v1	NRLGWU_Aamphi_draft	ensemblgenomes	metazoa	ensemblgenomes58	Amphibalanus amphitrite (Acorn barnacle, SeventyFive)
+amphimedon_queenslandica_gca000090795v2rs	v1.1	ensemblgenomes	metazoa	ensemblgenomes58	Amphimedon queenslandica (Demosponge)
+amyelois_transitella_gca001186105v1rs	ASM118610v1	ensemblgenomes	metazoa	ensemblgenomes58	Amyelois transitella (Naval orange worm, UIUC subculture of SPIRL-1966)
+ancistrocerus_nigricornis_gca916049575v1	iyAncNigr1.1	ensemblgenomes	metazoa	ensemblgenomes58	Ancistrocerus nigricornis (Potter wasp, reference)
+anneissia_japonica_gca011630105v1	ASM1163010v1	ensemblgenomes	metazoa	ensemblgenomes58	Anneissia japonica (Sea lily, Jap-2015-1)
+anopheles_albimanus	AalbS2	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles albimanus (Mosquito, STECLA)
+anopheles_arabiensis	AaraD1	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles arabiensis (Mosquito, Dongola)
+anopheles_atroparvus_gca914969975	atroparvus_hifiasm_n225_277Mb	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles atroparvus (Mosquito, Infravec2 EBRE)
+anopheles_christyi	AchrA1	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles christyi (Mosquito, ACHKN1017)
+anopheles_coluzzii	AcolM1	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles coluzzii (Mosquito, Mali-NIH)
+anopheles_coluzzii_ngousso	AcolN1	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles coluzzii (Mosquito, Ngousso)
+anopheles_culicifacies	AculA1	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles culicifacies (Mosquito, A-37)
+anopheles_darlingi	AdarC3	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles darlingi (American malaria mosquito, Coari)
+anopheles_dirus	AdirW1	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles dirus (Mosquito, WRAIR2)
+anopheles_epiroticus	AepiE1	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles epiroticus (Mosquito, Epiroticus2)
+anopheles_farauti	AfarF2	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles farauti (Mosquito, FAR1)
+anopheles_funestus	AfunF3	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles funestus (African malaria mosquito, FUMOZ)
+anopheles_gambiae	AgamP4	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles gambiae (African malaria mosquito, PEST)
+anopheles_maculatus	AmacM1	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles maculatus (Mosquito, maculatus3)
+anopheles_melas	AmelC2	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles melas (Mosquito, CM1001059_A)
+anopheles_merus	AmerM2	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles merus (Mosquito, MAF)
+anopheles_minimus	AminM1	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles minimus (Mosquito, MINIMUS1)
+anopheles_quadriannulatus	AquaS1	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles quadriannulatus (Mosquito, SANGWE)
+anopheles_sinensis	AsinS2	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles sinensis (Mosquito, SINENSIS)
+anopheles_sinensis_china	AsinC2	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles sinensis (Mosquito, China)
+anopheles_stephensi	AsteS1	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles stephensi (Asian malaria mosquito, SDA-500)
+anopheles_stephensi_indian	AsteI2	ensemblgenomes	metazoa	ensemblgenomes58	Anopheles stephensi (Asian malaria mosquito, Indian)
+anoplophora_glabripennis	Agla_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Anoplophora glabripennis (Asian long-horned beetle, ALB-LARVAE)
+anthonomus_grandis_gca022605725v3rs	icAntGran1.3	ensemblgenomes	metazoa	ensemblgenomes58	Anthonomus grandis grandis (Boll weevil)
+aphidius_gifuensis_gca014905175v1	ASM1490517v1	ensemblgenomes	metazoa	ensemblgenomes58	Aphidius gifuensis (Parasitoid wasp, YNYX2018)
+apis_dorsata_gca000469605v1rs	Apis_dorsata_1.3	ensemblgenomes	metazoa	ensemblgenomes58	Apis dorsata (Giant honeybee)
+apis_florea_gca000184785v2rs	Aflo_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Apis florea (Dwarf honeybee)
+apis_mellifera	Amel_HAv3.1	ensemblgenomes	metazoa	ensemblgenomes58	Apis mellifera (Honey bee, DH4)
+aplysia_californica_gca000002075v2	AplCal3.0	ensemblgenomes	metazoa	ensemblgenomes58	Aplysia californica (California sea hare, F4 #8)
+ascaris_suum	ASM18702v3	ensemblgenomes	metazoa	ensemblgenomes58	Ascaris suum (Pig roundworm, AG01)
+asterias_rubens_gca902459465v3	eAstRub1.3	ensemblgenomes	metazoa	ensemblgenomes58	Asterias rubens (European starfish)
+athalia_rosae_gca000344095v2	Aros_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Athalia rosae (Coleseed sawfly, CS-ADULT)
+athalia_rosae_gca917208135v1	iyAthRosa1.1	ensemblgenomes	metazoa	ensemblgenomes58	Athalia rosae (Coleseed sawfly, reference)
+atta_cephalotes	Attacep1.0	ensemblgenomes	metazoa	ensemblgenomes58	Atta cephalotes (Leaf-cutter ant)
+bactrocera_dorsalis_gca000789215v2	ASM78921v2	ensemblgenomes	metazoa	ensemblgenomes58	Bactrocera dorsalis (Oriental fruit fly, Punador)
+bactrocera_latifrons_gca001853355v1	ASM185335v1	ensemblgenomes	metazoa	ensemblgenomes58	Bactrocera latifrons (Solanum fruit fly, USDA-ARS-PBARC rearing strain)
+bactrocera_tryoni_gca016617805v2	CSIRO_BtryS06_freeze1	ensemblgenomes	metazoa	ensemblgenomes58	Bactrocera tryoni (Queensland fruitfly, S06)
+belgica_antarctica	ASM77530v1	ensemblgenomes	metazoa	ensemblgenomes58	Belgica antarctica (Antarctic midge)
+bemisia_tabaci_asiaii5	ASIAII5_n227_616Mb	ensemblgenomes	metazoa	ensemblgenomes58	Bemisia tabaci (Silverleaf whitefly, Asia II-5)
+bemisia_tabaci_ssa1nig	SSA1SG1_Nigeria_n4493_656Mb	ensemblgenomes	metazoa	ensemblgenomes58	Bemisia tabaci (Silverleaf whitefly, SSA1-SG1 Ng)
+bemisia_tabaci_ssa1ug	SSA1_SG1_Uganda_n955_657Mb	ensemblgenomes	metazoa	ensemblgenomes58	Bemisia tabaci (Silverleaf whitefly, SSA1-SG1 Ug)
+bemisia_tabaci_ssa2nig	SSA2_Nigeria_n785_625mb	ensemblgenomes	metazoa	ensemblgenomes58	Bemisia tabaci (Silverleaf whitefly, SSA2 Ng)
+bemisia_tabaci_ssa3nig	SSA3_Nigeria_2278n_648mb	ensemblgenomes	metazoa	ensemblgenomes58	Bemisia tabaci (Silverleaf whitefly, SSA3 Ng)
+bemisia_tabaci_uganda1	Uganda1_n5713_630Mb	ensemblgenomes	metazoa	ensemblgenomes58	Bemisia tabaci (Silverleaf whitefly, Uganda-1)
+bicyclus_anynana_gca900239965v1rs	Bicyclus_anynana_v1.2	ensemblgenomes	metazoa	ensemblgenomes58	Bicyclus anynana (Squinting bush brown)
+biomphalaria_glabrata	BglaB1	ensemblgenomes	metazoa	ensemblgenomes58	Biomphalaria glabrata (Bloodfluke planorb, BB02)
+bombus_huntii_gca024542735v1rs	iyBomHunt1.1	ensemblgenomes	metazoa	ensemblgenomes58	Bombus huntii (Hunt's bumblebee, Logan2020A)
+bombus_impatiens	BIMP_2.2	ensemblgenomes	metazoa	ensemblgenomes58	Bombus impatiens (Common eastern bumblebee)
+bombus_terrestris	Bter_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Bombus terrestris (Buff-tailed bumblebee)
+bombus_terrestris_gca910591885v2	iyBomTerr1.2	ensemblgenomes	metazoa	ensemblgenomes58	Bombus terrestris (buff-tailed bumblebee, reference)
+bombus_vancouverensis_gca011952275v1rs	Bvanc_JDL1245	ensemblgenomes	metazoa	ensemblgenomes58	Bombus vancouverensis nearcticus (Montane Bumble Bee, JDL1245)
+bombyx_mandarina_gca003987935v1rs	ASM398793v1	ensemblgenomes	metazoa	ensemblgenomes58	Bombyx mandarina (Wild silkworm, Bman2017)
+bombyx_mori	Bmori_2016v1.0	ensemblgenomes	metazoa	ensemblgenomes58	Bombyx mori (Domestic silkworm, p50T)
+branchiostoma_lanceolatum	BraLan2	ensemblgenomes	metazoa	ensemblgenomes58	Branchiostoma lanceolatum (Amphioxus)
+brugia_malayi	Bmal-4.0	ensemblgenomes	metazoa	ensemblgenomes58	Brugia malayi (Nematode, FR3)
+caenorhabditis_brenneri	C_brenneri-6.0.1b	ensemblgenomes	metazoa	ensemblgenomes58	Caenorhabditis brenneri (Nematode)
+caenorhabditis_briggsae	CB4	ensemblgenomes	metazoa	ensemblgenomes58	Caenorhabditis briggsae (Nematode)
+caenorhabditis_elegans	WBcel235	ensemblgenomes	metazoa	ensemblgenomes58	Caenorhabditis elegans (Nematode, N2)
+caenorhabditis_japonica	C_japonica-7.0.1	ensemblgenomes	metazoa	ensemblgenomes58	Caenorhabditis japonica (Nematode)
+caenorhabditis_remanei	C_remanei-15.0.1	ensemblgenomes	metazoa	ensemblgenomes58	Caenorhabditis remanei (Nematode)
+camponotus_floridanus_gca003227725v1rs	Cflo_v7.5	ensemblgenomes	metazoa	ensemblgenomes58	Camponotus floridanus (Florida carpenter ant, SB8)
+capitella_teleta	Capitella_teleta_v1.0	ensemblgenomes	metazoa	ensemblgenomes58	Capitella teleta (Bristle worm)
+cataglyphis_hispanica_gca021464435v1rs	ULB_Chis1_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Cataglyphis hispanica (Desert ant, Lineage 1)
+centruroides_sculpturatus_gca000671375v2	Cexi_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Centruroides sculpturatus (Bark scorpion, CEXI.00-Female)
+ceratitis_capitata_gca000347755v4	Ccap_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Ceratitis capitata (Mediterranean fruit fly)
+chelonus_insularis_gca013357705v1rs	ASM1335770v1	ensemblgenomes	metazoa	ensemblgenomes58	Chelonus insularis (Parasitoid wasp, UGA/USDA-ARS -01)
+cimex_lectularius	Clec_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Cimex lectularius (Bed bug, Harlan)
+clytia_hemisphaerica_gca902728285	Clytia_hemisphaerica_genome_assembly	ensemblgenomes	metazoa	ensemblgenomes58	Clytia hemisphaerica (Jellyfish, Z4C2)
+copidosoma_floridanum_gca000648655v2	Cflo_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Copidosoma floridanum (Parasitoid wasp, CFLO.00-Male)
+cotesia_glomerata_gca020080835v1	MPM_Cglom_v2.3	ensemblgenomes	metazoa	ensemblgenomes58	Cotesia glomerata (White butterfly parasite wasp, CgM1)
+crassostrea_angulata_gca025612915v2rs	ASM2561291v2	ensemblgenomes	metazoa	ensemblgenomes58	Crassostrea angulata (Portuguese oyster, pt1a10)
+crassostrea_gigas	cgigas_uk_roslin_v1	ensemblgenomes	metazoa	ensemblgenomes58	Crassostrea gigas (Pacific oyster)
+crassostrea_virginica_gca002022765v4	C_virginica_3.0	ensemblgenomes	metazoa	ensemblgenomes58	Crassostrea virginica (Eastern oyster, RU13XGHG1-28)
+cryptotermes_secundus_gca002891405v2rs	Csec_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Cryptotermes secundus (Drywood termite)
+culex_quinquefasciatus	CpipJ2	ensemblgenomes	metazoa	ensemblgenomes58	Culex quinquefasciatus (Southern house mosquito, Johannesburg)
+culex_quinquefasciatus_gca015732765v1	VPISU_Cqui_1.0_pri_paternal	ensemblgenomes	metazoa	ensemblgenomes58	Culex quinquefasciatus (Southern house mosquito, JHB)
+culicoides_sonorensis	Cson1	ensemblgenomes	metazoa	ensemblgenomes58	Culicoides sonorensis (Biting Midge)
+daktulosphaira_vitifoliae_gca025091365v1rs	ASM2509136v1	ensemblgenomes	metazoa	ensemblgenomes58	Daktulosphaira vitifoliae (Grape phylloxera, Bord-2020)
+danaus_plexippus	Dplex_v4	ensemblgenomes	metazoa	ensemblgenomes58	Danaus plexippus plexippus (Monarch butterfly, F-2)
+daphnia_magna_gca020631705v2	ASM2063170v1.1	ensemblgenomes	metazoa	ensemblgenomes58	Daphnia magna (Fresh water planktonic, NIES)
+daphnia_pulex	V1.0	ensemblgenomes	metazoa	ensemblgenomes58	Daphnia pulex (Common water flea)
+daphnia_pulex_gca021134715v1rs	ASM2113471v1	ensemblgenomes	metazoa	ensemblgenomes58	Daphnia pulex (Common water flea, KAP4)
+daphnia_pulicaria_gca021234035v2rs	SC_F0_13B	ensemblgenomes	metazoa	ensemblgenomes58	Daphnia pulicaria (Water flea, SC F1-1A)
+dendroctonus_ponderosae_gca000355655v1	DendPond_male_gca000355655v1.0	ensemblgenomes	metazoa	ensemblgenomes58	Dendroctonus ponderosae (Mountain pine beetle)
+dendronephthya_gigantea_gca004324835v1	DenGig_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Dendronephthya gigantea (Carnation coral, DGI-Jeju-01)
+dermacentor_andersoni_gca023375885v2rs	qqDerAnde1.2	ensemblgenomes	metazoa	ensemblgenomes58	Dermacentor andersoni (Rocky Mountain wood tick, qqDerAnde1)
+dermacentor_silvarum_gca013339745v2rs	BIME_Dsil_1.4	ensemblgenomes	metazoa	ensemblgenomes58	Dermacentor silvarum (Tick, Dsil-2018)
+dermatophagoides_pteronyssinus_gca001901225v2	ASM190122v2	ensemblgenomes	metazoa	ensemblgenomes58	Dermatophagoides pteronyssinus (European house dust mite, airmid)
+diabrotica_virgifera_gca003013835v2	Dvir_v2.0	ensemblgenomes	metazoa	ensemblgenomes58	Diabrotica virgifera virgifera (Western corn rootworm, Ped12-6-A-3)
+diabrotica_virgifera_gca917563875v2rs	PGI_DIABVI_V3a	ensemblgenomes	metazoa	ensemblgenomes58	Diabrotica virgifera virgifera (Western corn rootworm)
+dimorphilus_gyrociliatus_gca904063045v1	Dgyrociliatus_assembly	ensemblgenomes	metazoa	ensemblgenomes58	Dimorphilus gyrociliatus (Segmented worms)
+dinothrombium_tinctorium	DtinU1	ensemblgenomes	metazoa	ensemblgenomes58	Dinothrombium tinctorium (Red velvet mite, UoL-WK)
+diuraphis_noxia_gca001186385v1	Dnoxia_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Diuraphis noxia (Russian wheat aphid, RWA2)
+dreissena_polymorpha_gca020536995v1rs	UMN_Dpol_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Dreissena polymorpha (Zebra mussle, Duluth1)
+drosophila_ananassae	dana_caf1	ensemblgenomes	metazoa	ensemblgenomes58	Drosophila ananassae (Fruit fly, TSC#14024-0371.13)
+drosophila_erecta	dere_caf1	ensemblgenomes	metazoa	ensemblgenomes58	Drosophila erecta (Fruit fly, TSC#14021-0224.01)
+drosophila_grimshawi	dgri_caf1	ensemblgenomes	metazoa	ensemblgenomes58	Drosophila grimshawi (Fruit fly, TSC#15287-2541.00)
+drosophila_melanogaster	BDGP6.46	ensemblgenomes	metazoa	ensemblgenomes58	Drosophila melanogaster (Fruit fly)
+drosophila_mojavensis	dmoj_caf1	ensemblgenomes	metazoa	ensemblgenomes58	Drosophila mojavensis (Fruit fly, TSC#15081-1352.22)
+drosophila_persimilis	dper_caf1	ensemblgenomes	metazoa	ensemblgenomes58	Drosophila persimilis (Fruit fly, MSH-3)
+drosophila_pseudoobscura	Dpse_3.0	ensemblgenomes	metazoa	ensemblgenomes58	Drosophila pseudoobscura pseudoobscura (Fruit fly, MV2-25)
+drosophila_sechellia	dsec_caf1	ensemblgenomes	metazoa	ensemblgenomes58	Drosophila sechellia (Fruit fly, Rob3c)
+drosophila_simulans	ASM75419v3	ensemblgenomes	metazoa	ensemblgenomes58	Drosophila simulans (Fruit fly, w501)
+drosophila_virilis	dvir_caf1	ensemblgenomes	metazoa	ensemblgenomes58	Drosophila virilis (Fruit fly, TSC#15010-1051.87)
+drosophila_willistoni	dwil_caf1	ensemblgenomes	metazoa	ensemblgenomes58	Drosophila willistoni (Fruit fly, TSC#14030-0811.24)
+drosophila_yakuba	dyak_caf1	ensemblgenomes	metazoa	ensemblgenomes58	Drosophila yakuba (Fruit fly, Tai18E2)
+dufourea_novaeangliae_gca001272555v1rs	ASM127255v1	ensemblgenomes	metazoa	ensemblgenomes58	Dufourea novaeangliae (Bee, 0120121106)
+echinococcus_granulosus_gca000524195v1rs	ASM52419v1	ensemblgenomes	metazoa	ensemblgenomes58	Echinococcus granulosus (Dog tapeworm)
+eufriesea_mexicana_gca001483705v1rs	ASM148370v1	ensemblgenomes	metazoa	ensemblgenomes58	Eufriesea mexicana (Bee, 0111107269)
+eurytemora_affinis_gca000591075v2	Eaff_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Eurytemora affinis (Calanoid copepod, Atlantic clade)
+exaiptasia_diaphana_gca001417965v1	Aiptasia_genome_1.1	ensemblgenomes	metazoa	ensemblgenomes58	Exaiptasia diaphana (Sea anemone, CC7)
+folsomia_candida	ASM221717v1	ensemblgenomes	metazoa	ensemblgenomes58	Folsomia candida (Springtail, str. VU population)
+galendromus_occidentalis_gca000255335v2rs	Mocc_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Galendromus occidentalis (Western predatory mite)
+galleria_mellonella_gca003640425v2rs	ASM364042v2	ensemblgenomes	metazoa	ensemblgenomes58	Galleria mellonella (Greater wax moth, Carbio01_MB)
+gigantopelta_aegis_gca016097555v1	Gae_host_genome	ensemblgenomes	metazoa	ensemblgenomes58	Gigantopelta aegis (Deep sea snail, Gae_Host)
+glossina_austeni	GausT1	ensemblgenomes	metazoa	ensemblgenomes58	Glossina austeni (Tsetse fly, TTRI)
+glossina_brevipalpis	GbreI1	ensemblgenomes	metazoa	ensemblgenomes58	Glossina brevipalpis (Tsetse fly, IAEA)
+glossina_fuscipes	Yale_Gfus_2	ensemblgenomes	metazoa	ensemblgenomes58	Glossina fuscipes (Tsetse fly, IAEA_lab_2018)
+glossina_morsitans	GmorY1	ensemblgenomes	metazoa	ensemblgenomes58	Glossina morsitans morsitans (Tsetse fly, Yale)
+glossina_pallidipes	GpalI1	ensemblgenomes	metazoa	ensemblgenomes58	Glossina pallidipes (Tsetse fly, IAEA)
+glossina_palpalis	GpapI1	ensemblgenomes	metazoa	ensemblgenomes58	Glossina palpalis gambiensis (Tsetse fly, IAEA)
+glyphotaelius_pellucidus_gca936435175v1	iiGlyPell1.1	ensemblgenomes	metazoa	ensemblgenomes58	Glyphotaelius pellucidus (Caddisflies, reference)
+habropoda_laboriosa_gca001263275v1rs	ASM126327v1	ensemblgenomes	metazoa	ensemblgenomes58	Habropoda laboriosa (Southeastern blueberry bee, 0110345459)
+haemaphysalis_longicornis_gca013339765v1	ASM1333976v1	ensemblgenomes	metazoa	ensemblgenomes58	Haemaphysalis longicornis (Longhorned tick, HaeL-2018)
+haliotis_rubra_gca003918875v1rs	ASM391887v1	ensemblgenomes	metazoa	ensemblgenomes58	Haliotis rubra (Blacklip abalone, DU_JTF1)
+haliotis_rufescens_gca023055435v1rs	xgHalRufe1.0.p	ensemblgenomes	metazoa	ensemblgenomes58	Haliotis rufescens (Red abalone, VD_foot)
+harpegnathos_saltator_gca003227715v2rs	Hsal_v8.5	ensemblgenomes	metazoa	ensemblgenomes58	Harpegnathos saltator (Indian jumping ant, DR-91)
+heliconius_melpomene	Hmel1	ensemblgenomes	metazoa	ensemblgenomes58	Heliconius melpomene (Postman butterfly)
+helicoverpa_armigera_gca023701775v1rs	HaSCD2	ensemblgenomes	metazoa	ensemblgenomes58	Helicoverpa armigera (Cotton bollworm, SCD)
+helicoverpa_zea_gca022581195v1rs	ilHelZeax1.1	ensemblgenomes	metazoa	ensemblgenomes58	Helicoverpa zea (Corn earworm, HzStark_Cry1AcR)
+helobdella_robusta	Helro1	ensemblgenomes	metazoa	ensemblgenomes58	Helobdella robusta (Freshwater leech)
+hermetia_illucens_gca905115235v1	iHerIll2.2.curated.20191125	ensemblgenomes	metazoa	ensemblgenomes58	Hermetia illucens (Black soldier fly)
+hofstenia_miamia	HmiaM1	ensemblgenomes	metazoa	ensemblgenomes58	Hofstenia miamia (Panther worm, MS-H3)
+homalodisca_vitripennis_gca021130785v2rs	UT_GWSS_2.1	ensemblgenomes	metazoa	ensemblgenomes58	Homalodisca vitripennis (Glassy winged sharpshooter, AUS2020)
+homarus_americanus_gca018991925v1	GMGI_Hamer_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Homarus americanus (American lobster, GMGI-L3)
+hyalella_azteca_gca000764305v2	Hazt_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Hyalella azteca (Amphipod, HAZT.00-mixed)
+hyalomma_asiaticum_gca013339685v1	ASM1333968v1	ensemblgenomes	metazoa	ensemblgenomes58	Hyalomma asiaticum (Tick, Hyas-2018)
+hydra_vulgaris_gca000004095v1	Hydra_RP_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Hydra vulgaris (Swiftwater hydra, 105)
+hydra_vulgaris_gca022113875v1rs	Hydra_105_v3	ensemblgenomes	metazoa	ensemblgenomes58	Hydra vulgaris (Swiftwater hydra, 105)
+hymenolepis_microstoma	HMN_v3	ensemblgenomes	metazoa	ensemblgenomes58	Hymenolepis microstoma (Rodent tapeworm)
+hypsibius_exemplaris_gca002082055v1	nHd_3.1	ensemblgenomes	metazoa	ensemblgenomes58	Hypsibius exemplaris (Water bear tardigrade, Z151)
+ichneumon_xanthorius_gca917499995v1	iyIchXant1.1	ensemblgenomes	metazoa	ensemblgenomes58	Ichneumon xanthorius (Ichneumon Wasp, reference)
+ixodes_persulcatus_gca013358835v1	BIME_Iper_1.3	ensemblgenomes	metazoa	ensemblgenomes58	Ixodes persulcatus (Taiga tick, Iper-2018)
+ixodes_scapularis	IscaW1	ensemblgenomes	metazoa	ensemblgenomes58	Ixodes scapularis (Black-legged tick, Wikel)
+ixodes_scapularis_gca016920785v2	ASM1692078v2	ensemblgenomes	metazoa	ensemblgenomes58	Ixodes scapularis (Black-legged tick, PalLabHiFi)
+ixodes_scapularis_ise6	IscaI1	ensemblgenomes	metazoa	ensemblgenomes58	Ixodes scapularis (Black-legged tick, ISE6)
+leguminivora_glycinivorella_gca023078275v1rs	LegGlyc_1.1	ensemblgenomes	metazoa	ensemblgenomes58	Leguminivora glycinivorella (Soybean pod borer, SPB_JAAS2020)
+lepeophtheirus_salmonis_gca016086655v3rs	UVic_Lsal_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Lepeophtheirus salmonis (Salmon louse, Lsal2020)
+leptinotarsa_decemlineata_gca000500325v2	Ldec_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Leptinotarsa decemlineata (Colorado potato beetle, Imidocloprid resistant)
+leptotrombidium_deliense	LdelU1	ensemblgenomes	metazoa	ensemblgenomes58	Leptotrombidium deliense (Harvest mite, UoL-UT)
+limnephilus_lunatus_gca917563855v2	iiLimLuna2.2	ensemblgenomes	metazoa	ensemblgenomes58	Limnephilus lunatus (Caddisflies, reference)
+limnephilus_marmoratus_gca917880885v1	iiLimMarm1.1	ensemblgenomes	metazoa	ensemblgenomes58	Limnephilus marmoratus (Caddisflies, reference)
+limnephilus_rhombicus_gca929108145v2	iiLimRhom1.2	ensemblgenomes	metazoa	ensemblgenomes58	Limnephilus rhombicus (Caddisflies, reference)
+limnoperna_fortunei_gca944474755v1	xbLimFort5.1	ensemblgenomes	metazoa	ensemblgenomes58	Limnoperna fortunei (Golden mussle, reference)
+limulus_polyphemus_gca000517525v1	Limulus_polyphemus_2.1.2	ensemblgenomes	metazoa	ensemblgenomes58	Limulus polyphemus (Atlantic horseshoe crab)
+linepithema_humile_gca000217595v1rs	Lhum_UMD_V04	ensemblgenomes	metazoa	ensemblgenomes58	Linepithema humile (Argentine ant)
+lineus_longissimus_gca910592395v2	tnLinLong1.2	ensemblgenomes	metazoa	ensemblgenomes58	Lineus longissimus (Bootlace worm, reference)
+lingula_anatina_gca001039355v2	LinAna2.0	ensemblgenomes	metazoa	ensemblgenomes58	Lingula anatina (Lamp shell, Amm_Jpn)
+loa_loa	Loa_loa_V3	ensemblgenomes	metazoa	ensemblgenomes58	Loa loa (Eye worm, Cameroon SouthWest Province isolate)
+lottia_gigantea	Lotgi1	ensemblgenomes	metazoa	ensemblgenomes58	Lottia gigantea (Owl limpet)
+lucilia_cuprina	ASM118794v1	ensemblgenomes	metazoa	ensemblgenomes58	Lucilia cuprina (Australian sheep blowfly, LS)
+lucilia_cuprina_gca022045245v1rs	ASM2204524v1	ensemblgenomes	metazoa	ensemblgenomes58	Lucilia cuprina (Australian sheep blowfly, Lc7/37)
+lutzomyia_longipalpis	LlonJ1	ensemblgenomes	metazoa	ensemblgenomes58	Lutzomyia longipalpis (Sand fly, Jacobina)
+lytechinus_variegatus_gca018143015v1	Lvar_3.0	ensemblgenomes	metazoa	ensemblgenomes58	Lytechinus variegatus (Green sea urchin, NC3)
+macrosteles_quadrilineatus_gca028750875v1rs	UCM_ALF_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Macrosteles quadrilineatus (Aster leafhopper, MER2022)
+manduca_sexta_gca014839805v1rs	JHU_Msex_v1.0	ensemblgenomes	metazoa	ensemblgenomes58	Manduca sexta (Tobacco hornworm, Smith_Timp_Sample1)
+mayetiola_destructor	Mdes_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Mayetiola destructor (Hessian fly, Kansas Great Plain)
+megachile_rotundata_gca000220905v1rs	MROT_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Megachile rotundata (Alfalfa leafcutting bee)
+megaselia_scalaris	Msca1	ensemblgenomes	metazoa	ensemblgenomes58	Megaselia scalaris (Coffin fly)
+melitaea_cinxia	MelCinx1.0	ensemblgenomes	metazoa	ensemblgenomes58	Melitaea cinxia (Glanville fritillary)
+melitaea_cinxia_gca905220565v1	ilMelCinx1.1	ensemblgenomes	metazoa	ensemblgenomes58	Melitaea cinxia (Glanville fritillary, reference)
+mercenaria_mercenaria_gca014805675v2	ASM1480567v1.1	ensemblgenomes	metazoa	ensemblgenomes58	Mercenaria mercenaria (Hard clam (quahog), YKG-2019)
+mizuhopecten_yessoensis_gca002113885v2	ASM211388v2	ensemblgenomes	metazoa	ensemblgenomes58	Mizuhopecten yessoensis (Yesso scallop, PY_sf001)
+mnemiopsis_leidyi	MneLei_Aug2011	ensemblgenomes	metazoa	ensemblgenomes58	Mnemiopsis leidyi (Warty comb jelly)
+monomorium_pharaonis_gca013373865v2	ASM1337386v2	ensemblgenomes	metazoa	ensemblgenomes58	Monomorium pharaonis (Pharaoh ant, MP-MQ-018)
+musca_domestica	MdomA1	ensemblgenomes	metazoa	ensemblgenomes58	Musca domestica (House fly, aabys)
+mya_arenaria_gca026914265v1rs	ASM2691426v1	ensemblgenomes	metazoa	ensemblgenomes58	Mya arenaria (Soft-shell clam, MELC-2E11)
+nasonia_vitripennis	Nvit_psr_1.1	ensemblgenomes	metazoa	ensemblgenomes58	Nasonia vitripennis (Jewel wasp, AsymCx)
+necator_americanus	N_americanus_v1	ensemblgenomes	metazoa	ensemblgenomes58	Necator americanus (New World hookworm, N. amaericanus Hunan isolate)
+nematostella_vectensis	ASM20922v1	ensemblgenomes	metazoa	ensemblgenomes58	Nematostella vectensis (Starlet sea anemone, CH2 x CH6)
+neodiprion_lecontei_gca021901455v1rs	iyNeoLeco1.1	ensemblgenomes	metazoa	ensemblgenomes58	Neodiprion lecontei (Redheaded pine sawfly, iyNeoLeco1)
+neodiprion_pinetum_gca021155775v1rs	iyNeoPine1.1	ensemblgenomes	metazoa	ensemblgenomes58	Neodiprion pinetum (White pine sawfly, iyNeoPine1)
+nilaparvata_lugens_gca014356525v1rs	ASM1435652v1	ensemblgenomes	metazoa	ensemblgenomes58	Nilaparvata lugens (Brown planthopper, BPH)
+octopus_bimaculoides	PRJNA270931	ensemblgenomes	metazoa	ensemblgenomes58	Octopus bimaculoides (California two-spot octopus)
+octopus_bimaculoides_gca001194135v1	Octopus_bimaculoides_v2_0	ensemblgenomes	metazoa	ensemblgenomes58	Octopus bimaculoides (Octopus, UCB-OBI-ISO-001)
+octopus_sinensis_gca006345805v1	ASM634580v1	ensemblgenomes	metazoa	ensemblgenomes58	Octopus sinensis (East Asian common octopus)
+onchocerca_volvulus	ASM49940v2	ensemblgenomes	metazoa	ensemblgenomes58	Onchocerca volvulus (Nematode, O. volvulus Cameroon isolate)
+onthophagus_taurus_gca000648695v2	Otau_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Onthophagus taurus (Dung beetle)
+ooceraea_biroi_gca003672135v1	Obir_v5.4	ensemblgenomes	metazoa	ensemblgenomes58	Ooceraea biroi (Clonal raider ant, clonal line C1)
+oppia_nitens_gca028296485v1rs	nextdenovo_longstitch_racon4_pilon3	ensemblgenomes	metazoa	ensemblgenomes58	Oppia nitens (Oribatid soil mite, AA-2021)
+orbicella_faveolata_gca002042975v1	ofav_dov_v1	ensemblgenomes	metazoa	ensemblgenomes58	Orbicella faveolata (Mountainous star coral, FL)
+orchesella_cincta	ASM171814v1	ensemblgenomes	metazoa	ensemblgenomes58	Orchesella cincta (Springtail)
+orussus_abietinus_gca000612105v2	Oabi_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Orussus abietinus (Parasitic wood wasp, OABI.00-Male)
+ostrea_edulis_gca023158985v1rs	OEROSLIN_1.1	ensemblgenomes	metazoa	ensemblgenomes58	Ostrea edulis (European flat oyster, OE_ROSLIN_2020)
+owenia_fusiformis_gca903813345v1	Owenia_assembly_annotated	ensemblgenomes	metazoa	ensemblgenomes58	Owenia fusiformis (Segmented worms)
+panonychus_citri_gca014898815v1rs	ASM1489881v1	ensemblgenomes	metazoa	ensemblgenomes58	Panonychus citri (Citrus red mite, SS)
+parasteatoda_tepidariorum_gca000365465v3	Ptep_3.0	ensemblgenomes	metazoa	ensemblgenomes58	Parasteatoda tepidariorum (Common house spider, Goettingen)
+patella_pellucida_gca917208275v1	xgPatPell1.1	ensemblgenomes	metazoa	ensemblgenomes58	Patella pellucida (Blue-rayed limpet, reference)
+patella_vulgata_gca932274485v1	xgPatVulg1.1	ensemblgenomes	metazoa	ensemblgenomes58	Patella vulgata (Common limpet, reference)
+patiria_miniata_gca015706575v1	Pmin_3.0	ensemblgenomes	metazoa	ensemblgenomes58	Patiria miniata (Bat star starfish, m_02_andy)
+pectinophora_gossypiella_gca024362695v1rs	ilPecGoss1.1	ensemblgenomes	metazoa	ensemblgenomes58	Pectinophora gossypiella (Pink bollworm)
+pediculus_humanus	PhumU2	ensemblgenomes	metazoa	ensemblgenomes58	Pediculus humanus corporis (Human body louse, USDA)
+penaeus_chinensis_gca019202785v2rs	ASM1920278v2	ensemblgenomes	metazoa	ensemblgenomes58	Penaeus chinensis (Fleshy prawn)
+penaeus_japonicus_gca017312705v1	Mj_TUMSAT_v1.0	ensemblgenomes	metazoa	ensemblgenomes58	Penaeus japonicus (Kuruma shrimp, Ginoza2017)
+penaeus_monodon_gca015228065v1	NSTDA_Pmon_1	ensemblgenomes	metazoa	ensemblgenomes58	Penaeus monodon (Black tiger shrimp, SGIC_2016)
+penaeus_vannamei_gca003789085v1	ASM378908v1	ensemblgenomes	metazoa	ensemblgenomes58	Penaeus vannamei (Pacific white shrimp)
+phlebotomus_papatasi	PpapI1	ensemblgenomes	metazoa	ensemblgenomes58	Phlebotomus papatasi (Sand fly, Israel)
+phlebotomus_perniciosus_gca918844115v2	pperniciosus_asm_v2.0	ensemblgenomes	metazoa	ensemblgenomes58	Phlebotomus perniciosus (Murcia)
+pocillopora_damicornis_gca003704095v1	ASM370409v1	ensemblgenomes	metazoa	ensemblgenomes58	Pocillopora damicornis (Cauliflower coral, RSMAS)
+pogonomyrmex_barbatus_gca000187915v1rs	Pbar_UMD_V03	ensemblgenomes	metazoa	ensemblgenomes58	Pogonomyrmex barbatus (Red harvester ant)
+polistes_canadensis_gca001313835v1rs	ASM131383v1	ensemblgenomes	metazoa	ensemblgenomes58	Polistes canadensis (Red paper wasp, GaletaPanama2010)
+polistes_dominula_gca001465965v1rs	Pdom_r1.2	ensemblgenomes	metazoa	ensemblgenomes58	Polistes dominula (European paper wasp, PdomPennStateAug2009)
+polistes_fuscatus_gca010416935v1rs	CU_Pfus_HIC	ensemblgenomes	metazoa	ensemblgenomes58	Polistes fuscatus (Common paper wasp, 324)
+pollicipes_pollicipes_gca011947565v2	Ppol_2	ensemblgenomes	metazoa	ensemblgenomes58	Pollicipes pollicipes (Goose neck barnacle, AB1234)
+pomacea_canaliculata_gca003073045v1	ASM307304v1	ensemblgenomes	metazoa	ensemblgenomes58	Pomacea canaliculata (Apple snail, SZHN2017)
+pomphorhynchus_laevis_gca012934845v2gb	ASM1293484v2	ensemblgenomes	metazoa	ensemblgenomes58	Pomphorhynchus laevis (Thorny-headed worm, GPI110)
+portunus_trituberculatus_gca017591435v1	ASM1759143v1	ensemblgenomes	metazoa	ensemblgenomes58	Portunus trituberculatus (Swimming crab, SZX2019)
+priapulus_caudatus_gca000485595v2	Priapulus_caudatus-5.0.1	ensemblgenomes	metazoa	ensemblgenomes58	Priapulus caudatus (Penis worm)
+pristionchus_pacificus	El_Paco_fix	ensemblgenomes	metazoa	ensemblgenomes58	Pristionchus pacificus (Nematode, PS312)
+procambarus_clarkii_gca020424385v2	ASM2042438v2	ensemblgenomes	metazoa	ensemblgenomes58	Procambarus clarkii (Red swamp crayfish, Jiangsu)
+rhagoletis_pomonella_gca013731165v1	Rhpom_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Rhagoletis pomonella (Apple magot fly, Grant_MI)
+rhipicephalus_microplus_gca013339725v1	ASM1333972v1	ensemblgenomes	metazoa	ensemblgenomes58	Rhipicephalus microplus (Southern cattle tick, Rmic-2018)
+rhipicephalus_sanguineus_gca013339695v1	ASM1333969v1	ensemblgenomes	metazoa	ensemblgenomes58	Rhipicephalus sanguineus (Brown dog tick, Rsan-2018)
+rhipicephalus_sanguineus_gca013339695v2rs	BIME_Rsan_1.4	ensemblgenomes	metazoa	ensemblgenomes58	Rhipicephalus sanguineus (Brown dog tick, Rsan-2018)
+rhodnius_prolixus	RproC3	ensemblgenomes	metazoa	ensemblgenomes58	Rhodnius prolixus (Kissing bug, CDC)
+rhopalosiphum_maidis_gca003676215v3	ASM367621v3	ensemblgenomes	metazoa	ensemblgenomes58	Rhopalosiphum maidis (Corn leaf aphid, BTI-1)
+saccoglossus_kowalevskii_gca000003605v1	Skow_1.1	ensemblgenomes	metazoa	ensemblgenomes58	Saccoglossus kowalevskii (Acorn worm)
+sarcoptes_scabiei	ASM1459567v1	ensemblgenomes	metazoa	ensemblgenomes58	Sarcoptes scabiei (Itch mite, SSS_KF_BRIS2020)
+schistocerca_americana_gca021461395v2rs	iqSchAmer2.1	ensemblgenomes	metazoa	ensemblgenomes58	Schistocerca americana (American grasshopper, TAMUIC-IGC-003095)
+schistocerca_cancellata_gca023864275v2rs	iqSchCanc2.1	ensemblgenomes	metazoa	ensemblgenomes58	Schistocerca cancellata (South American locust, TAMUIC-IGC-003103)
+schistocerca_gregaria_gca023897955v2rs	iqSchGreg1.2	ensemblgenomes	metazoa	ensemblgenomes58	Schistocerca gregaria (Grasshoppers, iqSchGreg1)
+schistocerca_nitens_gca023898315v2rs	iqSchNite1.1	ensemblgenomes	metazoa	ensemblgenomes58	Schistocerca nitens (Vagrant locust, TAMUIC-IGC-003100)
+schistocerca_piceifrons_gca021461385v2rs	iqSchPice1.1	ensemblgenomes	metazoa	ensemblgenomes58	Schistocerca piceifrons (Central American locust, TAMUIC-IGC-003096)
+schistocerca_serialis_gca023864345v3rs	iqSchSeri2.2	ensemblgenomes	metazoa	ensemblgenomes58	Schistocerca serialis cubense (Grasshoppers, TAMUIC-IGC-003099)
+schistosoma_haematobium_gca000699445v2rs	SchHae_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Schistosoma haematobium (Urinary blood fluke)
+schistosoma_mansoni	Smansoni_v7	ensemblgenomes	metazoa	ensemblgenomes58	Schistosoma mansoni (Flatworm)
+sipha_flava_gca003268045v1	YSA_version1	ensemblgenomes	metazoa	ensemblgenomes58	Sipha flava (Yellow sugarcane aphid, LNK)
+sitophilus_oryzae_gca002938485v2rs	Soryzae_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Sitophilus oryzae (Rice weevil)
+solenopsis_invicta	UNIL_Sinv_3.0	ensemblgenomes	metazoa	ensemblgenomes58	Solenopsis invicta (Red fire ant, M01_SB)
+stegodyphus_dumicola_gca010614865v2rs	ASM1061486v2	ensemblgenomes	metazoa	ensemblgenomes58	Stegodyphus dumicola (Social spider, AA2019)
+stegodyphus_mimosarum	Stegodyphus_mimosarum_v1	ensemblgenomes	metazoa	ensemblgenomes58	Stegodyphus mimosarum (African social velvet spider)
+stomoxys_calcitrans	ScalU1	ensemblgenomes	metazoa	ensemblgenomes58	Stomoxys calcitrans (Stable fly, USDA)
+strigamia_maritima	Smar1	ensemblgenomes	metazoa	ensemblgenomes58	Strigamia maritima (Soil centipede)
+strongylocentrotus_purpuratus	Spur_5.0	ensemblgenomes	metazoa	ensemblgenomes58	Strongylocentrotus purpuratus (Purple sea urchin, Spur 01)
+strongyloides_ratti	S_ratti_ED321_v5_0_4	ensemblgenomes	metazoa	ensemblgenomes58	Strongyloides ratti (Threadworm)
+stylophora_pistillata_gca002571385v1	Stylophora_pistillata_v1	ensemblgenomes	metazoa	ensemblgenomes58	Stylophora pistillata (Hood coral, CSM Monaco)
+teleopsis_dalmanni	ASM223713v2	ensemblgenomes	metazoa	ensemblgenomes58	Teleopsis dalmanni (Malaysian stalk-eyed fly, 2A)
+tetranychus_urticae	ASM23943v1	ensemblgenomes	metazoa	ensemblgenomes58	Tetranychus urticae (Two-spotted spider mite)
+thelohanellus_kitauei	ASM82789v1	ensemblgenomes	metazoa	ensemblgenomes58	Thelohanellus kitauei (Myxozoan endoparasite)
+thrips_palmi_gca012932325v1rs	TpBJ_2018v1	ensemblgenomes	metazoa	ensemblgenomes58	Thrips palmi (Melon Thrips, BJ-2018)
+tigriopus_californicus_gca007210705	Tcal_SD_v2.1	ensemblgenomes	metazoa	ensemblgenomes58	Tigriopus californicus (Copepod, San Diego)
+trialeurodes_vaporariorum_gca011764245	ASM1176424v1	ensemblgenomes	metazoa	ensemblgenomes58	Trialeurodes vaporariorum (Greenhouse whitefly, IVF)
+tribolium_castaneum	Tcas5.2	ensemblgenomes	metazoa	ensemblgenomes58	Tribolium castaneum (Red flour beetle, Georgia GA2)
+trichinella_spiralis	Tspiralis1	ensemblgenomes	metazoa	ensemblgenomes58	Trichinella spiralis (Pork worm, ISS_195)
+trichogramma_pretiosum_gca000599845v3	Tpre_2.0	ensemblgenomes	metazoa	ensemblgenomes58	Trichogramma pretiosum (Parasitoid wasp, Unisexual culture from Peru)
+trichoplax_adhaerens	ASM15027v1	ensemblgenomes	metazoa	ensemblgenomes58	Trichoplax adhaerens (Placozoa, Grell-BS-1999)
+trichuris_muris	TMUE3.0	ensemblgenomes	metazoa	ensemblgenomes58	Trichuris muris (Nematode)
+varroa_destructor_gca002443255	Vdes_3.0	ensemblgenomes	metazoa	ensemblgenomes58	Varroa destructor (Honeybee mite)
+varroa_jacobsoni_gca002532875v1rs	vjacob_1.0	ensemblgenomes	metazoa	ensemblgenomes58	Varroa jacobsoni (Varroa mite, VJ856)
+venturia_canescens_gca019457755v1rs	ASM1945775v1	ensemblgenomes	metazoa	ensemblgenomes58	Venturia canescens (Endoparasitoid wasp, UGA)
+zerene_cesonia_gca012273895v2rs	Zerene_cesonia_1.1	ensemblgenomes	metazoa	ensemblgenomes58	Zerene cesonia (Southern Dogface)
+zootermopsis_nevadensis	ZooNev1.0	ensemblgenomes	metazoa	ensemblgenomes58	Zootermopsis nevadensis (Nevada dampwood termite)
