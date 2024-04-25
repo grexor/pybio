@@ -50,5 +50,11 @@ Use the [issues page](https://github.com/grexor/pybio/issues) to report issues a
 
 ### Change log
 
-**v0.3.12**: November 2023
+**v0.4**: April 2024
+* refreshed Ensembl (111) and Ensembl Genomes (58) database
+
+<details>
+<summary><b>v0.3.12</b>: released in November 2023</summary>
+
 * updated docs
+</details>
