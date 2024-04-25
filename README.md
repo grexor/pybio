@@ -8,7 +8,13 @@
 Install via pip and download + prepare human genome:
 
 ```
+# install over PyPi
 pip install pybio
+
+# or install directly from this repository
+pip install git+https://github.com/grexor/pybio.git@master
+
+# download and process homo sapiens genome
 pybio genome homo_sapiens
 ```
 
