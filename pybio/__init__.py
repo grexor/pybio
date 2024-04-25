@@ -27,7 +27,7 @@ pybio.path.init()
 pybio.core.genomes.init()
 
 def genome_download(species, genome_version, args):
-    print(f"[pybio genome_download] species {species} and version {genome_version}")
+    print(f"pybio | genome | download species {species} and version {genome_version}")
     genomes_ready_fname = os.path.join(pybio.config.genomes_folder, "genomes_ready.json")
     if os.path.exists(genomes_ready_fname):
         genomes_ready = json.load(open(genomes_ready_fname, "rt"))
@@ -43,7 +43,7 @@ def genome_download(species, genome_version, args):
         else:
             genomes_ready[species][genome_version]["assembly"] = False
     else:
-        print(f"[pybio genome] FASTA ready at {pybio.config.genomes_folder}/{species}.assembly.{genome_version}")
+        print(f"pybio | genome | FASTA ready at {pybio.config.genomes_folder}/{species}.assembly.{genome_version}")
 
     annotation_folder = os.path.join(pybio.config.genomes_folder, f"{species}.annotation.{genome_version}")
     if not genomes_ready.get(species, {}).get(genome_version, {}).get("annotation", False) or not os.path.exists(annotation_folder):
@@ -60,7 +60,7 @@ def genome_download(species, genome_version, args):
     json.dump(genomes_ready, open(genomes_ready_fname, "wt"))
 
 def genome_import(species, genome_version, args):
-    print(f"[pybio genome] species {species} and version {genome_version}")
+    print(f"pybio | genome | species {species} and version {genome_version}")
     genomes_ready_fname = os.path.join(pybio.config.genomes_folder, "genomes_ready.json")
     if os.path.exists(genomes_ready_fname):
         genomes_ready = json.load(open(genomes_ready_fname, "rt"))
@@ -71,7 +71,7 @@ def genome_import(species, genome_version, args):
     assembly_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.{genome_version}")
     if not genomes_ready.get(species, {}).get(genome_version, {}).get("assembly", False) or not os.path.exists(assembly_folder):
         fasta_fname = args.fasta
-        print(f"[pybio genome] importing {fasta_fname} to {assembly_folder}/{species}.fasta")
+        print(f"pybio | genome | importing {fasta_fname} to {assembly_folder}/{species}.fasta")
         if fasta_fname.endswith(".gz"):
             os.system(f"mkdir {assembly_folder}; cp {fasta_fname} {assembly_folder}/{species}.fasta.gz; gunzip -f {assembly_folder}/{species}.fasta.gz")
         else:
@@ -82,7 +82,7 @@ def genome_import(species, genome_version, args):
         else:
             genomes_ready[species][genome_version]["assembly"] = False
     else:
-        print(f"[pybio genome] FASTA ready at {pybio.config.genomes_folder}/{species}.assembly.{genome_version}")
+        print(f"pybio | genome | FASTA ready at {pybio.config.genomes_folder}/{species}.assembly.{genome_version}")
     json.dump(genomes_ready, open(genomes_ready_fname, "wt"))
 
     annotation_folder = os.path.join(pybio.config.genomes_folder, f"{species}.annotation.{genome_version}")
@@ -101,7 +101,7 @@ def genome_import(species, genome_version, args):
             genomes_ready[species][genome_version]["STAR"] = False
             genomes_ready[species][genome_version]["salmon"] = False
     else:
-        print(f"[pybio genome] genome annotation at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}")
+        print(f"pybio | genome | annotation at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}")
     json.dump(genomes_ready, open(genomes_ready_fname, "wt"))
 
 def genome_prepare(species, genome_version, args):
@@ -121,7 +121,7 @@ def genome_prepare(species, genome_version, args):
             else:
                 genomes_ready[species][genome_version]["STAR"] = False
         else:
-            print(f"[pybio genome] STAR index ready at {pybio.config.genomes_folder}/{species}.assembly.{genome_version}.star")
+            print(f"pybio | genome | STAR index ready at {pybio.config.genomes_folder}/{species}.assembly.{genome_version}.star")
 
     if pybio.utils.is_tool("salmon") and not args.nosalmon:
         salmon_folder = os.path.join(pybio.config.genomes_folder, f"{species}.transcripts.{genome_version}.salmon")
@@ -132,6 +132,36 @@ def genome_prepare(species, genome_version, args):
             else:
                 genomes_ready[species][genome_version]["salmon"] = False
         else:
-            print(f"[pybio genome] salmon index ready at {pybio.config.genomes_folder}/{species}.transcripts.{genome_version}.salmon")
+            print(f"pybio | genome | salmon index ready at {pybio.config.genomes_folder}/{species}.transcripts.{genome_version}.salmon")
 
     json.dump(genomes_ready, open(genomes_ready_fname, "wt"))
+
+def gff4jbrowse(fname_input, fname_output):
+    print(f"pybio | gff3 for JBrowse2 | {fname_input} {fname_output}")
+    fin = gzip.open(fname_input) if fname_input.endswith(".gz") else open(fname_input)
+    fout = gzip.open(fname_output, "wt") if fname_input.endswith(".gz") else open(fname_output, "wt")
+    r = fin.readline()
+    while r:
+        r = r.replace("\r", "").replace("\n", "").split("\t")
+        if len(r)>2:
+            if r[2]!="gene":
+                atts = r[-1]
+                atts = atts.split(";")
+                new_atts = []
+                gene_id = None
+                for att in atts:
+                    if att.find("Parent=gene:")!=-1:
+                        gene_id = att.split("Parent=gene:")[1]
+                    elif att.startswith("Name="):
+                        if gene_id!=None:
+                            new_atts.append(f"{att},{gene_id}")
+                        else:
+                            new_atts.append(att)
+                    else:
+                        new_atts.append(att)
+                new_atts = ";".join(new_atts)
+                r[-1] = new_atts
+                fout.write("\t".join(r)+"\n")
+        r = fin.readline()
+    fin.close()
+    fout.close()

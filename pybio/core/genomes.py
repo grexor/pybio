@@ -132,8 +132,12 @@ def prepare(species="homo_sapiens", genome_version=None):
             atts[el1] = el2[1:-1]
         if data["feature"] == "gene":
             gene_id = atts["gene_id"]
-            gene_name = atts.get("gene_name", gene_id)
-            gene = Gene(gene_name, gene_id, data["chr"], data["strand"], data["start"], data["stop"], atts)
+            gene_name = atts.get("gene_name", "")
+            if gene_name=="":
+                gene_name = atts.get("gene", "")
+                if gene_name=="":
+                    gene_name = gene_id
+            gene = Gene(gene_id, gene_name, data["chr"], data["strand"], data["start"], data["stop"], atts)
             genes_db[atts["gene_id"]] = gene
             chr_list.add(data["chr"])
             gene_bins = set()
