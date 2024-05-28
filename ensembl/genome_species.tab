@@ -1,321 +1,328 @@
 species	assembly	provider	provider_subfolder	genome_version	display_name
-acanthochromis_polyacanthus	ASM210954v1	ensembl		ensembl111	Spiny chromis
-accipiter_nisus	Accipiter_nisus_ver1.0	ensembl		ensembl111	Eurasian sparrowhawk
-ailuropoda_melanoleuca	ASM200744v2	ensembl		ensembl111	Giant panda
-amazona_collaria	ASM394721v1	ensembl		ensembl111	Yellow-billed parrot
-amphilophus_citrinellus	Midas_v5	ensembl		ensembl111	Midas cichlid
-amphiprion_ocellaris	AmpOce1.0	ensembl		ensembl111	Clown anemonefish
-amphiprion_percula	Nemo_v1	ensembl		ensembl111	Orange clownfish
-anabas_testudineus	fAnaTes1.2	ensembl		ensembl111	Climbing perch
-anas_platyrhynchos	ASM874695v1	ensembl		ensembl111	Mallard
-anas_platyrhynchos_platyrhynchos	CAU_duck1.0	ensembl		ensembl111	Duck
-anas_zonorhyncha	ASM222487v1	ensembl		ensembl111	Eastern spot-billed duck
-anolis_carolinensis	AnoCar2.0v2	ensembl		ensembl111	Green anole
-anser_brachyrhynchus	ASM259213v1	ensembl		ensembl111	Pink-footed goose
-anser_cygnoides	GooseV1.0	ensembl		ensembl111	Swan goose
-aotus_nancymaae	Anan_2.0	ensembl		ensembl111	Ma's night monkey
-apteryx_haastii	aptHaa1	ensembl		ensembl111	Great spotted kiwi
-apteryx_owenii	aptOwe1	ensembl		ensembl111	Little spotted kiwi
-apteryx_rowi	aptRow1	ensembl		ensembl111	Okarito brown kiwi
-aquila_chrysaetos_chrysaetos	bAquChr1.2	ensembl		ensembl111	Golden eagle
-astatotilapia_calliptera	fAstCal1.2	ensembl		ensembl111	Eastern happy
-astyanax_mexicanus	Astyanax_mexicanus-2.0	ensembl		ensembl111	Mexican tetra
-astyanax_mexicanus_pachon	Astyanax_mexicanus-1.0.2	ensembl		ensembl111	Pachon cavefish
-athene_cunicularia	athCun1	ensembl		ensembl111	Burrowing owl
-balaenoptera_musculus	mBalMus1.v2	ensembl		ensembl111	Blue whale
-betta_splendens	fBetSpl5.2	ensembl		ensembl111	Siamese fighting fish
-bison_bison_bison	Bison_UMD1.0	ensembl		ensembl111	American bison
-bos_grunniens	LU_Bosgru_v3.0	ensembl		ensembl111	Domestic yak
-bos_indicus_hybrid	UOA_Brahman_1	ensembl		ensembl111	Hybrid - Bos Indicus
-bos_mutus	BosGru_v2.0	ensembl		ensembl111	Wild yak
-bos_taurus	ARS-UCD1.3	ensembl		ensembl111	Cow
-bos_taurus_hybrid	UOA_Angus_1	ensembl		ensembl111	Hybrid - Bos Taurus
-bubo_bubo	BubBub1.0	ensembl		ensembl111	Eurasian eagle-owl
-buteo_japonicus	ButJap1.0	ensembl		ensembl111	Eastern buzzard
-caenorhabditis_elegans	WBcel235	ensembl		ensembl111	Caenorhabditis elegans (Nematode, N2)
-cairina_moschata_domestica	CaiMos1.0	ensembl		ensembl111	Muscovy Duck (domestic type)
-calidris_pugnax	ASM143184v1	ensembl		ensembl111	Ruff
-calidris_pygmaea	ASM369795v1	ensembl		ensembl111	Spoon-billed sandpiper
-callithrix_jacchus	mCalJac1.pat.X	ensembl		ensembl111	White-tufted-ear marmoset
-callorhinchus_milii	Callorhinchus_milii-6.1.3	ensembl		ensembl111	Elephant shark
-camarhynchus_parvulus	Camarhynchus_parvulus_V1.1	ensembl		ensembl111	Small tree finch
-camelus_dromedarius	CamDro2	ensembl		ensembl111	Arabian camel
-canis_lupus_dingo	ASM325472v1	ensembl		ensembl111	Dingo
-canis_lupus_familiaris	ROS_Cfam_1.0	ensembl		ensembl111	Dog
-canis_lupus_familiarisbasenji	Basenji_breed-1.1	ensembl		ensembl111	Dog - Basenji
-canis_lupus_familiarisboxer	Dog10K_Boxer_Tasha	ensembl		ensembl111	Dog - Boxer
-canis_lupus_familiarisgreatdane	UMICH_Zoey_3.1	ensembl		ensembl111	Dog - Great Dane
-canis_lupus_familiarisgsd	UU_Cfam_GSD_1.0	ensembl		ensembl111	Dog - German Shepherd
-capra_hircus	ARS1	ensembl		ensembl111	Goat
-capra_hircus_blackbengal	CVASU_BBG_1.0	ensembl		ensembl111	Goat (black bengal)
-carassius_auratus	ASM336829v1	ensembl		ensembl111	Goldfish
-carlito_syrichta	Tarsius_syrichta-2.0.1	ensembl		ensembl111	Tarsier
-castor_canadensis	C.can_genome_v1.0	ensembl		ensembl111	American beaver
-catagonus_wagneri	CatWag_v2_BIUU_UCD	ensembl		ensembl111	Chacoan peccary
-catharus_ustulatus	bCatUst1.pri	ensembl		ensembl111	Swainson's thrush
-cavia_aperea	CavAp1.0	ensembl		ensembl111	Brazilian guinea pig
-cavia_porcellus	Cavpor3.0	ensembl		ensembl111	Guinea Pig
-cebus_imitator	Cebus_imitator-1.0	ensembl		ensembl111	Panamanian white-faced capuchin
-cercocebus_atys	Caty_1.0	ensembl		ensembl111	Sooty mangabey
-cervus_hanglu_yarkandensis	CEY_v1	ensembl		ensembl111	Yarkand deer
-chelonoidis_abingdonii	ASM359739v1	ensembl		ensembl111	Abingdon island giant tortoise
-chelydra_serpentina	Chelydra_serpentina-1.0	ensembl		ensembl111	Common snapping turtle
-chinchilla_lanigera	ChiLan1.0	ensembl		ensembl111	Long-tailed chinchilla
-chlorocebus_sabaeus	ChlSab1.1	ensembl		ensembl111	Vervet-AGM
-choloepus_hoffmanni	choHof1	ensembl		ensembl111	Sloth
-chrysemys_picta_bellii	Chrysemys_picta_bellii-3.0.3	ensembl		ensembl111	Painted turtle
-chrysolophus_pictus	Chrysolophus_pictus_GenomeV1.0	ensembl		ensembl111	Golden pheasant
-ciona_intestinalis	KH	ensembl		ensembl111	C.intestinalis
-ciona_savignyi	CSAV2.0	ensembl		ensembl111	C.savignyi
-clupea_harengus	Ch_v2.0.2	ensembl		ensembl111	Atlantic herring 
-colobus_angolensis_palliatus	Cang.pa_1.0	ensembl		ensembl111	Angola colobus
-corvus_moneduloides	bCorMon1.pri	ensembl		ensembl111	New Caledonian crow
-cottoperca_gobio	fCotGob3.1	ensembl		ensembl111	Channel bull blenny
-coturnix_japonica	Coturnix_japonica_2.0	ensembl		ensembl111	Japanese quail
-cricetulus_griseus_chok1gshd	CHOK1GS_HDv1	ensembl		ensembl111	Chinese hamster CHOK1GS
-cricetulus_griseus_crigri	CriGri_1.0	ensembl		ensembl111	Chinese hamster CriGri
-cricetulus_griseus_picr	CriGri-PICRH-1.0	ensembl		ensembl111	Chinese hamster PICR
-crocodylus_porosus	CroPor_comp1	ensembl		ensembl111	Australian saltwater crocodile
-cyanistes_caeruleus	cyaCae2	ensembl		ensembl111	Blue tit
-cyclopterus_lumpus	fCycLum1.pri	ensembl		ensembl111	Lumpfish
-cynoglossus_semilaevis	Cse_v1.0	ensembl		ensembl111	Tongue sole
-cyprinodon_variegatus	C_variegatus-1.0	ensembl		ensembl111	Sheepshead minnow
-cyprinus_carpio_carpio	Cypcar_WagV4.0	ensembl		ensembl111	Common carp
-cyprinus_carpio_germanmirror	German_Mirror_carp_1.0	ensembl		ensembl111	Common carp german mirror
-cyprinus_carpio_hebaored	Hebao_red_carp_1.0	ensembl		ensembl111	Common carp hebao red
-cyprinus_carpio_huanghe	Hunaghe_carp_2.0	ensembl		ensembl111	Common carp huanghe
-danio_rerio	GRCz11	ensembl		ensembl111	Zebrafish
-dasypus_novemcinctus	Dasnov3.0	ensembl		ensembl111	Armadillo
-delphinapterus_leucas	ASM228892v3	ensembl		ensembl111	Beluga whale
-denticeps_clupeoides	fDenClu1.1	ensembl		ensembl111	Denticle herring
-dicentrarchus_labrax	dlabrax2021	ensembl		ensembl111	European seabass
-dipodomys_ordii	Dord_2.0	ensembl		ensembl111	Kangaroo rat
-dromaius_novaehollandiae	droNov1	ensembl		ensembl111	Emu
-drosophila_melanogaster	BDGP6.46	ensembl		ensembl111	Drosophila melanogaster (Fruit fly)
-echeneis_naucrates	fEcheNa1.1	ensembl		ensembl111	Live sharksucker
-echinops_telfairi	TENREC	ensembl		ensembl111	Lesser hedgehog tenrec
-electrophorus_electricus	Ee_SOAP_WITH_SSPACE	ensembl		ensembl111	Electric eel
-eptatretus_burgeri	Eburgeri_3.2	ensembl		ensembl111	Hagfish
-equus_asinus	ASM1607732v2	ensembl		ensembl111	Donkey
-equus_caballus	EquCab3.0	ensembl		ensembl111	Horse
-erinaceus_europaeus	HEDGEHOG	ensembl		ensembl111	Hedgehog
-erpetoichthys_calabaricus	fErpCal1.1	ensembl		ensembl111	Reedfish
-erythrura_gouldiae	GouldianFinch	ensembl		ensembl111	Gouldian finch
-esox_lucius	Eluc_v4	ensembl		ensembl111	Northern pike
-falco_tinnunculus	FalTin1.0	ensembl		ensembl111	Common kestrel
-felis_catus	Felis_catus_9.0	ensembl		ensembl111	Cat
-ficedula_albicollis	FicAlb1.5	ensembl		ensembl111	Collared flycatcher
-fukomys_damarensis	DMR_v1.0	ensembl		ensembl111	Damara mole rat
-fundulus_heteroclitus	Fundulus_heteroclitus-3.0.2	ensembl		ensembl111	Mummichog
-gadus_morhua	gadMor3.0	ensembl		ensembl111	Atlantic cod
-gallus_gallus	bGalGal1.mat.broiler.GRCg7b	ensembl		ensembl111	Chicken
-gallus_gallus_gca000002315v5	GRCg6a	ensembl		ensembl111	Chicken (Red Jungle fowl)
-gallus_gallus_gca016700215v2	bGalGal1.pat.whiteleghornlayer.GRCg7w	ensembl		ensembl111	Chicken (paternal White leghorn layer)
-gambusia_affinis	ASM309773v1	ensembl		ensembl111	Western mosquitofish
-gasterosteus_aculeatus	BROADS1	ensembl		ensembl111	Stickleback
-geospiza_fortis	GeoFor_1.0	ensembl		ensembl111	Medium ground-finch
-gopherus_agassizii	ASM289641v1	ensembl		ensembl111	Agassiz's desert tortoise
-gopherus_evgoodei	rGopEvg1_v1.p	ensembl		ensembl111	Goodes thornscrub tortoise
-gorilla_gorilla	gorGor4	ensembl		ensembl111	Gorilla
-gouania_willdenowi	fGouWil2.1	ensembl		ensembl111	Blunt-snouted clingfish
-haplochromis_burtoni	AstBur1.0	ensembl		ensembl111	Burton's mouthbrooder
-heterocephalus_glaber_female	Naked_mole-rat_maternal	ensembl		ensembl111	Naked mole-rat female
-heterocephalus_glaber_male	Naked_mole-rat_paternal	ensembl		ensembl111	Naked mole-rat male
-hippocampus_comes	H_comes_QL1_v1	ensembl		ensembl111	Tiger tail seahorse
-homo_sapiens	GRCh38	ensembl		ensembl111	Human
-hucho_hucho	ASM331708v1	ensembl		ensembl111	Huchen
-ictalurus_punctatus	IpCoco_1.2	ensembl		ensembl111	Channel catfish
-ictidomys_tridecemlineatus	SpeTri2.0	ensembl		ensembl111	Squirrel
-jaculus_jaculus	JacJac1.0	ensembl		ensembl111	Lesser Egyptian jerboa
-junco_hyemalis	ASM382977v1	ensembl		ensembl111	Dark-eyed junco
-kryptolebias_marmoratus	ASM164957v1	ensembl		ensembl111	Mangrove rivulus
-labrus_bergylta	BallGen_V1	ensembl		ensembl111	Ballan wrasse
-larimichthys_crocea	L_crocea_2.0	ensembl		ensembl111	Large yellow croaker
-lates_calcarifer	ASB_HGAPassembly_v1	ensembl		ensembl111	Barramundi perch
-laticauda_laticaudata	latLat_1.0	ensembl		ensembl111	Blue-ringed sea krait
-latimeria_chalumnae	LatCha1	ensembl		ensembl111	Coelacanth
-lepidothrix_coronata	Lepidothrix_coronata-1.0	ensembl		ensembl111	Blue-crowned manakin
-lepisosteus_oculatus	LepOcu1	ensembl		ensembl111	Spotted gar
-leptobrachium_leishanense	ASM966780v1	ensembl		ensembl111	Leishan spiny toad
-lonchura_striata_domestica	LonStrDom1	ensembl		ensembl111	Bengalese finch
-loxodonta_africana	loxAfr3	ensembl		ensembl111	Elephant
-lynx_canadensis	mLynCan4_v1.p	ensembl		ensembl111	Canada lynx
-macaca_fascicularis	Macaca_fascicularis_6.0	ensembl		ensembl111	Crab-eating macaque
-macaca_mulatta	Mmul_10	ensembl		ensembl111	Macaque
-macaca_nemestrina	Mnem_1.0	ensembl		ensembl111	Pig-tailed macaque
-malurus_cyaneus_samueli	mCya_1.0	ensembl		ensembl111	Superb fairywren
-manacus_vitellinus	ASM171598v2	ensembl		ensembl111	Golden-collared manakin
-mandrillus_leucophaeus	Mleu.le_1.0	ensembl		ensembl111	Drill
-marmota_marmota_marmota	marMar2.1	ensembl		ensembl111	Alpine marmot
-mastacembelus_armatus	fMasArm1.2	ensembl		ensembl111	Zig-zag eel
-maylandia_zebra	M_zebra_UMD2a	ensembl		ensembl111	Zebra mbuna
-meleagris_gallopavo	Turkey_5.1	ensembl		ensembl111	Turkey
-melopsittacus_undulatus	bMelUnd1.mat.Z	ensembl		ensembl111	Budgerigar
-meriones_unguiculatus	MunDraft-v1.0	ensembl		ensembl111	Mongolian gerbil
-mesocricetus_auratus	MesAur1.0	ensembl		ensembl111	Golden Hamster
-microcebus_murinus	Mmur_3.0	ensembl		ensembl111	Mouse Lemur
-microtus_ochrogaster	MicOch1.0	ensembl		ensembl111	Prairie vole
-mola_mola	ASM169857v1	ensembl		ensembl111	Ocean sunfish
-monodelphis_domestica	ASM229v1	ensembl		ensembl111	Opossum
-monodon_monoceros	NGI_Narwhal_1	ensembl		ensembl111	Narwhal
-monopterus_albus	M_albus_1.0	ensembl		ensembl111	Swamp eel
-moschus_moschiferus	MosMos_v2_BIUU_UCD	ensembl		ensembl111	Siberian musk deer
-mus_caroli	CAROLI_EIJ_v1.1	ensembl		ensembl111	Ryukyu mouse
-mus_musculus	GRCm39	ensembl		ensembl111	Mouse
-mus_musculus_129s1svimj	129S1_SvImJ_v1	ensembl		ensembl111	Mouse 129S1/SvImJ
-mus_musculus_aj	A_J_v1	ensembl		ensembl111	Mouse A/J
-mus_musculus_akrj	AKR_J_v1	ensembl		ensembl111	Mouse AKR/J
-mus_musculus_balbcj	BALB_cJ_v1	ensembl		ensembl111	Mouse BALB/cJ
-mus_musculus_c3hhej	C3H_HeJ_v1	ensembl		ensembl111	Mouse C3H/HeJ
-mus_musculus_c57bl6nj	C57BL_6NJ_v1	ensembl		ensembl111	Mouse C57BL/6NJ
-mus_musculus_casteij	CAST_EiJ_v1	ensembl		ensembl111	Mouse CAST/EiJ
-mus_musculus_cbaj	CBA_J_v1	ensembl		ensembl111	Mouse CBA/J
-mus_musculus_dba2j	DBA_2J_v1	ensembl		ensembl111	Mouse DBA/2J
-mus_musculus_fvbnj	FVB_NJ_v1	ensembl		ensembl111	Mouse FVB/NJ
-mus_musculus_lpj	LP_J_v1	ensembl		ensembl111	Mouse LP/J
-mus_musculus_nodshiltj	NOD_ShiLtJ_v1	ensembl		ensembl111	Mouse NOD/ShiLtJ
-mus_musculus_nzohlltj	NZO_HlLtJ_v1	ensembl		ensembl111	Mouse NZO/HlLtJ
-mus_musculus_pwkphj	PWK_PhJ_v1	ensembl		ensembl111	Mouse PWK/PhJ
-mus_musculus_wsbeij	WSB_EiJ_v1	ensembl		ensembl111	Mouse WSB/EiJ
-mus_pahari	PAHARI_EIJ_v1.1	ensembl		ensembl111	Shrew mouse
-mus_spicilegus	MUSP714	ensembl		ensembl111	Steppe mouse
-mus_spretus	SPRET_EiJ_v1	ensembl		ensembl111	Algerian mouse
-mustela_putorius_furo	MusPutFur1.0	ensembl		ensembl111	Ferret
-myotis_lucifugus	Myoluc2.0	ensembl		ensembl111	Microbat
-myripristis_murdjan	fMyrMur1.1	ensembl		ensembl111	Pinecone soldierfish
-naja_naja	Nana_v5	ensembl		ensembl111	Indian cobra
-nannospalax_galili	S.galili_v1.0	ensembl		ensembl111	Upper Galilee mountains blind mole rat
-neogobius_melanostomus	RGoby_Basel_V2	ensembl		ensembl111	Round goby
-neolamprologus_brichardi	NeoBri1.0	ensembl		ensembl111	Lyretail cichlid
-neovison_vison	NNQGG.v01	ensembl		ensembl111	American mink
-nomascus_leucogenys	Nleu_3.0	ensembl		ensembl111	Gibbon
-notamacropus_eugenii	Meug_1.0	ensembl		ensembl111	Wallaby
-notechis_scutatus	TS10Xv2-PRI	ensembl		ensembl111	Mainland tiger snake
-nothobranchius_furzeri	Nfu_20140520	ensembl		ensembl111	Turquoise killifish
-nothoprocta_perdicaria	notPer1	ensembl		ensembl111	Chilean tinamou
-numida_meleagris	NumMel1.0	ensembl		ensembl111	Helmeted guineafowl
-ochotona_princeps	OchPri2.0-Ens	ensembl		ensembl111	Pika
-octodon_degus	OctDeg1.0	ensembl		ensembl111	Degu
-oncorhynchus_kisutch	Okis_V2	ensembl		ensembl111	Coho salmon
-oncorhynchus_mykiss	USDA_OmykA_1.1	ensembl		ensembl111	Rainbow trout
-oncorhynchus_tshawytscha	Otsh_v1.0	ensembl		ensembl111	Chinook salmon
-oreochromis_aureus	ASM587006v1	ensembl		ensembl111	Blue tilapia
-oreochromis_niloticus	O_niloticus_UMD_NMBU	ensembl		ensembl111	Nile tilapia
-ornithorhynchus_anatinus	mOrnAna1.p.v1	ensembl		ensembl111	Platypus
-oryctolagus_cuniculus	OryCun2.0	ensembl		ensembl111	Rabbit
-oryzias_javanicus	OJAV_1.1	ensembl		ensembl111	Javanese ricefish
-oryzias_latipes	ASM223467v1	ensembl		ensembl111	Japanese medaka HdrR
-oryzias_latipes_hni	ASM223471v1	ensembl		ensembl111	Japanese medaka HNI
-oryzias_latipes_hsok	ASM223469v1	ensembl		ensembl111	Japanese medaka HSOK
-oryzias_melastigma	Om_v0.7.RACA	ensembl		ensembl111	Indian medaka
-oryzias_sinensis	ASM858656v1	ensembl		ensembl111	Chinese medaka
-otolemur_garnettii	OtoGar3	ensembl		ensembl111	Bushbaby
-otus_sunia	OtuSun1.0	ensembl		ensembl111	Oriental scops-owl
-ovis_aries	Oar_v3.1	ensembl		ensembl111	Sheep (texel)
-ovis_aries_rambouillet	ARS-UI_Ramb_v2.0	ensembl		ensembl111	Sheep
-pan_paniscus	panpan1.1	ensembl		ensembl111	Bonobo
-pan_troglodytes	Pan_tro_3.0	ensembl		ensembl111	Chimpanzee
-panthera_leo	PanLeo1.0	ensembl		ensembl111	Lion
-panthera_pardus	PanPar1.0	ensembl		ensembl111	Leopard
-panthera_tigris_altaica	PanTig1.0	ensembl		ensembl111	Tiger
-papio_anubis	Panubis1.0	ensembl		ensembl111	Olive baboon
-parambassis_ranga	fParRan2.1	ensembl		ensembl111	Indian glassy fish
-paramormyrops_kingsleyae	PKINGS_0.1	ensembl		ensembl111	Paramormyrops kingsleyae
-parus_major	Parus_major1.1	ensembl		ensembl111	Great Tit
-pavo_cristatus	AIIM_Pcri_1.0	ensembl		ensembl111	Indian peafowl
-pelodiscus_sinensis	PelSin_1.0	ensembl		ensembl111	Chinese softshell turtle
-pelusios_castaneus	Pelusios_castaneus-1.0	ensembl		ensembl111	West African mud turtle
-periophthalmus_magnuspinnatus	PM.fa	ensembl		ensembl111	Korean mudskipper
-peromyscus_maniculatus_bairdii	HU_Pman_2.1	ensembl		ensembl111	Northern American deer mouse
-petromyzon_marinus	Pmarinus_7.0	ensembl		ensembl111	Lamprey
-phascolarctos_cinereus	phaCin_unsw_v4.1	ensembl		ensembl111	Koala
-phasianus_colchicus	ASM414374v1	ensembl		ensembl111	Ring-necked pheasant
-phocoena_sinus	mPhoSin1.pri	ensembl		ensembl111	Vaquita
-physeter_catodon	ASM283717v2	ensembl		ensembl111	Sperm whale
-piliocolobus_tephrosceles	ASM277652v2	ensembl		ensembl111	Ugandan red Colobus
-podarcis_muralis	PodMur_1.0	ensembl		ensembl111	Common wall lizard
-poecilia_formosa	PoeFor_5.1.2	ensembl		ensembl111	Amazon molly
-poecilia_latipinna	P_latipinna-1.0	ensembl		ensembl111	Sailfin molly
-poecilia_mexicana	P_mexicana-1.0	ensembl		ensembl111	Shortfin molly
-poecilia_reticulata	Guppy_female_1.0_MT	ensembl		ensembl111	Guppy
-pogona_vitticeps	pvi1.1	ensembl		ensembl111	Central bearded dragon
-pongo_abelii	Susie_PABv2	ensembl		ensembl111	Sumatran orangutan
-procavia_capensis	proCap1	ensembl		ensembl111	Hyrax
-prolemur_simus	Prosim_1.0	ensembl		ensembl111	Greater bamboo lemur
-propithecus_coquereli	Pcoq_1.0	ensembl		ensembl111	Coquerel's sifaka
-pseudonaja_textilis	EBS10Xv2-PRI	ensembl		ensembl111	Eastern brown snake
-pteropus_vampyrus	pteVam1	ensembl		ensembl111	Megabat
-pundamilia_nyererei	PunNye1.0	ensembl		ensembl111	Makobe Island cichlid
-pygocentrus_nattereri	Pygocentrus_nattereri-1.0.2	ensembl		ensembl111	Red-bellied piranha
-rattus_norvegicus	mRatBN7.2	ensembl		ensembl111	Rat
-rattus_norvegicus_shrspbbbutx	UTH_Rnor_SHRSP_BbbUtx_1.0	ensembl		ensembl111	Rat - SHRSP/BbbUtx
-rattus_norvegicus_shrutx	UTH_Rnor_SHR_Utx	ensembl		ensembl111	Rat - SHR/Utx RGD_8142385
-rattus_norvegicus_wkybbb	UTH_Rnor_WKY_Bbb_1.0	ensembl		ensembl111	Rat - WKY/Bbb RGD_1581635
-rhinolophus_ferrumequinum	mRhiFer1_v1.p	ensembl		ensembl111	Greater horseshoe bat
-rhinopithecus_bieti	ASM169854v1	ensembl		ensembl111	Black snub-nosed monkey
-rhinopithecus_roxellana	Rrox_v1	ensembl		ensembl111	Golden snub-nosed monkey
-saccharomyces_cerevisiae	R64-1-1	ensembl		ensembl111	Saccharomyces cerevisiae
-saimiri_boliviensis_boliviensis	SaiBol1.0	ensembl		ensembl111	Bolivian squirrel monkey
-salarias_fasciatus	fSalaFa1.1	ensembl		ensembl111	Jewelled blenny
-salmo_salar	Ssal_v3.1	ensembl		ensembl111	Atlantic salmon
-salmo_trutta	fSalTru1.1	ensembl		ensembl111	Brown trout
-salvator_merianae	HLtupMer3	ensembl		ensembl111	Argentine black and white tegu
-sander_lucioperca	SLUC_FBN_1	ensembl		ensembl111	Pike-perch
-sarcophilus_harrisii	mSarHar1.11	ensembl		ensembl111	Tasmanian devil
-sciurus_vulgaris	mSciVul1.1	ensembl		ensembl111	Eurasian red squirrel
-scleropages_formosus	fSclFor1.1	ensembl		ensembl111	Asian bonytongue
-scophthalmus_maximus	ASM1334776v1	ensembl		ensembl111	Turbot
-serinus_canaria	SCA1	ensembl		ensembl111	Common canary
-seriola_dumerili	Sdu_1.0	ensembl		ensembl111	Greater amberjack
-seriola_lalandi_dorsalis	Sedor1	ensembl		ensembl111	Yellowtail amberjack
-sinocyclocheilus_anshuiensis	SAMN03320099.WGS_v1.1	ensembl		ensembl111	Blind barbel
-sinocyclocheilus_grahami	SAMN03320097.WGS_v1.1	ensembl		ensembl111	Golden-line barbel
-sinocyclocheilus_rhinocerous	SAMN03320098_v1.1	ensembl		ensembl111	Horned golden-line barbel
-sorex_araneus	COMMON_SHREW1	ensembl		ensembl111	Shrew
-sparus_aurata	fSpaAur1.1	ensembl		ensembl111	Gilthead seabream
-spermophilus_dauricus	ASM240643v1	ensembl		ensembl111	Daurian ground squirrel
-sphaeramia_orbicularis	fSphaOr1.1	ensembl		ensembl111	Orbiculate cardinalfish
-sphenodon_punctatus	ASM311381v1	ensembl		ensembl111	Tuatara
-stachyris_ruficeps	ASM869450v1	ensembl		ensembl111	Rufous-capped babbler
-stegastes_partitus	Stegastes_partitus-1.0.2	ensembl		ensembl111	Bicolor damselfish
-strigops_habroptila	bStrHab1_v1.p	ensembl		ensembl111	Kakapo
-strix_occidentalis_caurina	Soccid_v01	ensembl		ensembl111	Northern spotted owl
-struthio_camelus_australis	ASM69896v1	ensembl		ensembl111	African ostrich
-suricata_suricatta	meerkat_22Aug2017_6uvM2_HiC	ensembl		ensembl111	Meerkat
-sus_scrofa	Sscrofa11.1	ensembl		ensembl111	Pig
-sus_scrofa_bamei	Bamei_pig_v1	ensembl		ensembl111	Pig - Bamei
-sus_scrofa_berkshire	Berkshire_pig_v1	ensembl		ensembl111	Pig - Berkshire
-sus_scrofa_hampshire	Hampshire_pig_v1	ensembl		ensembl111	Pig - Hampshire
-sus_scrofa_jinhua	Jinhua_pig_v1	ensembl		ensembl111	Pig - Jinhua
-sus_scrofa_landrace	Landrace_pig_v1	ensembl		ensembl111	Pig - Landrace
-sus_scrofa_largewhite	Large_White_v1	ensembl		ensembl111	Pig - Largewhite
-sus_scrofa_meishan	Meishan_pig_v1	ensembl		ensembl111	Pig - Meishan
-sus_scrofa_pietrain	Pietrain_pig_v1	ensembl		ensembl111	Pig - Pietrain
-sus_scrofa_rongchang	Rongchang_pig_v1	ensembl		ensembl111	Pig - Rongchang
-sus_scrofa_tibetan	Tibetan_Pig_v2	ensembl		ensembl111	Pig - Tibetan
-sus_scrofa_usmarc	USMARCv1.0	ensembl		ensembl111	Pig USMARC
-sus_scrofa_wuzhishan	minipig_v1.0	ensembl		ensembl111	Pig - Wuzhishan
-taeniopygia_guttata	bTaeGut1_v1.p	ensembl		ensembl111	Zebra finch
-takifugu_rubripes	fTakRub1.2	ensembl		ensembl111	Fugu
-terrapene_carolina_triunguis	T_m_triunguis-2.0	ensembl		ensembl111	Three-toed box turtle
-tetraodon_nigroviridis	TETRAODON8	ensembl		ensembl111	Tetraodon
-theropithecus_gelada	Tgel_1.0	ensembl		ensembl111	Gelada
-tupaia_belangeri	TREESHREW	ensembl		ensembl111	Tree Shrew
-tursiops_truncatus	turTru1	ensembl		ensembl111	Dolphin
-urocitellus_parryii	ASM342692v1	ensembl		ensembl111	Arctic ground squirrel
-ursus_americanus	ASM334442v1	ensembl		ensembl111	American black bear
-ursus_maritimus	UrsMar_1.0	ensembl		ensembl111	Polar bear
-ursus_thibetanus_thibetanus	ASM966005v1	ensembl		ensembl111	Asiatic black bear
-varanus_komodoensis	ASM479886v1	ensembl		ensembl111	Komodo dragon
-vicugna_pacos	vicPac1	ensembl		ensembl111	Alpaca
-vombatus_ursinus	bare-nosed_wombat_genome_assembly	ensembl		ensembl111	Common wombat
-vulpes_vulpes	VulVul2.2	ensembl		ensembl111	Red fox
-xenopus_tropicalis	UCB_Xtro_10.0	ensembl		ensembl111	Tropical clawed frog
-xiphophorus_couchianus	Xiphophorus_couchianus-4.0.1	ensembl		ensembl111	Monterrey platyfish
-xiphophorus_maculatus	X_maculatus-5.0-male	ensembl		ensembl111	Platyfish
-zalophus_californianus	mZalCal1.pri	ensembl		ensembl111	California sea lion
-zonotrichia_albicollis	Zonotrichia_albicollis-1.0.1	ensembl		ensembl111	White-throated sparrow
-zosterops_lateralis_melanops	ASM128173v1	ensembl		ensembl111	Silver-eye
+acanthochromis_polyacanthus	ASM210954v1	ensembl		ensembl112	Spiny chromis
+accipiter_nisus	Accipiter_nisus_ver1.0	ensembl		ensembl112	Eurasian sparrowhawk
+ailuropoda_melanoleuca	ASM200744v2	ensembl		ensembl112	Giant panda
+amazona_collaria	ASM394721v1	ensembl		ensembl112	Yellow-billed parrot
+amphilophus_citrinellus	Midas_v5	ensembl		ensembl112	Midas cichlid
+amphiprion_ocellaris	ASM2253959v1	ensembl		ensembl112	Clown anemonefish
+amphiprion_percula	Nemo_v1	ensembl		ensembl112	Orange clownfish
+anabas_testudineus	fAnaTes1.2	ensembl		ensembl112	Climbing perch
+anas_platyrhynchos	ASM874695v1	ensembl		ensembl112	Mallard
+anas_platyrhynchos_platyrhynchos	CAU_duck1.0	ensembl		ensembl112	Duck
+anas_zonorhyncha	ASM222487v1	ensembl		ensembl112	Eastern spot-billed duck
+anolis_carolinensis	AnoCar2.0v2	ensembl		ensembl112	Green anole
+anser_brachyrhynchus	ASM259213v1	ensembl		ensembl112	Pink-footed goose
+anser_cygnoides	GooseV1.0	ensembl		ensembl112	Swan goose
+aotus_nancymaae	Anan_2.0	ensembl		ensembl112	Ma's night monkey
+apteryx_haastii	aptHaa1	ensembl		ensembl112	Great spotted kiwi
+apteryx_owenii	aptOwe1	ensembl		ensembl112	Little spotted kiwi
+apteryx_rowi	aptRow1	ensembl		ensembl112	Okarito brown kiwi
+aquila_chrysaetos_chrysaetos	bAquChr1.2	ensembl		ensembl112	Golden eagle
+astatotilapia_calliptera	fAstCal1.2	ensembl		ensembl112	Eastern happy
+astyanax_mexicanus	Astyanax_mexicanus-2.0	ensembl		ensembl112	Mexican tetra
+astyanax_mexicanus_pachon	Astyanax_mexicanus-1.0.2	ensembl		ensembl112	Pachon cavefish
+athene_cunicularia	athCun1	ensembl		ensembl112	Burrowing owl
+balaenoptera_musculus	mBalMus1.v2	ensembl		ensembl112	Blue whale
+betta_splendens	fBetSpl5.2	ensembl		ensembl112	Siamese fighting fish
+bison_bison_bison	Bison_UMD1.0	ensembl		ensembl112	American bison
+bos_grunniens	LU_Bosgru_v3.0	ensembl		ensembl112	Domestic yak
+bos_indicus_hybrid	UOA_Brahman_1	ensembl		ensembl112	Hybrid - Bos Indicus
+bos_mutus	BosGru_v2.0	ensembl		ensembl112	Wild yak
+bos_taurus	ARS-UCD1.3	ensembl		ensembl112	Cow
+bos_taurus_hybrid	UOA_Angus_1	ensembl		ensembl112	Hybrid - Bos Taurus
+bubo_bubo	BubBub1.0	ensembl		ensembl112	Eurasian eagle-owl
+buteo_japonicus	ButJap1.0	ensembl		ensembl112	Eastern buzzard
+caenorhabditis_elegans	WBcel235	ensembl		ensembl112	Caenorhabditis elegans (Nematode, N2)
+cairina_moschata_domestica	CaiMos1.0	ensembl		ensembl112	Muscovy Duck (domestic type)
+calidris_pugnax	ASM143184v1	ensembl		ensembl112	Ruff
+calidris_pygmaea	ASM369795v1	ensembl		ensembl112	Spoon-billed sandpiper
+callithrix_jacchus	mCalJac1.pat.X	ensembl		ensembl112	White-tufted-ear marmoset
+callorhinchus_milii	Callorhinchus_milii-6.1.3	ensembl		ensembl112	Elephant shark
+camarhynchus_parvulus	Camarhynchus_parvulus_V1.1	ensembl		ensembl112	Small tree finch
+camelus_dromedarius	CamDro2	ensembl		ensembl112	Arabian camel
+canis_lupus_dingo	ASM325472v1	ensembl		ensembl112	Dingo
+canis_lupus_familiaris	ROS_Cfam_1.0	ensembl		ensembl112	Dog
+canis_lupus_familiarisbasenji	Basenji_breed-1.1	ensembl		ensembl112	Dog - Basenji
+canis_lupus_familiarisboxer	Dog10K_Boxer_Tasha	ensembl		ensembl112	Dog - Boxer
+canis_lupus_familiarisgreatdane	UMICH_Zoey_3.1	ensembl		ensembl112	Dog - Great Dane
+canis_lupus_familiarisgsd	UU_Cfam_GSD_1.0	ensembl		ensembl112	Dog - German Shepherd
+capra_hircus	ARS1	ensembl		ensembl112	Goat
+capra_hircus_blackbengal	CVASU_BBG_1.0	ensembl		ensembl112	Goat (black bengal)
+carassius_auratus	ASM336829v1	ensembl		ensembl112	Goldfish
+carlito_syrichta	Tarsius_syrichta-2.0.1	ensembl		ensembl112	Tarsier
+castor_canadensis	C.can_genome_v1.0	ensembl		ensembl112	American beaver
+catagonus_wagneri	CatWag_v2_BIUU_UCD	ensembl		ensembl112	Chacoan peccary
+catharus_ustulatus	bCatUst1.pri	ensembl		ensembl112	Swainson's thrush
+cavia_aperea	CavAp1.0	ensembl		ensembl112	Brazilian guinea pig
+cavia_porcellus	Cavpor3.0	ensembl		ensembl112	Guinea Pig
+cebus_imitator	Cebus_imitator-1.0	ensembl		ensembl112	Panamanian white-faced capuchin
+cercocebus_atys	Caty_1.0	ensembl		ensembl112	Sooty mangabey
+cervus_hanglu_yarkandensis	CEY_v1	ensembl		ensembl112	Yarkand deer
+chelonoidis_abingdonii	ASM359739v1	ensembl		ensembl112	Abingdon island giant tortoise
+chelydra_serpentina	Chelydra_serpentina-1.0	ensembl		ensembl112	Common snapping turtle
+chinchilla_lanigera	ChiLan1.0	ensembl		ensembl112	Long-tailed chinchilla
+chlorocebus_sabaeus	ChlSab1.1	ensembl		ensembl112	Vervet-AGM
+choloepus_hoffmanni	choHof1	ensembl		ensembl112	Sloth
+chrysemys_picta_bellii	Chrysemys_picta_bellii-3.0.3	ensembl		ensembl112	Painted turtle
+chrysolophus_pictus	Chrysolophus_pictus_GenomeV1.0	ensembl		ensembl112	Golden pheasant
+ciona_intestinalis	KH	ensembl		ensembl112	C.intestinalis
+ciona_savignyi	CSAV2.0	ensembl		ensembl112	C.savignyi
+clupea_harengus	Ch_v2.0.2	ensembl		ensembl112	Atlantic herring 
+colobus_angolensis_palliatus	Cang.pa_1.0	ensembl		ensembl112	Angola colobus
+corvus_moneduloides	bCorMon1.pri	ensembl		ensembl112	New Caledonian crow
+cottoperca_gobio	fCotGob3.1	ensembl		ensembl112	Channel bull blenny
+coturnix_japonica	Coturnix_japonica_2.0	ensembl		ensembl112	Japanese quail
+cricetulus_griseus_chok1gshd	CHOK1GS_HDv1	ensembl		ensembl112	Chinese hamster CHOK1GS
+cricetulus_griseus_crigri	CriGri_1.0	ensembl		ensembl112	Chinese hamster CriGri
+cricetulus_griseus_picr	CriGri-PICRH-1.0	ensembl		ensembl112	Chinese hamster PICR
+crocodylus_porosus	CroPor_comp1	ensembl		ensembl112	Australian saltwater crocodile
+cyanistes_caeruleus	cyaCae2	ensembl		ensembl112	Blue tit
+cyclopterus_lumpus	fCycLum1.pri	ensembl		ensembl112	Lumpfish
+cynoglossus_semilaevis	Cse_v1.0	ensembl		ensembl112	Tongue sole
+cyprinodon_variegatus	C_variegatus-1.0	ensembl		ensembl112	Sheepshead minnow
+cyprinus_carpio_carpio	Cypcar_WagV4.0	ensembl		ensembl112	Common carp
+cyprinus_carpio_germanmirror	German_Mirror_carp_1.0	ensembl		ensembl112	Common carp german mirror
+cyprinus_carpio_hebaored	Hebao_red_carp_1.0	ensembl		ensembl112	Common carp hebao red
+cyprinus_carpio_huanghe	Hunaghe_carp_2.0	ensembl		ensembl112	Common carp huanghe
+danio_rerio	GRCz11	ensembl		ensembl112	Zebrafish
+dasypus_novemcinctus	Dasnov3.0	ensembl		ensembl112	Armadillo
+delphinapterus_leucas	ASM228892v3	ensembl		ensembl112	Beluga whale
+denticeps_clupeoides	fDenClu1.1	ensembl		ensembl112	Denticle herring
+dicentrarchus_labrax	dlabrax2021	ensembl		ensembl112	European seabass
+dipodomys_ordii	Dord_2.0	ensembl		ensembl112	Kangaroo rat
+dromaius_novaehollandiae	droNov1	ensembl		ensembl112	Emu
+drosophila_melanogaster	BDGP6.46	ensembl		ensembl112	Drosophila melanogaster (Fruit fly)
+echeneis_naucrates	fEcheNa1.1	ensembl		ensembl112	Live sharksucker
+echinops_telfairi	TENREC	ensembl		ensembl112	Lesser hedgehog tenrec
+electrophorus_electricus	Ee_SOAP_WITH_SSPACE	ensembl		ensembl112	Electric eel
+eptatretus_burgeri	Eburgeri_3.2	ensembl		ensembl112	Hagfish
+equus_asinus	ASM1607732v2	ensembl		ensembl112	Donkey
+equus_caballus	EquCab3.0	ensembl		ensembl112	Horse
+erinaceus_europaeus	HEDGEHOG	ensembl		ensembl112	Hedgehog
+erpetoichthys_calabaricus	fErpCal1.1	ensembl		ensembl112	Reedfish
+erythrura_gouldiae	GouldianFinch	ensembl		ensembl112	Gouldian finch
+esox_lucius	Eluc_v4	ensembl		ensembl112	Northern pike
+falco_tinnunculus	FalTin1.0	ensembl		ensembl112	Common kestrel
+felis_catus	Felis_catus_9.0	ensembl		ensembl112	Cat
+ficedula_albicollis	FicAlb1.5	ensembl		ensembl112	Collared flycatcher
+fukomys_damarensis	DMR_v1.0	ensembl		ensembl112	Damara mole rat
+fundulus_heteroclitus	Fundulus_heteroclitus-3.0.2	ensembl		ensembl112	Mummichog
+gadus_morhua	gadMor3.0	ensembl		ensembl112	Atlantic cod
+gadus_morhua_gca010882105v1	gadMor_Celtic	ensembl		ensembl112	
+gallus_gallus	bGalGal1.mat.broiler.GRCg7b	ensembl		ensembl112	Chicken
+gallus_gallus_gca000002315v5	GRCg6a	ensembl		ensembl112	Chicken (Red Jungle fowl)
+gallus_gallus_gca016700215v2	bGalGal1.pat.whiteleghornlayer.GRCg7w	ensembl		ensembl112	Chicken (paternal White leghorn layer)
+gambusia_affinis	ASM309773v1	ensembl		ensembl112	Western mosquitofish
+gasterosteus_aculeatus	BROADS1	ensembl		ensembl112	Stickleback
+gasterosteus_aculeatus_gca006229185v1	BOT	ensembl		ensembl112	
+gasterosteus_aculeatus_gca006232265v1	BAM	ensembl		ensembl112	
+gasterosteus_aculeatus_gca006232285v1	SYL	ensembl		ensembl112	
+geospiza_fortis	GeoFor_1.0	ensembl		ensembl112	Medium ground-finch
+gopherus_agassizii	ASM289641v1	ensembl		ensembl112	Agassiz's desert tortoise
+gopherus_evgoodei	rGopEvg1_v1.p	ensembl		ensembl112	Goodes thornscrub tortoise
+gorilla_gorilla	gorGor4	ensembl		ensembl112	Gorilla
+gouania_willdenowi	fGouWil2.1	ensembl		ensembl112	Blunt-snouted clingfish
+haplochromis_burtoni	AstBur1.0	ensembl		ensembl112	Burton's mouthbrooder
+heterocephalus_glaber_female	Naked_mole-rat_maternal	ensembl		ensembl112	Naked mole-rat female
+heterocephalus_glaber_male	Naked_mole-rat_paternal	ensembl		ensembl112	Naked mole-rat male
+hippocampus_comes	H_comes_QL1_v1	ensembl		ensembl112	Tiger tail seahorse
+homo_sapiens	GRCh38	ensembl		ensembl112	Human
+hucho_hucho	ASM331708v1	ensembl		ensembl112	Huchen
+ictalurus_punctatus	ASM400665v3	ensembl		ensembl112	Channel catfish
+ictidomys_tridecemlineatus	SpeTri2.0	ensembl		ensembl112	Squirrel
+jaculus_jaculus	JacJac1.0	ensembl		ensembl112	Lesser Egyptian jerboa
+junco_hyemalis	ASM382977v1	ensembl		ensembl112	Dark-eyed junco
+kryptolebias_marmoratus	ASM164957v1	ensembl		ensembl112	Mangrove rivulus
+labrus_bergylta	BallGen_V1	ensembl		ensembl112	Ballan wrasse
+larimichthys_crocea	L_crocea_2.0	ensembl		ensembl112	Large yellow croaker
+lates_calcarifer	ASB_HGAPassembly_v1	ensembl		ensembl112	Barramundi perch
+laticauda_laticaudata	latLat_1.0	ensembl		ensembl112	Blue-ringed sea krait
+latimeria_chalumnae	LatCha1	ensembl		ensembl112	Coelacanth
+lepidothrix_coronata	Lepidothrix_coronata-1.0	ensembl		ensembl112	Blue-crowned manakin
+lepisosteus_oculatus	LepOcu1	ensembl		ensembl112	Spotted gar
+leptobrachium_leishanense	ASM966780v1	ensembl		ensembl112	Leishan spiny toad
+lonchura_striata_domestica	LonStrDom1	ensembl		ensembl112	Bengalese finch
+loxodonta_africana	loxAfr3	ensembl		ensembl112	Elephant
+lynx_canadensis	mLynCan4_v1.p	ensembl		ensembl112	Canada lynx
+macaca_fascicularis	Macaca_fascicularis_6.0	ensembl		ensembl112	Crab-eating macaque
+macaca_mulatta	Mmul_10	ensembl		ensembl112	Macaque
+macaca_nemestrina	Mnem_1.0	ensembl		ensembl112	Pig-tailed macaque
+malurus_cyaneus_samueli	mCya_1.0	ensembl		ensembl112	Superb fairywren
+manacus_vitellinus	ASM171598v2	ensembl		ensembl112	Golden-collared manakin
+mandrillus_leucophaeus	Mleu.le_1.0	ensembl		ensembl112	Drill
+marmota_marmota_marmota	marMar2.1	ensembl		ensembl112	Alpine marmot
+mastacembelus_armatus	fMasArm1.2	ensembl		ensembl112	Zig-zag eel
+maylandia_zebra	M_zebra_UMD2a	ensembl		ensembl112	Zebra mbuna
+meleagris_gallopavo	Turkey_5.1	ensembl		ensembl112	Turkey
+melopsittacus_undulatus	bMelUnd1.mat.Z	ensembl		ensembl112	Budgerigar
+meriones_unguiculatus	MunDraft-v1.0	ensembl		ensembl112	Mongolian gerbil
+mesocricetus_auratus	MesAur1.0	ensembl		ensembl112	Golden Hamster
+microcebus_murinus	Mmur_3.0	ensembl		ensembl112	Mouse Lemur
+microtus_ochrogaster	MicOch1.0	ensembl		ensembl112	Prairie vole
+mola_mola	ASM169857v1	ensembl		ensembl112	Ocean sunfish
+monodelphis_domestica	ASM229v1	ensembl		ensembl112	Opossum
+monodon_monoceros	NGI_Narwhal_1	ensembl		ensembl112	Narwhal
+monopterus_albus	M_albus_1.0	ensembl		ensembl112	Swamp eel
+moschus_moschiferus	MosMos_v2_BIUU_UCD	ensembl		ensembl112	Siberian musk deer
+mus_caroli	CAROLI_EIJ_v1.1	ensembl		ensembl112	Ryukyu mouse
+mus_musculus	GRCm39	ensembl		ensembl112	Mouse
+mus_musculus_129s1svimj	129S1_SvImJ_v1	ensembl		ensembl112	Mouse 129S1/SvImJ
+mus_musculus_aj	A_J_v1	ensembl		ensembl112	Mouse A/J
+mus_musculus_akrj	AKR_J_v1	ensembl		ensembl112	Mouse AKR/J
+mus_musculus_balbcj	BALB_cJ_v1	ensembl		ensembl112	Mouse BALB/cJ
+mus_musculus_c3hhej	C3H_HeJ_v1	ensembl		ensembl112	Mouse C3H/HeJ
+mus_musculus_c57bl6nj	C57BL_6NJ_v1	ensembl		ensembl112	Mouse C57BL/6NJ
+mus_musculus_casteij	CAST_EiJ_v1	ensembl		ensembl112	Mouse CAST/EiJ
+mus_musculus_cbaj	CBA_J_v1	ensembl		ensembl112	Mouse CBA/J
+mus_musculus_dba2j	DBA_2J_v1	ensembl		ensembl112	Mouse DBA/2J
+mus_musculus_fvbnj	FVB_NJ_v1	ensembl		ensembl112	Mouse FVB/NJ
+mus_musculus_lpj	LP_J_v1	ensembl		ensembl112	Mouse LP/J
+mus_musculus_nodshiltj	NOD_ShiLtJ_v1	ensembl		ensembl112	Mouse NOD/ShiLtJ
+mus_musculus_nzohlltj	NZO_HlLtJ_v1	ensembl		ensembl112	Mouse NZO/HlLtJ
+mus_musculus_pwkphj	PWK_PhJ_v1	ensembl		ensembl112	Mouse PWK/PhJ
+mus_musculus_wsbeij	WSB_EiJ_v1	ensembl		ensembl112	Mouse WSB/EiJ
+mus_pahari	PAHARI_EIJ_v1.1	ensembl		ensembl112	Shrew mouse
+mus_spicilegus	MUSP714	ensembl		ensembl112	Steppe mouse
+mus_spretus	SPRET_EiJ_v1	ensembl		ensembl112	Algerian mouse
+mustela_putorius_furo	MusPutFur1.0	ensembl		ensembl112	Ferret
+myotis_lucifugus	Myoluc2.0	ensembl		ensembl112	Microbat
+myripristis_murdjan	fMyrMur1.1	ensembl		ensembl112	Pinecone soldierfish
+naja_naja	Nana_v5	ensembl		ensembl112	Indian cobra
+nannospalax_galili	S.galili_v1.0	ensembl		ensembl112	Upper Galilee mountains blind mole rat
+neogobius_melanostomus	RGoby_Basel_V2	ensembl		ensembl112	Round goby
+neolamprologus_brichardi	NeoBri1.0	ensembl		ensembl112	Lyretail cichlid
+neovison_vison	NNQGG.v01	ensembl		ensembl112	American mink
+nomascus_leucogenys	Nleu_3.0	ensembl		ensembl112	Gibbon
+notamacropus_eugenii	Meug_1.0	ensembl		ensembl112	Wallaby
+notechis_scutatus	TS10Xv2-PRI	ensembl		ensembl112	Mainland tiger snake
+nothobranchius_furzeri	Nfu_20140520	ensembl		ensembl112	Turquoise killifish
+nothoprocta_perdicaria	notPer1	ensembl		ensembl112	Chilean tinamou
+numida_meleagris	NumMel1.0	ensembl		ensembl112	Helmeted guineafowl
+ochotona_princeps	OchPri2.0-Ens	ensembl		ensembl112	Pika
+octodon_degus	OctDeg1.0	ensembl		ensembl112	Degu
+oncorhynchus_kisutch	Okis_V2	ensembl		ensembl112	Coho salmon
+oncorhynchus_mykiss	USDA_OmykA_1.1	ensembl		ensembl112	Rainbow trout
+oncorhynchus_tshawytscha	Otsh_v1.0	ensembl		ensembl112	Chinook salmon
+oreochromis_aureus	ASM587006v1	ensembl		ensembl112	Blue tilapia
+oreochromis_niloticus	O_niloticus_UMD_NMBU	ensembl		ensembl112	Nile tilapia
+ornithorhynchus_anatinus	mOrnAna1.p.v1	ensembl		ensembl112	Platypus
+oryctolagus_cuniculus	OryCun2.0	ensembl		ensembl112	Rabbit
+oryzias_javanicus	OJAV_1.1	ensembl		ensembl112	Javanese ricefish
+oryzias_latipes	ASM223467v1	ensembl		ensembl112	Japanese medaka HdrR
+oryzias_latipes_hni	ASM223471v1	ensembl		ensembl112	Japanese medaka HNI
+oryzias_latipes_hsok	ASM223469v1	ensembl		ensembl112	Japanese medaka HSOK
+oryzias_melastigma	Om_v0.7.RACA	ensembl		ensembl112	Indian medaka
+oryzias_sinensis	ASM858656v1	ensembl		ensembl112	Chinese medaka
+otolemur_garnettii	OtoGar3	ensembl		ensembl112	Bushbaby
+otus_sunia	OtuSun1.0	ensembl		ensembl112	Oriental scops-owl
+ovis_aries	Oar_v3.1	ensembl		ensembl112	Sheep (texel)
+ovis_aries_rambouillet	ARS-UI_Ramb_v2.0	ensembl		ensembl112	Sheep
+pan_paniscus	panpan1.1	ensembl		ensembl112	Bonobo
+pan_troglodytes	Pan_tro_3.0	ensembl		ensembl112	Chimpanzee
+panthera_leo	PanLeo1.0	ensembl		ensembl112	Lion
+panthera_pardus	PanPar1.0	ensembl		ensembl112	Leopard
+panthera_tigris_altaica	PanTig1.0	ensembl		ensembl112	Tiger
+papio_anubis	Panubis1.0	ensembl		ensembl112	Olive baboon
+parambassis_ranga	fParRan2.1	ensembl		ensembl112	Indian glassy fish
+paramormyrops_kingsleyae	PKINGS_0.1	ensembl		ensembl112	Paramormyrops kingsleyae
+parus_major	Parus_major1.1	ensembl		ensembl112	Great Tit
+pavo_cristatus	AIIM_Pcri_1.0	ensembl		ensembl112	Indian peafowl
+pelodiscus_sinensis	PelSin_1.0	ensembl		ensembl112	Chinese softshell turtle
+pelusios_castaneus	Pelusios_castaneus-1.0	ensembl		ensembl112	West African mud turtle
+periophthalmus_magnuspinnatus	PM.fa	ensembl		ensembl112	Korean mudskipper
+peromyscus_maniculatus_bairdii	HU_Pman_2.1	ensembl		ensembl112	Northern American deer mouse
+petromyzon_marinus	Pmarinus_7.0	ensembl		ensembl112	Lamprey
+phascolarctos_cinereus	phaCin_unsw_v4.1	ensembl		ensembl112	Koala
+phasianus_colchicus	ASM414374v1	ensembl		ensembl112	Ring-necked pheasant
+phocoena_sinus	mPhoSin1.pri	ensembl		ensembl112	Vaquita
+physeter_catodon	ASM283717v2	ensembl		ensembl112	Sperm whale
+piliocolobus_tephrosceles	ASM277652v2	ensembl		ensembl112	Ugandan red Colobus
+podarcis_muralis	PodMur_1.0	ensembl		ensembl112	Common wall lizard
+poecilia_formosa	PoeFor_5.1.2	ensembl		ensembl112	Amazon molly
+poecilia_latipinna	P_latipinna-1.0	ensembl		ensembl112	Sailfin molly
+poecilia_mexicana	P_mexicana-1.0	ensembl		ensembl112	Shortfin molly
+poecilia_reticulata	Guppy_female_1.0_MT	ensembl		ensembl112	Guppy
+pogona_vitticeps	pvi1.1	ensembl		ensembl112	Central bearded dragon
+pongo_abelii	Susie_PABv2	ensembl		ensembl112	Sumatran orangutan
+procavia_capensis	proCap1	ensembl		ensembl112	Hyrax
+prolemur_simus	Prosim_1.0	ensembl		ensembl112	Greater bamboo lemur
+propithecus_coquereli	Pcoq_1.0	ensembl		ensembl112	Coquerel's sifaka
+pseudonaja_textilis	EBS10Xv2-PRI	ensembl		ensembl112	Eastern brown snake
+pteropus_vampyrus	pteVam1	ensembl		ensembl112	Megabat
+pundamilia_nyererei	PunNye1.0	ensembl		ensembl112	Makobe Island cichlid
+pygocentrus_nattereri	Pygocentrus_nattereri-1.0.2	ensembl		ensembl112	Red-bellied piranha
+rattus_norvegicus	mRatBN7.2	ensembl		ensembl112	Rat
+rattus_norvegicus_shrspbbbutx	UTH_Rnor_SHRSP_BbbUtx_1.0	ensembl		ensembl112	Rat - SHRSP/BbbUtx
+rattus_norvegicus_shrutx	UTH_Rnor_SHR_Utx	ensembl		ensembl112	Rat - SHR/Utx RGD_8142385
+rattus_norvegicus_wkybbb	UTH_Rnor_WKY_Bbb_1.0	ensembl		ensembl112	Rat - WKY/Bbb RGD_1581635
+rhinolophus_ferrumequinum	mRhiFer1_v1.p	ensembl		ensembl112	Greater horseshoe bat
+rhinopithecus_bieti	ASM169854v1	ensembl		ensembl112	Black snub-nosed monkey
+rhinopithecus_roxellana	Rrox_v1	ensembl		ensembl112	Golden snub-nosed monkey
+saccharomyces_cerevisiae	R64-1-1	ensembl		ensembl112	Saccharomyces cerevisiae
+saimiri_boliviensis_boliviensis	SaiBol1.0	ensembl		ensembl112	Bolivian squirrel monkey
+salarias_fasciatus	fSalaFa1.1	ensembl		ensembl112	Jewelled blenny
+salmo_salar	Ssal_v3.1	ensembl		ensembl112	Atlantic salmon
+salmo_salar_gca021399835v1	USDA_NASsal_1.1	ensembl		ensembl112	
+salmo_salar_gca923944775v1	Ssal_Brian_v1.0	ensembl		ensembl112	
+salmo_salar_gca931346935v2	Ssal_ALTA	ensembl		ensembl112	
+salmo_trutta	fSalTru1.1	ensembl		ensembl112	Brown trout
+salvator_merianae	HLtupMer3	ensembl		ensembl112	Argentine black and white tegu
+sander_lucioperca	SLUC_FBN_1	ensembl		ensembl112	Pike-perch
+sarcophilus_harrisii	mSarHar1.11	ensembl		ensembl112	Tasmanian devil
+sciurus_vulgaris	mSciVul1.1	ensembl		ensembl112	Eurasian red squirrel
+scleropages_formosus	fSclFor1.1	ensembl		ensembl112	Asian bonytongue
+scophthalmus_maximus	ASM1334776v1	ensembl		ensembl112	Turbot
+serinus_canaria	SCA1	ensembl		ensembl112	Common canary
+seriola_dumerili	Sdu_1.0	ensembl		ensembl112	Greater amberjack
+seriola_lalandi_dorsalis	Sedor1	ensembl		ensembl112	Yellowtail amberjack
+sinocyclocheilus_anshuiensis	SAMN03320099.WGS_v1.1	ensembl		ensembl112	Blind barbel
+sinocyclocheilus_grahami	SAMN03320097.WGS_v1.1	ensembl		ensembl112	Golden-line barbel
+sinocyclocheilus_rhinocerous	SAMN03320098_v1.1	ensembl		ensembl112	Horned golden-line barbel
+sorex_araneus	COMMON_SHREW1	ensembl		ensembl112	Shrew
+sparus_aurata	fSpaAur1.1	ensembl		ensembl112	Gilthead seabream
+spermophilus_dauricus	ASM240643v1	ensembl		ensembl112	Daurian ground squirrel
+sphaeramia_orbicularis	fSphaOr1.1	ensembl		ensembl112	Orbiculate cardinalfish
+sphenodon_punctatus	ASM311381v1	ensembl		ensembl112	Tuatara
+stachyris_ruficeps	ASM869450v1	ensembl		ensembl112	Rufous-capped babbler
+stegastes_partitus	Stegastes_partitus-1.0.2	ensembl		ensembl112	Bicolor damselfish
+strigops_habroptila	bStrHab1_v1.p	ensembl		ensembl112	Kakapo
+strix_occidentalis_caurina	Soccid_v01	ensembl		ensembl112	Northern spotted owl
+struthio_camelus_australis	ASM69896v1	ensembl		ensembl112	African ostrich
+suricata_suricatta	meerkat_22Aug2017_6uvM2_HiC	ensembl		ensembl112	Meerkat
+sus_scrofa	Sscrofa11.1	ensembl		ensembl112	Pig
+sus_scrofa_bamei	Bamei_pig_v1	ensembl		ensembl112	Pig - Bamei
+sus_scrofa_berkshire	Berkshire_pig_v1	ensembl		ensembl112	Pig - Berkshire
+sus_scrofa_hampshire	Hampshire_pig_v1	ensembl		ensembl112	Pig - Hampshire
+sus_scrofa_jinhua	Jinhua_pig_v1	ensembl		ensembl112	Pig - Jinhua
+sus_scrofa_landrace	Landrace_pig_v1	ensembl		ensembl112	Pig - Landrace
+sus_scrofa_largewhite	Large_White_v1	ensembl		ensembl112	Pig - Largewhite
+sus_scrofa_meishan	Meishan_pig_v1	ensembl		ensembl112	Pig - Meishan
+sus_scrofa_pietrain	Pietrain_pig_v1	ensembl		ensembl112	Pig - Pietrain
+sus_scrofa_rongchang	Rongchang_pig_v1	ensembl		ensembl112	Pig - Rongchang
+sus_scrofa_tibetan	Tibetan_Pig_v2	ensembl		ensembl112	Pig - Tibetan
+sus_scrofa_usmarc	USMARCv1.0	ensembl		ensembl112	Pig USMARC
+sus_scrofa_wuzhishan	minipig_v1.0	ensembl		ensembl112	Pig - Wuzhishan
+taeniopygia_guttata	bTaeGut1_v1.p	ensembl		ensembl112	Zebra finch
+takifugu_rubripes	fTakRub1.2	ensembl		ensembl112	Fugu
+terrapene_carolina_triunguis	T_m_triunguis-2.0	ensembl		ensembl112	Three-toed box turtle
+tetraodon_nigroviridis	TETRAODON8	ensembl		ensembl112	Tetraodon
+theropithecus_gelada	Tgel_1.0	ensembl		ensembl112	Gelada
+tupaia_belangeri	TREESHREW	ensembl		ensembl112	Tree Shrew
+tursiops_truncatus	turTru1	ensembl		ensembl112	Dolphin
+urocitellus_parryii	ASM342692v1	ensembl		ensembl112	Arctic ground squirrel
+ursus_americanus	ASM334442v1	ensembl		ensembl112	American black bear
+ursus_maritimus	UrsMar_1.0	ensembl		ensembl112	Polar bear
+ursus_thibetanus_thibetanus	ASM966005v1	ensembl		ensembl112	Asiatic black bear
+varanus_komodoensis	ASM479886v1	ensembl		ensembl112	Komodo dragon
+vicugna_pacos	vicPac1	ensembl		ensembl112	Alpaca
+vombatus_ursinus	bare-nosed_wombat_genome_assembly	ensembl		ensembl112	Common wombat
+vulpes_vulpes	VulVul2.2	ensembl		ensembl112	Red fox
+xenopus_tropicalis	UCB_Xtro_10.0	ensembl		ensembl112	Tropical clawed frog
+xiphophorus_couchianus	Xiphophorus_couchianus-4.0.1	ensembl		ensembl112	Monterrey platyfish
+xiphophorus_maculatus	X_maculatus-5.0-male	ensembl		ensembl112	Platyfish
+zalophus_californianus	mZalCal1.pri	ensembl		ensembl112	California sea lion
+zonotrichia_albicollis	Zonotrichia_albicollis-1.0.1	ensembl		ensembl112	White-throated sparrow
+zosterops_lateralis_melanops	ASM128173v1	ensembl		ensembl112	Silver-eye
 actinidia_chinensis	Red5_PS1_1.69.0	ensemblgenomes	plants	ensemblgenomes58	Actinidia chinensis
 aegilops_tauschii	Aet_v4.0	ensemblgenomes	plants	ensemblgenomes58	Aegilops tauschii
 amborella_trichopoda	AMTR1.0	ensemblgenomes	plants	ensemblgenomes58	Amborella trichopoda
