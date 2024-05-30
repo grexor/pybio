@@ -174,7 +174,7 @@ def prepare(species="homo_sapiens", genome_version=None):
         r = f.readline()
         clines += 1
         if clines%100000==0:
-            print("pybio | {species} {genome_version} | %.2f M lines parsed, RAM GB used: %.3f" % (clines/1000000.0, process.memory_info().rss/1000000000))
+            print(f"pybio | {species} {genome_version} | %.2f M lines parsed, RAM GB used: %.3f" % (clines/1000000.0, process.memory_info().rss/1000000000))
     f.close()
     pickle.dump(gene_bins_db, open(os.path.join(annotation_folder, "gene_bins_db.pickle"), "wb"))
 
