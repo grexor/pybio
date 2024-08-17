@@ -102,7 +102,7 @@ def init():
 
 def prepare(species="homo_sapiens", genome_version=None):
     print(f"[pybio.core.genomes] {species}: processing annotation".format(species=species))
-    provider = species_db[species]["provider"]
+    provider = species_db.get(species, {}).get("provider", species)
     if genome_version==None:
         genome_version = species_db[species]["ensembl_version"]
     annotation_folder = os.path.join(pybio.config.genomes_folder, "%s.annotation.%s" % (species, genome_version))
@@ -360,7 +360,7 @@ wget {gtf_url} -O {species}.gtf.gz --no-check-certificate
 
 def star_index(species, genome_version, threads=1):
     species_capital = species.capitalize()
-    assembly = species_db[species]["assembly"]
+    assembly = species_db.get(species, {}).get("assembly", species)
     ensembl_version = genome_version.replace("ensembl", "")
     ensembl_version = ensembl_version.replace("genomes", "")
     script = """
@@ -379,13 +379,19 @@ STAR --runMode genomeGenerate --genomeSAindexNbases {genomeSAindexNbases} --geno
 
 def salmon_index(species, genome_version):
     species_capital = species.capitalize()
-    assembly = species_db[species]["assembly"]
+    assembly = species_db.get(species, {}).get("assembly", species)
     ensembl_version = genome_version.replace("ensembl", "")
     ensembl_version = ensembl_version.replace("genomes", "")
-    ftp_address = providers_ftp[species_db[species]["provider"]]
-    subfolder = species_db[species]["provider_subfolder"]
-    if subfolder!="":
-        ftp_address = f"{ftp_address}/{subfolder}"
+    try:
+        ftp_address = providers_ftp[species_db[species]["provider"]]
+    except:
+        ftp_address = ""
+    try:
+        subfolder = species_db[species]["provider_subfolder"]
+        if subfolder!="":
+            ftp_address = f"{ftp_address}/{subfolder}"
+    except:
+        ftp_address = ""
     
     script = """
 cd {gdir}
