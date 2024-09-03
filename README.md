@@ -64,3 +64,13 @@ Use the [issues page](https://github.com/grexor/pybio/issues) to report issues a
 
 * updated docs
 </details>
+
+### Citation
+
+If you are using pybio in your research, please cite:
+
+Rot, G., Wehling, A., Schmucki, R., Berntenis, N., Zhang, J. D., & Ebeling, M. (2024).
+[splicekit : an integrative toolkit for splicing analysis from short-read RNA-seq.](https://academic.oup.com/bioinformaticsadvances/article/4/1/vbae121/7735317)
+Bioinformatics Advances, 4(1). https://doi.org/10.1093/bioadv/vbae121
+
+
