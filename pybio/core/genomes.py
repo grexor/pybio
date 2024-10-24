@@ -88,6 +88,7 @@ class Utr5:
 
 def init():
     genome_species_fname_finished = os.path.join(pybio.config.genomes_folder, "genome_species.tab.finished")
+    print(genome_species_fname_finished)
     if not os.path.exists(genome_species_fname_finished):
         pybio.core.genomes.list_species_ensembl()
     f = open(os.path.join(pybio.config.genomes_folder, "genome_species.tab"), "rt")
@@ -102,7 +103,7 @@ def init():
 
 def prepare(species="homo_sapiens", genome_version=None):
     print(f"[pybio.core.genomes] {species}: processing annotation".format(species=species))
-    provider = species_db[species]["provider"]
+    provider = species_db.get(species, {}).get("provider", species)
     if genome_version==None:
         genome_version = species_db[species]["ensembl_version"]
     annotation_folder = os.path.join(pybio.config.genomes_folder, "%s.annotation.%s" % (species, genome_version))
@@ -360,7 +361,7 @@ wget {gtf_url} -O {species}.gtf.gz --no-check-certificate
 
 def star_index(species, genome_version, threads=1):
     species_capital = species.capitalize()
-    assembly = species_db[species]["assembly"]
+    assembly = species_db.get(species, {}).get("assembly", species)
     ensembl_version = genome_version.replace("ensembl", "")
     ensembl_version = ensembl_version.replace("genomes", "")
     script = """
@@ -379,13 +380,19 @@ STAR --runMode genomeGenerate --genomeSAindexNbases {genomeSAindexNbases} --geno
 
 def salmon_index(species, genome_version):
     species_capital = species.capitalize()
-    assembly = species_db[species]["assembly"]
+    assembly = species_db.get(species, {}).get("assembly", species)
     ensembl_version = genome_version.replace("ensembl", "")
     ensembl_version = ensembl_version.replace("genomes", "")
-    ftp_address = providers_ftp[species_db[species]["provider"]]
-    subfolder = species_db[species]["provider_subfolder"]
-    if subfolder!="":
-        ftp_address = f"{ftp_address}/{subfolder}"
+    try:
+        ftp_address = providers_ftp[species_db[species]["provider"]]
+    except:
+        ftp_address = ""
+    try:
+        subfolder = species_db[species]["provider_subfolder"]
+        if subfolder!="":
+            ftp_address = f"{ftp_address}/{subfolder}"
+    except:
+        ftp_address = ""
     
     script = """
 cd {gdir}
@@ -467,11 +474,14 @@ def list_species_ensembl(prepared=True):
             fasta_file = fasta_file[0]
             species_assembly = fasta_file.replace(".dna.toplevel.fa.g", "").replace(".dna.primary_assembly.fa.g", "").replace(".dna.nonchromosomal.fa.g", "").split(".")
             species_long = species_assembly[0]
+            # there are sometimes symlinks to more specific species, example
+            # https://ftp.ensembl.org/pub/release-113/fasta/ovis_aries/dna/ links to https://ftp.ensembl.org/pub/release-113/fasta/ovis_aries_rambouillet/dna/
+            if (species.capitalize()!=species_long):
+                species = species_long.lower()
             species_assembly = ".".join(species_assembly[1:])
             species_db[species] = (species, species_assembly)
             genome_data = get_genome_info(species)
             f.write(f"{species}\t{species_assembly}\tensembl\t\tensembl{ensembl_version}\t{genome_data.get('display_name', '')}\n")
-            assert(species.capitalize()==species_long)
 
         for subfolder in ["plants", "fungi", "protists", "metazoa"]:
             print(f"[pybio.core.genomes] Species list from Ensembl Genomes: {subfolder}; done once and takes ~ 1 minute")
