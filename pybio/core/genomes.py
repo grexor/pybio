@@ -88,7 +88,6 @@ class Utr5:
 
 def init():
     genome_species_fname_finished = os.path.join(pybio.config.genomes_folder, "genome_species.tab.finished")
-    print(genome_species_fname_finished)
     if not os.path.exists(genome_species_fname_finished):
         pybio.core.genomes.list_species_ensembl()
     f = open(os.path.join(pybio.config.genomes_folder, "genome_species.tab"), "rt")
@@ -100,6 +99,11 @@ def init():
         species_db[data["species"]] = {"display_name":data["display_name"], "assembly": data["assembly"], "genome_version": data["genome_version"], "provider": data["provider"], "provider_subfolder": data["provider_subfolder"]}
         r = f.readline()
     f.close()
+    # todo: update file with all genomes present
+    gfolders = glob.glob(pybio.config.genomes_folder+"/*")
+    for gfolder in gfolders:
+        if os.path.isdir(gfolder):
+            print(gfolder)
 
 def prepare(species="homo_sapiens", genome_version=None):
     print(f"[pybio.core.genomes] {species}: processing annotation".format(species=species))
@@ -273,13 +277,19 @@ def url_exists(path):
     r = requests.head(path, verify=False)
     return r.status_code == requests.codes.ok
 
+def write_ginfo_file(fname, species, genome_version):
+    f = open(fname, "wt")
+    data = {"species":species, "genome_version":genome_version}
+    json.dump(data, f, indent=4)
+    f.close()
+    return True
+
 def download_assembly(species, genome_version):
     if genome_version==None:
         return False
     species_capital = species.capitalize()
     assembly = species_db[species]["assembly"]
-    ensembl_version = genome_version.replace("ensembl", "")
-    ensembl_version = ensembl_version.replace("genomes", "")
+    ensembl_version = genome_version.replace("ensembl", "").replace("genomes", "")
 
     ftp_address = providers_ftp[species_db[species]["provider"]]
     subfolder = species_db[species]["provider_subfolder"]
@@ -293,7 +303,6 @@ def download_assembly(species, genome_version):
     # no? download nonchromosomal
     if not url_exists(fasta_url):
         fasta_url = f"{ftp_address}/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.nonchromosomal.fa.gz"
-    print(fasta_url)
     script = """
 cd {gdir}
 rm {species}.assembly.{genome_version}/* >/dev/null 2>&1
@@ -303,6 +312,10 @@ wget {fasta_url} -O {species}.fasta.gz --no-check-certificate
 gunzip -f {species}.fasta.gz
 python3 -c "import pybio; pybio.data.Fasta('{species}.fasta').split()"
 """
+
+    # write gingo file
+    ginfo_fname = "{gdir}/{species}.assembly.{genome_version}/genome.info".format(gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
+    write_ginfo_file(ginfo_fname, species, genome_version)
 
     # download FASTA and split
     print(f"[pybio.core.genomes] download FASTA for {species}.{genome_version}")
@@ -354,6 +367,10 @@ cd {species}.annotation.{genome_version}
 # https://www.biostars.org/p/279235/#279238
 wget {gtf_url} -O {species}.gtf.gz --no-check-certificate
 """
+    # write gingo file
+    ginfo_fname = "{gdir}/{species}.annotation.{genome_version}/genome.info".format(gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
+    write_ginfo_file(ginfo_fname, species, genome_version)
+
     # download GTF
     print(f"[pybio.core.genomes] download annotation GTF for {species}.{genome_version}")
     command = script.format(gtf_url=gtf_url, gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
@@ -364,6 +381,11 @@ def star_index(species, genome_version, threads=1):
     assembly = species_db.get(species, {}).get("assembly", species)
     ensembl_version = genome_version.replace("ensembl", "")
     ensembl_version = ensembl_version.replace("genomes", "")
+
+    # write gingo file
+    ginfo_fname = "{gdir}/{species}.assembly.{genome_version}.star/genome.info".format(gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
+    write_ginfo_file(ginfo_fname, species, genome_version)
+
     script = """
 cd {gdir}
 rm {species}.assembly.{genome_version}.star/* >/dev/null 2>&1
@@ -393,7 +415,11 @@ def salmon_index(species, genome_version):
             ftp_address = f"{ftp_address}/{subfolder}"
     except:
         ftp_address = ""
-    
+
+    # write gingo file
+    ginfo_fname = "{gdir}/{species}.transcripts.{genome_version}/genome.info".format(gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
+    write_ginfo_file(ginfo_fname, species, genome_version)
+
     script = """
 cd {gdir}
 rm {species}.transcripts.{genome_version}/* >/dev/null 2>&1
