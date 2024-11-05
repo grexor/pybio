@@ -168,7 +168,7 @@ if len(args.commands)>0:
         else:
             print(f"Please provide a search term for the species, otherwise all available Ensembl genome species are stored in the local database at:\n\n{pybio.config.genomes_folder}/genome_species.tab")
 
-    if args.commands[0]=="genome":
+    if args.commands[0] in ["genome", "genomes"]:
         if len(args.commands)==1:
             print("All genomes data stored at: " + pybio.config.genomes_folder)
             print(help_genome)

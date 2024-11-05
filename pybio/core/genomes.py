@@ -394,7 +394,7 @@ cd {gdir}
 rm {species}.assembly.{genome_version}.star/* >/dev/null 2>&1
 mkdir {species}.assembly.{genome_version}.star >/dev/null 2>&1
 cd {species}.assembly.{genome_version}.star
-gunzip -k ../{species}.annotation.{genome_version}/{species}.gtf.gz # -k to keep both .gz and uncompressed GTF, some tools require uncompressed GTF
+gunzip -f -k ../{species}.annotation.{genome_version}/{species}.gtf.gz # -k to keep both .gz and uncompressed GTF, some tools require uncompressed GTF
 STAR --runMode genomeGenerate --genomeSAindexNbases {genomeSAindexNbases} --genomeDir ../{species}.assembly.{genome_version}.star --genomeFastaFiles ../{species}.assembly.{genome_version}/{species}.fasta --runThreadN {threads} --sjdbGTFfile ../{species}.annotation.{genome_version}/{species}.gtf
 """
     fasta_file = f"{pybio.config.genomes_folder}/{species}.assembly.{genome_version}/{species}.fasta"

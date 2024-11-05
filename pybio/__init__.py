@@ -59,7 +59,7 @@ def genome_download(species, genome_version, args):
     else:
         print(f"[pybio genome] genome annotation at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}")
 
-    json.dump(pybio.core.genomes.genomes_present, open(os.path.join(pybio.config.genomes_folder, "genomes_ready.json"), "wt"), indent=4)
+    #json.dump(pybio.core.genomes.genomes_present, open(os.path.join(pybio.config.genomes_folder, "genomes_ready.json"), "wt"), indent=4)
 
 def genome_import(species, genome_version, args):
     print(f"pybio | genome | species {species} and version {genome_version}")
@@ -83,7 +83,7 @@ def genome_import(species, genome_version, args):
             pybio.core.genomes.genomes_present[species][genome_version]["assembly"] = False
     else:
         print(f"pybio | genome | FASTA ready at {pybio.config.genomes_folder}/{species}.assembly.{genome_version}")
-    json.dump(pybio.core.genomes.genomes_present, open(os.path.join(pybio.config.genomes_folder, "genomes_ready.json"), "wt"), indent=4)
+    #json.dump(pybio.core.genomes.genomes_present, open(os.path.join(pybio.config.genomes_folder, "genomes_ready.json"), "wt"), indent=4)
 
     annotation_folder = os.path.join(pybio.config.genomes_folder, f"{species}.annotation.{genome_version}")
     if not pybio.core.genomes.genomes_present.get(species, {}).get(genome_version, {}).get("annotation", False) or not os.path.exists(annotation_folder):
@@ -105,7 +105,7 @@ def genome_import(species, genome_version, args):
             pybio.core.genomes.genomes_present[species][genome_version]["salmon"] = False
     else:
         print(f"pybio | genome | annotation at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}")
-    json.dump(genomes_ready, open(os.path.join(pybio.config.genomes_folder, "genomes_ready.json"), "wt"), indent=4)
+    #json.dump(genomes_ready, open(os.path.join(pybio.config.genomes_folder, "genomes_ready.json"), "wt"), indent=4)
 
 def genome_prepare(species, genome_version, args):
     pybio.core.genomes.genomes_present.setdefault(species, {}).setdefault(genome_version, {}).setdefault("assembly", False)
@@ -140,7 +140,7 @@ def genome_prepare(species, genome_version, args):
         else:
             print(f"pybio | genome | salmon index ready at {pybio.config.genomes_folder}/{species}.transcripts.{genome_version}.salmon")
 
-    json.dump(pybio.core.genomes.genomes_present, open(os.path.join(pybio.config.genomes_folder, "genomes_ready.json"), "wt"), indent=4)
+    #json.dump(pybio.core.genomes.genomes_present, open(os.path.join(pybio.config.genomes_folder, "genomes_ready.json"), "wt"), indent=4)
 
 def gff4jbrowse(fname_input, fname_output):
     print(f"pybio | gff3 for JBrowse2 | {fname_input} {fname_output}")
