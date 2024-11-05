@@ -464,6 +464,7 @@ def get_genome_info(genome_id):
 def list_species_ensembl(prepared=True):
     from bs4 import BeautifulSoup
     genome_species_fname_finished = os.path.join(pybio.config.genomes_folder, "genome_species.tab.finished")
+    db = {}
     os.system(f"rm {genome_species_fname_finished} >/dev/null 2>&1")
     # download prepared file? (do not query Ensembl)
     if prepared:
@@ -507,6 +508,7 @@ def list_species_ensembl(prepared=True):
             species_db[species] = (species, species_assembly)
             genome_data = get_genome_info(species)
             f.write(f"{species}\t{species_assembly}\tensembl\t\tensembl{ensembl_version}\t{genome_data.get('display_name', '')}\n")
+            db[species] = {"display_name":genome_data.get('display_name', ''), "assembly": f"{species_assembly}", "genome_version": f"ensembl{ensembl_version}", "provider": "ensembl", "provider_subfolder": ""}
 
         for subfolder in ["plants", "fungi", "protists", "metazoa"]:
             print(f"[pybio.core.genomes] Species list from Ensembl Genomes: {subfolder}; done once and takes ~ 1 minute")
@@ -525,7 +527,10 @@ def list_species_ensembl(prepared=True):
                 genome_data = get_genome_info(species)
                 f.write(f"{species}\t{species_assembly}\tensemblgenomes\t{subfolder}\tensemblgenomes{ensemblgenomes_version}\t{genome_data.get('display_name', '')}\n")
                 assert(species.capitalize()==species_long)
+                db[species] = {"display_name":genome_data.get('display_name', ''), "assembly": f"{species_assembly}", "genome_version": f"ensemblgenomes{ensemblgenomes_version}", "provider": "ensemblgenomes", "provider_subfolder": f"{subfolder}"}
         f.close()
+
+    json.dump(db, open(os.path.join(pybio.config.genomes_folder, "ensembl.json"), "wt"), indent=4)
 
     os.system(f"touch {genome_species_fname_finished} >/dev/null 2>&1")
     print()
