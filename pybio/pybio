@@ -156,6 +156,8 @@ def handle_genome(args):
         pybio.genome_download(species, genome_version, args)
         pybio.genome_prepare(species, genome_version, args)
     elif args.fasta!=None and args.gtf!=None: # user provided genome, species, fasta, gtf, genome_version
+        species = args.commands[1]
+        args.nosalmon = True
         pybio.genome_import(species, genome_version, args)
         pybio.genome_prepare(species, genome_version, args)
     elif (args.fasta==None or args.gtf==None) and (genome_version.find("ensembl")==-1):
@@ -193,10 +195,11 @@ if len(args.commands)>0:
             potential_hits = determine_species(args.commands[1])
             display_potential_hits(potential_hits, args.commands[1])
         else:
-            print(f"Please provide a search term for the species, otherwise all available Ensembl genome species are stored in the local database at:\n\n{pybio.config.genomes_folder}/genome_species.tab")
+            print(f"Please provide a search term for the species, otherwise all available Ensembl genome species are stored in the local database at:\n\n{pybio.config.genomes_folder}/ensembl.json")
 
     if args.commands[0] in ["genome", "genomes"]:
         handle_genome(args)
+        sys.exit()
 
     if args.commands[0]=="config":
         if len(args.commands)>1:
