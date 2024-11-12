@@ -30,6 +30,7 @@ gene_bins_db = {}
 gene_bin_size = 100000
 species_db = {}
 genome_loaded = None
+genomes_present = {} # which genomes are present and ready in the genomes_folder?
 
 code = {"R": ["A", "G"], "Y": ["C", "T"], "S": ["G", "C"], "W": ["A", "T"]}
 revCode = {'A': 'T', 'T': 'A', 'U': 'A', 'G': 'C', 'C': 'G', 'R': 'Y', 'Y': 'R', 'K': 'M', 'M': 'K', 'S': 'S', 'W': 'W', 'B': 'V', 'D': 'H', 'H': 'D', 'V': 'B', 'N': 'N'}
@@ -86,20 +87,30 @@ class Utr5:
     self.stop = int(stop)-1
     self.transcript.utr5 = self
 
+def merge2d(dict1, dict2):
+    merged = dict1.copy()
+    for key, value in dict2.items():
+        if key in merged and isinstance(merged[key], dict) and isinstance(value, dict):
+            merged[key] = merge2d(merged[key], value)
+        else:
+            merged[key] = value
+    return merged
+
 def init():
-    genome_species_fname_finished = os.path.join(pybio.config.genomes_folder, "genome_species.tab.finished")
-    print(genome_species_fname_finished)
-    if not os.path.exists(genome_species_fname_finished):
+    global species_db
+    ensembldb_fname = os.path.join(pybio.config.genomes_folder, "ensembl.json")
+    genomes_present_fname = os.path.join(pybio.config.genomes_folder, "genomes.json")
+    if not os.path.exists(ensembldb_fname):
         pybio.core.genomes.list_species_ensembl()
-    f = open(os.path.join(pybio.config.genomes_folder, "genome_species.tab"), "rt")
-    header = f.readline().replace("\r", "").replace("\n", "").split("\t")
-    r = f.readline()
-    while r:
-        r = r.replace("\r", "").replace("\n", "").split("\t")
-        data = dict(zip(header, r))
-        species_db[data["species"]] = {"display_name":data["display_name"], "assembly": data["assembly"], "genome_version": data["genome_version"], "provider": data["provider"], "provider_subfolder": data["provider_subfolder"]}
-        r = f.readline()
-    f.close()
+    species_db = json.load(open(os.path.join(pybio.config.genomes_folder, "ensembl.json"), "rt"))
+    gfiles = glob.glob(pybio.config.genomes_folder+"/*/genome.info")
+    for gfile in gfiles:
+        data = json.load(open(gfile))
+        pybio.core.genomes.genomes_present = merge2d(data, pybio.core.genomes.genomes_present)
+    for species_id, species_data in pybio.core.genomes.genomes_present.items():
+        species_data["display_name"] = species_data.get("display_name", species_id)
+        species_db.setdefault(species_id.lower(), species_data)
+    json.dump(pybio.core.genomes.genomes_present, open(genomes_present_fname, "wt"), indent=4)
 
 def prepare(species="homo_sapiens", genome_version=None):
     print(f"[pybio.core.genomes] {species}: processing annotation".format(species=species))
@@ -273,13 +284,24 @@ def url_exists(path):
     r = requests.head(path, verify=False)
     return r.status_code == requests.codes.ok
 
+def write_ginfo_file(fname, data):
+    f = open(fname, "wt")
+    json.dump(data, f, indent=4)
+    f.close()
+    return True
+
+def read_ginfo_file(fname):
+    f = open(fname, "rt")
+    data = json.load(f)
+    f.close()
+    return data
+
 def download_assembly(species, genome_version):
     if genome_version==None:
         return False
     species_capital = species.capitalize()
     assembly = species_db[species]["assembly"]
-    ensembl_version = genome_version.replace("ensembl", "")
-    ensembl_version = ensembl_version.replace("genomes", "")
+    ensembl_version = genome_version.replace("ensembl", "").replace("genomes", "")
 
     ftp_address = providers_ftp[species_db[species]["provider"]]
     subfolder = species_db[species]["provider_subfolder"]
@@ -293,7 +315,6 @@ def download_assembly(species, genome_version):
     # no? download nonchromosomal
     if not url_exists(fasta_url):
         fasta_url = f"{ftp_address}/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.nonchromosomal.fa.gz"
-    print(fasta_url)
     script = """
 cd {gdir}
 rm {species}.assembly.{genome_version}/* >/dev/null 2>&1
@@ -364,12 +385,13 @@ def star_index(species, genome_version, threads=1):
     assembly = species_db.get(species, {}).get("assembly", species)
     ensembl_version = genome_version.replace("ensembl", "")
     ensembl_version = ensembl_version.replace("genomes", "")
+
     script = """
 cd {gdir}
 rm {species}.assembly.{genome_version}.star/* >/dev/null 2>&1
 mkdir {species}.assembly.{genome_version}.star >/dev/null 2>&1
 cd {species}.assembly.{genome_version}.star
-gunzip -k ../{species}.annotation.{genome_version}/{species}.gtf.gz # -k to keep both .gz and uncompressed GTF, some tools require uncompressed GTF
+gunzip -f -k ../{species}.annotation.{genome_version}/{species}.gtf.gz # -k to keep both .gz and uncompressed GTF, some tools require uncompressed GTF
 STAR --runMode genomeGenerate --genomeSAindexNbases {genomeSAindexNbases} --genomeDir ../{species}.assembly.{genome_version}.star --genomeFastaFiles ../{species}.assembly.{genome_version}/{species}.fasta --runThreadN {threads} --sjdbGTFfile ../{species}.annotation.{genome_version}/{species}.gtf
 """
     fasta_file = f"{pybio.config.genomes_folder}/{species}.assembly.{genome_version}/{species}.fasta"
@@ -393,7 +415,7 @@ def salmon_index(species, genome_version):
             ftp_address = f"{ftp_address}/{subfolder}"
     except:
         ftp_address = ""
-    
+
     script = """
 cd {gdir}
 rm {species}.transcripts.{genome_version}/* >/dev/null 2>&1
@@ -438,15 +460,14 @@ def get_genome_info(genome_id):
 
 def list_species_ensembl(prepared=True):
     from bs4 import BeautifulSoup
-    genome_species_fname_finished = os.path.join(pybio.config.genomes_folder, "genome_species.tab.finished")
-    os.system(f"rm {genome_species_fname_finished} >/dev/null 2>&1")
+    db = {}
     # download prepared file? (do not query Ensembl)
     if prepared:
         if not os.path.exists(pybio.config.genomes_folder):
             os.makedirs(pybio.config.genomes_folder)
-        genome_species_online = "https://raw.githubusercontent.com/grexor/pybio/master/ensembl/genome_species.tab"
+        genome_species_online = "https://raw.githubusercontent.com/grexor/pybio/master/ensembl/ensembl.json"
         r = requests.get(genome_species_online, allow_redirects=True, verify=False)
-        open(os.path.join(pybio.config.genomes_folder, "genome_species.tab"), "wb").write(r.content)
+        open(os.path.join(pybio.config.genomes_folder, "ensembl.json"), "wb").write(r.content)
     else:
         print("[pybio.core.genomes] Species list from Ensembl; done once and takes ~ 1 minute")
         ensembl_version = get_latest_ensembl()
@@ -458,8 +479,6 @@ def list_species_ensembl(prepared=True):
             return [node.get('href')[:-1] for node in soup.find_all('a') if node.get('href').endswith(ext)]
         if not os.path.exists(pybio.config.genomes_folder):
             os.makedirs(pybio.config.genomes_folder)
-        f = open(os.path.join(pybio.config.genomes_folder, "genome_species.tab"), "wt")
-        f.write("species\tassembly\tprovider\tprovider_subfolder\tgenome_version\tdisplay_name\n")
         for species in listFD(f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/", "/")[1:]:
             print(f"[pybio.core.genomes] Checking {species}" + " "*30, end="\r")
             dna_folder_url = f"https://ftp.ensembl.org/pub/release-{ensembl_version}/fasta/{species}/dna/"
@@ -481,7 +500,7 @@ def list_species_ensembl(prepared=True):
             species_assembly = ".".join(species_assembly[1:])
             species_db[species] = (species, species_assembly)
             genome_data = get_genome_info(species)
-            f.write(f"{species}\t{species_assembly}\tensembl\t\tensembl{ensembl_version}\t{genome_data.get('display_name', '')}\n")
+            db[species] = {"display_name":genome_data.get('display_name', ''), "assembly": f"{species_assembly}", "genome_version": f"ensembl{ensembl_version}", "provider": "ensembl", "provider_subfolder": ""}
 
         for subfolder in ["plants", "fungi", "protists", "metazoa"]:
             print(f"[pybio.core.genomes] Species list from Ensembl Genomes: {subfolder}; done once and takes ~ 1 minute")
@@ -498,16 +517,17 @@ def list_species_ensembl(prepared=True):
                 species_assembly = ".".join(species_assembly[1:])
                 species_db[species] = (species, species_assembly)
                 genome_data = get_genome_info(species)
-                f.write(f"{species}\t{species_assembly}\tensemblgenomes\t{subfolder}\tensemblgenomes{ensemblgenomes_version}\t{genome_data.get('display_name', '')}\n")
                 assert(species.capitalize()==species_long)
+                db[species] = {"display_name":genome_data.get('display_name', ''), "assembly": f"{species_assembly}", "genome_version": f"ensemblgenomes{ensemblgenomes_version}", "provider": "ensemblgenomes", "provider_subfolder": f"{subfolder}"}
         f.close()
+    # save db to ensembl.json
+    json.dump(db, open(os.path.join(pybio.config.genomes_folder, "ensembl.json"), "wt"), indent=4)
 
-    os.system(f"touch {genome_species_fname_finished} >/dev/null 2>&1")
     print()
-    print("[pybio.core.genomes] Complete species list downloaded to:", os.path.join(pybio.config.genomes_folder, "genome_species.tab"))
+    print("[pybio.core.genomes] Complete species list downloaded to:", os.path.join(pybio.config.genomes_folder, "ensembl.json"))
     print()
     print("[pybio.core.genomes] Example command to download and process homo_sapiens genome:")
-    print("$ pybio genome homo_sapiens 109")
+    print("$ pybio genome homo_sapiens 113")
 
 def load(species, genome_version=None):
     global gene_bins_db
