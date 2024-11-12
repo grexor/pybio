@@ -101,7 +101,7 @@ if len(args.commands)==0 and args.help:
 
 def is_known_species(species):
     species = species.lower()
-    return species in pybio.core.genomes.species_db
+    return species in pybio.core.genomes.species_db.keys()
 
 def determine_species(species):
     provided_species = species
@@ -139,8 +139,6 @@ def resolve_species_version(species, args):
     else:
         try:
             genome_version = args.commands[2]
-            if genome_version.find("ensembl")==-1:
-                genome_version = None
         except:
             genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)
     return species, genome_version, potential_hits

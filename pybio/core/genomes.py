@@ -97,15 +97,20 @@ def merge2d(dict1, dict2):
     return merged
 
 def init():
+    global species_db
     ensembldb_fname = os.path.join(pybio.config.genomes_folder, "ensembl.json")
+    genomes_present_fname = os.path.join(pybio.config.genomes_folder, "genomes.json")
     if not os.path.exists(ensembldb_fname):
         pybio.core.genomes.list_species_ensembl()
     species_db = json.load(open(os.path.join(pybio.config.genomes_folder, "ensembl.json"), "rt"))
-    # todo: update file with all genomes present
     gfiles = glob.glob(pybio.config.genomes_folder+"/*/genome.info")
     for gfile in gfiles:
         data = json.load(open(gfile))
         pybio.core.genomes.genomes_present = merge2d(data, pybio.core.genomes.genomes_present)
+    for species_id, species_data in pybio.core.genomes.genomes_present.items():
+        species_data["display_name"] = species_data.get("display_name", species_id)
+        species_db.setdefault(species_id.lower(), species_data)
+    json.dump(pybio.core.genomes.genomes_present, open(genomes_present_fname, "wt"), indent=4)
 
 def prepare(species="homo_sapiens", genome_version=None):
     print(f"[pybio.core.genomes] {species}: processing annotation".format(species=species))
