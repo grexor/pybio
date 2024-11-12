@@ -1,5 +1,6 @@
 # Ensembl REST API, https://rest.ensembl.org
 
+import sys
 import os
 import bisect
 import pybio
@@ -14,8 +15,8 @@ import psutil
 import pickle
 import math
 import requests
-import sys
-requests.packages.urllib3.disable_warnings()
+import urllib3
+urllib3.disable_warnings()
 
 process = psutil.Process(os.getpid())
 
@@ -465,9 +466,11 @@ def list_species_ensembl(prepared=True):
     if prepared:
         if not os.path.exists(pybio.config.genomes_folder):
             os.makedirs(pybio.config.genomes_folder)
-        genome_species_online = "https://raw.githubusercontent.com/grexor/pybio/master/ensembl/ensembl.json"
+        genome_species_online = "http://raw.githubusercontent.com/grexor/pybio/master/ensembl/ensembl.json"
         r = requests.get(genome_species_online, allow_redirects=True, verify=False)
-        open(os.path.join(pybio.config.genomes_folder, "ensembl.json"), "wb").write(r.content)
+        f = open(os.path.join(pybio.config.genomes_folder, "ensembl.json"), "wb")
+        f.write(r.content)
+        f.close()
     else:
         print("[pybio.core.genomes] Species list from Ensembl; done once and takes ~ 1 minute")
         ensembl_version = get_latest_ensembl()
@@ -520,8 +523,8 @@ def list_species_ensembl(prepared=True):
                 assert(species.capitalize()==species_long)
                 db[species] = {"display_name":genome_data.get('display_name', ''), "assembly": f"{species_assembly}", "genome_version": f"ensemblgenomes{ensemblgenomes_version}", "provider": "ensemblgenomes", "provider_subfolder": f"{subfolder}"}
         f.close()
-    # save db to ensembl.json
-    json.dump(db, open(os.path.join(pybio.config.genomes_folder, "ensembl.json"), "wt"), indent=4)
+        # save db to ensembl.json
+        json.dump(db, open(os.path.join(pybio.config.genomes_folder, "ensembl.json"), "wt"), indent=4)
 
     print()
     print("[pybio.core.genomes] Complete species list downloaded to:", os.path.join(pybio.config.genomes_folder, "ensembl.json"))
