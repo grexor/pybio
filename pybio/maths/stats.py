@@ -237,13 +237,13 @@ print stats.amean.__doc__ or whatever.
         for func, types in tuples:
             for t in types:
                 if t in self._dispatch.keys():
-                    raise ValueError, "can't have two dispatches on "+str(t)
+                    raise ValueError("can't have two dispatches on "+str(t))
                 self._dispatch[t] = func
         self._types = self._dispatch.keys()
 
     def __call__(self, arg1, *args, **kw):
         if type(arg1) not in self._types:
-            raise TypeError, "don't know how to dispatch %s arguments" %  type(arg1)
+            raise TypeError("don't know how to dispatch %s arguments" %  type(arg1))
         return apply(self._dispatch[type(arg1)], (arg1,) + args, kw)
 
 
@@ -464,7 +464,7 @@ given by inlist.
 Usage:   lscoreatpercentile(inlist,percent)
 """
     if percent > 1:
-        print "\nDividing percent>1 by 100 in lscoreatpercentile().\n"
+        print ("\nDividing percent>1 by 100 in lscoreatpercentile().\n")
         percent = percent / 100.0
     targetcf = percent*len(inlist)
     h, lrl, binsize, extras = histogram(inlist)
@@ -526,7 +526,7 @@ Returns: list of bin values, lowerreallimit, binsize, extrapoints
         except:
             extrapoints = extrapoints + 1
     if (extrapoints > 0 and printextras == 1):
-        print '\nPoints outside given histogram range =',extrapoints
+        print('\nPoints outside given histogram range =',extrapoints)
     return (bins, lowerreallimit, binsize, extrapoints)
 
 
@@ -590,7 +590,7 @@ Returns: transformed data for use in an ANOVA
         if v[j] - mean(nargs[j]) > TINY:
             check = 0
     if check <> 1:
-        raise ValueError, 'Problem in obrientransform.'
+        raise ValueError('Problem in obrientransform.')
     else:
         return nargs
 
@@ -743,11 +743,11 @@ Returns: appropriate statistic name, value, and probability
 """
     samples = ''
     while samples not in ['i','r','I','R','c','C']:
-        print '\nIndependent or related samples, or correlation (i,r,c): ',
+        print ('\nIndependent or related samples, or correlation (i,r,c): ')
         samples = raw_input()
 
     if samples in ['i','I','r','R']:
-        print '\nComparing variances ...',
+        print ('\nComparing variances ...')
 # USE O'BRIEN'S TEST FOR HOMOGENEITY OF VARIANCE, Maxwell & delaney, p.112
         r = obrientransform(x,y)
         f,p = F_oneway(pstat.colex(r,0),pstat.colex(r,1))
@@ -759,14 +759,14 @@ Returns: appropriate statistic name, value, and probability
         if samples in ['i','I']:
             if vartype[0]=='e':
                 t,p = ttest_ind(x,y,0)
-                print '\nIndependent samples t-test:  ', round(t,4),round(p,4)
+                print ('\nIndependent samples t-test:  ', round(t,4),round(p,4))
             else:
                 if len(x)>20 or len(y)>20:
                     z,p = ranksums(x,y)
-                    print '\nRank Sums test (NONparametric, n>20):  ', round(z,4),round(p,4)
+                    print ('\nRank Sums test (NONparametric, n>20):  ', round(z,4),round(p,4))
                 else:
                     u,p = mannwhitneyu(x,y)
-                    print '\nMann-Whitney U-test (NONparametric, ns<20):  ', round(u,4),round(p,4)
+                    print ('\nMann-Whitney U-test (NONparametric, ns<20):  ', round(u,4),round(p,4))
 
         else:  # RELATED SAMPLES
             if vartype[0]=='e':
@@ -808,7 +808,7 @@ Returns: Pearson's r value, two-tailed p-value
 """
     TINY = 1.0e-30
     if len(x) <> len(y):
-        raise ValueError, 'Input values not paired in pearsonr.  Aborting.'
+        raise ValueError('Input values not paired in pearsonr.  Aborting.')
     n = len(x)
     x = map(float,x)
     y = map(float,y)
@@ -833,7 +833,7 @@ Returns: Spearman's r, two-tailed p-value
 """
     TINY = 1e-30
     if len(x) <> len(y):
-        raise ValueError, 'Input values not paired in spearmanr.  Aborting.'
+        raise ValueError('Input values not paired in spearmanr.  Aborting.')
     n = len(x)
     rankx = rankdata(x)
     ranky = rankdata(y)
@@ -858,11 +858,11 @@ Returns: Point-biserial r, two-tailed p-value
 """
     TINY = 1e-30
     if len(x) <> len(y):
-        raise ValueError, 'INPUT VALUES NOT PAIRED IN pointbiserialr.  ABORTING.'
+        raise ValueError('INPUT VALUES NOT PAIRED IN pointbiserialr.  ABORTING.')
     data = pstat.abut(x,y)
     categories = pstat.unique(x)
     if len(categories) <> 2:
-        raise ValueError, "Exactly 2 categories required for pointbiserialr()."
+        raise ValueError("Exactly 2 categories required for pointbiserialr().")
     else:   # there are 2 categories, continue
         codemap = pstat.abut(categories,range(2))
         recoded = pstat.recode(data,codemap,0)
@@ -923,7 +923,7 @@ Returns: slope, intercept, r, two-tailed prob, sterr-of-estimate
 """
     TINY = 1.0e-20
     if len(x) <> len(y):
-        raise ValueError, 'Input values not paired in linregress.  Aborting.'
+        raise ValueError('Input values not paired in linregress.  Aborting.')
     n = len(x)
     x = map(float,x)
     y = map(float,y)
@@ -1016,7 +1016,7 @@ Usage:   lttest_rel(a,b,printit=0,name1='Sample1',name2='Sample2',writemode='a')
 Returns: t-value, two-tailed prob
 """
     if len(a)<>len(b):
-        raise ValueError, 'Unequal length lists in ttest_rel.'
+        raise ValueError('Unequal length lists in ttest_rel.')
     x1 = mean(a)
     x2 = mean(b)
     v1 = var(a)
@@ -1120,7 +1120,7 @@ Returns: u-statistic, one-tailed p-value (i.e., p(z(U)))
     smallu = min(u1,u2)
     T = math.sqrt(tiecorrect(ranked))  # correction factor for tied scores
     if T == 0:
-        raise ValueError, 'All numbers are identical in lmannwhitneyu'
+        raise ValueError('All numbers are identical in lmannwhitneyu')
     sd = math.sqrt(T*n1*n2*(n1+n2+1)/12.0)
     z = abs((bigu-n1*n2/2.0) / sd)  # normal approximation for prob calc
     return smallu, 1.0 - zprob(z)
@@ -1182,7 +1182,7 @@ Usage:   lwilcoxont(x,y)
 Returns: a t-statistic, two-tail probability estimate
 """
     if len(x) <> len(y):
-        raise ValueError, 'Unequal N in wilcoxont.  Aborting.'
+        raise ValueError('Unequal N in wilcoxont.  Aborting.')
     d=[]
     for i in range(len(x)):
         diff = x[i] - y[i]
@@ -1236,7 +1236,7 @@ Returns: H-statistic (corrected for ties), associated p-value
     h = 12.0 / (totaln*(totaln+1)) * ssbn - 3*(totaln+1)
     df = len(args) - 1
     if T == 0:
-        raise ValueError, 'All numbers are identical in lkruskalwallish'
+        raise ValueError('All numbers are identical in lkruskalwallish')
     h = h / float(T)
     return h, chisqprob(h,df)
 
