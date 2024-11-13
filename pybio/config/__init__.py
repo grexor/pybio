@@ -36,3 +36,9 @@ def init(genomes_folder=None):
         f.close()
         print(f"[pybio] genome folder changed to: '{genomes_folder}'")
 
+try:
+    shell
+except:
+    shell = os.environ.get('SHELL') # environment set
+    if shell == "":
+        shell = "/bin/bash" # default
