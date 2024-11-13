@@ -186,7 +186,7 @@ if len(args.commands)>0:
         print(fasta_file)
         print(gtf_file)
         print(gff3_file)
-        sys.exit(0)
+        sys.exit()
 
     if args.commands[0] in ["species", "search"]:
         if len(args.commands)>1:
@@ -194,6 +194,7 @@ if len(args.commands)>0:
             display_potential_hits(potential_hits, args.commands[1])
         else:
             print(f"Please provide a search term for the species, otherwise all available Ensembl genome species are stored in the local database at:\n\n{pybio.config.genomes_folder}/ensembl.json")
+        sys.exit()
 
     if args.commands[0] in ["genome", "genomes"]:
         handle_genome(args)
@@ -202,6 +203,7 @@ if len(args.commands)>0:
     if args.commands[0]=="config":
         if len(args.commands)>1:
             pybio.config.init(args.commands[1]) # pybio config genome_folder
+        sys.exit()
 
     if args.commands[0]=="sam2bam":
         if len(args.commands) not in [3]:
@@ -209,9 +211,10 @@ if len(args.commands)>0:
             sys.exit()
         input_fname = args.commands[1]
         output_fname = args.commands[2]
-        os.system(f"{pybio.config.shell} -c '{pybio.config.shell} -c samtools view -@ {args.threads} -F 4 -bS {input_fname} -o {output_fname} # -F 4 means only mapped reads'")
-        os.system(f"{pybio.config.shell} -c '{pybio.config.shell} -c samtools sort {output_fname} -o {output_fname} -@ {args.threads}'")
-        os.system(f"{pybio.config.shell} -c '{pybio.config.shell} -c samtools index {output_fname} -@ {args.threads}'")
+        os.system(f"{pybio.config.shell} -c 'samtools view -@ {args.threads} -F 4 -bS {input_fname} -o {output_fname} # -F 4 means only mapped reads'")
+        os.system(f"{pybio.config.shell} -c 'samtools sort {output_fname} -o {output_fname} -@ {args.threads}'")
+        os.system(f"{pybio.config.shell} -c 'samtools index {output_fname} -@ {args.threads}'")
+        sys.exit()
 
     if args.commands[0]=="gff4jbrowse":
         if len(args.commands) not in [3]:
@@ -220,6 +223,7 @@ if len(args.commands)>0:
         file1=args.commands[1]
         file2=args.commands[2]
         pybio.gff4jbrowse(file1, file2)
+        sys.exit()
 
     if args.commands[0]=="star":
         if len(args.commands) not in [4,5]:
@@ -233,7 +237,7 @@ if len(args.commands)>0:
             genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)
         if genome_version==None:
             print("Could not determine genome version")
-            sys.exit(0)
+            sys.exit()
         star_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.{genome_version}.star")
         if len(args.commands)==4:
             file1=args.commands[2]
@@ -265,6 +269,7 @@ if len(args.commands)>0:
         os.system(f"{pybio.config.shell} -c 'mv {output}_Log.progress.out {output}.progress.txt'")
         os.system(f"{pybio.config.shell} -c 'rm {output}_Aligned.out.sam'")
         os.system(f"{pybio.config.shell} -c 'mv {output}_SJ.out.tab {output}.splice.tab'")
+        sys.exit()
 
     # lastly, is the first parameter maybe a genome name, species name?
     handle_genome(args)
