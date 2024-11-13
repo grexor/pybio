@@ -209,9 +209,9 @@ if len(args.commands)>0:
             sys.exit()
         input_fname = args.commands[1]
         output_fname = args.commands[2]
-        os.system(f"samtools view -@ {args.threads} -F 4 -bS {input_fname} -o {output_fname} # -F 4 means only mapped reads")
-        os.system(f"samtools sort {output_fname} -o {output_fname} -@ {args.threads}")
-        os.system(f"samtools index {output_fname} -@ {args.threads}")
+        os.system(f"{pybio.config.shell} -c '{pybio.config.shell} -c samtools view -@ {args.threads} -F 4 -bS {input_fname} -o {output_fname} # -F 4 means only mapped reads'")
+        os.system(f"{pybio.config.shell} -c '{pybio.config.shell} -c samtools sort {output_fname} -o {output_fname} -@ {args.threads}'")
+        os.system(f"{pybio.config.shell} -c '{pybio.config.shell} -c samtools index {output_fname} -@ {args.threads}'")
 
     if args.commands[0]=="gff4jbrowse":
         if len(args.commands) not in [3]:
@@ -255,17 +255,16 @@ if len(args.commands)>0:
             add_params.append("--outSAMstrandField intronMotif")
         add_params = " ".join(add_params)
         if file2!=None: # paired-end
-            print(f"STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat {add_params}")
-            os.system(f"STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat {add_params}")
+            os.system(f"{pybio.config.shell} -c 'STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat {add_params}'")
         if file2==None: # single-end
-            os.system(f"STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} --readFilesCommand zcat {add_params}")
+            os.system(f"{pybio.config.shell} -c 'STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} --readFilesCommand zcat {add_params}'")
 
-        os.system(f"pybio sam2bam {output}_Aligned.out.sam {output}.bam -threads {args.threads}")
-        os.system(f"mv {output}_Log.final.out {output}.stats.txt")
-        os.system(f"mv {output}_Log.out {output}.log.txt")
-        os.system(f"mv {output}_Log.progress.out {output}.progress.txt")
-        os.system(f"rm {output}_Aligned.out.sam")
-        os.system(f"mv {output}_SJ.out.tab {output}.splice.tab")
+        os.system(f"{pybio.config.shell} -c 'pybio sam2bam {output}_Aligned.out.sam {output}.bam -threads {args.threads}'")
+        os.system(f"{pybio.config.shell} -c 'mv {output}_Log.final.out {output}.stats.txt'")
+        os.system(f"{pybio.config.shell} -c 'mv {output}_Log.out {output}.log.txt'")
+        os.system(f"{pybio.config.shell} -c 'mv {output}_Log.progress.out {output}.progress.txt'")
+        os.system(f"{pybio.config.shell} -c 'rm {output}_Aligned.out.sam'")
+        os.system(f"{pybio.config.shell} -c 'mv {output}_SJ.out.tab {output}.splice.tab'")
 
     # lastly, is the first parameter maybe a genome name, species name?
     handle_genome(args)

@@ -316,7 +316,7 @@ def download_assembly(species, genome_version):
     # no? download nonchromosomal
     if not url_exists(fasta_url):
         fasta_url = f"{ftp_address}/release-{ensembl_version}/fasta/{species}/dna/{species_capital}.{assembly}.dna.nonchromosomal.fa.gz"
-    script = """
+    script = """#!{shell}
 cd {gdir}
 rm {species}.assembly.{genome_version}/* >/dev/null 2>&1
 mkdir {species}.assembly.{genome_version} >/dev/null 2>&1
@@ -328,7 +328,7 @@ python3 -c "import pybio; pybio.data.Fasta('{species}.fasta').split()"
 
     # download FASTA and split
     print(f"[pybio.core.genomes] download FASTA for {species}.{genome_version}")
-    command = script.format(gdir=pybio.config.genomes_folder, fasta_url=fasta_url, species=species, species_capital=species_capital, assembly=assembly, genome_version=genome_version, ensembl_version=ensembl_version)
+    command = script.format(shell=pybio.config.shell, gdir=pybio.config.genomes_folder, fasta_url=fasta_url, species=species, species_capital=species_capital, assembly=assembly, genome_version=genome_version, ensembl_version=ensembl_version)
     return os.system(command)
 
 def download_annotation(species, genome_version):
@@ -349,7 +349,7 @@ def download_annotation(species, genome_version):
     # no? download the toplevel
     if not url_exists(gff3_url):
         gff3_url = f"{ftp_address}/release-{ensembl_version}/gff3/{species}/{species_capital}.{assembly}.{ensembl_version}.gff3.gz"
-    script = """
+    script = """#!{shell}
 cd {gdir}
 rm {species}.annotation.{genome_version}/* >/dev/null 2>&1
 mkdir {species}.annotation.{genome_version} >/dev/null 2>&1
@@ -359,7 +359,7 @@ wget {gff3_url} -O {species}.gff3.gz --no-check-certificate
 """
     # download GFF3
     print(f"[pybio.core.genomes] download annotation GFF3 for {species}.{genome_version}")
-    command = script.format(gff3_url=gff3_url, gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
+    command = script.format(shell=pybio.config.shell, gff3_url=gff3_url, gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
     print(command)
     os.system(command)
 
@@ -369,7 +369,7 @@ wget {gff3_url} -O {species}.gff3.gz --no-check-certificate
     if not url_exists(gtf_url):
         gtf_url = f"{ftp_address}/release-{ensembl_version}/gtf/{species}/{species_capital}.{assembly}.{ensembl_version}.gtf.gz"
 
-    script = """
+    script = """#!{shell}
 cd {gdir}
 mkdir {species}.annotation.{genome_version} >/dev/null 2>&1
 cd {species}.annotation.{genome_version}
@@ -378,7 +378,7 @@ wget {gtf_url} -O {species}.gtf.gz --no-check-certificate
 """
     # download GTF
     print(f"[pybio.core.genomes] download annotation GTF for {species}.{genome_version}")
-    command = script.format(gtf_url=gtf_url, gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
+    command = script.format(shell=pybio.config.shell, gtf_url=gtf_url, gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
     return os.system(command)
 
 def star_index(species, genome_version, threads=1):
@@ -387,7 +387,7 @@ def star_index(species, genome_version, threads=1):
     ensembl_version = genome_version.replace("ensembl", "")
     ensembl_version = ensembl_version.replace("genomes", "")
 
-    script = """
+    script = """#!{shell}
 cd {gdir}
 rm {species}.assembly.{genome_version}.star/* >/dev/null 2>&1
 mkdir {species}.assembly.{genome_version}.star >/dev/null 2>&1
@@ -398,7 +398,7 @@ STAR --runMode genomeGenerate --genomeSAindexNbases {genomeSAindexNbases} --geno
     fasta_file = f"{pybio.config.genomes_folder}/{species}.assembly.{genome_version}/{species}.fasta"
     fasta_size = os.path.getsize(fasta_file)
     genomeSAindexNbases = int(min(14, math.log(fasta_size, 2)/2 - 1))
-    command = script.format(threads=threads, genomeSAindexNbases=genomeSAindexNbases, gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
+    command = script.format(shell=pybio.config.shell, threads=threads, genomeSAindexNbases=genomeSAindexNbases, gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
     return os.system(command)
 
 def salmon_index(species, genome_version):
@@ -417,7 +417,7 @@ def salmon_index(species, genome_version):
     except:
         ftp_address = ""
 
-    script = """
+    script = """#!{shell}
 cd {gdir}
 rm {species}.transcripts.{genome_version}/* >/dev/null 2>&1
 mkdir {species}.transcripts.{genome_version} >/dev/null 2>&1
@@ -427,7 +427,7 @@ wget {ftp_address}/release-{ensembl_version}/fasta/{species}/cdna/{species_capit
 cd {gdir}
 salmon index -t {species}.transcripts.{genome_version}/{species}.transcripts.fasta.gz -i {species}.transcripts.{genome_version}.salmon
 """
-    command = script.format(ftp_address=ftp_address, gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
+    command = script.format(shell=pybio.config.shell, ftp_address=ftp_address, gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
     return os.system(command)
 
 def get_latest_ensembl():
