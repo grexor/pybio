@@ -127,7 +127,7 @@ def display_potential_hits(potential_hits, search_text):
         print()
     sys.exit(1)
 
-def resolve_species_version(species, args):
+def resolve_species_version(species, args, downloaded_only=False):
     known_species = is_known_species(species)
     potential_hits = []
     if not known_species:
@@ -136,12 +136,34 @@ def resolve_species_version(species, args):
             species = potential_hits[0][1]
     if args.genome_version!=None:
         genome_version = args.genome_version
-    else:
-        try:
-            genome_version = args.commands[2]
-        except:
-            genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)
-    return species, genome_version, potential_hits
+        return species, genome_version, potential_hits
+    if len(args.commands)>=3:
+        genome_version = args.commands[2]
+        return species, genome_version, potential_hits
+    if len(args.commands)>=2:
+        if args.commands[0] not in ["search", "genome", "path", "species"]:
+            genome_version = args.commands[1]
+            return species, genome_version, potential_hits
+    genome_version = determine_genome_version(species, downloaded_only=downloaded_only)
+    return species.lower(), genome_version, potential_hits
+
+def determine_genome_version(species, downloaded_only):
+    potential_versions = []
+    if downloaded_only:
+        L = pybio.core.genomes.genomes_present[species]
+        for k,v in L.items():
+            if isinstance(v, dict):
+                ke = k.replace("ensemblgenomes", "").replace("ensembl","")
+                try:
+                    ke = int(ke)
+                    potential_versions = [k] + potential_versions
+                except:
+                    potential_versions.append(k)
+        if len(potential_versions)>0:
+            return potential_versions[0]
+        else:
+            return None
+    return pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)
 
 def handle_genome(args):
     species, genome_version, potential_hits = resolve_species_version(args.commands[0], args)
@@ -167,22 +189,29 @@ def handle_genome(args):
         print("$ pybio genome homo_sapiens ensembl110\n")
         print("Ommiting the genome version will download the latest Ensembl release of the genome.\n")
 
-if len(args.commands)>0:     
+if len(args.commands)>0:
+
+    # make all names in the parameters lower case (species)
+    args.commands = [val.lower() for val in args.commands]
 
     if args.commands[0]=="path":
         if len(args.commands)<2:
             print("Please provide species, e.g.:\n\n$ pybio path homo_sapiens\n")
             sys.exit(0)
         species = args.commands[1]
-        species, genome_version, potential_hits = resolve_species_version(species, args)
-        if genome_version==None:
-            print(f"pybio couldn't find any genomes for species '{species}'.\nPlease provide a valid genome species to retrieve paths.")
-            sys.exit(0)
+        # genome_version can also be the second command line parameter
+        # $ pybio path homo_sapiens genome_version
+        # or can be specified as named parameter
+        # $ pybio path homo_sapiens -genome_version refseq
+        species, genome_version, potential_hits = resolve_species_version(species, args, downloaded_only=True) 
         annotation_folder = os.path.join(pybio.config.genomes_folder, "%s.annotation.%s" % (species, genome_version))
         assembly_folder = os.path.join(pybio.config.genomes_folder, "%s.assembly.%s" % (species, genome_version))
         fasta_file = os.path.join(assembly_folder, f"{species}.fasta")
         gtf_file = os.path.join(annotation_folder, f"{species}.gtf.gz")
         gff3_file = os.path.join(annotation_folder, f"{species}.gff3.gz")
+        if not os.path.exists(fasta_file) or genome_version==None:
+            print(f"pybio couldn't find any genomes for species '{species}' with genome version {genome_version}.\nPlease provide a valid genome species to retrieve paths.")
+            sys.exit(0)
         print(fasta_file)
         print(gtf_file)
         print(gff3_file)
@@ -248,14 +277,11 @@ if len(args.commands)>0:
             file2=args.commands[3]
             output = args.commands[4]
 
-        # remove .bam if provided
-        if output.endswith(".bam"):
+        if output.endswith(".bam"): # remove .bam if provided
             output = output[:-4]
 
-        # --outFilterMultimapNmax 1
-        # --outSAMstrandField intronMotif
         add_params = []
-        if args.xs:
+        if args.xs: # --outFilterMultimapNmax 1 --outSAMstrandField intronMotif
             add_params.append("--outSAMstrandField intronMotif")
         add_params = " ".join(add_params)
         if file2!=None: # paired-end
@@ -271,5 +297,4 @@ if len(args.commands)>0:
         os.system(f"{pybio.config.shell} -c 'mv {output}_SJ.out.tab {output}.splice.tab'")
         sys.exit()
 
-    # lastly, is the first parameter maybe a genome name, species name?
-    handle_genome(args)
+    handle_genome(args) # lastly: is the first parameter maybe a genome / species name?
