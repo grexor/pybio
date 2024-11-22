@@ -111,7 +111,7 @@ def init():
     for species_id, species_data in pybio.core.genomes.genomes_present.items():
         species_data["display_name"] = species_data.get("display_name", species_id)
         # update all genomes with info of downloaded genomes
-        species_db[species_id] = merge2d(species_data, species_db[species_id])
+        species_db[species_id] = merge2d(species_data, species_db.get(species_id, {}))
     json.dump(pybio.core.genomes.genomes_present, open(genomes_present_fname, "wt"), indent=4)
 
 def prepare(species="homo_sapiens", genome_version=None):
