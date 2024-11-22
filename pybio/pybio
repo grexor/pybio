@@ -191,9 +191,6 @@ def handle_genome(args):
 
 if len(args.commands)>0:
 
-    # make all names in the parameters lower case (species)
-    args.commands = [val.lower() for val in args.commands]
-
     if args.commands[0]=="path":
         if len(args.commands)<2:
             print("Please provide species, e.g.:\n\n$ pybio path homo_sapiens\n")
