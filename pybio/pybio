@@ -136,21 +136,22 @@ def resolve_species_version(species, args, downloaded_only=False):
             species = potential_hits[0][1]
     if args.genome_version!=None:
         genome_version = args.genome_version
-        return species, genome_version, potential_hits
+        return species.lower(), genome_version, potential_hits
     if len(args.commands)>=3:
         genome_version = args.commands[2]
-        return species, genome_version, potential_hits
+        return species.lower(), genome_version, potential_hits
     if len(args.commands)>=2:
         if args.commands[0] not in ["search", "genome", "path", "species"]:
             genome_version = args.commands[1]
-            return species, genome_version, potential_hits
+            return species.lower(), genome_version, potential_hits
     genome_version = determine_genome_version(species, downloaded_only=downloaded_only)
     return species.lower(), genome_version, potential_hits
 
 def determine_genome_version(species, downloaded_only):
+    species = species.lower()
     potential_versions = []
     if downloaded_only:
-        L = pybio.core.genomes.genomes_present[species]
+        L = pybio.core.genomes.genomes_present.get(species, {})
         for k,v in L.items():
             if isinstance(v, dict):
                 ke = k.replace("ensemblgenomes", "").replace("ensembl","")
@@ -177,7 +178,7 @@ def handle_genome(args):
         pybio.genome_download(species, genome_version, args)
         pybio.genome_prepare(species, genome_version, args)
     elif args.fasta!=None and args.gtf!=None: # user provided genome, species, fasta, gtf, genome_version
-        species = args.commands[1]
+        species = args.commands[1].lower()
         args.nosalmon = True
         pybio.genome_import(species, genome_version, args)
         pybio.genome_prepare(species, genome_version, args)
