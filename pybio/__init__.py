@@ -28,7 +28,7 @@ pybio.path.init()
 pybio.core.genomes.init()
 
 def genome_download(species, genome_version, args):
-    print(f"pybio | genome | download species {species} and version {genome_version}")
+    print(f"pybio | genome | download/check | {species} | {genome_version}")
     pybio.core.genomes.genomes_present.setdefault(species, {}).setdefault(genome_version, {}).setdefault("assembly", False)
     pybio.core.genomes.genomes_present.setdefault(species, {}).setdefault(genome_version, {}).setdefault("annotation", False)
     assembly_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.{genome_version}")
@@ -42,7 +42,7 @@ def genome_download(species, genome_version, args):
         else:
             pybio.core.genomes.genomes_present[species][genome_version]["assembly"] = False
     else:
-        print(f"pybio | genome | FASTA ready at {pybio.config.genomes_folder}/{species}.assembly.{genome_version}")
+        print(f"pybio | genome | assembly | {pybio.config.genomes_folder}/{species}.assembly.{genome_version}")
 
     annotation_folder = os.path.join(pybio.config.genomes_folder, f"{species}.annotation.{genome_version}")
     if not pybio.core.genomes.genomes_present.get(species, {}).get(genome_version, {}).get("annotation", False) or not os.path.exists(annotation_folder):
@@ -57,7 +57,7 @@ def genome_download(species, genome_version, args):
         else:
             pybio.core.genomes.genomes_present[species][genome_version]["annotation"] = False
     else:
-        print(f"[pybio genome] genome annotation at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}")
+        print(f"pybio | genome | annotation | {pybio.config.genomes_folder}/{species}.annotation.{genome_version}")
 
     #json.dump(pybio.core.genomes.genomes_present, open(os.path.join(pybio.config.genomes_folder, "genomes_ready.json"), "wt"), indent=4)
 
@@ -87,7 +87,7 @@ def genome_import(species, genome_version, args):
     annotation_folder = os.path.join(pybio.config.genomes_folder, f"{species}.annotation.{genome_version}")
     if not pybio.core.genomes.genomes_present.get(species, {}).get(genome_version, {}).get("annotation", False) or not os.path.exists(annotation_folder):
         gtf_fname = args.gtf
-        print(f"[pybio genome] importing {gtf_fname} to {annotation_folder}/{species}.gtf.gz")
+        print(f"pybio | genome | importing {gtf_fname} to {annotation_folder}/{species}.gtf.gz")
         if gtf_fname.endswith(".gz"):
             os.system(f"mkdir {annotation_folder}; cp {gtf_fname} {annotation_folder}/{species}.gtf.gz; gunzip -f {annotation_folder}/{species}.gtf.gz")
         else:
@@ -121,7 +121,7 @@ def genome_prepare(species, genome_version, args):
             else:
                 pybio.core.genomes.genomes_present[species][genome_version]["STAR"] = False
         else:
-            print(f"pybio | genome | STAR index ready at {pybio.config.genomes_folder}/{species}.assembly.{genome_version}.star")
+            print(f"pybio | genome | STAR index | {pybio.config.genomes_folder}/{species}.assembly.{genome_version}.star")
 
     if pybio.utils.is_tool("salmon") and not args.nosalmon:
         salmon_folder = os.path.join(pybio.config.genomes_folder, f"{species}.transcripts.{genome_version}.salmon")
@@ -137,7 +137,7 @@ def genome_prepare(species, genome_version, args):
             else:
                 pybio.core.genomes.genomes_present[species][genome_version]["salmon"] = False
         else:
-            print(f"pybio | genome | salmon index ready at {pybio.config.genomes_folder}/{species}.transcripts.{genome_version}.salmon")
+            print(f"pybio | genome | salmon index | {pybio.config.genomes_folder}/{species}.transcripts.{genome_version}.salmon")
 
     #json.dump(pybio.core.genomes.genomes_present, open(os.path.join(pybio.config.genomes_folder, "genomes_ready.json"), "wt"), indent=4)
 
