@@ -172,7 +172,7 @@ def handle_genome(args):
     if len(potential_hits)>1:
         display_potential_hits(potential_hits, species)
     if genome_version==None:
-        print("Please provide a custom or valid Ensembl genome version, examples: custom_genome_v1 / ensembl113 / ensemblgenomes57")
+        print("Could not identify species name.\n")
         sys.exit(1)
     if genome_version.find("ensembl")!=-1:
         pybio.genome_download(species, genome_version, args)
