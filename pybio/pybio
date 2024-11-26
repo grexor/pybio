@@ -177,7 +177,7 @@ def handle_genome(args):
         pybio.genome_download(species, genome_version, args)
         pybio.genome_prepare(species, genome_version, args)
     elif args.fasta!=None and args.gtf!=None: # user provided genome, species, fasta, gtf, genome_version
-        species = args.commands[1]
+        species = args.commands[1].lower()
         args.nosalmon = True
         pybio.genome_import(species, genome_version, args)
         pybio.genome_prepare(species, genome_version, args)
