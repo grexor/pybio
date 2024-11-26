@@ -255,9 +255,10 @@ if len(args.commands)>0:
     if args.commands[0]=="star":
         if len(args.commands) not in [4,5]:
             print(help_star)
-            sys.exit()
-        
-        species = args.commands[1]
+            sys.exit()       
+
+        species = args.commands[1].lower()
+
         if args.genome_version!=None:
             genome_version = args.genome_version
         else:
