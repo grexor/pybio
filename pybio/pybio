@@ -148,9 +148,10 @@ def resolve_species_version(species, args, downloaded_only=False):
     return species.lower(), genome_version, potential_hits
 
 def determine_genome_version(species, downloaded_only):
+    species = species.lower()
     potential_versions = []
     if downloaded_only:
-        L = pybio.core.genomes.genomes_present[species]
+        L = pybio.core.genomes.genomes_present.get(species, {})
         for k,v in L.items():
             if isinstance(v, dict):
                 ke = k.replace("ensemblgenomes", "").replace("ensembl","")
