@@ -136,14 +136,14 @@ def resolve_species_version(species, args, downloaded_only=False):
             species = potential_hits[0][1]
     if args.genome_version!=None:
         genome_version = args.genome_version
-        return species, genome_version, potential_hits
+        return species.lower(), genome_version, potential_hits
     if len(args.commands)>=3:
         genome_version = args.commands[2]
-        return species, genome_version, potential_hits
+        return species.lower(), genome_version, potential_hits
     if len(args.commands)>=2:
         if args.commands[0] not in ["search", "genome", "path", "species"]:
             genome_version = args.commands[1]
-            return species, genome_version, potential_hits
+            return species.lower(), genome_version, potential_hits
     genome_version = determine_genome_version(species, downloaded_only=downloaded_only)
     return species.lower(), genome_version, potential_hits
 
