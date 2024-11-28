@@ -17,6 +17,8 @@ parser.add_argument("-gtf", "--gtf", help="GTF file to import")
 parser.add_argument("-threads", "--threads", '-t', '--t', default="1", help="Number of threads to use (default: 1)")
 parser.add_argument("-help", "-h", "--help", action="store_true")
 parser.add_argument("-xs", "--xs", help="Add '--outSAMstrandField intronMotif'", action="store_false")
+parser.add_argument("-genomeSAindexNbases", "--genomeSAindexNbases", help="STAR genomeSAindexNbases")
+parser.add_argument("-genomeChrBinNbits", "--genomeChrBinNbits", help="STAR genomeChrBinNbits")
 args = parser.parse_args()
 
 help_0 = """

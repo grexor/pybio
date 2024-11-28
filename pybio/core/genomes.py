@@ -382,7 +382,7 @@ wget {gtf_url} -O {species}.gtf.gz --no-check-certificate
     command = script.format(shell=pybio.config.shell, gtf_url=gtf_url, gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
     return os.system(command)
 
-def star_index(species, genome_version, threads=1):
+def star_index(species, genome_version, args):
     species_capital = species.capitalize()
     assembly = species_db.get(species, {}).get("assembly", species)
     ensembl_version = genome_version.replace("ensembl", "")
@@ -394,12 +394,19 @@ rm {species}.assembly.{genome_version}.star/* >/dev/null 2>&1
 mkdir {species}.assembly.{genome_version}.star >/dev/null 2>&1
 cd {species}.assembly.{genome_version}.star
 gunzip -f -k ../{species}.annotation.{genome_version}/{species}.gtf.gz # -k to keep both .gz and uncompressed GTF, some tools require uncompressed GTF
-STAR --runMode genomeGenerate --genomeSAindexNbases {genomeSAindexNbases} --genomeDir ../{species}.assembly.{genome_version}.star --genomeFastaFiles ../{species}.assembly.{genome_version}/{species}.fasta --runThreadN {threads} --sjdbGTFfile ../{species}.annotation.{genome_version}/{species}.gtf
+STAR --runMode genomeGenerate {genomeChrBinNbits} --genomeSAindexNbases {genomeSAindexNbases} --genomeDir ../{species}.assembly.{genome_version}.star --genomeFastaFiles ../{species}.assembly.{genome_version}/{species}.fasta --runThreadN {threads} --sjdbGTFfile ../{species}.annotation.{genome_version}/{species}.gtf
 """
     fasta_file = f"{pybio.config.genomes_folder}/{species}.assembly.{genome_version}/{species}.fasta"
     fasta_size = os.path.getsize(fasta_file)
-    genomeSAindexNbases = int(min(14, math.log(fasta_size, 2)/2 - 1))
-    command = script.format(shell=pybio.config.shell, threads=threads, genomeSAindexNbases=genomeSAindexNbases, gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
+    if not args.genomeSAindexNbases:
+        genomeSAindexNbases = int(min(14, math.log(fasta_size, 2)/2 - 1))
+    else:
+        genomeSAindexNbases = int(args.genomeSAindexNbases)
+    if args.genomeChrBinNbits:
+        genomeChrBinNbits = f"--genomeChrBinNbits {args.genomeChrBinNbits}"
+    else:
+        genomeChrBinNbits = ""
+    command = script.format(shell=pybio.config.shell, threads=args.threads, genomeChrBinNbits=genomeChrBinNbits, genomeSAindexNbases=genomeSAindexNbases, gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
     return os.system(command)
 
 def salmon_index(species, genome_version):
