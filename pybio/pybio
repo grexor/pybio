@@ -89,9 +89,9 @@ Example:
 $ pybio sam2bam file1.sam file1.bam
 """
 
-print(f"[pybio] v{pybio.version}, https://github.com/grexor/pybio")
-print(f"[pybio] config file: {pybio.config.config_fname()}")
-print(f"[pybio] genomes folder: {pybio.config.genomes_folder}")
+print(f"pybio | v{pybio.version}, https://github.com/grexor/pybio")
+print(f"pybio | config file: {pybio.config.config_fname()}")
+print(f"pybio | genomes folder: {pybio.config.genomes_folder}")
 print()
 
 if args.version:
@@ -120,7 +120,7 @@ def determine_species(species):
     return []
 
 def display_potential_hits(potential_hits, search_text):
-    print(f"We found {len(potential_hits)} genome hits for your provided genome species `{search_text}`.\n")
+    print(f"pybio found {len(potential_hits)} genome hits for your provided genome species `{search_text}`.\n")
     for hit in potential_hits:
         print(f"Species = '{hit[1]}', display name = '{hit[2]}'")
     if len(potential_hits)>0:
