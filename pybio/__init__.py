@@ -112,7 +112,7 @@ def genome_prepare(species, genome_version, args):
     if pybio.utils.is_tool("STAR") and not args.nostar:
         star_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.{genome_version}.star")
         if not pybio.core.genomes.genomes_present.get(species, {}).get(genome_version, {}).get("STAR", False) or not os.path.exists(star_folder):
-            return_code = pybio.core.genomes.star_index(species, genome_version, threads=args.threads)
+            return_code = pybio.core.genomes.star_index(species, genome_version, args)
             if return_code==0:
                 pybio.core.genomes.genomes_present[species][genome_version]["STAR"] = True
                 # write gingo file

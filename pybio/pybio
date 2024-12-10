@@ -17,6 +17,8 @@ parser.add_argument("-gtf", "--gtf", help="GTF file to import")
 parser.add_argument("-threads", "--threads", '-t', '--t', default="1", help="Number of threads to use (default: 1)")
 parser.add_argument("-help", "-h", "--help", action="store_true")
 parser.add_argument("-xs", "--xs", help="Add '--outSAMstrandField intronMotif'", action="store_false")
+parser.add_argument("-genomeSAindexNbases", "--genomeSAindexNbases", help="STAR genomeSAindexNbases")
+parser.add_argument("-genomeChrBinNbits", "--genomeChrBinNbits", help="STAR genomeChrBinNbits")
 args = parser.parse_args()
 
 help_0 = """
@@ -87,9 +89,9 @@ Example:
 $ pybio sam2bam file1.sam file1.bam
 """
 
-print(f"[pybio] v{pybio.version}, https://github.com/grexor/pybio")
-print(f"[pybio] config file: {pybio.config.config_fname()}")
-print(f"[pybio] genomes folder: {pybio.config.genomes_folder}")
+print(f"pybio | v{pybio.version}, https://github.com/grexor/pybio")
+print(f"pybio | config file: {pybio.config.config_fname()}")
+print(f"pybio | genomes folder: {pybio.config.genomes_folder}")
 print()
 
 if args.version:
@@ -118,12 +120,12 @@ def determine_species(species):
     return []
 
 def display_potential_hits(potential_hits, search_text):
-    print(f"We found {len(potential_hits)} genome hits for your provided genome species `{search_text}`.\n")
+    print(f"pybio found {len(potential_hits)} genome hits for your provided genome species `{search_text}`.\n")
     for hit in potential_hits:
-        print(f"Species = '{hit[1]}', display name = '{hit[2]}'")
+        print(f"Species = '\033[32;1m{hit[1]}\033[0m', display name = '{hit[2]}'")
     if len(potential_hits)>0:
         print(f"\nFor example, to download the first hit from the list above, you could write:\n")
-        print(f"$ pybio genome {potential_hits[0][1]}")
+        print(f"$ \033[32;1mpybio genome {potential_hits[0][1]}\033[0m")
         print()
     sys.exit(1)
 
@@ -141,7 +143,7 @@ def resolve_species_version(species, args, downloaded_only=False):
         genome_version = args.commands[2]
         return species.lower(), genome_version, potential_hits
     if len(args.commands)>=2:
-        if args.commands[0] not in ["search", "genome", "path", "species"]:
+        if args.commands[0] not in ["search", "genome", "genomes", "path", "species"]:
             genome_version = args.commands[1]
             return species.lower(), genome_version, potential_hits
     genome_version = determine_genome_version(species, downloaded_only=downloaded_only)
@@ -167,7 +169,7 @@ def determine_genome_version(species, downloaded_only):
     return pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)
 
 def handle_genome(args):
-    search_string = args.commands[1] if args.commands[0] in ["genome", "search"] else args.commands[0]
+    search_string = args.commands[1] if args.commands[0] in ["genome", "genomes", "search"] else args.commands[0]
     species, genome_version, potential_hits = resolve_species_version(search_string, args)
     if len(potential_hits)>1:
         display_potential_hits(potential_hits, species)
@@ -225,6 +227,9 @@ if len(args.commands)>0:
         sys.exit()
 
     if args.commands[0] in ["genome", "genomes"]:
+        if len(args.commands)<2:
+            print("Please provide a search term for the species")
+            sys.exit()
         handle_genome(args)
         sys.exit()
 
