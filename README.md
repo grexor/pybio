@@ -53,6 +53,10 @@ Use the [issues page](https://github.com/grexor/pybio/issues) to report issues a
 
 ### Change log
 
+**v0.6.3**: December 2024
+* updated setup.py to use an entry point instead of a script
+* removed `pybio` scripts
+
 **v0.6**: November 2024
 * updated Ensembl search and genome versioning offline
 * updated custom genome interface
