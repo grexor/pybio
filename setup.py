@@ -19,7 +19,10 @@ setup(
     ],
     zip_safe=False,
     author='Gregor Rot',
-    scripts=["pybio/pybio"],
+    #scripts=["pybio/pybio"],
+    entry_points={
+        'console_scripts': ['pybio=pybio:main']
+    },
     author_email='gregor.rot@gmail.com',
     url='https://github.com/grexor/pybio',
     keywords=['pybio', 'bioinformatics'],

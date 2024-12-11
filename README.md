@@ -5,16 +5,19 @@
 
 ### Quick Start
 
-Install via pip and download + prepare human genome:
+Install and download + prepare human genome:
 
 ```
-# install over PyPi
+# Option 1: install over PyPi
 pip install pybio
 
-# or install directly from this repository
+# Option 2: install from this repository
 pip install git+https://github.com/grexor/pybio.git@master
 
-# download and process homo sapiens genome
+# Option 3: use over singularity / apptainer / Docker (only if you don't need python imports)
+singularity run docker://ghcr.io/grexor/pybio:master pybio
+
+# Download and process homo sapiens genome
 pybio genome homo_sapiens
 ```
 
@@ -49,6 +52,10 @@ Check documentation for more examples.
 Use the [issues page](https://github.com/grexor/pybio/issues) to report issues and leave suggestions.
 
 ### Change log
+
+**v0.6.3**: December 2024
+* updated setup.py to use an entry point instead of a script
+* removed `pybio` scripts
 
 **v0.6**: November 2024
 * updated Ensembl search and genome versioning offline
