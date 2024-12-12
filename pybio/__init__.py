@@ -108,13 +108,13 @@ def genome_import(species, genome_version, args):
         print(f"pybio | genome | annotation at {pybio.config.genomes_folder}/{species}.annotation.{genome_version}")
     #json.dump(genomes_ready, open(os.path.join(pybio.config.genomes_folder, "genomes_ready.json"), "wt"), indent=4)
 
-def genome_prepare(species, genome_version, args):
+def genome_prepare(species, genome_version, args, unknown_args=""):
     pybio.core.genomes.genomes_present.setdefault(species, {}).setdefault(genome_version, {}).setdefault("assembly", False)
     pybio.core.genomes.genomes_present.setdefault(species, {}).setdefault(genome_version, {}).setdefault("annotation", False)
     if pybio.utils.is_tool("STAR") and not args.nostar:
         star_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.{genome_version}.star")
         if not pybio.core.genomes.genomes_present.get(species, {}).get(genome_version, {}).get("STAR", False) or not os.path.exists(star_folder):
-            return_code = pybio.core.genomes.star_index(species, genome_version, args)
+            return_code = pybio.core.genomes.star_index(species, genome_version, args, unknown_args=unknown_args)
             if return_code==0:
                 pybio.core.genomes.genomes_present[species][genome_version]["STAR"] = True
                 # write gingo file
@@ -189,7 +189,8 @@ def main():
     parser.add_argument("-xs", "--xs", help="Add '--outSAMstrandField intronMotif'", action="store_false")
     parser.add_argument("-genomeSAindexNbases", "--genomeSAindexNbases", help="STAR genomeSAindexNbases")
     parser.add_argument("-genomeChrBinNbits", "--genomeChrBinNbits", help="STAR genomeChrBinNbits")
-    args = parser.parse_args()
+    args, unknown_args = parser.parse_known_args()
+    unknown_args = " ".join(unknown_args)
 
     help_0 = """
     Usage: pybio <species|command> [options]
@@ -338,7 +339,7 @@ def main():
                 return None
         return pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)
 
-    def handle_genome(args):
+    def handle_genome(args, unknown_args=""):
         search_string = args.commands[1] if args.commands[0] in ["genome", "genomes", "search"] else args.commands[0]
         species, genome_version, potential_hits = resolve_species_version(search_string, args)
         if len(potential_hits)>1:
@@ -348,7 +349,7 @@ def main():
             sys.exit(1)
         if genome_version.find("ensembl")!=-1:
             pybio.genome_download(species, genome_version, args)
-            pybio.genome_prepare(species, genome_version, args)
+            pybio.genome_prepare(species, genome_version, args, unknown_args=unknown_args)
         elif args.fasta!=None and args.gtf!=None: # user provided genome, species, fasta, gtf, genome_version
             species = args.commands[1].lower()
             args.nosalmon = True
@@ -400,7 +401,7 @@ def main():
             if len(args.commands)<2:
                 print("Please provide a search term for the species")
                 sys.exit()
-            handle_genome(args)
+            handle_genome(args, unknown_args=unknown_args)
             sys.exit()
 
         if args.commands[0]=="config":
@@ -460,9 +461,9 @@ def main():
                 add_params.append("--outSAMstrandField intronMotif")
             add_params = " ".join(add_params)
             if file2!=None: # paired-end
-                os.system(f"{pybio.config.shell} -c 'STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat {add_params}'")
+                os.system(f"{pybio.config.shell} -c 'STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat {add_params} {unknown_args}'")
             if file2==None: # single-end
-                os.system(f"{pybio.config.shell} -c 'STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} --readFilesCommand zcat {add_params}'")
+                os.system(f"{pybio.config.shell} -c 'STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} --readFilesCommand zcat {add_params} {unknown_args}'")
 
             os.system(f"{pybio.config.shell} -c 'pybio sam2bam {output}_Aligned.out.sam {output}.bam -threads {args.threads}'")
             os.system(f"{pybio.config.shell} -c 'mv {output}_Log.final.out {output}.stats.txt'")
