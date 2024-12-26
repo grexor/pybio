@@ -406,7 +406,7 @@ STAR --runMode genomeGenerate {genomeChrBinNbits} --genomeSAindexNbases {genomeS
         genomeChrBinNbits = f"--genomeChrBinNbits {args.genomeChrBinNbits}"
     else:
         genomeChrBinNbits = ""
-    command = script.format(shell=pybio.config.shell, threads=args.threads, genomeChrBinNbits=genomeChrBinNbits, genomeSAindexNbases=genomeSAindexNbases, gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
+    command = script.format(unknown_args=unknown_args, shell=pybio.config.shell, threads=args.threads, genomeChrBinNbits=genomeChrBinNbits, genomeSAindexNbases=genomeSAindexNbases, gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
     return os.system(command)
 
 def salmon_index(species, genome_version):
