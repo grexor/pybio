@@ -187,6 +187,7 @@ def main():
     parser.add_argument("-threads", "--threads", '-t', '--t', default="1", help="Number of threads to use (default: 1)")
     parser.add_argument("-help", "-h", "--help", action="store_true")
     parser.add_argument("-xs", "--xs", help="Add '--outSAMstrandField intronMotif'", action="store_false")
+    parser.add_argument("-alignIntronMax", "--alignIntronMax", help="STAR alignIntronMax", type=int, default=None)
     parser.add_argument("-genomeSAindexNbases", "--genomeSAindexNbases", help="STAR genomeSAindexNbases")
     parser.add_argument("-genomeChrBinNbits", "--genomeChrBinNbits", help="STAR genomeChrBinNbits")
     args = parser.parse_args()
@@ -458,6 +459,8 @@ def main():
             add_params = []
             if args.xs: # --outFilterMultimapNmax 1 --outSAMstrandField intronMotif
                 add_params.append("--outSAMstrandField intronMotif")
+            if args.alignIntronMax is not None:
+                add_params.append(f"--alignIntronMax {args.alignIntronMax}")
             add_params = " ".join(add_params)
             if file2!=None: # paired-end
                 os.system(f"{pybio.config.shell} -c 'STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat {add_params}'")
