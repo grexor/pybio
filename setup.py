@@ -9,6 +9,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='pybio',
+    license="GNU General Public License v3.0",
     version = open("pybio/version", "rt").readlines()[0].replace("\n", "").replace("\r", ""),
     packages=find_packages(),
     description='pybio genomics',
@@ -16,7 +17,8 @@ setup(
     long_description_content_type = "text/markdown",
     classifiers=[
         'Programming Language :: Python :: 3',
-    ],
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+    ],    
     zip_safe=False,
     author='Gregor Rot',
     #scripts=["pybio/pybio"],
