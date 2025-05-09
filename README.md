@@ -53,17 +53,29 @@ Use the [issues page](https://github.com/grexor/pybio/issues) to report issues a
 
 ### Change log
 
-**0.7**: February 2025
+**0.8**: May 2025
+* aimux: added short-read paired end sequencing demultiplexing tool
+
+<details>
+<summary><b>0.7</b>: February 2025</summary>
+
 * alignIntronMax for STAR
 * other small fixes
+</details>
 
-**v0.6.3**: December 2024
+<details>
+<summary><b>v0.6.3</b>: December 2024</summary>
+
 * updated setup.py to use an entry point instead of a script
 * removed `pybio` scripts
+</details>
 
-**v0.6**: November 2024
+<details>
+<summary><b>v0.6</b>: November 2024</summary>
+
 * updated Ensembl search and genome versioning offline
 * updated custom genome interface
+</details>
 
 <details>
 <summary><b>v0.5</b>: May 2024</summary>
