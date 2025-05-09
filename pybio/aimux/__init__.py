@@ -49,6 +49,10 @@ def process(args):
     stop_at = float('inf')
     match_db = {}
 
+    if not os.path.exists(args.annotation):
+        print(f"Provided annotation file {args.annotation} not present, please check.")
+        sys.exit(1)
+
     f = open(args.annotation, 'rt')
     header = f.readline()
     header = header.replace('\r', '').replace('\n', '').split('\t')

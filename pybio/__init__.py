@@ -369,7 +369,7 @@ def main():
     if len(args.commands)>0:
 
         if args.commands[0] == "aimux":
-            sub_args = args.commands[1:]
+            sub_args = sys.argv[2:]
             parser = argparse.ArgumentParser(prog="pybio aimux")
             parser.add_argument('-r1', required=True, help='R1 FASTQ file')
             parser.add_argument('-r2', required=True, help='R2 FASTQ file')
