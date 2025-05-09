@@ -19,6 +19,7 @@ import pybio.config
 import pybio.sequence
 import pybio.core
 import argparse
+import pybio.aimux
 
 pybio_path = os.path.abspath(__file__)
 pybio_folder = os.path.dirname(pybio_path)
@@ -190,6 +191,7 @@ def main():
     parser.add_argument("-alignIntronMax", "--alignIntronMax", help="STAR alignIntronMax", type=int, default=None)
     parser.add_argument("-genomeSAindexNbases", "--genomeSAindexNbases", help="STAR genomeSAindexNbases")
     parser.add_argument("-genomeChrBinNbits", "--genomeChrBinNbits", help="STAR genomeChrBinNbits")
+
     args, unknown_args = parser.parse_known_args()
     unknown_args = " ".join(unknown_args)
 
@@ -367,6 +369,20 @@ def main():
 
     if len(args.commands)>0:
 
+        if args.commands[0] == "aimux":
+            sub_args = sys.argv[2:]
+            parser = argparse.ArgumentParser(prog="pybio aimux")
+            parser.add_argument('-r1', required=True, help='R1 FASTQ file')
+            parser.add_argument('-r2', required=True, help='R2 FASTQ file')
+            parser.add_argument('-i1', required=True, help='I1 FASTQ file')
+            parser.add_argument('-i2', required=True, help='I2 FASTQ file')
+            parser.add_argument('-stats', required=True, help='stats file name')
+            parser.add_argument('-annotation', required=True, help='samples annotation file with barcodes, TAB delimited, 3 columns: sample_name (1), barcode_forward (2), barcode_reverse (3)')
+            parser.add_argument('-barcodes', required=True, help='barcodes definition')
+            parser.add_argument('-output', required=False, default="demulti", help='output folder')
+            args = parser.parse_args(sub_args)
+            pybio.aimux.process(args)
+
         if args.commands[0]=="path":
             if len(args.commands)<2:
                 print("Please provide species, e.g.:\n\n$ pybio path homo_sapiens\n")
@@ -429,6 +445,11 @@ def main():
             file2=args.commands[2]
             pybio.gff4jbrowse(file1, file2)
             sys.exit()
+
+        if args.commands[0]=="aimux":
+            if len(args.commands) not in [4,5]:
+                print(help_star)
+                sys.exit()       
 
         if args.commands[0]=="star":
             if len(args.commands) not in [4,5]:
