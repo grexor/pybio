@@ -461,10 +461,13 @@ def main():
             if args.genome_version!=None:
                 genome_version = args.genome_version
             else:
-                genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)
+                genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)           
             if genome_version==None:
-                print("Could not determine genome version")
-                sys.exit()
+                if "refseq" in pybio.core.genomes.species_db[species].keys():
+                    genome_version = "refseq"
+                else:
+                    print("Could not determine genome version")
+                    sys.exit()
             star_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.{genome_version}.star")
             if len(args.commands)==4:
                 file1=args.commands[2]
