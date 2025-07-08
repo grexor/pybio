@@ -371,17 +371,17 @@ def main():
 
         if args.commands[0] == "aimux":
             sub_args = sys.argv[2:]
-            parser = argparse.ArgumentParser(prog="pybio aimux")
-            parser.add_argument('-r1', required=True, help='R1 FASTQ file')
-            parser.add_argument('-r2', required=True, help='R2 FASTQ file')
-            parser.add_argument('-i1', required=True, help='I1 FASTQ file')
-            parser.add_argument('-i2', required=True, help='I2 FASTQ file')
-            parser.add_argument('-stats', required=True, help='stats file name')
-            parser.add_argument('-annotation', required=True, help='samples annotation file with barcodes, TAB delimited, 3 columns: sample_name (1), barcode_forward (2), barcode_reverse (3)')
-            parser.add_argument('-barcodes', required=True, help='barcodes definition')
-            parser.add_argument('-output', required=False, default="demulti", help='output folder')
-            args = parser.parse_args(sub_args)
-            pybio.aimux.process(args)
+            parser_aimux = argparse.ArgumentParser(prog="pybio aimux")
+            parser_aimux.add_argument('-r1', required=True, help='R1 FASTQ file')
+            parser_aimux.add_argument('-r2', required=True, help='R2 FASTQ file')
+            parser_aimux.add_argument('-i1', required=True, help='I1 FASTQ file')
+            parser_aimux.add_argument('-i2', required=True, help='I2 FASTQ file')
+            parser_aimux.add_argument('-stats', required=True, help='stats file name')
+            parser_aimux.add_argument('-annotation', required=True, help='samples annotation file with barcodes, TAB delimited, 3 columns: sample_name (1), barcode_forward (2), barcode_reverse (3)')
+            parser_aimux.add_argument('-barcodes', required=True, help='barcodes definition')
+            parser_aimux.add_argument('-output', required=False, default="demulti", help='output folder')
+            args_aimux = parser_aimux.parse_args(sub_args)
+            pybio.aimux.process(args_aimux)
 
         if args.commands[0]=="path":
             if len(args.commands)<2:

@@ -53,15 +53,22 @@ def process(args):
         print(f"Provided annotation file {args.annotation} not present, please check.")
         sys.exit(1)
 
+    num_samples = 0
+    with open(args.annotation, 'r') as f:
+        num_samples = sum(1 for _ in f)
+
     f = open(args.annotation, 'rt')
     header = f.readline()
     header = header.replace('\r', '').replace('\n', '').split('\t')
     r = f.readline()
     samples_encountered = set()
+    csample = 0
     while r:
+        csample += 1
         r = r.replace('\r', '').replace('\n', '').split('\t')
         data = dict(zip(header, r))
         sample_name = data["sample_name"]
+        print(f"adding barcodes for sample: {sample_name} ({csample}/{num_samples})", flush=True)
 
         # sample name must be unique
         assert(sample_name not in samples_encountered)
@@ -142,7 +149,7 @@ def process(args):
         if current>stop_at:
             break
         if current%10000==0:
-            print(f"processed {current/1000000}M reads")
+            print(f"processed {current/1000000}M reads", flush=True)
 
     for f in fsamples.values():
         f.close()
