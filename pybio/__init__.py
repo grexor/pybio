@@ -463,8 +463,11 @@ def main():
             else:
                 genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)           
             if genome_version==None:
-                if "refseq" in pybio.core.genomes.species_db[species].keys():
-                    genome_version = "refseq"
+                genome_version_candidates = list(pybio.core.genomes.species_db[species].keys())
+                genome_version_candidates = [x for x in genome_version_candidates if x not in ["display_name"]]
+                genome_version_candidates.sort()
+                if len(genome_version_candidates)>0:
+                    genome_version = genome_version_candidates[0]
                 else:
                     print("Could not determine genome version")
                     sys.exit()
