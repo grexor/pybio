@@ -52,7 +52,7 @@ def genome_download(species, genome_version, args):
         return_code = pybio.core.genomes.download_annotation(species, genome_version)
         if return_code==0:
             return_code = pybio.core.genomes.prepare(species, genome_version)
-            # write gingo file
+            # write ginfo file
             ginfo_fname = "{gdir}/{species}.annotation.{genome_version}/genome.info".format(gdir=pybio.config.genomes_folder, species=species, genome_version=genome_version)
             pybio.core.genomes.write_ginfo_file(ginfo_fname, {species: {genome_version: {"annotation":True}}})
         if return_code==0:
@@ -92,9 +92,9 @@ def genome_import(species, genome_version, args):
         gtf_fname = args.gtf
         print(f"pybio | genome | importing {gtf_fname} to {annotation_folder}/{species}.gtf.gz")
         if gtf_fname.endswith(".gz"):
-            os.system(f"mkdir {annotation_folder}; cp {gtf_fname} {annotation_folder}/{species}.gtf.gz; gunzip -f {annotation_folder}/{species}.gtf.gz")
+            os.system(f"mkdir {annotation_folder}; cp {gtf_fname} {annotation_folder}/{species}.gtf.gz; gunzip -k -f {annotation_folder}/{species}.gtf.gz")
         else:
-            os.system(f"mkdir {annotation_folder}; cp {gtf_fname} {annotation_folder}/{species}.gtf; gzip -f {annotation_folder}/{species}.gtf")
+            os.system(f"mkdir {annotation_folder}; cp {gtf_fname} {annotation_folder}/{species}.gtf; gzip -k -f {annotation_folder}/{species}.gtf")
         return_code = pybio.core.genomes.prepare(species, genome_version)
         if return_code==0:
             pybio.core.genomes.genomes_present[species][genome_version]["annotation"] = True
