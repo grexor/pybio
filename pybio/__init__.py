@@ -188,6 +188,7 @@ def main():
     parser.add_argument("-threads", "--threads", '-t', '--t', default="1", help="Number of threads to use (default: 1)")
     parser.add_argument("-help", "-h", "--help", action="store_true")
     parser.add_argument("-xs", "--xs", help="Add '--outSAMstrandField intronMotif'", action="store_false")
+    parser.add_argument("-alignIntronMax", "--alignIntronMax", help="STAR alignIntronMax", type=int, default=None)
     parser.add_argument("-genomeSAindexNbases", "--genomeSAindexNbases", help="STAR genomeSAindexNbases")
     parser.add_argument("-genomeChrBinNbits", "--genomeChrBinNbits", help="STAR genomeChrBinNbits")
 
@@ -460,10 +461,16 @@ def main():
             if args.genome_version!=None:
                 genome_version = args.genome_version
             else:
-                genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)
+                genome_version = pybio.core.genomes.species_db.get(species, {}).get("genome_version", None)           
             if genome_version==None:
-                print("Could not determine genome version")
-                sys.exit()
+                genome_version_candidates = list(pybio.core.genomes.species_db[species].keys())
+                genome_version_candidates = [x for x in genome_version_candidates if x not in ["display_name"]]
+                genome_version_candidates.sort()
+                if len(genome_version_candidates)>0:
+                    genome_version = genome_version_candidates[0]
+                else:
+                    print("Could not determine genome version")
+                    sys.exit()
             star_folder = os.path.join(pybio.config.genomes_folder, f"{species}.assembly.{genome_version}.star")
             if len(args.commands)==4:
                 file1=args.commands[2]
@@ -480,6 +487,8 @@ def main():
             add_params = []
             if args.xs: # --outFilterMultimapNmax 1 --outSAMstrandField intronMotif
                 add_params.append("--outSAMstrandField intronMotif")
+            if args.alignIntronMax is not None:
+                add_params.append(f"--alignIntronMax {args.alignIntronMax}")
             add_params = " ".join(add_params)
             if file2!=None: # paired-end
                 os.system(f"{pybio.config.shell} -c 'STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat {add_params} {unknown_args}'")

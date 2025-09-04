@@ -548,7 +548,7 @@ def load(species, genome_version=None):
     global genome_loaded
     if genome_version==None:
         genome_version = pybio.config.ensembl_version_latest
-    print(f"[pybio] loading genome annotation for {species} with Ensembl version {genome_version}")
+    print(f"[pybio] loading genome annotation for \033[32m{species}\033[0m with genome version \033[32m{genome_version}\033[0m")
     annotation_folder = os.path.join(pybio.config.genomes_folder, f"{species}.annotation.{genome_version}")
     gene_bins_db = pickle.load(open(os.path.join(annotation_folder, "gene_bins_db.pickle"), "rb"))
     genes_db = pickle.load(open(os.path.join(annotation_folder, "genes_db.pickle"), "rb"))
