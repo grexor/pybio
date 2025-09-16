@@ -530,7 +530,6 @@ def list_species_ensembl(prepared=True):
                 genome_data = get_genome_info(species)
                 assert(species.capitalize()==species_long)
                 db[species] = {"display_name":genome_data.get('display_name', ''), "assembly": f"{species_assembly}", "genome_version": f"ensemblgenomes{ensemblgenomes_version}", "provider": "ensemblgenomes", "provider_subfolder": f"{subfolder}"}
-        f.close()
         # save db to ensembl.json
         json.dump(db, open(os.path.join(pybio.config.genomes_folder, "ensembl.json"), "wt"), indent=4)
 
