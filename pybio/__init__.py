@@ -451,7 +451,6 @@ def main():
             sys.exit()
 
         if args.commands[0]=="aimux":
-            print(len(args.commands))
             if len(args.commands) not in [2,3,4,5]:
                 print(help_aimux)
                 sys.exit()       
