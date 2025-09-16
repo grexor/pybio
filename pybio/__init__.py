@@ -247,6 +247,10 @@ def main():
     $ pybio star homo_sapiens r1.fastq.gz r2.fastq.gz output.bam
     """
 
+    help_aimux = """
+    Demultiplexing sequencing data with aimux.
+    """
+
     help_gff4jbrowse = """
     Prepare GFF3 for JBrowse2, without gene records and moving the Parent=gene: to Name property of transcripts
 
@@ -374,8 +378,8 @@ def main():
             parser_aimux = argparse.ArgumentParser(prog="pybio aimux")
             parser_aimux.add_argument('-r1', required=True, help='R1 FASTQ file')
             parser_aimux.add_argument('-r2', required=True, help='R2 FASTQ file')
-            parser_aimux.add_argument('-i1', required=True, help='I1 FASTQ file')
-            parser_aimux.add_argument('-i2', required=True, help='I2 FASTQ file')
+            parser_aimux.add_argument('-i1', required=False, help='I1 FASTQ file', default=None)
+            parser_aimux.add_argument('-i2', required=False, help='I2 FASTQ file', default=None)
             parser_aimux.add_argument('-stats', required=True, help='stats file name')
             parser_aimux.add_argument('-annotation', required=True, help='samples annotation file with barcodes, TAB delimited, 3 columns: sample_name (1), barcode_forward (2), barcode_reverse (3)')
             parser_aimux.add_argument('-barcodes', required=True, help='barcodes definition')
@@ -447,8 +451,8 @@ def main():
             sys.exit()
 
         if args.commands[0]=="aimux":
-            if len(args.commands) not in [4,5]:
-                print(help_star)
+            if len(args.commands) not in [2,3,4,5]:
+                print(help_aimux)
                 sys.exit()       
 
         if args.commands[0]=="star":
