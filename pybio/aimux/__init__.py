@@ -55,7 +55,7 @@ def process(args):
 
     num_samples = 0
     with open(args.annotation, 'r') as f:
-        num_samples = sum(1 for _ in f)
+        num_samples = sum(1 for _ in f) - 1
 
     f = open(args.annotation, 'rt')
     header = f.readline()
@@ -76,7 +76,7 @@ def process(args):
         
         b = []
         for (barcode_name, barcode_file, barcode_code) in barcodes:
-            bcode = data[barcode_name]
+            bcode = data[barcode_name].strip()
             if barcode_code.find("R")!=-1: # is it reverse? (RRRR...)
                 bcode = pybio.sequence.reverse_complement(bcode)
             b.append(bcode) 
@@ -100,51 +100,62 @@ def process(args):
         r = f.readline()
     f.close()
 
-    fsamples["unknown_R1"] = gzip.open(f"{args.output}/unknown_R1.fastq.gz", "wt")
-    fsamples["unknown_R2"] = gzip.open(f"{args.output}/unknown_R2.fastq.gz", "wt")
+    base_name = os.path.basename(args.stats)
+    if base_name.endswith(".stats"):
+        base_name = base_name.replace(".stats", "")
+    fsamples["unknown_R1"] = gzip.open(f"{args.output}/{base_name}_unknown_R1.fastq.gz", "wt")
+    fsamples["unknown_R2"] = gzip.open(f"{args.output}/{base_name}_unknown_R2.fastq.gz", "wt")
 
-    fsamples["ambiguous_R1"] = gzip.open(f"{args.output}/ambiguous_R1.fastq.gz", "wt")
-    fsamples["ambiguous_R2"] = gzip.open(f"{args.output}/ambiguous_R2.fastq.gz", "wt")
+    fsamples["ambiguous_R1"] = gzip.open(f"{args.output}/{base_name}_ambiguous_R1.fastq.gz", "wt")
+    fsamples["ambiguous_R2"] = gzip.open(f"{args.output}/{base_name}_ambiguous_R2.fastq.gz", "wt")
 
     def get_matches(i1, i2, r1, r2):
         match = True
-        files = {"i1": i1, "i2": i2, "r1": r1, "r2": r2}
+        file_data = {"i1": i1, "i2": i2, "r1": r1, "r2": r2}
         k = []
         for (barcode_name, barcode_file, barcode_code) in barcodes:
             barcode_pos = int(barcode_code.split("_")[1])
             barcode_code = barcode_code.split("_")[0]
-            code = files[barcode_file][barcode_pos:barcode_pos+len(barcode_code)]
+            code = file_data[barcode_file][barcode_pos:barcode_pos+len(barcode_code)]
             k.append(code)
         return list(match_db.get(tuple(k), set()))
 
-    r1f = pybio.data.Fastq(args.r1)
-    r2f = pybio.data.Fastq(args.r2)
-    i1f = pybio.data.Fastq(args.i1)
-    i2f = pybio.data.Fastq(args.i2)
+    files = {}
+    if args.r1: files["r1"] = pybio.data.Fastq(args.r1)
+    if args.r2: files["r2"] = pybio.data.Fastq(args.r2)
+    if args.i1: files["i1"] = pybio.data.Fastq(args.i1)
+    if args.i2: files["i2"] = pybio.data.Fastq(args.i2)    
 
     current = 0
-    while i1f.read() and i2f.read() and r1f.read() and r2f.read():
+
+    while True:
         current += 1
-        i1 = i1f.sequence
-        i2 = i2f.sequence
-        r1 = r1f.sequence
-        r2 = r2f.sequence
+        recs = {name: f.read() for name, f in files.items()}
+        if not all(recs.values()):
+            break        
+        
+        i1 = files.get("i1").sequence if "i1" in files else ""
+        i2 = files.get("i2").sequence if "i2" in files else ""
+        r1 = files.get("r1").sequence if "r1" in files else ""
+        r2 = files.get("r2").sequence if "r2" in files else ""
+
         matches = get_matches(i1, i2, r1, r2)
+
         if len(matches)==1:
             sample_name = matches[0]
-            fsamples[sample_name+"_R1"].write(f"{r1f.id}\n{r1f.sequence}\n+\n{r1f.quality}\n")
-            fsamples[sample_name+"_R2"].write(f"{r2f.id}\n{r2f.sequence}\n+\n{r2f.quality}\n")
+            fsamples[sample_name+"_R1"].write(f"{files['r1'].id}\n{files['r1'].sequence}\n+\n{files['r1'].quality}\n")
+            fsamples[sample_name+"_R2"].write(f"{files['r2'].id}\n{files['r2'].sequence}\n+\n{files['r2'].quality}\n")
             stats[sample_name] = stats.get(sample_name, 0) + 1
         elif len(matches)==0:
             sample_name = "unknown"
             stats[sample_name] = stats.get(sample_name, 0) + 1
-            fsamples[sample_name+"_R1"].write(f"{r1f.id}:{i1}\n{r1f.sequence}\n+\n{r1f.quality}\n")
-            fsamples[sample_name+"_R2"].write(f"{r2f.id}:{i2}\n{r2f.sequence}\n+\n{r2f.quality}\n")
+            fsamples[sample_name+"_R1"].write(f"{files['r1'].id}:{i1}\n{files['r1'].sequence}\n+\n{files['r1'].quality}\n")
+            fsamples[sample_name+"_R2"].write(f"{files['r2'].id}:{i2}\n{files['r2'].sequence}\n+\n{files['r2'].quality}\n")
         elif len(matches)>1:
             sample_name = "ambiguous"
             stats[sample_name] = stats.get(sample_name, 0) + 1
-            fsamples[sample_name+"_R1"].write(f"{r1f.id}:{i1}\n{r1f.sequence}\n+\n{r1f.quality}\n")
-            fsamples[sample_name+"_R2"].write(f"{r2f.id}:{i2}\n{r2f.sequence}\n+\n{r2f.quality}\n")
+            fsamples[sample_name+"_R1"].write(f"{files['r1'].id}:{i1}\n{files['r1'].sequence}\n+\n{files['r1'].quality}\n")
+            fsamples[sample_name+"_R2"].write(f"{files['r2'].id}:{i2}\n{files['r2'].sequence}\n+\n{files['r2'].quality}\n")
 
         if current>stop_at:
             break
