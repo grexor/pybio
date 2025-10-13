@@ -53,6 +53,9 @@ class Transcript:
 
   def __init__(self, transcript_id, gene_id, start, stop):
     self.transcript_id = transcript_id
+    if genes_db.get(gene_id, None)==None:
+        print("pybio | quitting | malformed GTF file? please make sure there are gene records defined before exons or transcripts referencing them in the GTF file")
+        sys.exit(1)
     self.gene = genes_db[gene_id]
     self.start = int(start)-1
     self.stop = int(stop)-1
