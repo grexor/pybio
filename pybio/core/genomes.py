@@ -53,6 +53,9 @@ class Transcript:
 
   def __init__(self, transcript_id, gene_id, start, stop):
     self.transcript_id = transcript_id
+    if genes_db.get(gene_id, None)==None:
+        print("pybio | quitting | malformed GTF file? please make sure there are gene records defined before exons or transcripts referencing them in the GTF file")
+        sys.exit(1)
     self.gene = genes_db[gene_id]
     self.start = int(start)-1
     self.stop = int(stop)-1
@@ -537,7 +540,7 @@ def list_species_ensembl(prepared=True):
     print("[pybio.core.genomes] Complete species list downloaded to:", os.path.join(pybio.config.genomes_folder, "ensembl.json"))
     print()
     print("[pybio.core.genomes] Example command to download and process homo_sapiens genome:")
-    print("$ pybio genome homo_sapiens 113")
+    print("$ pybio genome homo_sapiens 115")
 
 def load(species, genome_version=None):
     global gene_bins_db
