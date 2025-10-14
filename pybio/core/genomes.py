@@ -540,7 +540,7 @@ def list_species_ensembl(prepared=True):
     print("[pybio.core.genomes] Complete species list downloaded to:", os.path.join(pybio.config.genomes_folder, "ensembl.json"))
     print()
     print("[pybio.core.genomes] Example command to download and process homo_sapiens genome:")
-    print("$ pybio genome homo_sapiens 113")
+    print("$ pybio genome homo_sapiens 115")
 
 def load(species, genome_version=None):
     global gene_bins_db

@@ -216,7 +216,7 @@ def main():
 
     Options:
 
-        -genome_version       Specify genome version (e.g. ensembl113)
+        -genome_version       Specify genome version (e.g. ensembl115)
         -nostar, -nosalmon    Avoid building STAR and samlmon index for the genome
         -threads n            Number of threads to use (STAR mapping, etc), default: 1
         -fasta fasta_file     Fasta file for custom genome
@@ -368,7 +368,7 @@ def main():
             print("$ pybio genome custom_species -fasta /path/to/fasta -gtf /path/to/gtf -genome_version custom_genome_v1\n")
             print("The above imported genome would be reachable under species 'custom_species' and genome_version 'custom_genome_v1'.\n")
             print("In case you would like to import an Ensembl ready genome:\n")
-            print("$ pybio genome homo_sapiens ensembl113\n")
+            print("$ pybio genome homo_sapiens ensembl115\n")
             print("Ommiting the genome version will download the latest Ensembl release of the genome.\n")
 
     if len(args.commands)>0:
