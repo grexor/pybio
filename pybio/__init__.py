@@ -20,6 +20,7 @@ import pybio.sequence
 import pybio.core
 import argparse
 import pybio.aimux
+import subprocess
 
 pybio_path = os.path.abspath(__file__)
 pybio_folder = os.path.dirname(pybio_path)
@@ -495,9 +496,23 @@ def main():
                 add_params.append(f"--alignIntronMax {args.alignIntronMax}")
             add_params = " ".join(add_params)
             if file2!=None: # paired-end
-                os.system(f"{pybio.config.shell} -c 'STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} {file2} --readFilesCommand zcat {add_params} {unknown_args}'")
+                os.system(
+                    f"""{pybio.config.shell} -c 'STAR --runThreadN {args.threads} \
+                    --outFileNamePrefix "{output}_" \
+                    --genomeDir "{star_folder}" \
+                    --readFilesIn "{file1}" "{file2}" \
+                    --readFilesCommand "gzip -cd" \
+                    {add_params} {unknown_args}'"""
+                )
             if file2==None: # single-end
-                os.system(f"{pybio.config.shell} -c 'STAR --runThreadN {args.threads} --outFileNamePrefix {output}_  --genomeDir {star_folder} --readFilesIn {file1} --readFilesCommand zcat {add_params} {unknown_args}'")
+                os.system(
+                    f"""{pybio.config.shell} -c 'STAR --runThreadN {args.threads} \
+                    --outFileNamePrefix "{output}_" \
+                    --genomeDir "{star_folder}" \
+                    --readFilesIn "{file1}" \
+                    --readFilesCommand "gzip -cd" \
+                    {add_params} {unknown_args}'"""
+                )
 
             os.system(f"{pybio.config.shell} -c 'pybio sam2bam {output}_Aligned.out.sam {output}.bam -threads {args.threads}'")
             os.system(f"{pybio.config.shell} -c 'mv {output}_Log.final.out {output}.stats.txt'")
