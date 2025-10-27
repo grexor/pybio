@@ -21,6 +21,7 @@ import pybio.core
 import argparse
 import pybio.aimux
 import subprocess
+import textwrap
 
 pybio_path = os.path.abspath(__file__)
 pybio_folder = os.path.dirname(pybio_path)
@@ -363,14 +364,26 @@ def main():
             args.nosalmon = True
             pybio.genome_import(species, genome_version, args)
             pybio.genome_prepare(species, genome_version, args)
-        elif (args.fasta==None or args.gtf==None) and (genome_version.find("ensembl")==-1):
-            print(f"Could not find a match for the species '{species}'.")
-            print("If you would like to import a custom genome from your own FASTA and GTF files,\nan example call would be:\n")
-            print("$ pybio genome custom_species -fasta /path/to/fasta -gtf /path/to/gtf -genome_version custom_genome_v1\n")
-            print("The above imported genome would be reachable under species 'custom_species' and genome_version 'custom_genome_v1'.\n")
-            print("In case you would like to import an Ensembl ready genome:\n")
-            print("$ pybio genome homo_sapiens ensembl115\n")
-            print("Ommiting the genome version will download the latest Ensembl release of the genome.\n")
+        elif (args.fasta is None or args.gtf is None) and ("ensembl" not in genome_version):
+            print(textwrap.dedent(f"""
+                Could not find a match for the species '{species}'.
+
+                You can import a genome manually in one of the following ways:
+
+                To import a custom genome from your own FASTA and GTF files:
+                    $ pybio genome custom_species \\
+                        -fasta /path/to/fasta \\
+                        -gtf /path/to/gtf \\
+                        -genome_version custom_genome_v1
+
+                    The above genome will be available as:
+                    species='custom_species', genome_version='custom_genome_v1'
+
+                To import an Ensembl genome:
+                    $ pybio genome homo_sapiens ensembl115
+
+                    Omitting the genome version will download the latest Ensembl release.
+            """))
 
     if len(args.commands)>0:
 
@@ -496,30 +509,37 @@ def main():
                 add_params.append(f"--alignIntronMax {args.alignIntronMax}")
             add_params = " ".join(add_params)
             if file2!=None: # paired-end
-                os.system(
-                    f"""{pybio.config.shell} -c 'STAR --runThreadN {args.threads} \
-                    --outFileNamePrefix "{output}_" \
-                    --genomeDir "{star_folder}" \
-                    --readFilesIn "{file1}" "{file2}" \
-                    --readFilesCommand "gzip -cd" \
-                    {add_params} {unknown_args}'"""
-                )
+                cmd = [
+                    "STAR",
+                    "--runThreadN", str(args.threads),
+                    "--outFileNamePrefix", f"{output}_",
+                    "--genomeDir", star_folder,
+                    "--readFilesIn", file1, file2,
+                    "--readFilesCommand", "gzip -cd",
+                    *add_params.split(),
+                    *unknown_args.split(),
+                ]
+                subprocess.run(cmd, check=True)
             if file2==None: # single-end
-                os.system(
-                    f"""{pybio.config.shell} -c 'STAR --runThreadN {args.threads} \
-                    --outFileNamePrefix "{output}_" \
-                    --genomeDir "{star_folder}" \
-                    --readFilesIn "{file1}" \
-                    --readFilesCommand "gzip -cd" \
-                    {add_params} {unknown_args}'"""
-                )
+                cmd = [
+                    "STAR",
+                    "--runThreadN", str(args.threads),
+                    "--outFileNamePrefix", f"{output}_",
+                    "--genomeDir", star_folder,
+                    "--readFilesIn", file1,
+                    "--readFilesCommand", "gzip -cd",
+                    *add_params.split(),
+                    *unknown_args.split(),
+                ]
+                subprocess.run(cmd, check=True)
 
-            os.system(f"{pybio.config.shell} -c 'pybio sam2bam {output}_Aligned.out.sam {output}.bam -threads {args.threads}'")
-            os.system(f"{pybio.config.shell} -c 'mv {output}_Log.final.out {output}.stats.txt'")
-            os.system(f"{pybio.config.shell} -c 'mv {output}_Log.out {output}.log.txt'")
-            os.system(f"{pybio.config.shell} -c 'mv {output}_Log.progress.out {output}.progress.txt'")
-            os.system(f"{pybio.config.shell} -c 'rm {output}_Aligned.out.sam'")
-            os.system(f"{pybio.config.shell} -c 'mv {output}_SJ.out.tab {output}.splice.tab'")
+            subprocess.run(["pybio", "sam2bam", f"{output}_Aligned.out.sam", f"{output}.bam", "-threads", str(args.threads)], check=True)
+            subprocess.run(["mv", f"{output}_Log.final.out", f"{output}.stats.txt"], check=True)
+            subprocess.run(["mv", f"{output}_Log.out", f"{output}.log.txt"], check=True)
+            subprocess.run(["mv", f"{output}_Log.progress.out", f"{output}.progress.txt"], check=True)
+            subprocess.run(["rm", f"{output}_Aligned.out.sam"], check=True)
+            subprocess.run(["mv", f"{output}_SJ.out.tab", f"{output}.splice.tab"], check=True)
+
             sys.exit()
 
         handle_genome(args) # lastly: is the first parameter maybe a genome / species name?    
