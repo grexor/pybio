@@ -75,9 +75,9 @@ def genome_import(species, genome_version, args):
         fasta_fname = args.fasta
         print(f"pybio | genome | importing {fasta_fname} to {assembly_folder}/{species}.fasta")
         if fasta_fname.endswith(".gz"):
-            os.system(f"mkdir {assembly_folder}; cp {fasta_fname} {assembly_folder}/{species}.fasta.gz; gunzip -f {assembly_folder}/{species}.fasta.gz")
+            os.system(f"mkdir {assembly_folder}; cp {fasta_fname} {assembly_folder}/{species}.fasta.gz; gunzip -k -f {assembly_folder}/{species}.fasta.gz")
         else:
-            os.system(f"mkdir {assembly_folder}; cp {fasta_fname} {assembly_folder}/{species}.fasta")
+            os.system(f"mkdir {assembly_folder}; cp {fasta_fname} {assembly_folder}/{species}.fasta; gzip -k {assembly_folder}/{species}.fasta")
         return_code = os.system("python3 -c \"import pybio; pybio.data.Fasta('{assembly_folder}/{species}.fasta').split()\"".format(assembly_folder=assembly_folder, species=species))
         if return_code==0:
             pybio.core.genomes.genomes_present[species][genome_version]["assembly"] = True

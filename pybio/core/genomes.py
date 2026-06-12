@@ -327,7 +327,7 @@ def download_assembly(species, genome_version):
     mkdir -p {{species}}.assembly.{{genome_version}}
     cd {{species}}.assembly.{{genome_version}}
     wget {{fasta_url}} -O {{species}}.fasta.gz --no-check-certificate
-    gunzip -f {{species}}.fasta.gz
+    gunzip -k -f {{species}}.fasta.gz
     {sys.executable} -c "import pybio; pybio.data.Fasta('{{species}}.fasta').split()"
     """
 
