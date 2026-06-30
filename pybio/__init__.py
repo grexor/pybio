@@ -144,7 +144,9 @@ def genome_prepare(species, genome_version, args, unknown_args=""):
         else:
             print(f"pybio | genome | salmon index | {pybio.config.genomes_folder}/{species}.transcripts.{genome_version}.salmon")
 
-    #json.dump(pybio.core.genomes.genomes_present, open(os.path.join(pybio.config.genomes_folder, "genomes_ready.json"), "wt"), indent=4)
+    genomes_present_fname = os.path.join(pybio.config.genomes_folder, "genomes.json")
+    json.dump(pybio.core.genomes.genomes_present, open(genomes_present_fname, "wt"), indent=4)
+    print(f"pybio | genome | genomes.json updated: {genomes_present_fname}")
 
 def gff4jbrowse(fname_input, fname_output):
     print(f"pybio | gff3 for JBrowse2 | {fname_input} {fname_output}")
