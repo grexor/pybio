@@ -413,6 +413,44 @@ STAR --runMode genomeGenerate {genomeChrBinNbits} --genomeSAindexNbases {genomeS
     command = script.format(unknown_args=unknown_args, shell=pybio.config.shell, threads=args.threads, genomeChrBinNbits=genomeChrBinNbits, genomeSAindexNbases=genomeSAindexNbases, gdir=pybio.config.genomes_folder, species=species, species_capital=species_capital, assembly=assembly, ensembl_version=ensembl_version, genome_version=genome_version)
     return os.system(command)
 
+def starsolo(genome_dir, r2_files, r1_files, whitelist, out_prefix, threads=8, extra_args=""):
+    """
+    Run STARsolo for Visium spatial RNA-seq (CB_UMI_Simple with Visium barcode geometry).
+
+    genome_dir  — path to the STAR genome index directory
+    r2_files    — list of cDNA read FASTQ paths (R2 in Visium convention)
+    r1_files    — list of barcode+UMI read FASTQ paths (R1 in Visium convention)
+    whitelist   — path to barcode whitelist text file (16-bp barcodes, one per line)
+    out_prefix  — output prefix (directory + basename, e.g. /data/starsolo_)
+    threads     — number of STAR threads
+    extra_args  — optional additional STAR flags as a single string
+
+    Visium R1 layout: 16 bp barcode (pos 1-16) + 12 bp UMI (pos 17-28).
+    Uses CB_UMI_Simple rather than --soloType Visium for broader STAR version compatibility.
+    STAR writes sorted BAM to {out_prefix}Aligned.sortedByCoord.out.bam
+    Returns the exit code of the STAR command.
+    """
+    r2_str = ",".join(r2_files)
+    r1_str = ",".join(r1_files)
+    cmd = (
+        f"STAR"
+        f" --runThreadN {threads}"
+        f" --genomeDir {genome_dir}"
+        f" --soloType CB_UMI_Simple"
+        f" --soloCBstart 1 --soloCBlen 16"
+        f" --soloUMIstart 17 --soloUMIlen 12"
+        f" --soloCBwhitelist {whitelist}"
+        f" --readFilesIn {r2_str} {r1_str}"
+        f" --readFilesCommand zcat"
+        f" --outSAMtype BAM SortedByCoordinate"
+        f" --outSAMattributes NH HI nM AS CB UB"
+        f" --outFileNamePrefix {out_prefix}"
+    )
+    if extra_args:
+        cmd += f" {extra_args}"
+    return os.system(cmd)
+
+
 def salmon_index(species, genome_version):
     species_capital = species.capitalize()
     assembly = species_db.get(species, {}).get("assembly", species)
