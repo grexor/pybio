@@ -21,6 +21,12 @@ singularity run docker://ghcr.io/grexor/pybio:master pybio
 pybio genome homo_sapiens
 ```
 
+Import a custom genome from FASTA/GTF files:
+
+```
+pybio genome custom_species -fasta /path/to/fasta -gtf /path/to/gtf -genome_version custom_genome_v1
+```
+
 Search genome features (exons, transcripts, genes) from Python:
 
 ```
@@ -95,5 +101,5 @@ Use the [issues page](https://github.com/grexor/pybio/issues) to report issues a
 If you are using pybio in your research, please cite:
 
 Rot, G., Wehling, A., Schmucki, R., Berntenis, N., Zhang, J. D., & Ebeling, M. (2024)<br>
-[splicekit : an integrative toolkit for splicing analysis from short-read RNA-seq](https://academic.oup.com/bioinformaticsadvances/article/4/1/vbae121/7735317)<br>
+[splicekit : an integrative toolkit for splicing analysis from short-read RNA-seq](https://academic.oup.com/bioinformaticsadvances/article/4/1/vbae121/7735317)<br>
 Bioinformatics Advances, 4(1). https://doi.org/10.1093/bioadv/vbae121
