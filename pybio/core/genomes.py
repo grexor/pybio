@@ -33,6 +33,20 @@ species_db = {}
 genome_loaded = None
 genomes_present = {} # which genomes are present and ready in the genomes_folder?
 
+# (species, genome_version) -> (gene_bins_db, genes_db), populated by load() below.
+# Before this cache, load() unconditionally re-read and unpickled both files from
+# disk on every call -- callers were expected to guard it themselves by checking
+# genome_loaded first (see annotate() below for the pattern), but any caller that
+# doesn't, or any workload that alternates between more than one genome (multiple
+# species/versions in the same process), paid the full disk+unpickle cost every
+# single time regardless. A multi-genome client (e.g. a genome browser serving
+# requests across several species) needs more than the single currently-active
+# slot genome_loaded already provides. Unbounded on purpose: genome annotation
+# sets are few and known in advance (one per installed species/version, not
+# something that grows per-request), so there's no unbounded-growth risk that
+# would call for an eviction policy.
+_genome_cache = {}
+
 code = {"R": ["A", "G"], "Y": ["C", "T"], "S": ["G", "C"], "W": ["A", "T"]}
 revCode = {'A': 'T', 'T': 'A', 'U': 'A', 'G': 'C', 'C': 'G', 'R': 'Y', 'Y': 'R', 'K': 'M', 'M': 'K', 'S': 'S', 'W': 'W', 'B': 'V', 'D': 'H', 'H': 'D', 'V': 'B', 'N': 'N'}
 revCodeRYSW = {'R' : 'Y', 'Y' : 'R', 'S' : 'S', 'W' : 'W'}
@@ -589,11 +603,17 @@ def load(species, genome_version=None):
     global genome_loaded
     if genome_version==None:
         genome_version = pybio.config.ensembl_version_latest
+    key = (species, genome_version)
+    if key in _genome_cache:
+        gene_bins_db, genes_db = _genome_cache[key]
+        genome_loaded = key
+        return
     print(f"[pybio] loading genome annotation for \033[32m{species}\033[0m with genome version \033[32m{genome_version}\033[0m")
     annotation_folder = os.path.join(pybio.config.genomes_folder, f"{species}.annotation.{genome_version}")
     gene_bins_db = pickle.load(open(os.path.join(annotation_folder, "gene_bins_db.pickle"), "rb"))
     genes_db = pickle.load(open(os.path.join(annotation_folder, "genes_db.pickle"), "rb"))
-    genome_loaded = (species, genome_version)
+    genome_loaded = key
+    _genome_cache[key] = (gene_bins_db, genes_db)
 
 def annotate(species, chr, strand, pos, genome_version=None):
     global genome_loaded
