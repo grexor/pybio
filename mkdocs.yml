@@ -1,0 +1,60 @@
+site_name: pybio
+site_description: pybio - basic genomics toolset
+site_url: https://grexor.github.io/pybio/
+repo_url: https://github.com/grexor/pybio
+repo_name: grexor/pybio
+docs_dir: docs/pages
+site_dir: docs/site
+
+theme:
+  name: material
+  logo: assets/pybio_logo.png
+  favicon: assets/pybio_logo.png
+  palette:
+    # "custom" + extra_css below, rather than a built-in named color, so the
+    # header/accent can be the exact brand blue (#3c78d7) instead of whichever
+    # named material swatch happens to be closest.
+    - scheme: default
+      primary: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.top
+    - content.code.copy
+    - search.suggest
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Quick Start: quickstart.md
+  - Guides:
+      - Genomic coordinates: coordinates.md
+      - Genomes: genomes.md
+      - Sequences & annotation: sequences.md
+      - Read mapping: mapping.md
+      - Sequence & motif tools: motifs.md
+      - CLIP & interval data: bedgraph.md
+      - File formats: fileformats.md
+      - Demultiplexing (aimux): aimux.md
+  - Reference:
+      - Command-line reference: cli.md
+      - Dependencies: dependencies.md
+  - About: about.md

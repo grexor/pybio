@@ -42,12 +42,13 @@ import pybio
 seq = pybio.core.genomes.seq("homo_sapiens", "1", "+", 450000, -20, 20)
 ```
 
-Check documentation for more examples.
+Check the documentation for more examples.
 
 ### Documentation
 
-* [PDF reference manual](https://github.com/grexor/pybio/raw/master/docs/pybio_docs.pdf)
-* [Google docs](https://docs.google.com/document/d/12KJvdsl78ujXaE3vTdGBK4vDgRRpHHh3RJg9npSVlZ4/edit?usp=sharing) of the above PDF (comment if you like)
+Full documentation, including installation, a quick start guide, and reference pages for genomes, read mapping, motif search, CLIP/bedGraph data and the command line, is available at:
+
+* [grexor.github.io/pybio](https://grexor.github.io/pybio/)
 
 ### Authors
 
