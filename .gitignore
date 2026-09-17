@@ -11,3 +11,6 @@ genomes/*.bowtie2
 genomes/*.ensembl*
 genomes/*.bowtie
 genomes/*.annotation
+
+# mkdocs build output (regenerate with: mkdocs build)
+site/
