@@ -58,43 +58,52 @@ Full documentation, including installation, a quick start guide, and reference p
 
 Use the [issues page](https://github.com/grexor/pybio/issues) to report issues and leave suggestions.
 
-### <summary>Change log</summary>
 <details>
+<summary><b>Change log</b></summary>
+
+<b>0.8.8</b>: 17 September 2026
+* migrated documentation to a mkdocs-material site ([grexor.github.io/pybio](https://grexor.github.io/pybio/)), retiring the PDF/Google Docs manual
+* added STARsolo support for single-cell alignment
+* added caching of genome annotation lookups for faster repeated queries
+* removed legacy `genome_species.tab`, superseded by `ensembl.json`
+
+<b>0.8.7</b>: 30 June 2026
+* refreshed Ensembl database to release 116
+
+<b>0.8.6</b>: 30 June 2026
+* `genomes.json` now auto-updates after each genome install
+
+<b>0.8.5</b>: 12 June 2026
+* keep a `.gz` copy of FASTA files alongside the decompressed genome assembly
 
 <b>0.8.4</b>: 28 October 2025
-* moved os.system to subprocess
-* fixed direct calling of python3 to sys.executable
+* moved `os.system` calls to `subprocess`
+* fixed direct calling of `python3` to use `sys.executable`
 
 <b>0.8</b>: May 2025
-* aimux: added short-read paired end sequencing demultiplexing tool
+* aimux: added short-read paired-end sequencing demultiplexing tool
 
 <b>0.7</b>: February 2025
-
-* alignIntronMax for STAR
+* `alignIntronMax` support for STAR
 * other small fixes
 
-<b>v0.6.3</b>: December 2024
-
-* updated setup.py to use an entry point instead of a script
+<b>0.6.3</b>: December 2024
+* updated `setup.py` to use an entry point instead of a script
 * removed `pybio` scripts
 
-<b>v0.6</b>: November 2024
-
+<b>0.6</b>: November 2024
 * updated Ensembl search and genome versioning offline
 * updated custom genome interface
 
-<b>v0.5</b>: May 2024
-
+<b>0.5</b>: May 2024
 * refreshed Ensembl (112) and Ensembl Genomes (58) database
 
-<b>v0.4</b>: April 2024
-
+<b>0.4</b>: April 2024
 * refreshed Ensembl (111) and Ensembl Genomes (58) database
 
-<b>v0.3.12</b>: released in November 2023
-
+<b>0.3.12</b>: November 2023
 * updated docs
-* 
+
 </details>
 
 ### Citation
